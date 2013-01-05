@@ -19,3 +19,5 @@ CREATE TABLE Users
 		user_type_id	NUMBER(6) REFERENCES Users_type (user_type_id)
     );
 
+
+COMMIT;

@@ -4,5 +4,6 @@ public class Test {
         System.out.println("Hello My Name is Chirko Lorans");
         System.out.println("Hello! My name is Belov Alexandr!");
         System.out.println("Hello! My name is Kovalenko Aleksandr!");
+        System.out.println("Hello! My name is Loginova Kristina!");
     }
 }

@@ -345,8 +345,8 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Left" type="integer">656</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">32</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">652</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">24</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">265</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">326</XPD:ATTR>
 <XPD:ATTR name="StereotypeDisplay" type="UMLStereotypeDisplayKind">sdkNone</XPD:ATTR>
@@ -382,7 +382,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">246,174;308,156;576,156;656,170</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">246,174;308,156;576,156;652,167</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentStereotype" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentVisibility" type="boolean">False</XPD:ATTR>
 <XPD:REF name="Model">Cu3YNvaWSUel4cn5Zf0pnQAA</XPD:REF>
@@ -510,7 +510,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">787,357;787,440</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">786,349;787,440</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentStereotype" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentVisibility" type="boolean">False</XPD:ATTR>
 <XPD:REF name="Model">XsdnGr4SyE6YJs3LRlZe1QAA</XPD:REF>
@@ -727,7 +727,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">656,294;559,368</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">652,290;554,368</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentStereotype" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentVisibility" type="boolean">False</XPD:ATTR>
 <XPD:REF name="Model">usWNJQL/0EKbBM6EAveZKQAA</XPD:REF>
@@ -819,7 +819,7 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">332</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">192</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">188</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">234</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">105</XPD:ATTR>
 <XPD:ATTR name="StereotypeDisplay" type="UMLStereotypeDisplayKind">sdkNone</XPD:ATTR>
@@ -855,7 +855,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">246,220;332,230</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">246,219;332,228</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentStereotype" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentVisibility" type="boolean">False</XPD:ATTR>
 <XPD:REF name="Model">LEWa/BtGTEG/yMyfujL0QwAA</XPD:REF>
@@ -945,7 +945,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">656,213;565,227</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">652,207;565,221</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentStereotype" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentVisibility" type="boolean">False</XPD:ATTR>
 <XPD:REF name="Model">cb9vlTQsMkalSO9rWcfdcwAA</XPD:REF>
@@ -1301,7 +1301,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[4]" type="UMLAttribute" guid="Igyln6vQi0y9Fbcwsz/JOwAA">
 <XPD:ATTR name="Name" type="string">end_year</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">DATE</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">VARCHAR2(5)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 <XPD:ATTR name="#TaggedValues" type="integer">1</XPD:ATTR>
 <XPD:OBJ name="TaggedValues[0]" type="TaggedValue" guid="irArlWpoGkOmfmWcYH7laAAA">
@@ -1336,7 +1336,7 @@
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[8]" type="UMLAttribute" guid="RSLNcdJX1EypY/Mkjo5UMwAA">
-<XPD:ATTR name="Name" type="string">interesting</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">interest</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">VARCHAR2(200)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 </XPD:OBJ>
@@ -1351,12 +1351,12 @@
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[11]" type="UMLAttribute" guid="LiC7n6/66E++/75w7eKeCwAA">
-<XPD:ATTR name="Name" type="string">language</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">prog_lang</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">VARCHAR2(200)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[12]" type="UMLAttribute" guid="Z7stMvOs7kCi47XtxuyOwQAA">
-<XPD:ATTR name="Name" type="string">cs</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">computer_science</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">VARCHAR2(200)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 </XPD:OBJ>
@@ -1367,7 +1367,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[14]" type="UMLAttribute" guid="JBW8Y1ytU0ymzh12yLBwHAAA">
 <XPD:ATTR name="Name" type="string">english</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">NUMBER(1)</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">VARCHAR2(200)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[15]" type="UMLAttribute" guid="UAXcHnhl7kyc/qs8fHpurAAA">
@@ -1693,12 +1693,12 @@
 <XPD:REF name="Owner">hR8GVTI6m0mFulGQW2pQkwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[7]" type="UMLAttribute" guid="+60AJBM6s0WGJvnIsOzpSgAA">
-<XPD:ATTR name="Name" type="string">cs</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">computer_science</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">NUMBER(3)</XPD:ATTR>
 <XPD:REF name="Owner">hR8GVTI6m0mFulGQW2pQkwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[8]" type="UMLAttribute" guid="nWa0lb/g4U6RtJwBO9CYHgAA">
-<XPD:ATTR name="Name" type="string">exp</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">expa</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">NUMBER(3)</XPD:ATTR>
 <XPD:REF name="Owner">hR8GVTI6m0mFulGQW2pQkwAA</XPD:REF>
 </XPD:OBJ>

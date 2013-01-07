@@ -345,8 +345,8 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Left" type="integer">652</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">24</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">648</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">20</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">265</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">326</XPD:ATTR>
 <XPD:ATTR name="StereotypeDisplay" type="UMLStereotypeDisplayKind">sdkNone</XPD:ATTR>
@@ -382,7 +382,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">246,174;308,156;576,156;652,167</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">246,174;308,156;576,156;648,165</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentStereotype" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentVisibility" type="boolean">False</XPD:ATTR>
 <XPD:REF name="Model">Cu3YNvaWSUel4cn5Zf0pnQAA</XPD:REF>
@@ -510,7 +510,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">786,349;787,440</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">784,345;786,440</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentStereotype" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentVisibility" type="boolean">False</XPD:ATTR>
 <XPD:REF name="Model">XsdnGr4SyE6YJs3LRlZe1QAA</XPD:REF>
@@ -727,7 +727,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">652,290;554,368</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">648,289;551,368</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentStereotype" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentVisibility" type="boolean">False</XPD:ATTR>
 <XPD:REF name="Model">usWNJQL/0EKbBM6EAveZKQAA</XPD:REF>
@@ -945,7 +945,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">652,207;565,221</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">648,205;565,220</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentStereotype" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="ShowCompartmentVisibility" type="boolean">False</XPD:ATTR>
 <XPD:REF name="Model">cb9vlTQsMkalSO9rWcfdcwAA</XPD:REF>
@@ -1405,13 +1405,13 @@
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[17]" type="UMLAttribute" guid="49JmKYqNzk24Aou5smBdrwAA">
-<XPD:ATTR name="Name" type="string">comment</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">comment2</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">VARCHAR2(200)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[18]" type="UMLAttribute" guid="3556whwwKUOxtUfTgq6uSAAA">
 <XPD:ATTR name="Name" type="string">status</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">BOOL</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">NUMBER(1)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[19]" type="UMLAttribute" guid="ZkIqWlz/FE6Oyiry0Bqd6QAA">
@@ -1443,7 +1443,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[20]" type="UMLAttribute" guid="pj2vVC0zlUycCoQQ9VbpeQAA">
 <XPD:ATTR name="Name" type="string">visit_status</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">BOOL</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">NUMBER(1)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
 <XPD:ATTR name="#TaggedValues" type="integer">1</XPD:ATTR>
 <XPD:OBJ name="TaggedValues[0]" type="TaggedValue" guid="ei5/Vt51ukiLRBllnQV9LwAA">

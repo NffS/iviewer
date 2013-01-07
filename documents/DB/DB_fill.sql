@@ -169,3 +169,5 @@ VALUES
 	4
 );
 /*End Users insertion*/
+
+COMMIT;

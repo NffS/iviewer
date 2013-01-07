@@ -1329,11 +1329,27 @@
 <XPD:ATTR name="Name" type="string">phone</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">VARCHAR2(20)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
+<XPD:ATTR name="#TaggedValues" type="integer">1</XPD:ATTR>
+<XPD:OBJ name="TaggedValues[0]" type="TaggedValue" guid="Jg3tNFug8kqvJOZZ/kIc1wAA">
+<XPD:ATTR name="ProfileName" type="string">ERD</XPD:ATTR>
+<XPD:ATTR name="TagDefinitionSetName" type="string">column</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">NullOption</XPD:ATTR>
+<XPD:ATTR name="DataValue" type="string">NULL</XPD:ATTR>
+<XPD:REF name="TaggedModel">9zpvi8Nr40iW6eRSwb5PlgAA</XPD:REF>
+</XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[7]" type="UMLAttribute" guid="y9WX79UAjEWxuj8Jiw8fqQAA">
 <XPD:ATTR name="Name" type="string">another_contact</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">VARCHAR2(200)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
+<XPD:ATTR name="#TaggedValues" type="integer">1</XPD:ATTR>
+<XPD:OBJ name="TaggedValues[0]" type="TaggedValue" guid="U8pK6Lyenk6Pc31ZahvNxgAA">
+<XPD:ATTR name="ProfileName" type="string">ERD</XPD:ATTR>
+<XPD:ATTR name="TagDefinitionSetName" type="string">column</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">NullOption</XPD:ATTR>
+<XPD:ATTR name="DataValue" type="string">NULL</XPD:ATTR>
+<XPD:REF name="TaggedModel">y9WX79UAjEWxuj8Jiw8fqQAA</XPD:REF>
+</XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[8]" type="UMLAttribute" guid="RSLNcdJX1EypY/Mkjo5UMwAA">
 <XPD:ATTR name="Name" type="string">interest</XPD:ATTR>
@@ -1364,6 +1380,14 @@
 <XPD:ATTR name="Name" type="string">experience</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">VARCHAR2(200)</XPD:ATTR>
 <XPD:REF name="Owner">+pwnLxW9O0ehm0lO1T2LrAAA</XPD:REF>
+<XPD:ATTR name="#TaggedValues" type="integer">1</XPD:ATTR>
+<XPD:OBJ name="TaggedValues[0]" type="TaggedValue" guid="WcZYzEH/QUWRHsejQqgkrwAA">
+<XPD:ATTR name="ProfileName" type="string">ERD</XPD:ATTR>
+<XPD:ATTR name="TagDefinitionSetName" type="string">column</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">NullOption</XPD:ATTR>
+<XPD:ATTR name="DataValue" type="string">NULL</XPD:ATTR>
+<XPD:REF name="TaggedModel">7HV8YOqO/E+ZEmzR7rhUNwAA</XPD:REF>
+</XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[14]" type="UMLAttribute" guid="JBW8Y1ytU0ymzh12yLBwHAAA">
 <XPD:ATTR name="Name" type="string">english</XPD:ATTR>
@@ -1426,7 +1450,7 @@
 <XPD:ATTR name="ProfileName" type="string">ERD</XPD:ATTR>
 <XPD:ATTR name="TagDefinitionSetName" type="string">column</XPD:ATTR>
 <XPD:ATTR name="Name" type="string">NullOption</XPD:ATTR>
-<XPD:ATTR name="DataValue" type="string">NULL</XPD:ATTR>
+<XPD:ATTR name="DataValue" type="string">NOT NULL</XPD:ATTR>
 <XPD:REF name="TaggedModel">pj2vVC0zlUycCoQQ9VbpeQAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
@@ -1698,7 +1722,7 @@
 <XPD:REF name="Owner">hR8GVTI6m0mFulGQW2pQkwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[8]" type="UMLAttribute" guid="nWa0lb/g4U6RtJwBO9CYHgAA">
-<XPD:ATTR name="Name" type="string">expa</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">experience</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">NUMBER(3)</XPD:ATTR>
 <XPD:REF name="Owner">hR8GVTI6m0mFulGQW2pQkwAA</XPD:REF>
 </XPD:OBJ>

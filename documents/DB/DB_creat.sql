@@ -79,6 +79,5 @@ CREATE TABLE Tech_mark
 		other			NUMBER(3) NOT NULL
 	);
 
-
 	
 COMMIT;

@@ -42,7 +42,7 @@ CREATE TABLE Form
 		university			VARCHAR2(400) CONSTRAINT university
 		CHECK (REGEXP_LIKE(university,'[a-zA-Zа-яА-Я0-9]$')),
 		faculty 			VARCHAR2(400) CONSTRAINT faculty
-		CHECK (REGEXP_LIKE(faculty,'[А-Яa-zA-Zа-я0-9]{1,400}$')),
+		CHECK (REGEXP_LIKE(faculty,'[a-zA-Zа-яА-Я0-9]')),
 		course	 			NUMBER(1),
 		end_year			VARCHAR2(5),
 		email2				VARCHAR2(20) CONSTRAINT email2 
@@ -321,7 +321,7 @@ INSERT INTO Interview VALUES(
 );
 
 INSERT INTO Form values
-(1, 8, 'ОНПУ', 'ИКС4', 4, 2013, 'double@gmail.com', '+380996661633',
+(1, 8, 'ОНПУ', 'ИКС', 4, 2013, 'double@gmail.com', '+380996661633',
  '', '+', '+', '+', '', '+', '+-', '+', '-', '', 4, 2, 'Python - 2; C# - 1',
  4, 4, 4, 2, 2, 3, 4, 1, 'RFID project', 3, 1, 1, 'преподаватели',
  'очень хочу получить опыт работы в компании NetCracker', 'без комментариев',
@@ -332,7 +332,7 @@ INSERT INTO Form values
  'С++ - 5; C# - 4', 2, 5, 4, 1,	1, 1, 2, 1, 'олимпиады', 3, 3, 3, 'Одесский форум',
  'просто люблю проходить собеседования', 'это комментарий', 0, 1, 0);
  INSERT INTO Form values
-(3, 10, 'ОНПУ', 'ИКс', 4, 2013, 'int@gmail.com', '+380573573488',
+(3, 10, 'ОНПУ', 'ИКС', 4, 2013, 'int@gmail.com', '+380573573488',
  '', '+', '+', '+', '', '+', '+', '+', '+', '', 5, 2, 'PHP - 1',
  5, 5, 5, 5, 5, 5, 5, 5, 'Лабораторки в универе сама делала', 5, 5, 5, 'декан',
  'Сама не знаю', 'без комментариев', 0, 1, 0);

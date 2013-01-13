@@ -14,15 +14,19 @@ CREATE TABLE Users_type
 CREATE TABLE Users
     ( 
 		user_id    		NUMBER(6) NOT NULL PRIMARY KEY,
-		email   		VARCHAR2(20) NOT NULL,
+		email   		VARCHAR2(20) NOT NULL CONSTRAINT email 
+		CHECK (REGEXP_LIKE(email,'^([a-zA-Z0-9_\.\-]{1,20})@([a-zA-Z0-9\.\-]{1,20})\.([a-z]{2,4})$')),
 		password 		VARCHAR2(16) NOT NULL,
-		first_name  	VARCHAR2(20) NOT NULL,
-		surname			VARCHAR2(20) NOT NULL,
-		last_name		VARCHAR2(20) NOT NULL,
+		first_name  	VARCHAR2(20) NOT NULL CONSTRAINT first_name
+		CHECK (first_name = INITCAP(first_name) AND REGEXP_LIKE(first_name,'[a-zA-Zа-яА-Я]$')),
+		surname			VARCHAR2(20) NOT NULL CONSTRAINT surname
+		CHECK (surname = INITCAP(surname) AND REGEXP_LIKE(surname,'[a-zA-Zа-яА-Я]$')),
+		last_name		VARCHAR2(20) NOT NULL CONSTRAINT last_name
+		CHECK (last_name = INITCAP(last_name) AND REGEXP_LIKE(last_name,'[a-zA-Zа-яА-Я]$')),
 		foto			VARCHAR2(40),
 		user_type_id	NUMBER(6) REFERENCES Users_type (user_type_id)
     );
-	
+		
 CREATE TABLE Interview
 	(
 		interview_id	NUMBER(6) NOT NULL PRIMARY KEY,
@@ -35,37 +39,61 @@ CREATE TABLE Form
 	(
 		form_id		 		NUMBER(6) NOT NULL PRIMARY KEY,
 		candidate_id		NUMBER(6) NOT NULL REFERENCES Users (user_id),
-		university			VARCHAR2(400),
-		faculty 			VARCHAR2(400),
+		university			VARCHAR2(400) CONSTRAINT university
+		CHECK (REGEXP_LIKE(university,'[a-zA-Zа-яА-Я0-9]$')),
+		faculty 			VARCHAR2(400) CONSTRAINT faculty
+		CHECK (REGEXP_LIKE(faculty,'[А-Яa-zA-Zа-я0-9]{1,400}$')),
 		course	 			NUMBER(1),
 		end_year			VARCHAR2(5),
-		email2				VARCHAR2(20),
-		phone				VARCHAR2(20),
+		email2				VARCHAR2(20) CONSTRAINT email2 
+		CHECK (REGEXP_LIKE(email2,'^([a-zA-Z0-9_\.\-]{1,20})@([a-zA-Z0-9\.\-]{1,20})\.([a-z]{2,4})$')),
+		phone				VARCHAR2(13) CONSTRAINT phone
+		CHECK (REGEXP_LIKE(phone,'[\+0-9]{7,13}')),
 		another_contact		VARCHAR2(200),
-		interest_tc 		VARCHAR2(2) NOT NULL,
-		interest_nc 		VARCHAR2(2) NOT NULL,
-		interest_area_po 	VARCHAR2(2)	NOT NULL,
+		interest_tc 		VARCHAR2(2) NOT NULL CONSTRAINT interest_tc
+		CHECK (interest_tc in('+','+-','-','?')),
+		interest_nc 		VARCHAR2(2) NOT NULL CONSTRAINT interest_nc
+		CHECK (interest_nc in('+','+-','-','?')),
+		interest_area_po 	VARCHAR2(2)	NOT NULL CONSTRAINT interest_area_po
+		CHECK (interest_area_po in('+','+-','-','?')),
 		interest_area_other VARCHAR2(400),
-		job_ar_deep_spec 	VARCHAR2(2) NOT NULL,
-		job_ar_varied 		VARCHAR2(2) NOT NULL,
-		job_ar_manage 		VARCHAR2(2) NOT NULL,
-		job_ar_sales		VARCHAR2(2) NOT NULL,
+		job_ar_deep_spec 	VARCHAR2(2) NOT NULL CONSTRAINT job_ar_deep_spec
+		CHECK (job_ar_deep_spec in('+','+-','-','?')),
+		job_ar_varied 		VARCHAR2(2) NOT NULL CONSTRAINT job_ar_varied
+		CHECK (job_ar_varied in('+','+-','-','?')),
+		job_ar_manage 		VARCHAR2(2) NOT NULL  CONSTRAINT job_ar_manage
+		CHECK (job_ar_manage in('+','+-','-','?')),
+		job_ar_sales		VARCHAR2(2) NOT NULL  CONSTRAINT job_ar_sales
+		CHECK (job_ar_sales in('+','+-','-','?')),
 		job_ar_other 		VARCHAR2(400),
-		prog_lang_c 		NUMBER(1) NOT NULL,
-		prog_lang_java		NUMBER(1) NOT NULL,
+		prog_lang_c 		NUMBER(1) NOT NULL CONSTRAINT prog_lang_c
+		CHECK (prog_lang_c between 0 and 5),
+		prog_lang_java		NUMBER(1) NOT NULL CONSTRAINT prog_lang_java
+		CHECK (prog_lang_java between 0 and 5),
 		prog_lang_other 	VARCHAR2(400),
-		cs_network_tech 	NUMBER(1) NOT NULL,
-		cs_algorithms 		NUMBER(1) NOT NULL,
-		cs_oop	 			NUMBER(1) NOT NULL,
-		cs_gui 				NUMBER(1) NOT NULL,
-		cs_db 				NUMBER(1) NOT NULL,
-		cs_web 				NUMBER(1) NOT NULL,
-		cs_network_prog 	NUMBER(1) NOT NULL,
-		cs_desing 			NUMBER(1) NOT NULL,
+		cs_network_tech 	NUMBER(1) NOT NULL CONSTRAINT cs_network_tech
+		CHECK (cs_network_tech between 0 and 5),
+		cs_algorithms 		NUMBER(1) NOT NULL CONSTRAINT cs_algorithms
+		CHECK (cs_algorithms between 0 and 5),
+		cs_oop	 			NUMBER(1) NOT NULL CONSTRAINT cs_oop
+		CHECK (cs_oop between 0 and 5),
+		cs_gui 				NUMBER(1) NOT NULL CONSTRAINT cs_gui
+		CHECK (cs_gui between 0 and 5),
+		cs_db 				NUMBER(1) NOT NULL CONSTRAINT cs_db
+		CHECK (cs_db between 0 and 5),
+		cs_web 				NUMBER(1) NOT NULL CONSTRAINT cs_web
+		CHECK (cs_web between 0 and 5),
+		cs_network_prog 	NUMBER(1) NOT NULL CONSTRAINT cs_network_prog
+		CHECK (cs_network_prog between 0 and 5),
+		cs_design 			NUMBER(1) NOT NULL CONSTRAINT cs_design
+		CHECK (cs_design between 0 and 5),
 		experience			VARCHAR2(2000),
-		english_read 		NUMBER(1) NOT NULL,
-		english_write		NUMBER(1) NOT NULL,
-		english_spoken	 	NUMBER(1) NOT NULL,
+		english_read 		NUMBER(1) NOT NULL CONSTRAINT english_read
+		CHECK (english_read between 0 and 5),
+		english_write		NUMBER(1) NOT NULL CONSTRAINT english_write
+		CHECK (english_write between 0 and 5),
+		english_spoken	 	NUMBER(1) NOT NULL CONSTRAINT english_spoken
+		CHECK (english_spoken between 0 and 5),
 		source				VARCHAR2(200) NOT NULL,
 		motivation_comment	VARCHAR2(800) NOT NULL,
 		comment2			VARCHAR2(2000) NOT NULL,
@@ -98,7 +126,10 @@ CREATE TABLE Tech_mark
 		other			NUMBER(3) NOT NULL, 
 		general_mark    VARCHAR2(2000) NOT NULL
 	);
-
+	
+	ALTER TABLE Users 
+	ADD CONSTRAINT password
+	CHECK(REGEXP_LIKE(password,'[a-zA-Z0-9_\.]{4,16}$'));
 	
 COMMIT;
 
@@ -137,7 +168,7 @@ VALUES
 ( 
 	2, 
 	'hr1@mail.ru',
-	'hr1',
+	'hr31',
 	'Morj',
 	'Tulenev',
 	'Lamantinovich',
@@ -150,7 +181,7 @@ VALUES
 ( 
 	3, 
 	'hr2@ukr.net',
-	'hr2',
+	'hrd2',
 	'Tulen',
 	'Lamantinov',
 	'Morjevich',
@@ -163,7 +194,7 @@ VALUES
 ( 
 	4, 
 	'inter1@nm.ru',
-	'i1',
+	'idf1',
 	'Lamantin',
 	'Morjev',
 	'Tulenevich',
@@ -176,7 +207,7 @@ VALUES
 ( 
 	5, 
 	'inter2@pop3.ru',
-	'i2',
+	'isf2',
 	'Ogurec',
 	'Koroviev',
 	'Anatolievich',
@@ -189,7 +220,7 @@ VALUES
 ( 
 	6, 
 	'inter3@mail.ru',
-	'i3',
+	'ibg3',
 	'Svetlana',
 	'Krizovnikova',
 	'Semenovna',
@@ -202,7 +233,7 @@ VALUES
 ( 
 	7, 
 	'inter4@mail.ru',
-	'i4',
+	'ity4',
 	'Ilia',
 	'Bananov',
 	'Victorovich',
@@ -290,7 +321,7 @@ INSERT INTO Interview VALUES(
 );
 
 INSERT INTO Form values
-(1, 8, 'ОНПУ', 'ИКС', 4, 2013, 'double@gmail.com', '+380996661633',
+(1, 8, 'ОНПУ', 'ИКС4', 4, 2013, 'double@gmail.com', '+380996661633',
  '', '+', '+', '+', '', '+', '+-', '+', '-', '', 4, 2, 'Python - 2; C# - 1',
  4, 4, 4, 2, 2, 3, 4, 1, 'RFID project', 3, 1, 1, 'преподаватели',
  'очень хочу получить опыт работы в компании NetCracker', 'без комментариев',
@@ -301,7 +332,7 @@ INSERT INTO Form values
  'С++ - 5; C# - 4', 2, 5, 4, 1,	1, 1, 2, 1, 'олимпиады', 3, 3, 3, 'Одесский форум',
  'просто люблю проходить собеседования', 'это комментарий', 0, 1, 0);
  INSERT INTO Form values
-(3, 10, 'ОНПУ', 'ИКС', 4, 2013, 'int@gmail.com', '+3805735734',
+(3, 10, 'ОНПУ', 'ИКс', 4, 2013, 'int@gmail.com', '+380573573488',
  '', '+', '+', '+', '', '+', '+', '+', '+', '', 5, 2, 'PHP - 1',
  5, 5, 5, 5, 5, 5, 5, 5, 'Лабораторки в универе сама делала', 5, 5, 5, 'декан',
  'Сама не знаю', 'без комментариев', 0, 1, 0);

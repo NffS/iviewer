@@ -1,9 +1,12 @@
 package test;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -12,26 +15,34 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="Users")
 public class User {
 
-private int user_id;
+@Id
+@GeneratedValue(generator="increment")
+@GenericGenerator(name="increment", strategy = "increment")
+@Column(name="user_id")
+private Integer user_id;
 private String email;
 private String password;
 private String first_name;
 private String surname;
 private String last_name;
 private String foto;
-private int user_type_id;
+private Integer user_type_id;
+
+@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+private Form form;
+
+@OneToOne
+@PrimaryKeyJoinColumn
+private Users_type users_type;
 
 public User(){}
 
-public void setUserId(int id){
+public void setUserId(Integer id){
 	this.user_id=id;
 }
 
-@Id
-@GeneratedValue(generator="increment")
-@GenericGenerator(name="increment", strategy = "increment")
-@Column(name="user_id")
-public int getUserId(){
+
+public Integer getUserId(){
 	return user_id;
 }
 
@@ -67,11 +78,11 @@ public void setFoto(String foto) {
 }
 
 @Column(name="user_type_id")
-public int getUser_type_id() {
+public Integer getUser_type_id() {
 	return user_type_id;
 }
 
-public void setUser_type_id(int user_type_id) {
+public void setUser_type_id(Integer user_type_id) {
 	this.user_type_id = user_type_id;
 }
 
@@ -96,6 +107,14 @@ public String getEmail() {
 
 public void setEmail(String email) {
 	this.email = email;
+}
+
+public Form getForm() {
+	return form;
+}
+
+public void setForm(Form form) {
+	this.form = form;
 }
 
 

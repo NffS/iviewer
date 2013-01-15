@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -20,22 +22,35 @@ public class User {
 @GenericGenerator(name="increment", strategy = "increment")
 @Column(name="user_id")
 private Integer user_id;
+
+@Column(name="email")
 private String email;
+
+@Column(name="password")
 private String password;
+
+@Column(name="first_name")
 private String first_name;
+
+@Column(name="surname")
 private String surname;
+
+@Column(name="last_name")
 private String last_name;
+
+@Column(name="foto")
 private String foto;
+
+@Column(name="user_type_id")
 private Integer user_type_id;
 
 @OneToOne(mappedBy="user", cascade=CascadeType.ALL)
 private Form form;
 
-@OneToOne
-@PrimaryKeyJoinColumn
+@ManyToOne
+@JoinColumn(name="user_type_id", referencedColumnName = "user_type_id", insertable=false, updatable=false)
 private Users_type users_type;
 
-public User(){}
 
 public void setUserId(Integer id){
 	this.user_id=id;
@@ -50,7 +65,7 @@ public void setPassword(String password){
 	this.password=password;
 }
 
-@Column(name="surname")
+
 public String getSurname() {
 	return surname;
 }
@@ -59,7 +74,7 @@ public void setSurname(String surname) {
 	this.surname = surname;
 }
 
-@Column(name="last_name")
+
 public String getLast_name() {
 	return last_name;
 }
@@ -68,7 +83,7 @@ public void setLast_name(String last_name) {
 	this.last_name = last_name;
 }
 
-@Column(name="foto")
+
 public String getFoto() {
 	return foto;
 }
@@ -77,7 +92,7 @@ public void setFoto(String foto) {
 	this.foto = foto;
 }
 
-@Column(name="user_type_id")
+
 public Integer getUser_type_id() {
 	return user_type_id;
 }
@@ -86,12 +101,12 @@ public void setUser_type_id(Integer user_type_id) {
 	this.user_type_id = user_type_id;
 }
 
-@Column(name="password")
+
 public String getPassword() {
 	return password;
 }
 
-@Column(name="first_name")
+
 public String getFirst_name() {
 	return first_name;
 }
@@ -100,7 +115,7 @@ public void setFirst_name(String first_name) {
 	this.first_name = first_name;
 }
 
-@Column(name="email")
+
 public String getEmail() {
 	return email;
 }
@@ -115,6 +130,14 @@ public Form getForm() {
 
 public void setForm(Form form) {
 	this.form = form;
+}
+
+public Users_type getUsers_type() {
+	return users_type;
+}
+
+public void setUsers_type(Users_type users_type) {
+	this.users_type = users_type;
 }
 
 

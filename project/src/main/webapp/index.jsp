@@ -9,21 +9,11 @@
 </head>
 <body>
 <body>
-<form name="input" action="TestDB" method="post">
+<form name="testdb" action="TestDB" method="post">
 <input type="submit" value="See testing of DB tables">
+</form>
 <br>
-<%--Приимер обращения к БД из JSP--%>
-<br>=============All users========== 
-<br>
-<%
-Locale.setDefault(Locale.ENGLISH);
-List<User> usrs = Factory.getInstance().getUserDAO().getAllUsers();
-List<String> strs=new ArrayList<String>();
-for(int i = 0; i < usrs.size(); i++) {
-	out.println("<br>"+i+". "+usrs.get(i).getFirst_name()+" "+usrs.get(i).getLast_name()+" "+usrs.get(i).getSurname()
-		+", "+usrs.get(i).getEmail());
-}
-%>
+<input type="submit" value="Вход" name="login" onclick="javascript:document.location='login.jsp'">
 </form>
 </body>
 </html>

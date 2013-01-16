@@ -77,7 +77,7 @@ public class TestDB extends HttpServlet {
 				out.print(form.getForm_id());
 				out.print("<br>");
 				for(int i=0; i<usrs.size();i++){
-					if(form.getCandidate_id()==usrs.get(i).getUserId()){
+					if(form.getCandidate_id()==usrs.get(i).getUser_id()){
 						form.setUser(usrs.get(i));
 						usrs.get(i).setForm(form);
 					}

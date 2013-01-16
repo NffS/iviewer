@@ -52,12 +52,12 @@ private Form form;
 private Users_type users_type;
 
 
-public void setUserId(Integer id){
+public void setUser_id(Integer id){
 	this.user_id=id;
 }
 
 
-public Integer getUserId(){
+public Integer getUser_id(){
 	return user_id;
 }
 

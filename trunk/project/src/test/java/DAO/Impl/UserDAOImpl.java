@@ -89,5 +89,5 @@ public class UserDAOImpl implements UserDAO {
                     session.close();
                 }
             }
-      }  
+      } 
 }

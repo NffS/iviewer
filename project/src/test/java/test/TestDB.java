@@ -17,6 +17,7 @@ import java.util.Locale;
 import test.User;
 import test.Users_type;
 import test.Form;
+import test.Interview;
 import DAO.Factory;
 
 /**
@@ -48,12 +49,22 @@ public class TestDB extends HttpServlet {
 		try{
 			Locale.setDefault(Locale.ENGLISH);
 			Factory factory = Factory.getInstance();
+			List<Interview> interview = factory.getInterviewDAO().getAllInterview();
 			List<User> usrs = factory.getUserDAO().getAllUsers();
 			List<Users_type> users_types =factory.getUsers_typeDAO().getAllUser_types();
 			Form form=factory.getFormDAO().getFormById(1);
 			PrintWriter out = response.getWriter();
 			try {
-				out.print("<HTML><BODY>=============All users========== ");
+				out.print("<HTML><BODY>");
+				out.print("<br>");
+				out.print("<=============All Interview==========>");
+				for(int i = 0; i < interview.size(); i++) {
+					out.print("<br>");
+					out.print(i+". "+interview.get(i).getStart_date()+" "+interview.get(i).getEnd_date()+" "+interview.get(i).getSeats());
+				}
+				out.print("<br>");
+				
+				out.print("<=============All users==========>");
 				for(int i = 0; i < usrs.size(); i++) {
 					out.print("<br>");
 					out.print(i+". "+usrs.get(i).getFirst_name()+" "+usrs.get(i).getLast_name()+" "+usrs.get(i).getSurname()

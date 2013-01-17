@@ -12,7 +12,7 @@
 <form name="testdb" action="TestDB" method="post">
 <input type="submit" value="See testing of DB tables">
 </form>
-<br>
+<br> 
 <input type="submit" value="Вход" name="login" onclick="javascript:document.location='login.jsp'">
 </form>
 </body>

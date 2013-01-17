@@ -3,10 +3,12 @@ package DAO;
 import DAO.Impl.UserDAOImpl;
 import DAO.Impl.Users_typeDAOImpl;
 import DAO.Impl.FormDAOImpl;
+import DAO.Impl.InterviewDAOImpl;
 
 public class Factory {
      
       private static UserDAO userDAO = null;
+      private static InterviewDAO interviewDAO = null;
       private static Users_typeDAO users_typeDAO = null;
       private static FormDAO formDAO = null;
       private static Factory instance = null;
@@ -30,6 +32,13 @@ public class Factory {
     		  users_typeDAO = new Users_typeDAOImpl();
     	  }
     	  return users_typeDAO;
+      }
+      
+      public InterviewDAO getInterviewDAO(){
+    	  if(interviewDAO == null){
+    		  interviewDAO = new InterviewDAOImpl();
+    	  }
+    	  return interviewDAO;
       }
       
       public FormDAO getFormDAO(){

@@ -66,7 +66,7 @@ public class UserDAOImpl implements UserDAO {
                 session = HibernateUtil.getSessionFactory().openSession();
                 usrs = session.createCriteria(User.class).list();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O user", JOptionPane.OK_OPTION);
             } finally {
                 if (session != null && session.isOpen()) {
                     session.close();

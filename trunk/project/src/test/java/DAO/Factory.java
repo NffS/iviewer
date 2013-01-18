@@ -4,6 +4,7 @@ import DAO.Impl.UserDAOImpl;
 import DAO.Impl.Users_typeDAOImpl;
 import DAO.Impl.FormDAOImpl;
 import DAO.Impl.InterviewDAOImpl;
+import DAO.Impl.HR_markDAOImpl;
 
 public class Factory {
      
@@ -11,6 +12,7 @@ public class Factory {
       private static InterviewDAO interviewDAO = null;
       private static Users_typeDAO users_typeDAO = null;
       private static FormDAO formDAO = null;
+      private static HR_markDAO hr_markDAO = null;
       private static Factory instance = null;
 
       public static synchronized Factory getInstance(){
@@ -39,6 +41,13 @@ public class Factory {
     		  interviewDAO = new InterviewDAOImpl();
     	  }
     	  return interviewDAO;
+      }
+      
+      public HR_markDAO getHR_markDAO(){
+    	  if(hr_markDAO == null){
+    		  hr_markDAO = new HR_markDAOImpl();
+    	  }
+    	  return hr_markDAO;
       }
       
       public FormDAO getFormDAO(){

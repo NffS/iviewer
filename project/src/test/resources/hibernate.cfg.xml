@@ -19,6 +19,7 @@
     <mapping class="test.Users_type" />
     <mapping class="test.Form" />
     <mapping class="test.Interview" />
+    <mapping class="test.HR_mark" />
    
   </session-factory>
 </hibernate-configuration>

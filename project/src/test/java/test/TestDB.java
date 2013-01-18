@@ -2,22 +2,14 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Hibernate;
-
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Locale;
-
-import test.User;
-import test.Users_type;
-import test.Form;
-import test.Interview;
 import DAO.Factory;
 
 /**
@@ -50,6 +42,7 @@ public class TestDB extends HttpServlet {
 			Locale.setDefault(Locale.ENGLISH);
 			Factory factory = Factory.getInstance();
 			List<Interview> interview = factory.getInterviewDAO().getAllInterview();
+			List<HR_mark> hr_mark = factory.getHR_markDAO().getAllHR_mark();
 			List<User> usrs = factory.getUserDAO().getAllUsers();
 			List<Users_type> users_types =factory.getUsers_typeDAO().getAllUser_types();
 			Form form=factory.getFormDAO().getFormById(1);
@@ -57,11 +50,20 @@ public class TestDB extends HttpServlet {
 			try {
 				out.print("<HTML><BODY>");
 				out.print("<br>");
-				out.print("<=============All Interview==========>");
+				out.print("<=============All HR_marks==========>");
+				for(int i = 0; i < hr_mark.size(); i++) {
+					out.print("<br>");
+					out.print(i+". "+hr_mark.get(i).getHr_id()+" "+hr_mark.get(i).getForm_id()+" "+hr_mark.get(i).getMotivation()+" "
+					+hr_mark.get(i).getEnglish()+" "+hr_mark.get(i).getGeneral_mark());
+				}
+				out.print("<br>");
+				out.print("<br>");
+				out.print("<=============All Interviews==========>");
 				for(int i = 0; i < interview.size(); i++) {
 					out.print("<br>");
 					out.print(i+". "+interview.get(i).getStart_date()+" "+interview.get(i).getEnd_date()+" "+interview.get(i).getSeats());
 				}
+				out.print("<br>");
 				out.print("<br>");
 				
 				out.print("<=============All users==========>");
@@ -72,7 +74,6 @@ public class TestDB extends HttpServlet {
 				}
 				out.print("<br>");
 				out.print("<br>");
-				out.print("<br>");
 				out.print("===========All users types======== ");
 				for(int i = 0; i < users_types.size(); i++) {
 					out.print("<br>");
@@ -81,10 +82,7 @@ public class TestDB extends HttpServlet {
 				}
 				out.print("<br>");
 				out.print("<br>");
-				out.print("<br>");
 				out.print("=============Some form==============");
-				out.print("<br>");
-				out.print("<br>");
 				out.print(form.getForm_id());
 				out.print("<br>");
 				for(int i=0; i<usrs.size();i++){

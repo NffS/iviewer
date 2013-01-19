@@ -461,4 +461,7 @@ VALUES ( 2, 'Текст новости 2' );
 INSERT INTO News 
 VALUES ( 3, 'Текст новости 3' );
 
+INSERT INTO News 
+VALUES ( 4, 'Текст главной страницы 4' );
+
 COMMIT;

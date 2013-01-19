@@ -5,6 +5,7 @@ import DAO.Impl.Users_typeDAOImpl;
 import DAO.Impl.FormDAOImpl;
 import DAO.Impl.InterviewDAOImpl;
 import DAO.Impl.HR_markDAOImpl;
+import DAO.Impl.NewsDAOImpl;
 
 public class Factory {
      
@@ -13,6 +14,7 @@ public class Factory {
       private static Users_typeDAO users_typeDAO = null;
       private static FormDAO formDAO = null;
       private static HR_markDAO hr_markDAO = null;
+      private static NewsDAO newsDAO = null;
       private static Factory instance = null;
 
       public static synchronized Factory getInstance(){
@@ -28,6 +30,13 @@ public class Factory {
             }
             return userDAO;
       }
+      
+      public NewsDAO getNewsDAO(){
+          if (newsDAO == null){
+        	  newsDAO = new NewsDAOImpl();
+          }
+          return newsDAO;
+    }
       
       public Users_typeDAO getUsers_typeDAO(){
     	  if(users_typeDAO == null){

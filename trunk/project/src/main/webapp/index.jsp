@@ -20,7 +20,7 @@
 
 <%
 
-
+Locale.setDefault(Locale.ENGLISH);
 String text="";
 Enumeration params = request.getParameterNames();
 try{

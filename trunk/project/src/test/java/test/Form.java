@@ -1,10 +1,12 @@
 package test;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -138,6 +140,14 @@ public class Form {
 	@OneToOne
     @JoinColumn(name="user_id")
     private User user;
+	
+	@OneToOne(mappedBy="Form", cascade=CascadeType.ALL)
+	private HR_mark hr_mark;
+	
+		
+	@ManyToOne
+	@JoinColumn(name="intreview_id", referencedColumnName = "interview_id", insertable=false, updatable=false)
+	private Interview interview;
 
 	public Integer getForm_id() {
 		return form_id;
@@ -458,4 +468,22 @@ public class Form {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public Interview getInterview() {
+		return interview;
+	}
+
+	public void setInterview(Interview interview) {
+		this.interview = interview;
+	}
+	
+	public HR_mark getHR_mark() {
+		return hr_mark;
+	}
+
+	public void setHR_mark(HR_mark hr_mark) {
+		this.hr_mark = hr_mark;
+	}
+	
+	
 }

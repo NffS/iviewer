@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -46,6 +49,9 @@ private Integer user_type_id;
 
 @OneToOne(mappedBy="user", cascade=CascadeType.ALL)
 private Form form;
+
+@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+private Set<HR_mark> hr_mark;
 
 @ManyToOne
 @JoinColumn(name="user_type_id", referencedColumnName = "user_type_id", insertable=false, updatable=false)
@@ -138,6 +144,14 @@ public Users_type getUsers_type() {
 
 public void setUsers_type(Users_type users_type) {
 	this.users_type = users_type;
+}
+
+public Set<HR_mark> getHR_mark() {
+	return hr_mark;
+}
+
+public void setHR_mark(Set<HR_mark> hr_mark) {
+	this.hr_mark = hr_mark;
 }
 
 

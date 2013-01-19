@@ -4,26 +4,27 @@ DROP TABLE HR_mark		CASCADE CONSTRAINTS;
 DROP TABLE Tech_mark	CASCADE CONSTRAINTS;
 DROP TABLE Interview	CASCADE CONSTRAINTS;
 DROP TABLE Form			CASCADE CONSTRAINTS;
+DROP TABLE News			CASCADE CONSTRAINTS;
 
 CREATE TABLE Users_type
     ( 
 		user_type_id    NUMBER(6) NOT NULL PRIMARY KEY,
-		type_name    	VARCHAR2(20) NOT NULL
+		type_name    	VARCHAR2(25) NOT NULL
     );
 
 CREATE TABLE Users
     ( 
 		user_id    		NUMBER(6) NOT NULL PRIMARY KEY,
-		email   		VARCHAR2(20) NOT NULL CONSTRAINT email 
+		email   		VARCHAR2(30) NOT NULL CONSTRAINT email 
 		CHECK (REGEXP_LIKE(email,'^([a-zA-Z0-9_\.\-]{1,20})@([a-zA-Z0-9\.\-]{1,20})\.([a-z]{2,4})$')),
-		password 		VARCHAR2(16) NOT NULL,
-		first_name  	VARCHAR2(20) NOT NULL CONSTRAINT first_name
+		password 		VARCHAR2(20) NOT NULL,
+		first_name  	VARCHAR2(100) NOT NULL CONSTRAINT first_name
 		CHECK (first_name = INITCAP(first_name) AND REGEXP_LIKE(first_name,'[a-zA-Zа-яА-Я]$')),
-		surname			VARCHAR2(20) NOT NULL CONSTRAINT surname
+		surname			VARCHAR2(100) NOT NULL CONSTRAINT surname
 		CHECK (surname = INITCAP(surname) AND REGEXP_LIKE(surname,'[a-zA-Zа-яА-Я]$')),
-		last_name		VARCHAR2(20) NOT NULL CONSTRAINT last_name
+		last_name		VARCHAR2(100) NOT NULL CONSTRAINT last_name
 		CHECK (last_name = INITCAP(last_name) AND REGEXP_LIKE(last_name,'[a-zA-Zа-яА-Я]$')),
-		foto			VARCHAR2(40),
+		foto			VARCHAR2(80),
 		user_type_id	NUMBER(6) REFERENCES Users_type (user_type_id)
     );
 		
@@ -45,18 +46,18 @@ CREATE TABLE Form
 		CHECK (REGEXP_LIKE(faculty,'[a-zA-Zа-яА-Я0-9]')),
 		course	 			NUMBER(1),
 		end_year			VARCHAR2(5),
-		email2				VARCHAR2(20) CONSTRAINT email2 
+		email2				VARCHAR2(30) CONSTRAINT email2 
 		CHECK (REGEXP_LIKE(email2,'^([a-zA-Z0-9_\.\-]{1,20})@([a-zA-Z0-9\.\-]{1,20})\.([a-z]{2,4})$')),
 		phone				VARCHAR2(13) CONSTRAINT phone
 		CHECK (REGEXP_LIKE(phone,'[\+0-9]{7,13}')),
-		another_contact		VARCHAR2(200),
+		another_contact		VARCHAR2(400),
 		interest_tc 		VARCHAR2(2) NOT NULL CONSTRAINT interest_tc
 		CHECK (interest_tc in('+','+-','-','?')),
 		interest_nc 		VARCHAR2(2) NOT NULL CONSTRAINT interest_nc
 		CHECK (interest_nc in('+','+-','-','?')),
 		interest_area_po 	VARCHAR2(2)	NOT NULL CONSTRAINT interest_area_po
 		CHECK (interest_area_po in('+','+-','-','?')),
-		interest_area_other VARCHAR2(400),
+		interest_area_other VARCHAR2(800),
 		job_ar_deep_spec 	VARCHAR2(2) NOT NULL CONSTRAINT job_ar_deep_spec
 		CHECK (job_ar_deep_spec in('+','+-','-','?')),
 		job_ar_varied 		VARCHAR2(2) NOT NULL CONSTRAINT job_ar_varied
@@ -65,12 +66,12 @@ CREATE TABLE Form
 		CHECK (job_ar_manage in('+','+-','-','?')),
 		job_ar_sales		VARCHAR2(2) NOT NULL  CONSTRAINT job_ar_sales
 		CHECK (job_ar_sales in('+','+-','-','?')),
-		job_ar_other 		VARCHAR2(400),
+		job_ar_other 		VARCHAR2(800),
 		prog_lang_c 		NUMBER(1) NOT NULL CONSTRAINT prog_lang_c
 		CHECK (prog_lang_c between 0 and 5),
 		prog_lang_java		NUMBER(1) NOT NULL CONSTRAINT prog_lang_java
 		CHECK (prog_lang_java between 0 and 5),
-		prog_lang_other 	VARCHAR2(400),
+		prog_lang_other 	VARCHAR2(800),
 		cs_network_tech 	NUMBER(1) NOT NULL CONSTRAINT cs_network_tech
 		CHECK (cs_network_tech between 0 and 5),
 		cs_algorithms 		NUMBER(1) NOT NULL CONSTRAINT cs_algorithms
@@ -87,15 +88,15 @@ CREATE TABLE Form
 		CHECK (cs_network_prog between 0 and 5),
 		cs_design 			NUMBER(1) NOT NULL CONSTRAINT cs_design
 		CHECK (cs_design between 0 and 5),
-		experience			VARCHAR2(2000),
+		experience			VARCHAR2(4000),
 		english_read 		NUMBER(1) NOT NULL CONSTRAINT english_read
 		CHECK (english_read between 0 and 5),
 		english_write		NUMBER(1) NOT NULL CONSTRAINT english_write
 		CHECK (english_write between 0 and 5),
 		english_spoken	 	NUMBER(1) NOT NULL CONSTRAINT english_spoken
 		CHECK (english_spoken between 0 and 5),
-		source				VARCHAR2(200) NOT NULL,
-		motivation_comment	VARCHAR2(800) NOT NULL,
+		source				VARCHAR2(800) NOT NULL,
+		motivation_comment	VARCHAR2(2000) NOT NULL,
 		comment2			VARCHAR2(2000) NOT NULL,
 		status	 			NUMBER(1) NOT NULL,
 		interview_id		NUMBER(6) REFERENCES Interview (interview_id),
@@ -126,10 +127,16 @@ CREATE TABLE Tech_mark
 		other			NUMBER(3) NOT NULL, 
 		general_mark    VARCHAR2(2000) NOT NULL
 	);
-	
+		
 	ALTER TABLE Users 
 	ADD CONSTRAINT password
 	CHECK(REGEXP_LIKE(password,'[a-zA-Z0-9_\.]{4,16}$'));
+	
+CREATE TABLE News
+	(
+		news_id 		NUMBER(3) NOT NULL PRIMARY KEY,
+		text		    CLOB NOT NULL
+	);
 	
 COMMIT;
 
@@ -445,6 +452,13 @@ INSERT INTO Tech_mark values
 INSERT INTO Tech_mark values
 (5, 4, 5, 10, 10, 10, 10, 10, 10, 0, 'aaa');
 
+INSERT INTO News 
+VALUES ( 1, 'Текст новости 1' );
 
+INSERT INTO News 
+VALUES ( 2, 'Текст новости 2' );
+
+INSERT INTO News 
+VALUES ( 3, 'Текст новости 3' );
 
 COMMIT;

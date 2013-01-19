@@ -37,8 +37,8 @@ public class Interview {
 	@Column(name="seats")
 	private Integer seats;
 		
-	//@OneToMany(mappedBy="Interview", cascade=CascadeType.ALL)
-	//private Set<Form> Form;
+	@OneToMany(mappedBy="interview", cascade=CascadeType.ALL)
+	private Set<Form> Form;
 	
 	
 	public Integer getInterview_id() {
@@ -73,12 +73,12 @@ public class Interview {
 		this.seats = seats;
 	}
 	
-	//public Set<Form> getForm() {
-	//	return Form;
-	//}
+	public Set<Form> getForm() {
+		return Form;
+	}
 
-	//public void setForm(Set<Form> Form) {
-	//	this.Form = Form;
-	//}
+	public void setForm(Set<Form> Form) {
+		this.Form = Form;
+	}
 
 }

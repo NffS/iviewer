@@ -20,6 +20,7 @@
     <mapping class="test.Form" />
     <mapping class="test.Interview" />
     <mapping class="test.HR_mark" />
+    <mapping class="test.News" />
    
   </session-factory>
 </hibernate-configuration>

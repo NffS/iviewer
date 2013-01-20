@@ -9,7 +9,7 @@
  <link rel="stylesheet" type="text/css" href="loginStyle.css" />
 </head>
 <body>
-<form name="input" action="login.jsp">
+<form name="input" action="login.jsp" method="post">
 <%
 String message="";
 String email="";

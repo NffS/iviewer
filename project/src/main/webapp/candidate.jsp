@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Candidate</title>
 </head>
 <body>
-Вы вошли как кандидат
+Вы вошли как кандидат<br>
+<a href="index.jsp">Главная</a>
 </body>
 </html>

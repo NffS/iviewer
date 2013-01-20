@@ -17,7 +17,7 @@ import DAO.Factory;
  */
 public class TestDB extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,7 +48,7 @@ public class TestDB extends HttpServlet {
 			Form form=factory.getFormDAO().getFormById(1);
 			PrintWriter out = response.getWriter();
 			try {
-				out.print("<HTML><BODY>");
+				out.print("<HTML><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><title>Test DB</title></head><BODY>");
 				out.print("<br>");
 				out.print("<=============All HR_marks==========>");
 				for(int i = 0; i < hr_mark.size(); i++) {

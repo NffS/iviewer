@@ -1,0 +1,49 @@
+#email{
+	position:absolute;
+	top: 50px;
+	left: 150px;
+}
+
+#password{
+	position:absolute;
+	top: 100px;
+	left: 150px;
+}
+
+#emailText{
+	position:absolute;
+	top: 50px;
+	left: 30px;
+	font-size: 20px;
+}
+
+#passwordText{
+	position:absolute;
+	top: 100px;
+	left: 30px;
+	font-size: 20px;
+}
+
+#loginButton{
+	position:absolute;
+	top:135px;
+	left:250px;
+	height: 50px;
+	width: 100px;
+}
+
+#error{
+	position:absolute;
+	top:300px;
+	left:50px;
+	font-size: 30px;
+	font-color:#ff0000;
+}
+
+
+#main{
+	position:absolute;
+	top:200px;
+	left:30px;
+	font-size: 20px;
+}

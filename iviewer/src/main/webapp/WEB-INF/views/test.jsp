@@ -17,6 +17,9 @@ Initializing test.
 <form name="login" action="login" method="GET">
 <input type="submit" value="login">
 </form>
+<form name="formlist" action="form_list" method="GET">
+<input type="submit" value="form_list">
+</form>
 <%
 if(request.getAttribute("userList")!=null){
 	List<User> users=(List<User>)request.getAttribute("userList");%>

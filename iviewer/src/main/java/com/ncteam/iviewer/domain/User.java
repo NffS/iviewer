@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -46,7 +47,8 @@ private String foto;
 @Column(name="user_type_id")
 private Integer user_type_id;
 
-@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+@OneToOne(fetch = FetchType.LAZY)
+@JoinColumn(name="form_id", referencedColumnName = "form_id")
 private Form form;
 
 @OneToMany(mappedBy="user", cascade=CascadeType.ALL)

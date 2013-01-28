@@ -3,6 +3,7 @@ package com.ncteam.iviewer.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -136,8 +137,8 @@ public class Form {
 	@Column(name="visit_status")
 	private Integer visit_status;
 	
-	@OneToOne
-    @JoinColumn(name="user_id")
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", referencedColumnName = "user_id")
     private User user;
 	
 	@OneToOne(mappedBy="Form", cascade=CascadeType.ALL)
@@ -460,6 +461,7 @@ public class Form {
 		this.visit_status = visit_status;
 	}
 
+
 	public User getUser() {
 		return user;
 	}
@@ -468,6 +470,7 @@ public class Form {
 		this.user = user;
 	}
 	
+
 	public Interview getInterview() {
 		return interview;
 	}

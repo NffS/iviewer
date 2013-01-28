@@ -24,6 +24,12 @@ public class Interview {
 	@Column(name="interview_id")
 	private Integer interview_id;
 	
+	@Column(name="start_date", updatable=false, insertable=false)
+	private String stringStart_date;
+	
+	@Column(name="end_date", updatable=false, insertable=false)
+	private String stringEnd_date;
+	
 	@Column(name="start_date")
 	private Date start_date;
 	
@@ -75,6 +81,22 @@ public class Interview {
 
 	public void setForm(Set<Form> Form) {
 		this.Form = Form;
+	}
+
+	public String getStringStart_date() {
+		return stringStart_date;
+	}
+
+	public void setStringStart_date(String stringStart_date) {
+		this.stringStart_date = stringStart_date;
+	}
+
+	public String getStringEnd_date() {
+		return stringEnd_date;
+	}
+
+	public void setStringEnd_date(String stringEnd_date) {
+		this.stringEnd_date = stringEnd_date;
 	}
 
 }

@@ -2,7 +2,6 @@ package com.ncteam.iviewer.web;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -52,7 +51,13 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	public String login(Model model){
-		model.addAttribute("user", new User());
+		//model.addAttribute("user", new User());
 		return "login";
 	}
+	
+	@ModelAttribute("user")
+	public User addUser(){
+		return new User();
+	}
+
 }

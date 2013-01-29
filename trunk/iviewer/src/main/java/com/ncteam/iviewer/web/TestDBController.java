@@ -46,9 +46,6 @@ public class TestDBController {
 	        return "test";
 	    }
 
-	 @RequestMapping("/")
-	 public String home() {
-	        return "redirect:/index";
-	    }
+
 	 
 }

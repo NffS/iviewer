@@ -2,6 +2,7 @@ package com.ncteam.iviewer.web;
 
 import java.util.Map;
 
+import com.ncteam.iviewer.web.NewsController;
 import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.HR_mark;
 import com.ncteam.iviewer.domain.Interview;
@@ -23,7 +24,7 @@ public class TestDBController {
 	 @Autowired
 	 private TablesService tablesService;
 	 
-	 @RequestMapping("/index")
+	 @RequestMapping("/testdb")
 	 public String getAllUsers(Map<String, Object> map) {
 		 
 	        map.put("user", new User());
@@ -44,7 +45,7 @@ public class TestDBController {
 	         
 	        return "test";
 	    }
-	 
+
 	 @RequestMapping("/")
 	 public String home() {
 	        return "redirect:/index";

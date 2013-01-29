@@ -8,7 +8,7 @@ Enumeration names = request.getParameterNames();
 if (names.hasMoreElements()&&request.getParameter("loguot")!=null) {
 	session.removeAttribute("user");%>
 	
-	<jsp:forward page="index"/>
+	<jsp:forward page="/index"/>
 <%
 }
 %>

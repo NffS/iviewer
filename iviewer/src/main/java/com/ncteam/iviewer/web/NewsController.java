@@ -49,6 +49,10 @@ public class NewsController {
         return "index";
     }
 
+    @RequestMapping("/")
+    public String home() {
+        return "redirect:/index";
+    }
 
 
 }

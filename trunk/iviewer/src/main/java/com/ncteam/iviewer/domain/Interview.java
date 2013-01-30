@@ -1,6 +1,8 @@
 package com.ncteam.iviewer.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -8,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,7 +19,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Interview")
-public class Interview {
+public class Interview implements Serializable{
 	
 	@Id
 	@GeneratedValue(generator="increment")
@@ -39,8 +42,9 @@ public class Interview {
 	@Column(name="seats")
 	private Integer seats;
 		
-	@OneToMany(mappedBy="interview", cascade=CascadeType.ALL)
-	private Set<Form> Form;
+	@OneToMany
+	@JoinColumn(name="interview_id")
+	private List<Form> Form;
 	
 	
 	public Integer getInterview_id() {
@@ -75,11 +79,11 @@ public class Interview {
 		this.seats = seats;
 	}
 	
-	public Set<Form> getForm() {
+	public List<Form> getForm() {
 		return Form;
 	}
 
-	public void setForm(Set<Form> Form) {
+	public void setForm(List<Form> Form) {
 		this.Form = Form;
 	}
 

@@ -7,7 +7,7 @@
 <head>
     <title>NetCracker</title>
     <meta charset="utf-8">
-    <link type="text/css" rel="stylesheet" href="/resources/design/style.css">
+    <link type="text/css" rel="stylesheet" href="resources/design/style.css">
     </head>
 <body>
 	<div id="s" style="background:white; width:100%;height:70px;">
@@ -17,29 +17,28 @@
 			<div id="submain">
 				<div id="out">
 					<div id="header">
-						<img src="/resources/design/logo.jpg">
+						<img src="resources/design/logo.jpg">
 						<div id="menu">
 						    <ul>
-								<li><a href="/index"><p>Главная</p></a></li>
-								<li><a href="/index/1"><p>О компании</p></a></li>
-								<li><a href="/index/2"><p>Контакты</p></a></li>
-								<li><a href="/testdb"><p>testDB</p></a></li>
+								<li><a href="index"><p>Главная</p></a></li>
+								<li><a href="index/1"><p>О компании</p></a></li>
+								<li><a href="index/2"><p>Контакты</p></a></li>
+								<li><a href="testdb"><p>testDB</p></a></li>
 							</ul>
 						</div>
 						<%if((Integer)session.getAttribute("user_type_id")==null){	%>
 						<div id="log">
-                          <%//<form:form  method="POST" commandName="userProfile" modelAttribute="user" action="/loginCheck">
+                          <form:form  method="POST" commandName="userProfile" modelAttribute="user" action="loginCheck">
 
-							//   E-mail<form:input path="email"/><br>
-							//    <p style="margin-top:7px;">Пароль:</p>
-                             //   <form:password path="password" />
-                             //   <input type="submit" value="Войти">
-                           // </form:form>     %>
+							   E-mail<form:input path="email"/><br>
+							    Пароль:<form:password path="password" />
 						
 						        </div>
 						        <div id="reg">
-
-							<a href="reg.jsp"><p>Регистрация</p></a>
+								<input type="submit" value="Войти">
+								<a href="reg.jsp"><p>Регистрация</p></a>
+                            </form:form>     
+							
 						</div>
 						<%}else{String path="#";%>
 						<div id="cabin">
@@ -56,7 +55,7 @@
 						</div>
 					</div>	
 					<div id="info">
-						<img src="/resources/design/info.jpg">
+						<img src="resources/design/info.jpg">
 					</div>
                     <div id="left">
                         <div id="left_block">

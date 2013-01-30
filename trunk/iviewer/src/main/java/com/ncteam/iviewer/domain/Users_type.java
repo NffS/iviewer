@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,7 +26,8 @@ public class Users_type {
 	@Column(name="type_name")
 	private String type_name;
 	
-	@OneToMany(mappedBy="users_type", cascade=CascadeType.ALL)
+	@OneToMany
+	@JoinColumn(name="user_type_id")
 	private Set<User> users;
 	
 

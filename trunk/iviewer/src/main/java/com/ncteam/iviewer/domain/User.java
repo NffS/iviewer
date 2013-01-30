@@ -1,5 +1,7 @@
 package com.ncteam.iviewer.domain;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,7 +20,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Users")
-public class User {
+public class User implements Serializable{
 
 @Id
 @GeneratedValue(generator="increment")
@@ -47,8 +49,8 @@ private String foto;
 @Column(name="user_type_id")
 private Integer user_type_id;
 
-@OneToOne(fetch = FetchType.LAZY)
-@JoinColumn(name="form_id", referencedColumnName = "form_id")
+@OneToOne
+@JoinColumn(name="user_id")
 private Form form;
 
 @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
@@ -136,7 +138,7 @@ public Form getForm() {
 }
 
 public void setForm(Form form) {
-	this.form = form;
+	this.form=form;
 }
 
 public Users_type getUsers_type() {

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ncteam.iviewer.domain.Form;
-import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.domain.Interview;
+import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.service.TablesService;
 
 
@@ -33,8 +33,7 @@ public class FormListController {
 		String interviewDate=formListFilter.getInterviewDate();
 		boolean requiredConfirmOnly=formListFilter.isRequiredConfirmOnly();
 		
-		List<String> interviewsDates=new ArrayList<String>();
-		List<Form> forms=getAllFormsAndInterviewsDates(interviewsDates);
+		List<Form> forms=tablesService.getAllRecords(Form.class);
 		
 		if(!lastName.isEmpty()){
 			for(int i=0; i<forms.size(); i++){
@@ -61,7 +60,7 @@ public class FormListController {
 			}
 		}
 		
-		map.put("interviewsDates", interviewsDates);
+		map.put("interviewsDates", getAllInterviewsDates());
 		map.put("forms", forms);
 		return "form_list";
 	}
@@ -69,10 +68,10 @@ public class FormListController {
 	@RequestMapping("/form_list")
 	public String form_list(Map<String, Object> map){
 		
-		List<String> interviewsDates=new ArrayList<String>();
-		List<Form> forms=getAllFormsAndInterviewsDates(interviewsDates);
 		
-		map.put("interviewsDates", interviewsDates);
+		List<Form> forms=tablesService.getAllRecords(Form.class);
+		
+		map.put("interviewsDates", getAllInterviewsDates());
 		map.put("forms", forms);
 		return "form_list";
 	}
@@ -85,31 +84,16 @@ public class FormListController {
 		return new FormListFilter();
 	}
 	
-	private List<Form> getAllFormsAndInterviewsDates(List<String> interviewsDates){
+	private List<String> getAllInterviewsDates(){
 		
-		List<Form> forms=tablesService.getAllRecords(Form.class);
 		List<Interview> interviews=tablesService.getAllRecords(Interview.class);
-		List<User> users=tablesService.getAllRecords(User.class);
 		
-		for(int i=0; i<forms.size();i++){
-			for(int j=0; j<users.size();j++){
-				if(forms.get(i).getCandidate_id().equals(users.get(j).getUser_id())){
-					forms.get(i).setUser(users.get(j));
-					users.get(j).setForm(forms.get(i));
-				}
-			}
-		}
-		for(int i=0; i<forms.size();i++){
-			for(int j=0; j<interviews.size();j++){
-				if(forms.get(i).getInterview_id().equals(interviews.get(j).getInterview_id())){
-					forms.get(i).setInterview(interviews.get(j));
-				}
-			}
-		}
+		List<String> interviewsDates=new ArrayList<String>();
+		
 		for(int i=0;i<interviews.size();i++){
 			interviewsDates.add(interviews.get(i).getStringStart_date());
 		}
-		return forms;
+		return interviewsDates;
 	}
 
 }

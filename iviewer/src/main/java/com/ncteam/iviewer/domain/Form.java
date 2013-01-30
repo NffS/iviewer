@@ -1,5 +1,7 @@
 package com.ncteam.iviewer.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Form")
-public class Form {
+public class Form implements Serializable{
 
 	@Id
     @GeneratedValue(generator="increment")
@@ -131,14 +133,11 @@ public class Form {
 	@Column(name="status")
 	private Integer status;
 	
-	@Column(name="interview_id")
-	private Integer interview_id;
-	
 	@Column(name="visit_status")
 	private Integer visit_status;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", referencedColumnName = "user_id")
+	@OneToOne
+	@JoinColumn(name="user_id")
     private User user;
 	
 	@OneToOne(mappedBy="Form", cascade=CascadeType.ALL)
@@ -146,7 +145,7 @@ public class Form {
 	
 		
 	@ManyToOne
-	@JoinColumn(name="intreview_id", referencedColumnName = "interview_id", insertable=false, updatable=false)
+	@JoinColumn(name="interview_id")
 	private Interview interview;
 
 	public Integer getForm_id() {
@@ -157,13 +156,6 @@ public class Form {
 		this.form_id = form_id;
 	}
 
-	public Integer getCandidate_id() {
-		return candidate_id;
-	}
-
-	public void setCandidate_id(Integer candidate_id) {
-		this.candidate_id = candidate_id;
-	}
 
 	public String getUniversity() {
 		return university;
@@ -445,14 +437,6 @@ public class Form {
 		this.status = status;
 	}
 
-	public Integer getInterview_id() {
-		return interview_id;
-	}
-
-	public void setInterview_id(Integer interview_id) {
-		this.interview_id = interview_id;
-	}
-
 	public Integer getVisit_status() {
 		return visit_status;
 	}
@@ -460,7 +444,6 @@ public class Form {
 	public void setVisit_status(Integer visit_status) {
 		this.visit_status = visit_status;
 	}
-
 
 	public User getUser() {
 		return user;
@@ -485,6 +468,15 @@ public class Form {
 
 	public void setHR_mark(HR_mark hr_mark) {
 		this.hr_mark = hr_mark;
+	}
+
+
+	public Integer getCandidate_id() {
+		return candidate_id;
+	}
+
+	public void setCandidate_id(Integer candidate_id) {
+		this.candidate_id = candidate_id;
 	}
 	
 	

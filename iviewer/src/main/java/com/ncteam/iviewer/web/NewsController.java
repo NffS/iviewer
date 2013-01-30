@@ -3,6 +3,7 @@ package com.ncteam.iviewer.web;
 import java.util.Map;
 
 import com.ncteam.iviewer.domain.News;
+import com.ncteam.iviewer.domain.User;
 
 
 import com.ncteam.iviewer.service.TablesService;
@@ -53,6 +54,11 @@ public class NewsController {
     public String home() {
         return "redirect:/index";
     }
+    
+    @ModelAttribute("user")
+	public User addUser(){
+		return new User();
+	}
 
 
 }

@@ -30,7 +30,7 @@ public class NewsController {
     @Autowired
     private TablesService tablesService;
 
-    @RequestMapping(value = "/index/{pathVar}")
+    @RequestMapping(value = "/index?{pathVar}")
     public String getNewsById(Model model,
                              @PathVariable("pathVar") String pathVar, Map<String, Object> map) {
 

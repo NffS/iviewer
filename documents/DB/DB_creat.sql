@@ -39,7 +39,7 @@ CREATE TABLE Interview
 CREATE TABLE Form
 	(
 		form_id		 		NUMBER(6) NOT NULL PRIMARY KEY,
-		candidate_id		NUMBER(6) NOT NULL REFERENCES Users (user_id),
+		user_id		NUMBER(6) NOT NULL REFERENCES Users (user_id),
 		university			VARCHAR2(400) CONSTRAINT university
 		CHECK (REGEXP_LIKE(university,'[a-zA-Zà-ÿÀ-ß0-9]$')),
 		faculty 			VARCHAR2(400) CONSTRAINT faculty
@@ -315,14 +315,14 @@ VALUES
 
 INSERT INTO Interview VALUES(
 		1,
-		to_date('2013/05/03 08:00:00', 'yyyy/mm/dd hh24:mi:ss'),
-		to_date('2013/05/03 20:00:00', 'yyyy/mm/dd hh24:mi:ss'),
+		to_date('2013/05/03 16:00:00', 'yyyy/mm/dd hh24:mi:ss'),
+		to_date('2013/05/03 18:00:00', 'yyyy/mm/dd hh24:mi:ss'),
 		4
 );
 
 INSERT INTO Interview VALUES(
 		2,
-		to_date('2013/05/03 08:00:00', 'yyyy/mm/dd hh24:mi:ss'),
+		to_date('2013/05/03 18:00:00', 'yyyy/mm/dd hh24:mi:ss'),
 		to_date('2013/05/03 20:00:00', 'yyyy/mm/dd hh24:mi:ss'),
 		4
 );

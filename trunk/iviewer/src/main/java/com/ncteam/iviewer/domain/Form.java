@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -140,10 +139,14 @@ public class Form implements Serializable{
 	@JoinColumn(name="user_id")
     private User user;
 	
-	@OneToOne(mappedBy="Form", cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="hr_mark_id")
 	private HR_mark hr_mark;
 	
-		
+	@OneToOne
+	@JoinColumn(name="form_id")
+	private Tech_mark tech_mark;	
+	
 	@ManyToOne
 	@JoinColumn(name="interview_id")
 	private Interview interview;
@@ -477,6 +480,22 @@ public class Form implements Serializable{
 
 	public void setCandidate_id(Integer candidate_id) {
 		this.candidate_id = candidate_id;
+	}
+
+	public HR_mark getHr_mark() {
+		return hr_mark;
+	}
+
+	public void setHr_mark(HR_mark hr_mark) {
+		this.hr_mark = hr_mark;
+	}
+
+	public Tech_mark getTech_mark() {
+		return tech_mark;
+	}
+
+	public void setTech_mark(Tech_mark tech_mark) {
+		this.tech_mark = tech_mark;
 	}
 	
 	

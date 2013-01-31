@@ -12,6 +12,7 @@ import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.HR_mark;
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.News;
+import com.ncteam.iviewer.domain.Tech_mark;
 import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.domain.Users_type;
 
@@ -69,6 +70,10 @@ public class TablesDAOImpl implements TablesDAO{
 		}
 		else if(recordClass==Users_type.class){
 			return sessionFactory.getCurrentSession().createQuery("from Users_type")
+            .list();
+		}
+		else if(recordClass==Tech_mark.class){
+			return sessionFactory.getCurrentSession().createQuery("from Tech_mark")
             .list();
 		}
 		else return null;

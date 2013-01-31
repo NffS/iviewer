@@ -21,8 +21,8 @@
 						<div id="menu">
 						    <ul>
 								<li><a href="index"><p>Главная</p></a></li>
-								<li><a href="index/1"><p>О компании</p></a></li>
-								<li><a href="index/2"><p>Контакты</p></a></li>
+								<li><a href="index?1"><p>О компании</p></a></li>
+								<li><a href="index?2"><p>Контакты</p></a></li>
 								<li><a href="testdb"><p>testDB</p></a></li>
 							</ul>
 						</div>
@@ -40,9 +40,10 @@
                             </form:form>     
 							
 						</div>
-						<%}else{String path="#";%>
+						<%}else{
+							String path="#";%>
 						<div id="cabin">
-							 Добро пожаловать <%=session.getAttribute("first_name")%><br>
+							 Добро пожаловать, <%=session.getAttribute("first_name")%><br>
 							<%if((Integer)session.getAttribute("user_type_id")==1){path="admin.jsp";}
   								else if((Integer)session.getAttribute("user_type_id")==2){path="hr.jsp";}
   								else if((Integer)session.getAttribute("user_type_id")==3){path="interview.jsp";}
@@ -50,7 +51,7 @@
   							%>
 
   							<input type="button" value="Личный кабинет"  onclick="javascript:document.location='<%=path%>'">
-  							<input type="button" value="Выход" onclick="javascript:document.location='login.jsp'">
+  							<input type="button" value="Выход" onclick="javascript:document.location='logout'">
   						<%}%>
 						</div>
 					</div>	

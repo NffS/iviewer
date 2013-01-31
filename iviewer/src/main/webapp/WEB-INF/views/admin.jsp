@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@include file="/resources/design/header.jsp" %>
 
-<li>текст левого блока</li>
+<button type="button" class="btn btn-primary" data-toggle="button">Редактировать</button>
+
+<li><a href="#">Редактировать пользователя</a></li>
+<li><a href="#">что то еще</a></li>
 
 <%@ include file="/resources/design/center.jsp" %>
 

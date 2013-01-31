@@ -21,6 +21,7 @@
     <mapping class="com.ncteam.iviewer.domain.Interview" />
     <mapping class="com.ncteam.iviewer.domain.HR_mark" />
     <mapping class="com.ncteam.iviewer.domain.News" />
+    <mapping class="com.ncteam.iviewer.domain.Tech_mark"/>
    
   </session-factory>
 </hibernate-configuration>

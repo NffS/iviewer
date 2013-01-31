@@ -1,8 +1,8 @@
 package com.ncteam.iviewer.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Users_type")
-public class Users_type {
+public class Users_type implements Serializable{
 
 	@Id
 	@GeneratedValue(generator="increment")

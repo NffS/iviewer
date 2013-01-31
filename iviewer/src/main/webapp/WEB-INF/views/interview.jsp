@@ -8,5 +8,7 @@
 </head>
 <body>
 Вы вошли как интервьювер.
+
+<a href="index" id="main">На главную</a>
 </body>
 </html>

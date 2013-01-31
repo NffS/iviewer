@@ -48,6 +48,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <value>com.ncteam.iviewer.domain.Interview</value>
         <value>com.ncteam.iviewer.domain.News</value>
         <value>com.ncteam.iviewer.domain.Users_type</value>    
+        <value>com.ncteam.iviewer.domain.Tech_mark</value>
          </list>
     </property>
   </bean>

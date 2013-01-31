@@ -1,11 +1,12 @@
 package com.ncteam.iviewer.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -13,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="HR_mark")
-public class HR_mark {
+public class HR_mark implements Serializable{
 	
 	@Id
 	@GeneratedValue(generator="increment")
@@ -21,8 +22,8 @@ public class HR_mark {
 	@Column(name="hr_mark_id")
 	private Integer hr_mark_id;
 	
-	@Column(name="hr_id")
-	private Integer hr_id;
+	@Column(name="user_id")
+	private Integer user_id;
 	
 	@Column(name="form_id")
 	private Integer form_id;
@@ -37,8 +38,8 @@ public class HR_mark {
 	private String general_mark;
 		
 	
-	@ManyToOne
-	@JoinColumn(name="hr_id", referencedColumnName = "user_id", insertable=false, updatable=false)
+	@OneToOne
+	@JoinColumn(name="user_id", referencedColumnName = "user_id", insertable=false, updatable=false)
 	private User user;
 	
 	@OneToOne
@@ -55,12 +56,12 @@ public class HR_mark {
 		this.hr_mark_id = hr_mark_id;
 	}
 			
-	public Integer getHr_id() {
-		return hr_id;
+	public Integer getUser_id() {
+		return user_id;
 	}
 	
-	public void setHr_id(Integer hr_id) {
-		this.hr_id = hr_id;
+	public void setUser_id(Integer hr_id) {
+		this.user_id = user_id;
 	}
 
 	public Integer getForm_id() {

@@ -1,18 +1,12 @@
 package com.ncteam.iviewer.domain;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -53,8 +47,13 @@ private Integer user_type_id;
 @JoinColumn(name="user_id")
 private Form form;
 
-@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-private Set<HR_mark> hr_mark;
+@OneToOne
+@JoinColumn(name="user_id")
+private HR_mark hr_mark;
+
+@OneToOne
+@JoinColumn(name="user_id")
+private Tech_mark tech_mark;
 
 @ManyToOne
 @JoinColumn(name="user_type_id", referencedColumnName = "user_type_id", insertable=false, updatable=false)
@@ -149,12 +148,32 @@ public void setUsers_type(Users_type users_type) {
 	this.users_type = users_type;
 }
 
-public Set<HR_mark> getHR_mark() {
+public HR_mark getHR_mark() {
 	return hr_mark;
 }
 
-public void setHR_mark(Set<HR_mark> hr_mark) {
+public void setHR_mark(HR_mark hr_mark) {
 	this.hr_mark = hr_mark;
+}
+
+
+public HR_mark getHr_mark() {
+	return hr_mark;
+}
+
+
+public void setHr_mark(HR_mark hr_mark) {
+	this.hr_mark = hr_mark;
+}
+
+
+public Tech_mark getTech_mark() {
+	return tech_mark;
+}
+
+
+public void setTech_mark(Tech_mark tech_mark) {
+	this.tech_mark = tech_mark;
 }
 
 

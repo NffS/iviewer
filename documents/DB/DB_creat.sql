@@ -106,7 +106,7 @@ CREATE TABLE Form
 CREATE TABLE HR_mark
 	(
 		hr_mark_id 		NUMBER(6) NOT NULL PRIMARY KEY,
-		hr_id			NUMBER(6) NOT NULL REFERENCES Users (user_id),
+		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id),
 		form_id			NUMBER(6) NOT NULL REFERENCES Form (form_id),
 		motivation 		NUMBER(3) NOT NULL,
 		english			NUMBER(3) NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE HR_mark
 CREATE TABLE Tech_mark
 	(
 		tech_mark_id 	NUMBER(6) NOT NULL PRIMARY KEY,
-		interviewer_id	NUMBER(6) NOT NULL REFERENCES Users (user_id),
+		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id),
 		form_id			NUMBER(6) NOT NULL REFERENCES Form (form_id),
 		prog_lang 		NUMBER(3) NOT NULL,
 		oop				NUMBER(3) NOT NULL,

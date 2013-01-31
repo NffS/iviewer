@@ -85,8 +85,8 @@ html
 #reg
 {
 	float:right;
-	margin-right:30px;
-	margin-top:-15px;
+	margin-right:50px;
+	margin-top:-11px;
 	height:40px;
 }
 #reg a
@@ -104,7 +104,7 @@ margin-bottom:30;
 {
 	font-size:16px;
 	font-family: Geneva, Arial, Helvetica, sans-serif; 
-	margin-top:5px;
+	margin-top:-25px;
 }
 #cabin
 {

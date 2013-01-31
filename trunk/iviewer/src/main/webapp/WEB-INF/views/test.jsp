@@ -60,7 +60,7 @@ if(request.getAttribute("HR_markList")!=null){
 	<%for(int i=0; i<HR_marks.size();i++){%>
 	<tr>
 		<td>ID:<%=HR_marks.get(i).getHR_mark_id() %>. </td><td>Form id: <%=HR_marks.get(i).getForm_id() %>. </td>
-		<td>HR id: <%=HR_marks.get(i).getHr_id()%>. </td>
+		<td>HR id: <%=HR_marks.get(i).getUser_id()%>. </td>
 		<td>Marks: <%=HR_marks.get(i).getEnglish()%>, <%=HR_marks.get(i).getMotivation()%>, <%=HR_marks.get(i).getGeneral_mark()%>. </td>
 	</tr>
 <%	}%>

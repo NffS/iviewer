@@ -55,7 +55,7 @@ public class NewsController {
         return "redirect:/index";
     }
     
-    @ModelAttribute("user")
+    @ModelAttribute("usr")
 	public User addUser(){
 		return new User();
 	}

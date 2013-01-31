@@ -28,7 +28,7 @@
 						</div>
 						<%if((Integer)session.getAttribute("user_type_id")==null){	%>
 						<div id="log">
-                          <form:form  method="POST" commandName="userProfile" modelAttribute="user" action="loginCheck">
+                          <form:form  method="POST" commandName="userProfile" modelAttribute="usr" action="loginCheck">
 
 							   E-mail<form:input path="email"/><br>
 							    Пароль:<form:password path="password" />

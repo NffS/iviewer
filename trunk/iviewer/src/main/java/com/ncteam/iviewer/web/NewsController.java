@@ -24,18 +24,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Time: 8:58
  * To change this template use File | Settings | File Templates.
  */
+
 @Controller
 public class NewsController {
 
     @Autowired
     private TablesService tablesService;
 
-    @RequestMapping(value = "/index?{pathVar}")
+    @RequestMapping(value = "/index_{news_id}")
     public String getNewsById(Model model,
-                             @PathVariable("pathVar") String pathVar, Map<String, Object> map) {
+                             @PathVariable("news_id") String news_id, Map<String, Object> map) {
 
-        model.addAttribute("pathVar", pathVar);
-        map.put("newsText", tablesService. getRecordById(Integer.parseInt(pathVar),News.class).getText());
+        model.addAttribute("news_id", news_id);
+        map.put("newsText", tablesService. getRecordById(Integer.parseInt(news_id),News.class).getText());
 
         return "index";
     }

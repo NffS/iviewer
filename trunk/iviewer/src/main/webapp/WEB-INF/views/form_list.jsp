@@ -8,8 +8,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <title>Список форм</title>
+<%@include file="/resources/design/header.jsp" %>
 </head>
 <body>
+<li>текст левого блока</li>
+<%@ include file="/resources/design/center.jsp" %>
 <table>
 	<tr>
 		<td width=300/>
@@ -29,29 +32,40 @@
 				</c:forEach>
 			</table>
 		</td>
-	<%List<String> interviewsDates=(List<String>)request.getAttribute("interviewsDates");%>
 	<td width=300/>
 		<td align="center">
 			<form:form method="POST" modelAttribute="formListFilter" action="form_listFilter">
-			<h1>Фильтр</h1>
+			<font size=5>Фильтр</font>
+			<br><br>
 				<table>
 					<tr>
-						<td><form:label path="lastName">Поиск по фамилии</form:label></td>
+						<td><form:label path="lastName" style = "font-size: 10pt;">Поиск по фамилии</form:label></td>
 						<td><form:input path="lastName"/></td>
 					</tr>
 					<tr>
-						<td><form:label path="interviewDate">Поиск по дате собеседования</form:label></td>
+						<td><form:label path="interviewDate" style = "font-size: 10pt;">Поиск по дате собеседования</form:label></td>
 						<td>
 						 <form:select path="interviewDate">
 						 <form:option value=""/>
-							<%for(int i=0; i<interviewsDates.size();i++){ %>
-				 				<form:option value="<%=interviewsDates.get(i)%>"/>
-							<%} %>
+							<c:forEach var="interviewDate" items ="${interviewsDates }">
+				 				<form:option value="${interviewDate }"/>
+							</c:forEach>
 							</form:select>
 						</td>
 					</tr>
 					<tr>
-						<td><form:label path="requiredConfirmOnly">Только требующие подтверждения</form:label></td>
+						<td><form:label path="university" style = "font-size: 10pt;">Поиск по университету</form:label></td>
+						<td>
+						 <form:select path="university">
+						 <form:option value=""/>
+							<c:forEach var="university" items="${universities }">
+				 				<form:option value="${university }"/>
+							</c:forEach>
+							</form:select>
+						</td>
+					</tr>
+					<tr>
+						<td><form:label path="requiredConfirmOnly" style = "font-size: 10pt;">Только требующие подтверждения</form:label></td>
 						<td>
 							<form:checkbox path="requiredConfirmOnly"/>
 						</td>
@@ -62,5 +76,6 @@
 		</td>
 </tr>
 </table>
+<%@ include file="/resources/design/footer.jsp" %>
 </body>
 </html>

@@ -21,7 +21,7 @@ import com.ncteam.iviewer.service.TablesService;
 @Controller
 public class FormListController {
 
-	@Autowired
+	 @Autowired
 	 private TablesService tablesService;
 	
 	
@@ -31,9 +31,11 @@ public class FormListController {
 		
 		String lastName=formListFilter.getLastName();
 		String interviewDate=formListFilter.getInterviewDate();
+		String university=formListFilter.getUniversity();
 		boolean requiredConfirmOnly=formListFilter.isRequiredConfirmOnly();
 		
 		List<Form> forms=tablesService.getAllRecords(Form.class);
+		List<String> allUniversities=getAllUniversities(forms);
 		
 		if(!lastName.isEmpty()){
 			for(int i=0; i<forms.size(); i++){
@@ -51,6 +53,14 @@ public class FormListController {
 				}
 			}
 		}
+		if(!university.isEmpty()){
+			for(int i=0; i<forms.size(); i++){
+				if(!forms.get(i).getUniversity().equals(university)){
+					forms.remove(i);
+					i--;
+				}
+			}
+		}
 		if(requiredConfirmOnly){
 			for(int i=0; i<forms.size(); i++){
 				if(!forms.get(i).getStatus().equals(1)){
@@ -62,6 +72,7 @@ public class FormListController {
 		
 		map.put("interviewsDates", getAllInterviewsDates());
 		map.put("forms", forms);
+		map.put("universities", allUniversities);
 		return "form_list";
 	}
 	
@@ -73,16 +84,10 @@ public class FormListController {
 		
 		map.put("interviewsDates", getAllInterviewsDates());
 		map.put("forms", forms);
+		map.put("universities", getAllUniversities(forms));
 		return "form_list";
 	}
-	
-	/*
-	 * Помещает в модель объект, несущий информацию о параметрах фильтра
-	 */
-	@ModelAttribute("formListFilter")
-	public FormListFilter addUser(){
-		return new FormListFilter();
-	}
+
 	
 	private List<String> getAllInterviewsDates(){
 		
@@ -95,5 +100,23 @@ public class FormListController {
 		}
 		return interviewsDates;
 	}
-
+	
+	private List<String> getAllUniversities(List<Form> forms){
+		
+		List<String> universities=new ArrayList<String>();
+		for(int i=0; i<forms.size();i++){
+			if(!universities.contains(forms.get(i).getUniversity())){
+				universities.add(forms.get(i).getUniversity());
+			}
+		}
+		return universities;
+	}
+	
+	/*
+	 * Помещает в модель объект, несущий информацию о параметрах фильтра
+	 */
+	@ModelAttribute("formListFilter")
+	public FormListFilter addUser(){
+		return new FormListFilter();
+	}
 }

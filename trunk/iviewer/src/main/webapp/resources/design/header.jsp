@@ -29,7 +29,7 @@
 						</div>
 						<%if((Integer)session.getAttribute("user_type_id")==null){	%>
 						<div id="log">
-                          <form:form  method="POST" commandName="userProfile" modelAttribute="usr" action="loginCheck">
+                          <form:form  method="POST" commandName="userProfile" modelAttribute="user" action="loginCheck">
 
                                 E-mail<form:input path="email"/>
 							    <div style="margin-top: 5px;">Пароль:</div><form:password path="password" style="margin-top:-18px" />
@@ -44,7 +44,7 @@
 						</div>
 						<%}else{String path="#";%>
 						<div id="cabin">
-							 Добро пожаловать <%=session.getAttribute("first_name")%><br>
+							 Добро пожаловать, <%=session.getAttribute("first_name")%><br>
 							<%if((Integer)session.getAttribute("user_type_id")==1){path="admin";}
   								else if((Integer)session.getAttribute("user_type_id")==2){path="hr";}
   								else if((Integer)session.getAttribute("user_type_id")==3){path="interview";}

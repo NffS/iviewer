@@ -18,7 +18,7 @@ public class LoginAndLogoutController {
 	private UserServiceImpl userService=new UserServiceImpl();
 	
 	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
-	public String checkUserLogin(@ModelAttribute("usr") User user, Map<String, Object> map,
+	public String checkUserLogin(@ModelAttribute("user") User user, Map<String, Object> map,
 			HttpSession session){
 		
 		String message="";
@@ -67,7 +67,7 @@ public class LoginAndLogoutController {
 		return "redirect:/index";
 	}
 	
-	@ModelAttribute("usr")
+	@ModelAttribute("user")
 	public User addUser(){
 		return new User();
 	}

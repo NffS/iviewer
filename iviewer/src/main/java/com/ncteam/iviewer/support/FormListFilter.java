@@ -8,6 +8,7 @@ public class FormListFilter {
 
 	private String lastName;
 	private String interviewDate;
+	private String university;
 	private boolean requiredConfirmOnly;
 	
 	public FormListFilter(){
@@ -28,6 +29,14 @@ public class FormListFilter {
 	public void setInterviewDate(String interviewDate) {
 		this.interviewDate = interviewDate;
 	}
+	public String getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(String university) {
+		this.university = university;
+	}
+
 	public boolean isRequiredConfirmOnly() {
 		return requiredConfirmOnly;
 	}

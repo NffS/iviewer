@@ -6,8 +6,10 @@ import com.ncteam.iviewer.service.TablesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -38,11 +40,25 @@ public class AdminController {
     }
 
     @RequestMapping("/user_edit")
-    public String userEdit(Map<String, Object> map) {
+    public String userEdit(Map<String, Object> map, HttpSession session) {
+        //User user=tablesService.getRecordById((Integer)session.getAttribute("user"),User.class);
+        map.put("user", session.getAttribute("user"));
         return "user_edit";
     }
 
-    @ModelAttribute("edit_user")
+    @RequestMapping("/user_edit_{user_id}")
+    public String userEditById(@PathVariable("user_id")Integer user_id,Map<String, Object> map, HttpSession session) {
+        User user=tablesService.getRecordById(user_id,User.class);
+        map.put("user", user);
+        return "user_edit";
+    }
+
+    @RequestMapping("/user_edit.do")
+    public String userEditOk( @ModelAttribute("userEdit") User userEdit, Map<String, Object> map) {
+        return "index";
+    }
+
+    @ModelAttribute("userEdit")
     public User addUser(){
         return new User();
     }

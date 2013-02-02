@@ -32,6 +32,7 @@ public class LoginAndLogoutController {
 			if(resultUser!=null){
 				if(resultUser.getPassword().equals(password)){
 					session.setAttribute("user", resultUser);
+                    session.setAttribute("user_id", resultUser.getUser_id());
 					session.setAttribute("email", resultUser.getEmail());
 					session.setAttribute("first_name", resultUser.getFirst_name());
 					session.setAttribute("surname", resultUser.getSurname());
@@ -59,6 +60,7 @@ public class LoginAndLogoutController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.removeAttribute("user");
+        session.removeAttribute("user_id");
 		session.removeAttribute("email");
 		session.removeAttribute("first_name");
 		session.removeAttribute("surname");

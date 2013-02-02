@@ -19,7 +19,7 @@
         <%k++; %>
         <tr ALIGN=center height=40>
             <td><%=k %></td> <td width=300>${users.surname}  ${users.first_name} ${users.last_name}</td>
-            <td>${users.user_type_id}</td> <td><a href="/user_edit">Редактировать</a></td>
+            <td>${users.user_type_id}</td> <td><a href="/user_edit_${users.user_id}">Редактировать</a></td>
 
         </tr>
     </c:forEach>

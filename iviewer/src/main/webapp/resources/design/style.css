@@ -179,10 +179,11 @@ text-decoration:none;
 }
 #center{
 	margin-left:250px;
+    min-height: 300px;
 	margin-top:20px;
 	background:white;
     padding-left: 5px;
-	height:100%;
+
     border-radius: 5px;
 }
 #out{
@@ -191,12 +192,13 @@ text-decoration:none;
 	margin-left:-400px;
 }
 #footer{
-	height:100px;
+	height:0px;
+
 	}	
 	
 #footer p
 {
 	width:320px;
 	margin:auto;
-	padding-top:70px;
+	padding-top:20px;
 }

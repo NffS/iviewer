@@ -40,15 +40,15 @@ public class LoginAndLogoutController {
 					return "redirect:/index";
 				}
 			else{
-					message="Введённый неверный пароль.";
+					message="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.";
 				}
 			}
 			else{
-				message="Пользователя с таким email'ом не существует.";
+				message="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ email'пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.";
 			}
 		}
 		else{
-			message="Поля \"Email\" и \"Пароль\" должны быть заполнены!";
+			message="пїЅпїЅпїЅпїЅ \"Email\" пїЅ \"пїЅпїЅпїЅпїЅпїЅпїЅ\" пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!";
 		}
 		map.put("email", email);
 		map.put("password", password);
@@ -66,6 +66,11 @@ public class LoginAndLogoutController {
 		session.removeAttribute("user_type_id");
 		return "redirect:/index";
 	}
+
+    @RequestMapping("/login")
+    public String login(HttpSession session){
+        return "/login";
+    }
 	
 	@ModelAttribute("user")
 	public User addUser(){

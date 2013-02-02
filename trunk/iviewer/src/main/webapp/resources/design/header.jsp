@@ -1,4 +1,5 @@
 ﻿<%@page session="true"%>
+
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page import="com.ncteam.iviewer.domain.User"%>
@@ -28,18 +29,13 @@
 							</ul>
 						</div>
 						<%if((Integer)session.getAttribute("user_type_id")==null){	%>
-						<div id="log">
-                          <form:form  method="POST" commandName="userProfile" modelAttribute="user" action="loginCheck">
 
-                                E-mail<form:input path="email"/>
-							    <div style="margin-top: 5px;">Пароль:</div><form:password path="password" style="margin-top:-18px" />
-						
-						        </div>
 						        <div id="reg">
-								<input type="submit" value="Войти"><br>
-                                <input style="margin-top: -25;" type="button" onclick="javascript:document.location='reg.jsp'" value="Регистрация">
+								<input class="btn btn-primary" type="submit" onclick="javascript:document.location='login'"  value="Войти">
 
-                            </form:form>     
+                                <input class="btn btn-success" type="button" onclick="javascript:document.location='reg.jsp'" value="Регистрация">
+
+
 							
 						</div>
 						<%}else{String path="#";%>

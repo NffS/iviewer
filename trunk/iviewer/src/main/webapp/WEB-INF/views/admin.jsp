@@ -11,6 +11,7 @@
 
 <%@ include file="/resources/design/center.jsp" %>
 <%int k=0; %>
+
 <table width="100%" border=2 align="center">
     <tr ALIGN=center bgcolor="9999FF">
         <th>№</th> <th>ФИО</th> <th>Тип</th> <th>Действие</th>
@@ -19,7 +20,7 @@
         <%k++; %>
         <tr ALIGN=center height=40>
             <td><%=k %></td> <td width=300>${users.surname}  ${users.first_name} ${users.last_name}</td>
-            <td>${users.user_type_id}</td> <td><a href="/user_edit_${users.user_id}">Редактировать</a></td>
+            <td>${users.user_type_id}</td> <td><input type="button" class="btn btn-primary" value="Редактировать" onclick="javascript:document.location='/user_edit_${users.user_id}'"></td>
 
         </tr>
     </c:forEach>

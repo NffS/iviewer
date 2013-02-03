@@ -10,13 +10,15 @@
 
 <%@include file="/resources/design/header.jsp" %>
 
-<li>текст левого блока</li>
+<li>текст левого блокаs</li>
 
 <%@ include file="/resources/design/center.jsp" %>
 <center>
     <%User usr= (User) request.getAttribute("user");%>
 <form:form  method="POST" commandName="userEdit" modelAttribute="userEdit" action="user_edit.do">
 <table width="250px">
+
+     <form:hidden path="user_id" value="<%=usr.getUser_id()%>"></form:hidden>
     <tr>
         <td>
             Имя:
@@ -53,8 +55,11 @@
         <td>
             Пароль:
         </td>
-        <td>
-            <form:input path="password"/>
+        <td><%if((Integer)session.getAttribute("user_type_id")==1){%>
+            <form:password  path="password" value="<%=usr.getPassword()%>"/>
+            <%}else{%>
+            <form:password path="password"/>
+            <%}%>
         </td>
     </tr>
     <%  if((Integer)session.getAttribute("user_type_id")==1){%>
@@ -72,7 +77,7 @@
 
         </td>
         <td>
-           <input type="submit" value="Кнопочка" />
+           <input class="btn btn-primary" type="submit" value="Кнопочка" />
         </td>
     </tr>
 

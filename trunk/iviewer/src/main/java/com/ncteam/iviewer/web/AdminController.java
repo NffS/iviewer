@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -54,7 +55,27 @@ public class AdminController {
     }
 
     @RequestMapping("/user_edit.do")
-    public String userEditOk( @ModelAttribute("userEdit") User userEdit, Map<String, Object> map) {
+    public String userEditOk( @ModelAttribute("userEdit") User userEdit, Map<String, Object> map,
+                              HttpSession session) {
+
+        if (Pattern.matches("^([a-zA-Z0-9_\\.\\-]{1,20})@([a-zA-Z0-9\\.\\-]{1,20})\\.([a-z]{2,4})$",userEdit.getEmail()))
+           // if (Pattern.matches("[a-zA-Zа-яА-Я]$",userEdit.getFirst_name()))
+             //   if (Pattern.matches("[a-zA-Zа-яА-Я]$",userEdit.getSurname()))
+               //     if (Pattern.matches("[a-zA-Zа-яА-Я]$",userEdit.getLast_name()))
+                        if (userEdit.getPassword().length() > 0)
+                        {
+                            tablesService.updateRecord(userEdit);
+                            session.setAttribute("user", userEdit);
+                            session.setAttribute("user_id", userEdit.getUser_id());
+                            session.setAttribute("email", userEdit.getEmail());
+                            session.setAttribute("first_name", userEdit.getFirst_name());
+                            session.setAttribute("surname", userEdit.getSurname());
+                            session.setAttribute("foto", userEdit.getFoto());
+                            session.setAttribute("user_type_id", userEdit.getUser_type_id());
+                            map.put("newsText","Ok");
+                            return "index";
+                        }
+        map.put("newsText","Error");
         return "index";
     }
 

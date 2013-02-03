@@ -41,20 +41,20 @@ public class LoginAndLogoutController {
 					return "redirect:/index";
 				}
 			else{
-					message="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.";
+					message="Введён неверный пароль.";
 				}
 			}
 			else{
-				message="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ email'пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.";
+				message="Пользователя с таким email'ом не существует.";
 			}
 		}
 		else{
-			message="пїЅпїЅпїЅпїЅ \"Email\" пїЅ \"пїЅпїЅпїЅпїЅпїЅпїЅ\" пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!";
+			message="Поля \"Email\" и \"Пароль\" должны быть заполнены!";
 		}
 		map.put("email", email);
 		map.put("password", password);
 		map.put("message", message);
-		return "index";
+		return "login";
 	}
 		
 	@RequestMapping("/logout")

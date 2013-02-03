@@ -3,11 +3,9 @@ package com.ncteam.iviewer.domain;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -27,24 +25,24 @@ public class Interview implements Serializable{
 	@Column(name="interview_id")
 	private Integer interview_id;
 	
-	@Column(name="start_date", updatable=false, insertable=false)
+	@Column(name="start_date")
 	private String stringStart_date;
 	
-	@Column(name="end_date", updatable=false, insertable=false)
+	@Column(name="end_date")
 	private String stringEnd_date;
 	
-	@Column(name="start_date")
+	@Column(name="start_date", updatable=false, insertable=false)
 	private Date start_date;
 	
-	@Column(name="end_date")
+	@Column(name="end_date", updatable=false, insertable=false)
 	private Date end_date;
 	
 	@Column(name="seats")
 	private Integer seats;
 		
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="interview_id")
-	private List<Form> Form;
+	private List<Form> forms;
 	
 	
 	public Integer getInterview_id() {
@@ -79,12 +77,12 @@ public class Interview implements Serializable{
 		this.seats = seats;
 	}
 	
-	public List<Form> getForm() {
-		return Form;
+	public List<Form> getForms() {
+		return forms;
 	}
 
-	public void setForm(List<Form> Form) {
-		this.Form = Form;
+	public void setForms(List<Form> forms) {
+		this.forms = forms;
 	}
 
 	public String getStringStart_date() {

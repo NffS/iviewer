@@ -19,12 +19,6 @@
 
 <%@ include file="/resources/design/center.jsp" %>
 
-<%
-if(request.getAttribute("message")!=null){
-%>
-<font color="#FF0000" id="error" size="15px"><%=request.getAttribute("message") %></font>
-<%}
-else{%>
+
 <%=request.getAttribute("newsText")%>
-<%} %>
 <%@ include file="/resources/design/footer.jsp" %>

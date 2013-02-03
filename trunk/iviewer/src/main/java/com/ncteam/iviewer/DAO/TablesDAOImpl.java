@@ -1,11 +1,13 @@
 package com.ncteam.iviewer.DAO;
 
+import java.sql.Statement;
 import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.ncteam.iviewer.domain.Form;
@@ -30,6 +32,12 @@ public class TablesDAOImpl implements TablesDAO{
 	
 	@SuppressWarnings("unchecked")
 	public <T> T addRecord(T record) {
+		Session session=sessionFactory.getCurrentSession();
+		try{
+		Statement stmt=session.connection().createStatement();
+		stmt.execute( "alter session set NLS_DATE_FORMAT='yyyy-mm-dd HH24:MI'" );
+		}
+		catch(Exception e){	}
 		return (T)sessionFactory.getCurrentSession().save(record);
 		
 	}

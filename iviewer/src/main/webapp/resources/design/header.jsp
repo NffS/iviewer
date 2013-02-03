@@ -47,8 +47,8 @@
    								else if((Integer)session.getAttribute("user_type_id")==4){path="candidate";}
   							%>
 
-  							<input type="button" value="Личный кабинет"  onclick="javascript:document.location='<%=path%>'">
-  							<input type="button" value="Выход" onclick="javascript:document.location='logout'">
+  							<input type="button" class="btn btn-success"  value="Личный кабинет"  onclick="javascript:document.location='<%=path%>'">
+  							<input type="button" class="btn btn-danger" value="Выход" onclick="javascript:document.location='logout'">
   						<%}%>
 						</div>
 					</div>	

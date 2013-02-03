@@ -110,7 +110,7 @@ margin-bottom:30;
 {
 	float:right;
 	margin-right:30px;
-	margin-top:-15px;
+	margin-top:-20px;
 	height:40px;
 }
 
@@ -134,7 +134,7 @@ margin-bottom:30;
 
 #info
 {
-	margin-top:5px;
+	margin-top:0px;
 }
 #info img
 {
@@ -183,7 +183,9 @@ text-decoration:none;
 	margin-top:20px;
 	background:white;
     padding-left: 5px;
-
+    padding-right: 5px;
+    padding-bottom: 5px;
+    width: 736px;
     border-radius: 5px;
 }
 #out{

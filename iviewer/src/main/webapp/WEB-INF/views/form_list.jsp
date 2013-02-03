@@ -11,68 +11,72 @@
 <%@include file="/resources/design/header.jsp" %>
 </head>
 <body>
-<li>текст левого блока</li>
+<style>
+   a { 
+    text-decoration: none;
+   } 
+</style>
+<a href="hr"><font size="3" color="000000">Просмотр собеседований</font></a>
+<br><br>
+<a href=""><font size="3" color="000000">Управление отчётами </font></a>
+<br><br>
+<a href="index"><font size="3" color="000000">На главную</font></a>
 <%@ include file="/resources/design/center.jsp" %>
 <table>
 	<tr>
-		<td width=300/>
-		<td align="center">
-			<%int k=0; %>
-			<table border=2 align="center">
-				<tr ALIGN=center bgcolor="9999FF">
-					<th>№</th> <th>ФИО</th> <th>Дата собеседования</th> <th>Статус</th> <th>Просмотр</th> <th>Экспорт</th>
-				</tr>
-				<c:forEach var="form" items="${forms}">
-				<%k++; %>
-				<tr ALIGN=center height=40>
-				<td><%=k %></td> <td width=300>${form.user.surname}  ${form.user.first_name} ${form.user.last_name}</td>
-				<td>${form.interview.stringStart_date}</td> <td>${form.status}</td> <td><a href="/form.jsp?form_id=${form.form_id}">Просмотр</a></td>
-				<td></td>
-				</tr>
-				</c:forEach>
-			</table>
-		</td>
-	<td width=300/>
-		<td align="center">
+	<td align="center">
 			<form:form method="POST" modelAttribute="formListFilter" action="form_listFilter">
 			<font size=5>Фильтр</font>
 			<br><br>
 				<table>
 					<tr>
-						<td><form:label path="lastName" style = "font-size: 10pt;">Поиск по фамилии</form:label></td>
-						<td><form:input path="lastName"/></td>
-					</tr>
-					<tr>
-						<td><form:label path="interviewDate" style = "font-size: 10pt;">Поиск по дате собеседования</form:label></td>
-						<td>
-						 <form:select path="interviewDate">
-						 <form:option value=""/>
+						<td align="right">
+						 <form:select class="input-large" path="interviewDate">
+						 <form:option value="Поиск по собеседованию"/>
 							<c:forEach var="interviewDate" items ="${interviewsDates }">
-				 				<form:option value="${interviewDate }"/>
+				 				<form:option value="${interviewDate.substring(0,16) }"/>
 							</c:forEach>
 							</form:select>
 						</td>
+						<td align="right"><form:input placeholder="Поиск по фамилии" path="lastName"/></td>
 					</tr>
 					<tr>
-						<td><form:label path="university" style = "font-size: 10pt;">Поиск по университету</form:label></td>
-						<td>
-						 <form:select path="university">
-						 <form:option value=""/>
+						<td align ="center" >
+						<form:select path="university" class="input-large">
+						 <form:option value="Поиск по университету"/>
 							<c:forEach var="university" items="${universities }">
 				 				<form:option value="${university }"/>
 							</c:forEach>
 							</form:select>
 						</td>
-					</tr>
-					<tr>
-						<td><form:label path="requiredConfirmOnly" style = "font-size: 10pt;">Только требующие подтверждения</form:label></td>
-						<td>
-							<form:checkbox path="requiredConfirmOnly"/>
+						<td colspan="2" width=300 align="right">
+						Только требующие подтверждения&nbsp;&nbsp;&nbsp;&nbsp;
+						<form:checkbox path="requiredConfirmOnly"/>
 						</td>
 					</tr>
 					<tr><td align ="center" colspan="2"><br><input type="submit" value="Выполнить фильтр"></td></tr>
 				</table>
 			</form:form>
+		</td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<td align="center">
+			<%int k=0; %>
+			<table border=2 align="center">
+				<tr ALIGN=center bgcolor="9999FF">
+					<th>№</th> <th  width=300>ФИО</th> <th width=150>Дата собеседования</th> <th width=60>Статус</th> <th width=85>Просмотр</th> <th width=80>Экспорт</th>
+				</tr>
+				<c:forEach var="form" items="${forms}">
+				<%k++; %>
+				<tr ALIGN=center height=40>
+				<td><%=k %></td> <td>${form.user.surname}  ${form.user.first_name} ${form.user.last_name}</td>
+				<td>${form.interview.stringStart_date}</td> <td>${form.status}</td> <td><a href="/form.jsp?form_id=${form.form_id}">Просмотр</a></td>
+				<td></td>
+				</tr>
+				</c:forEach>
+			</table>
 		</td>
 </tr>
 </table>

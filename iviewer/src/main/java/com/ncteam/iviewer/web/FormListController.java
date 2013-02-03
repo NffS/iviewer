@@ -45,15 +45,15 @@ public class FormListController {
 				}
 			}
 		}
-		if(!interviewDate.isEmpty()){
+		if(!interviewDate.equals("Поиск по собеседованию")){
 			for(int i=0; i<forms.size(); i++){
-				if(!forms.get(i).getInterview().getStringStart_date().equals(interviewDate)){
+				if(!forms.get(i).getInterview().getStringStart_date().equals(interviewDate+":00")){
 					forms.remove(i);
 					i--;
 				}
 			}
 		}
-		if(!university.isEmpty()){
+		if(!university.equals("Поиск по университету")){
 			for(int i=0; i<forms.size(); i++){
 				if(!forms.get(i).getUniversity().equals(university)){
 					forms.remove(i);

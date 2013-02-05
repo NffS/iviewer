@@ -1,26 +1,22 @@
 package com.ncteam.iviewer.web;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ncteam.iviewer.domain.Interview;
-import com.ncteam.iviewer.service.InterviewServiceImpl;
 import com.ncteam.iviewer.service.TablesService;
 
 @Controller
 public class HRController {
 
 	 
-	 private InterviewServiceImpl interviewService=new InterviewServiceImpl();
 	 @Autowired
 	 private TablesService tablesService;
 	
@@ -49,7 +45,7 @@ public class HRController {
 			redactedInterview.setStringStart_date(updateStartDateString);
 			redactedInterview.setStringEnd_date(updateEndDateString);
 		}
-		interviewService.updateInterview(redactedInterview);
+		tablesService.updateRecord(redactedInterview);
 		map.put("interviews",tablesService.getAllRecords(Interview.class));
 		return "hr";
 	}

@@ -10,7 +10,9 @@
     <meta charset="utf-8">
     <link type="text/css" rel="stylesheet" href="resources/design/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="resources/design/style.css">
-    </head>
+    <script language="JavaScript" src="resources/jquery-1.3.2.min.js"></script>
+    <script language="JavaScript" src="resources/jquery.columnfilters.js"></script>
+</head>
 <body>
 	<div id="s" style="background:white; width:100%;height:70px;">
 	</div>

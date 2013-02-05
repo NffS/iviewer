@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.Interview;
-import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.service.TablesService;
 
 
@@ -45,7 +44,7 @@ public class FormListController {
 				}
 			}
 		}
-		if(!interviewDate.equals("Поиск по собеседованию")){
+		if(!interviewDate.equals("РџРѕРёСЃРє РїРѕ СЃРѕР±РµСЃРµРґРѕРІР°РЅРёСЋ")){
 			for(int i=0; i<forms.size(); i++){
 				if(!forms.get(i).getInterview().getStringStart_date().equals(interviewDate+":00")){
 					forms.remove(i);
@@ -53,7 +52,7 @@ public class FormListController {
 				}
 			}
 		}
-		if(!university.equals("Поиск по университету")){
+		if(!university.equals("РџРѕРёСЃРє РїРѕ СѓРЅРёРІРµСЂСЃРёС‚РµС‚Сѓ")){
 			for(int i=0; i<forms.size(); i++){
 				if(!forms.get(i).getUniversity().equals(university)){
 					forms.remove(i);
@@ -113,10 +112,10 @@ public class FormListController {
 	}
 	
 	/*
-	 * Помещает в модель объект, несущий информацию о параметрах фильтра
+	 * РњРµС‚РѕРґ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ СЂР°Р·РјРµС‰РµРЅРёСЏ РѕР±СЉРµРєС‚Р° РєР»Р°СЃСЃР° С„РёР»СЊС‚СЂР° РґР»СЏ СЃРїРёСЃРєР° С„РѕСЂРј.
 	 */
 	@ModelAttribute("formListFilter")
-	public FormListFilter addUser(){
+	public FormListFilter addFilter(){
 		return new FormListFilter();
 	}
 }

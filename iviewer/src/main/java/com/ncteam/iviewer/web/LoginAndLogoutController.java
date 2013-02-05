@@ -41,15 +41,15 @@ public class LoginAndLogoutController {
 					return "redirect:/index";
 				}
 			else{
-					message="Введён неверный пароль.";
+					message="Р’РІРµРґС‘РЅ РЅРµРІРµСЂРЅС‹Р№ РїР°СЂРѕР»СЊ.";
 				}
 			}
 			else{
-				message="Пользователя с таким email'ом не существует.";
+				message="РџРѕР»СЊР·РѕРІР°С‚РµР»СЏ СЃ С‚Р°РєРёРј email'РѕРј РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚.";
 			}
 		}
 		else{
-			message="Поля \"Email\" и \"Пароль\" должны быть заполнены!";
+			message="РџРѕР»СЏ \"Email\" Рё \"РџР°СЂРѕР»СЊ\" РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р·Р°РїРѕР»РЅРµРЅС‹!";
 		}
 		map.put("email", email);
 		map.put("password", password);

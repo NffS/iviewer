@@ -29,6 +29,10 @@ public class TablesDAOImpl implements TablesDAO{
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	public void setSessionFactory(SessionFactory sessionFactory){
+		this.sessionFactory=sessionFactory;
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public <T> T addRecord(T record) {
@@ -44,6 +48,12 @@ public class TablesDAOImpl implements TablesDAO{
 
 	
 	public <T> void updateRecord(T record) {
+		Session session=sessionFactory.getCurrentSession();
+		try{
+		Statement stmt=session.connection().createStatement();
+		stmt.execute( "alter session set NLS_DATE_FORMAT='yyyy-mm-dd HH24:MI'" );
+		}
+		catch(Exception e){	}
 		sessionFactory.getCurrentSession().update(record);
 	}
 

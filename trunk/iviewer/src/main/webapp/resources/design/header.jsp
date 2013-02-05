@@ -33,7 +33,7 @@
 						        <div id="reg">
 								<input class="btn btn-primary" type="submit" onclick="javascript:document.location='login'"  value="Войти">
 
-                                <input class="btn btn-success" type="button" onclick="javascript:document.location='reg.jsp'" value="Регистрация">
+                                <input class="btn btn-success" type="button" onclick="javascript:document.location='registration'" value="Регистрация">
 
 
 							

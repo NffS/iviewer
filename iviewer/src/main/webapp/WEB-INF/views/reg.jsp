@@ -4,34 +4,34 @@
 
 <a href="index"><font size="3" color="000000">На главную</font></a>
 <%@ include file="/resources/design/center.jsp" %>
-<form:form  method="POST" commandName="userProfile" modelAttribute="user" action="registration">
+<form:form  method="POST" action="registration">
 	<table>
 		<tr>
 			<td width=100><font size=5>Имя:</font></td>
-   			 <td><form:input style="height:30px" path="name"/></td>
+   			 <td><input type=text style="height:30px" name="first_name"></td>
    		</tr>
    		<tr>
 			<td width=100><font size=5>Фамилия:</font></td>
-   			 <td><form:input style="height:30px" path="surname"/></td>
+   			 <td><input type=text style="height:30px" name="surname"></td>
    		</tr>
    		<tr>
 			<td width=100><font size=5>Отчество:</font></td>
-   			 <td><form:input style="height:30px" path="lastname"/></td>
+   			 <td><input type=text style="height:30px" name="last_name"></td>
    		</tr>
    		<tr>
 			
    		</tr>
 		<tr>
 			<td width=100><font size=5>E-mail:</font></td>
-   			 <td><form:input style="height:30px" path="email"/></td>
+   			 <td><input type=text style="height:30px" name="email"/></td>
    		</tr>
     	<tr>
     		<td><font size=5>Пароль:</font></td>
-    		<td><form:password style="height:30px" path="password" /></td>
+    		<td><input type="password" style="height:30px" name="password" /></td>
 		</tr>
 		<tr>
 		<br>
-			<td colspan="2" align="center"><input type="submit" style="height:30px; width:100px; font-size: 15px" value="Войти"></td>
+			<td colspan="2" align="center"><input type="submit" style="height:30px; width:100px; font-size: 15px" value="Регистрация"></td>
 </table>
 </form:form>
 <br><br><br><br>

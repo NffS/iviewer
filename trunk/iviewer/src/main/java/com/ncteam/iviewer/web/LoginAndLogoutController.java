@@ -21,39 +21,49 @@ public class LoginAndLogoutController {
 	public String checkUserLogin(@ModelAttribute("user") User user, Map<String, Object> map,
 			HttpSession session){
 		
-		String message="";
+		String passwordMessage="";
+		String emailMessage="";
 		String email=user.getEmail();
 		String password=user.getPassword();
 		
-		if(!(email.isEmpty())&&!(password.isEmpty())){
+		if(!email.isEmpty()){
+				if(!password.isEmpty()){
 			
-			User resultUser=userService.getUserByEmail(user.getEmail());
+					User resultUser=userService.getUserByEmail(user.getEmail());
 			
-			if(resultUser!=null){
-				if(resultUser.getPassword().equals(password)){
-					session.setAttribute("user", resultUser);
-                    session.setAttribute("user_id", resultUser.getUser_id());
-					session.setAttribute("email", resultUser.getEmail());
-					session.setAttribute("first_name", resultUser.getFirst_name());
-					session.setAttribute("surname", resultUser.getSurname());
-					session.setAttribute("foto", resultUser.getFoto());
-					session.setAttribute("user_type_id", resultUser.getUser_type_id());
-					return "redirect:/index";
+					if(resultUser!=null){
+						if(resultUser.getPassword().equals(password)){
+							session.setAttribute("user", resultUser);
+							session.setAttribute("user_id", resultUser.getUser_id());
+							session.setAttribute("email", resultUser.getEmail());
+							session.setAttribute("first_name", resultUser.getFirst_name());
+							session.setAttribute("surname", resultUser.getSurname());
+							session.setAttribute("foto", resultUser.getFoto());
+							session.setAttribute("user_type_id", resultUser.getUser_type_id());
+							return "redirect:/index";
+						}
+						else{
+							passwordMessage="Введён неверный пароль.";
+						}
+					}
+					else{
+						emailMessage="Пользователя с таким email'ом не существует.";
+					}
 				}
-			else{
-					message="Введён неверный пароль.";
+				else{
+					passwordMessage="Заполните поле \"Пароль\".";
 				}
-			}
-			else{
-				message="Пользователя с таким email'ом не существует.";
-			}
 		}
 		else{
-			message="Поля \"Email\" и \"Пароль\" должны быть заполнены!";
+			emailMessage="Заполните поле \"Email\".";
+			if(password.isEmpty()){
+				passwordMessage="Заполните поле \"Пароль\".";
+			}
 		}
 		map.put("email", email);
 		map.put("password", password);
-		map.put("message", message);
+		map.put("emailMessage", emailMessage);
+		map.put("passwordMessage", passwordMessage);		
 		return "login";
 	}
 		
@@ -71,7 +81,7 @@ public class LoginAndLogoutController {
 
     @RequestMapping("/login")
     public String login(HttpSession session){
-        return "/login";
+        return "login";
     }
 	
 	@ModelAttribute("user")

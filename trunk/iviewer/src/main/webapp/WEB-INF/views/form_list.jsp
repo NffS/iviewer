@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="utf8"%>
 <%@ page import="com.ncteam.iviewer.domain.Interview, java.util.List, com.ncteam.iviewer.domain.Form"%> 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -6,8 +6,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <title>Список форм</title>
+<%@include file="/resources/table_sort.jsp" %>
 <%@include file="/resources/design/header.jsp" %>
 </head>
 <body>
@@ -60,14 +60,17 @@
 		</td>
 	</tr>
 </table>
-<table>
+<table class="sort">
 	<tr>
 		<td align="center">
 			<%int k=0; %>
 			<table border=2 align="center">
+			<thead>
 				<tr ALIGN=center bgcolor="9999FF">
-					<th>№</th> <th  width=300>ФИО</th> <th width=150>Дата собеседования</th> <th width=60>Статус</th> <th width=85>Просмотр</th> <th width=80>Экспорт</th>
+					<td>№</td> <td  width=300>ФИО</td> <td width=150>Дата собеседования</td> <td width=60>Статус</td> <td width=85>Просмотр</td> <td width=80>Экспорт</td>
 				</tr>
+			</thead>
+			<tbody>
 				<c:forEach var="form" items="${forms}">
 				<%k++; %>
 				<tr ALIGN=center height=40>
@@ -78,8 +81,14 @@
 				</c:forEach>
 			</table>
 		</td>
-</tr>
+	</tr>
+	</tbody>
 </table>
+<script type="text/javascript">
+initial_sort_id = 1;
+initial_sort_up = 0;
+</script>
+<br><br><br><br>
 <%@ include file="/resources/design/footer.jsp" %>
 </body>
 </html>

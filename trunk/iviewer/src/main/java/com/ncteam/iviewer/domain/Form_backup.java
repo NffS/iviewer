@@ -2,26 +2,27 @@ package com.ncteam.iviewer.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="Form")
-public class Form implements Serializable{
+@Table(name="Form_backup")
+public class Form_backup implements Serializable{
 
 	@Id
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
-	@Column(name="form_id")
+	@Column(name="form_backup_id")
+	private Integer form_backup_id;
+	
+	@Column(name="form_id", insertable=false, updatable=false)
 	private Integer form_id;
 	
 	@Column(name="candidate_id")
@@ -129,31 +130,17 @@ public class Form implements Serializable{
 	@Column(name="comment2")
 	private String comment2;
 	
-	@Column(name="status")
-	private Integer status;
-	
-	@Column(name="visit_status")
-	private Integer visit_status;
-	
 	@OneToOne
 	@JoinColumn(name="form_id")
-	private Form_backup form_backup;
-	
-	@OneToOne
-	@JoinColumn(name="user_id")
-    private User user;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="hr_mark_id")
-	private HR_mark hr_mark;
-	
-	@OneToOne
-	@JoinColumn(name="form_id")
-	private Tech_mark tech_mark;	
-	
-	@ManyToOne
-	@JoinColumn(name="interview_id")
-	private Interview interview;
+	private Form form;
+
+	public Integer getForm_backup_id() {
+		return form_backup_id;
+	}
+
+	public void setForm_backup_id(Integer form_backup_id) {
+		this.form_backup_id = form_backup_id;
+	}
 
 	public Integer getForm_id() {
 		return form_id;
@@ -163,6 +150,13 @@ public class Form implements Serializable{
 		this.form_id = form_id;
 	}
 
+	public Integer getCandidate_id() {
+		return candidate_id;
+	}
+
+	public void setCandidate_id(Integer candidate_id) {
+		this.candidate_id = candidate_id;
+	}
 
 	public String getUniversity() {
 		return university;
@@ -436,79 +430,11 @@ public class Form implements Serializable{
 		this.comment2 = comment2;
 	}
 
-	public Integer getStatus() {
-		return status;
+	public Form getForm() {
+		return form;
 	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
+	public void setForm(Form form) {
+		this.form = form;
 	}
-
-	public Integer getVisit_status() {
-		return visit_status;
-	}
-
-	public void setVisit_status(Integer visit_status) {
-		this.visit_status = visit_status;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-
-	public Interview getInterview() {
-		return interview;
-	}
-
-	public void setInterview(Interview interview) {
-		this.interview = interview;
-	}
-	
-	public HR_mark getHR_mark() {
-		return hr_mark;
-	}
-
-	public void setHR_mark(HR_mark hr_mark) {
-		this.hr_mark = hr_mark;
-	}
-
-
-	public Integer getCandidate_id() {
-		return candidate_id;
-	}
-
-	public void setCandidate_id(Integer candidate_id) {
-		this.candidate_id = candidate_id;
-	}
-
-	public HR_mark getHr_mark() {
-		return hr_mark;
-	}
-
-	public void setHr_mark(HR_mark hr_mark) {
-		this.hr_mark = hr_mark;
-	}
-
-	public Tech_mark getTech_mark() {
-		return tech_mark;
-	}
-
-	public void setTech_mark(Tech_mark tech_mark) {
-		this.tech_mark = tech_mark;
-	}
-
-	public Form_backup getForm_backup() {
-		return form_backup;
-	}
-
-	public void setForm_backup(Form_backup form_backup) {
-		this.form_backup = form_backup;
-	}
-	
-	
 }

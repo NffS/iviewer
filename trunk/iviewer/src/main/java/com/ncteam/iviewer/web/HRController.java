@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +30,10 @@ public class HRController {
 	}
 	
 	@RequestMapping(value="/hr_red_{interview_id}")
-	public String redactInterviewFromHRPage(HttpServletRequest request,
+	public String redactInterviewFromHRPage(HttpServletRequest request, HttpSession session,
 			@PathVariable("interview_id") Integer interview_id,	Map<String, Object> map){
+		
+		if(((Integer)session.getAttribute("user_type")).equals(2)){
 		
 		String updateStartDateString=((String)request.getParameter("date"))
 				.concat(" "+(String)request.getParameter("startTime"));
@@ -48,6 +51,10 @@ public class HRController {
 		tablesService.updateRecord(redactedInterview);
 		map.put("interviews",tablesService.getAllRecords(Interview.class));
 		return "hr";
+		}
+		else{
+			return "redirect/index";
+		}
 	}
 	
 	
@@ -77,12 +84,17 @@ public class HRController {
 	}
 	
 	@RequestMapping(value="hr_delete_interview_{interview_id}")
-	public String deleteInterviewFromHRPage(HttpServletRequest request,
+	public String deleteInterviewFromHRPage(HttpServletRequest request, HttpSession session,
 			@PathVariable("interview_id") Integer interview_id,	Map<String, Object> map){
 	
+		if(((Integer)session.getAttribute("user_type")).equals(2)){
 		tablesService.deleteRecord(tablesService.getRecordById(interview_id, Interview.class));
 		
 		map.put("interviews",tablesService.getAllRecords(Interview.class));
 		return "hr";
+		}
+		else{
+			return "redirect:/index";
+		}
 	}
 }

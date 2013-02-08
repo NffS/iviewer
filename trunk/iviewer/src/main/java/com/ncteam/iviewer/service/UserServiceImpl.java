@@ -11,6 +11,10 @@ public class UserServiceImpl extends TablesServiceImpl {
 	
 	private UserDAOImpl userDAO=new UserDAOImpl();
 	
+	public UserServiceImpl(){
+		super.setTablesDAO(userDAO);
+	}
+	
 	@Transactional
 	public User getUserByEmail(String email) {
 		return (User) userDAO.getUserByEmail(email);

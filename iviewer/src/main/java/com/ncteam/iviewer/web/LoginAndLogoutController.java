@@ -40,7 +40,9 @@ public class LoginAndLogoutController {
 							session.setAttribute("surname", resultUser.getSurname());
 							session.setAttribute("foto", resultUser.getFoto());
 							session.setAttribute("user_type_id", resultUser.getUser_type_id());
-							return "redirect:/index";
+							map.put("message","Вы успешно вошли");
+                            map.put("target","/index");
+                            return "redirect";
 						}
 						else{
 							passwordMessage="Введён неверный пароль.";

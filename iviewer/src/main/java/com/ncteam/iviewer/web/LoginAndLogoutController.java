@@ -29,6 +29,14 @@ public class LoginAndLogoutController {
 		if(!email.isEmpty()){
 				if(!password.isEmpty()){
 			
+					if(!email.matches("[A-Za-z0-9_]+@[A-Za-z0-9]+(.[A-Za-z0-9]+)*.[a-z]{2,4}")){
+						emailMessage="E-Mail не введён некорректно.";
+					}
+					else if(!password.matches("[A-Za-z0-9]+")){
+						passwordMessage="Пароль введён некорректно.";
+					}
+					else{
+					
 					User resultUser=userService.getUserByEmail(user.getEmail());
 			
 					if(resultUser!=null){
@@ -41,7 +49,7 @@ public class LoginAndLogoutController {
 							session.setAttribute("foto", resultUser.getFoto());
 							session.setAttribute("user_type_id", resultUser.getUser_type_id());
 							map.put("message","Вы успешно вошли");
-                            map.put("target","/index");
+                            map.put("target","index");
                             return "redirect";
 						}
 						else{
@@ -50,6 +58,7 @@ public class LoginAndLogoutController {
 					}
 					else{
 						emailMessage="Пользователя с таким email'ом не существует.";
+					}
 					}
 				}
 				else{

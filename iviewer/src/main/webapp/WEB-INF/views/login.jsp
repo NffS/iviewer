@@ -11,20 +11,20 @@
 
 <a href="index"><font size="3" color="000000">На главную</font></a>
 <%@ include file="/resources/design/center.jsp" %>
-<form:form  method="POST" commandName="userProfile" modelAttribute="user" action="loginCheck">
+<form  method="POST" action="loginCheck">
 	<table>
 		<tr>
 			<td width=100><font size=5>E-mail:</font></td>
-   			 <td><form:input style="height:30px" path="email"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${emailMessage }</font> </td>
+   			 <td><input class="input-large" type="text" style="height:30px" name="email" pattern="[\w_]+@\w+(.\w+)*.[a-z]{2,4}" value="${email}"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${emailMessage }</font> </td>
    		</tr>
     	<tr>
     		<td><font size=5>Пароль:</font></td>
-    		<td><form:password style="height:30px" path="password" /></td><td><font color="#FF0000" >&nbsp;&nbsp;${passwordMessage }</font></td>
+    		<td><input class="input-large" type="password" style="height:30px" name="password" pattern="[A-Za-z0-9]+"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${passwordMessage }</font></td>
 		</tr>
 		<tr>
 		<br>
 			<td colspan="2" align="center"><input type="submit" style="height:30px; width:100px; font-size: 15px" value="Войти"></td>
 </table>
-</form:form>
+</form>
 <br><br><br><br>
 <%@ include file="/resources/design/footer.jsp" %>

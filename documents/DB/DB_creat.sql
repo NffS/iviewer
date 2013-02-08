@@ -108,7 +108,7 @@ CREATE TABLE Form
 	
 CREATE TABLE Form_backup
 	(
-		form_bakup_id		NUMBER(6) NOT NULL PRIMARY KEY,
+		form_backup_id		NUMBER(6) NOT NULL PRIMARY KEY,
 		form_id		 		NUMBER(6) NOT NULL REFERENCES Form (form_id),
 		university			VARCHAR2(400),
 		faculty 			VARCHAR2(400),

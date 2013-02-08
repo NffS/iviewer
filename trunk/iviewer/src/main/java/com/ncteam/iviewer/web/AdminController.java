@@ -1,5 +1,6 @@
 package com.ncteam.iviewer.web;
 
+
 import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.domain.Users_type;
 import com.ncteam.iviewer.service.TablesService;
@@ -36,62 +37,30 @@ public class AdminController {
         List<User> users=tablesService.getAllRecords(User.class);
         List<Users_type> users_types=tablesService.getAllRecords(Users_type.class);
 
-        map.put("users_type", users_types);
+        map.put("users_types", users_types);
         map.put("users", users);
 
         return "admin";
     }
 
-    @RequestMapping("/user_edit")
-    public String userEdit(Map<String, Object> map, HttpSession session) {
-        //User user=tablesService.getRecordById((Integer)session.getAttribute("user"),User.class);
-        map.put("user", session.getAttribute("user"));
-        return "user_edit";
-    }
+    @RequestMapping("/user_delete_{user_id}")
+    public String delUser(@PathVariable("user_id")Integer user_id, Map<String, Object> map,
+                          HttpSession session) {
 
-    @RequestMapping("/user_edit_{user_id}")
-    public String userEditById(@PathVariable("user_id")Integer user_id,Map<String, Object> map, HttpSession session) {
-        if((Integer)session.getAttribute("user_type_id")==1 ||
-                session.getAttribute("user_id")==user_id){
-            User user=tablesService.getRecordById(user_id,User.class);
-            map.put("user", user);
-            return "user_edit";
-        }else{
-            map.put("newsText","Error!");
+        User usr = tablesService.getRecordById(user_id, User.class);
+
+        if((Integer)session.getAttribute("user_type_id") == 1
+            && (Integer)session.getAttribute("user_id") == user_id){
+
+            map.put("newsText","O_o АДМИН ТЫ КАМИКАДЗЕ??? Так делать нельзя!");
             return "index";
         }
 
-    }
+        if((Integer)session.getAttribute("user_type_id") == 1)
+            tablesService.deleteRecord(usr);
 
-    @RequestMapping("/user_edit.do")
-    public String userEditOk( @ModelAttribute("userEdit") User userEdit, Map<String, Object> map,
-                              HttpSession session) {
-
-        if (Pattern.matches("^([a-zA-Z0-9_\\.\\-]{1,20})@([a-zA-Z0-9\\.\\-]{1,20})\\.([a-z]{2,4})$",userEdit.getEmail()))
-           // if (Pattern.matches("[a-zA-Z�-��-�]$",userEdit.getFirst_name()))
-             //   if (Pattern.matches("[a-zA-Z�-��-�]$",userEdit.getSurname()))
-               //     if (Pattern.matches("[a-zA-Z�-��-�]$",userEdit.getLast_name()))
-                        if (userEdit.getPassword().length() > 0){
-                            tablesService.updateRecord(userEdit);
-                            if((Integer)session.getAttribute("user_id")==userEdit.getUser_id()){
-                                session.setAttribute("user", userEdit);
-                                session.setAttribute("user_id", userEdit.getUser_id());
-                                session.setAttribute("email", userEdit.getEmail());
-                                session.setAttribute("first_name", userEdit.getFirst_name());
-                                session.setAttribute("surname", userEdit.getSurname());
-                                session.setAttribute("foto", userEdit.getFoto());
-                                session.setAttribute("user_type_id", userEdit.getUser_type_id());
-
-                            }
-                            map.put("newsText","Ok");
-                            return "index";
-                        }
-        map.put("newsText","Error");
+        map.put("newsText","ok");
         return "index";
     }
 
-    @ModelAttribute("userEdit")
-    public User addUser(){
-        return new User();
-    }
 }

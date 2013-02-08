@@ -21,13 +21,13 @@ CREATE TABLE Users
 		CHECK (REGEXP_LIKE(email,'^([a-zA-Z0-9_\.\-]{1,20})@([a-zA-Z0-9\.\-]{1,20})\.([a-z]{2,4})$')),
 		password 		VARCHAR2(20) NOT NULL,
 		first_name  	VARCHAR2(100) NOT NULL CONSTRAINT first_name
-		CHECK (first_name = INITCAP(first_name) AND REGEXP_LIKE(first_name,'[a-zA-Zà-ÿÀ-ß]$')),
+		CHECK (first_name = INITCAP(first_name) AND REGEXP_LIKE(first_name,'[a-zA-Zà-ÿÀ-ß]{1,40}$')),
 		surname			VARCHAR2(100) NOT NULL CONSTRAINT surname
-		CHECK (surname = INITCAP(surname) AND REGEXP_LIKE(surname,'[a-zA-Zà-ÿÀ-ß]$')),
+		CHECK (surname = INITCAP(surname) AND REGEXP_LIKE(surname,'[a-zA-Zà-ÿÀ-ß]{1,40}$')),
 		last_name		VARCHAR2(100) NOT NULL CONSTRAINT last_name
-		CHECK (last_name = INITCAP(last_name) AND REGEXP_LIKE(last_name,'[a-zA-Zà-ÿÀ-ß]$')),
+		CHECK (last_name = INITCAP(last_name) AND REGEXP_LIKE(last_name,'[a-zA-Zà-ÿÀ-ß]{1,40}$')),
 		foto			VARCHAR2(80),
-		user_type_id	NUMBER(6) REFERENCES Users_type (user_type_id)
+		user_type_id	NUMBER(6) REFERENCES Users_type (user_type_id) ON DELETE CASCADE 
     );
 		
 CREATE TABLE Interview
@@ -41,11 +41,11 @@ CREATE TABLE Interview
 CREATE TABLE Form
 	(
 		form_id		 		NUMBER(6) NOT NULL PRIMARY KEY,
-		user_id				NUMBER(6) NOT NULL REFERENCES Users (user_id),
+		user_id				NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE CASCADE,
 		university			VARCHAR2(400) CONSTRAINT university
-		CHECK (REGEXP_LIKE(university,'[a-zA-Zà-ÿÀ-ß0-9]$')),
+		CHECK (REGEXP_LIKE(university,'[a-zA-Zà-ÿÀ-ß0-9]{1,199}$')),
 		faculty 			VARCHAR2(400) CONSTRAINT faculty
-		CHECK (REGEXP_LIKE(faculty,'[a-zA-Zà-ÿÀ-ß0-9]')),
+		CHECK (REGEXP_LIKE(faculty,'[a-zA-Zà-ÿÀ-ß0-9]{1,199}')),
 		course	 			NUMBER(1),
 		end_year			VARCHAR2(5),
 		email2				VARCHAR2(30) CONSTRAINT email2 
@@ -149,7 +149,7 @@ CREATE TABLE Form_backup
 CREATE TABLE HR_mark
 	(
 		hr_mark_id 		NUMBER(6) NOT NULL PRIMARY KEY,
-		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id),
+		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE CASCADE,
 		form_id			NUMBER(6) NOT NULL REFERENCES Form (form_id),
 		motivation 		NUMBER(3) NOT NULL,
 		english			NUMBER(3) NOT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE HR_mark
 CREATE TABLE Tech_mark
 	(
 		tech_mark_id 	NUMBER(6) NOT NULL PRIMARY KEY,
-		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id),
+		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE CASCADE,
 		form_id			NUMBER(6) NOT NULL REFERENCES Form (form_id),
 		prog_lang 		NUMBER(3) NOT NULL,
 		oop				NUMBER(3) NOT NULL,

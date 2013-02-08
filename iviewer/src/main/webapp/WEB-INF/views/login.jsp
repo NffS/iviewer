@@ -15,11 +15,11 @@
 	<table>
 		<tr>
 			<td width=100><font size=5>E-mail:</font></td>
-   			 <td><form:input style="height:30px" path="email"/></td>
+   			 <td><form:input style="height:30px" path="email"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${emailMessage }</font> </td>
    		</tr>
     	<tr>
     		<td><font size=5>Пароль:</font></td>
-    		<td><form:password style="height:30px" path="password" /></td>
+    		<td><form:password style="height:30px" path="password" /></td><td><font color="#FF0000" >&nbsp;&nbsp;${passwordMessage }</font></td>
 		</tr>
 		<tr>
 		<br>
@@ -27,6 +27,4 @@
 </table>
 </form:form>
 <br><br><br><br>
-<font color="#FF0000" id="error" size="15px">${message }</font>
-
 <%@ include file="/resources/design/footer.jsp" %>

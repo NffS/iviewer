@@ -15,6 +15,10 @@ public class TablesServiceImpl implements TablesService{
 	@Autowired
 	private TablesDAO tablesDAO;
 	
+	public void setTablesDAO(TablesDAO tablesDAO){
+		this.tablesDAO=tablesDAO;
+	}
+	
 	@Transactional
 	public <T> T addRecord(T record) {
 		return tablesDAO.addRecord(record);		

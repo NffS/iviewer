@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.ncteam.iviewer.domain.Form;
+import com.ncteam.iviewer.domain.Form_backup;
 import com.ncteam.iviewer.domain.HR_mark;
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.News;
@@ -92,6 +93,10 @@ public class TablesDAOImpl implements TablesDAO{
 		}
 		else if(recordClass==Tech_mark.class){
 			return sessionFactory.getCurrentSession().createQuery("from Tech_mark")
+            .list();
+		}
+		else if(recordClass==Form_backup.class){
+			return sessionFactory.getCurrentSession().createQuery("from Form_backup")
             .list();
 		}
 		else return null;

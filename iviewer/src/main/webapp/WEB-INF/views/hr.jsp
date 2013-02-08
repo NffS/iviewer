@@ -57,7 +57,9 @@
 				</form>
 			</table>
 
-<br><br><br><br>
+<br><br>
+<font color="#FF0000">${erroMessage }</font>
+<br><br>
 <%@ include file="/resources/design/footer.jsp" %>
 </body>
 </html>

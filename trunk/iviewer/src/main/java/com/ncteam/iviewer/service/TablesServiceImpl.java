@@ -20,8 +20,8 @@ public class TablesServiceImpl implements TablesService{
 	}
 	
 	@Transactional
-	public <T> T addRecord(T record) {
-		return tablesDAO.addRecord(record);		
+	public <T> void addRecord(T record) {
+		tablesDAO.addRecord(record);		
 	}
 
 	@Transactional

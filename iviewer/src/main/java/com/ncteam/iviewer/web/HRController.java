@@ -6,25 +6,24 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ncteam.iviewer.domain.Interview;
-import com.ncteam.iviewer.service.TablesService;
+import com.ncteam.iviewer.service.UserServiceImpl;
 
 @Controller
 public class HRController {
 
 	 
-	 @Autowired
-	 private TablesService tablesService;
+	 
+	 private UserServiceImpl userService=new UserServiceImpl();
 	
 	@RequestMapping(value="/hr")
 	public String hr(Map<String, Object> map){
 		
-		List<Interview> interviews=tablesService.getAllRecords(Interview.class);		
+		List<Interview> interviews=userService.getAllRecords(Interview.class);		
 		map.put("interviews",interviews);
 		return "hr";
 	}
@@ -46,14 +45,14 @@ public class HRController {
 			
 			if(isInterviewStartEarlierThanEnd((String)request.getParameter("startTime"),
 					(String)request.getParameter("endTime"))){
-		Interview redactedInterview=tablesService.getRecordById(interview_id, Interview.class);
+		Interview redactedInterview=userService.getRecordById(interview_id, Interview.class);
 		if(!redactedInterview.getStringStart_date().equals(updateStartDateString)
 				||!redactedInterview.getStringEnd_date().equals(updateEndDateString)){
 			
 			redactedInterview.setStringStart_date(updateStartDateString);
 			redactedInterview.setStringEnd_date(updateEndDateString);
 		}
-		tablesService.updateRecord(redactedInterview);
+		userService.updateRecord(redactedInterview);
 		}
 		else{
 			map.put("erroMessage", "Конец собеседования не может быть раньше его начала или совпадать с ним.");
@@ -63,7 +62,7 @@ public class HRController {
 		map.put("erroMessage","Введённые данные не соответствуют шаблону.");
 	}
 
-		map.put("interviews",tablesService.getAllRecords(Interview.class));
+		map.put("interviews",userService.getAllRecords(Interview.class));
 		return "hr";
 		}
 		else{
@@ -96,7 +95,7 @@ public class HRController {
 		newInterview.setStringEnd_date(newEndDateString);
 		newInterview.setStringStart_date(newStartDateString);
 		newInterview.setSeats(0);
-		tablesService.addRecord(newInterview);
+		userService.addRecord(newInterview);
 		}
 			else{
 				map.put("erroMessage", "Конец собеседования не может быть раньше его начала или совпадать с ним.");
@@ -107,7 +106,7 @@ public class HRController {
 		}
 		}
 		
-		List<Interview> interviews=tablesService.getAllRecords(Interview.class);		
+		List<Interview> interviews=userService.getAllRecords(Interview.class);		
 		map.put("interviews",interviews);
 		return "hr";
 		}
@@ -121,9 +120,9 @@ public class HRController {
 			@PathVariable("interview_id") Integer interview_id,	Map<String, Object> map){
 	
 		if(((Integer)session.getAttribute("user_type_id")).equals(2)){
-		tablesService.deleteRecord(tablesService.getRecordById(interview_id, Interview.class));
+			userService.deleteRecord(userService.getRecordById(interview_id, Interview.class));
 		
-		map.put("interviews",tablesService.getAllRecords(Interview.class));
+		map.put("interviews",userService.getAllRecords(Interview.class));
 		return "hr";
 		}
 		else{

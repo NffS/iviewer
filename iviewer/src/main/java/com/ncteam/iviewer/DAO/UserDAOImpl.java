@@ -13,9 +13,12 @@ public class UserDAOImpl extends TablesDAOImpl {
 	static{
 	  	  Locale.setDefault(Locale.ENGLISH);
 		}
-
 	
 	private SessionFactory sessionFactory=new AnnotationConfiguration().configure().buildSessionFactory();
+	
+	public UserDAOImpl(){
+		super.setSessionFactory(sessionFactory);
+	}
 	
 	public User getUserByEmail(String email){
 		String query="FROM User WHERE email='"+email+"'";

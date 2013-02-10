@@ -48,12 +48,14 @@ public class TablesDAOImpl implements TablesDAO{
 		
 			Session curSession=getSession();
 			try{
-					Statement stmt=session.connection().createStatement();
+					Statement stmt=curSession.connection().createStatement();
 					stmt.execute( "alter session set NLS_DATE_FORMAT='yyyy-mm-dd HH24:MI'" );
 			}
-			catch(Exception e){	}
+			catch(Exception e){}
+			if(isSessionFactorySet)
 			curSession.getTransaction().begin();
 			curSession.save(record);
+			if(isSessionFactorySet)
 			curSession.getTransaction().commit();
 	}
 
@@ -61,12 +63,14 @@ public class TablesDAOImpl implements TablesDAO{
 	public <T> void updateRecord(T record) {
 		Session curSession=getSession();
 		try{
-			Statement stmt=session.connection().createStatement();
+			Statement stmt=curSession.connection().createStatement();
 			stmt.execute( "alter session set NLS_DATE_FORMAT='yyyy-mm-dd HH24:MI'" );
 		}
-		catch(Exception e){	}
+		catch(Exception e){}
+		if(isSessionFactorySet)
 		curSession.getTransaction().begin();
 		curSession.update(record);
+		if(isSessionFactorySet)
 		curSession.getTransaction().commit();
 	}
 
@@ -111,8 +115,10 @@ public class TablesDAOImpl implements TablesDAO{
 	public void deleteRecord(Object record) {
 		if (null != record) {
 			Session session=getSession();
+			if(isSessionFactorySet)
 			session.getTransaction().begin();
 			session.delete(record);
+			if(isSessionFactorySet)
 			session.getTransaction().commit();
 		}
 	}

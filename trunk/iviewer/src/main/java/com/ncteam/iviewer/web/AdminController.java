@@ -31,36 +31,46 @@ public class AdminController {
     private TablesService tablesService;
 
     @RequestMapping("/admin")
-    public String showAdmin(Map<String, Object> map) {
+    public String showAdmin(Map<String, Object> map, HttpSession session) {
+        if(((Integer)session.getAttribute("user_type_id")).equals(1)){
 
+            List<User> users=tablesService.getAllRecords(User.class);
+            List<Users_type> users_types=tablesService.getAllRecords(Users_type.class);
 
-        List<User> users=tablesService.getAllRecords(User.class);
-        List<Users_type> users_types=tablesService.getAllRecords(Users_type.class);
+            map.put("users_types", users_types);
+            map.put("users", users);
 
-        map.put("users_types", users_types);
-        map.put("users", users);
-
-        return "admin";
+            return "admin";
+        }
+        map.put("message","<font color='red'>Ошибка доступа</font>");
+        map.put("target","index");
+        return "redirect";
     }
 
     @RequestMapping("/user_delete_{user_id}")
     public String delUser(@PathVariable("user_id")Integer user_id, Map<String, Object> map,
                           HttpSession session) {
+        if(((Integer)session.getAttribute("user_type_id")).equals(1)){
 
-        User usr = tablesService.getRecordById(user_id, User.class);
+            User usr = tablesService.getRecordById(user_id, User.class);
 
-        if((Integer)session.getAttribute("user_type_id") == 1
-            && (Integer)session.getAttribute("user_id") == user_id){
+            if(((Integer)session.getAttribute("user_id")).equals(user_id)){
 
-            map.put("newsText","O_o АДМИН ТЫ КАМИКАДЗЕ??? Так делать нельзя!");
-            return "index";
-        }
+                map.put("message","<font color='red'>O_o АДМИН ТЫ КАМИКАДЗЕ??? Так делать нельзя!</font>");
+                map.put("target","admin");
+                return "redirect";
+            }
 
-        if((Integer)session.getAttribute("user_type_id") == 1)
             tablesService.deleteRecord(usr);
 
-        map.put("newsText","ok");
-        return "index";
+            map.put("message","Пользователь "+usr.getEmail()+" успешно удален!");
+            map.put("target","admin");
+            return "redirect";
+        }
+
+        map.put("message","<font color='red'>Ошибка доступа</font>");
+        map.put("target","index");
+        return "redirect";
     }
 
 }

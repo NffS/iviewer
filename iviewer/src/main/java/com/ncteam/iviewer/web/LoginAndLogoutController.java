@@ -48,8 +48,15 @@ public class LoginAndLogoutController {
 							session.setAttribute("surname", resultUser.getSurname());
 							session.setAttribute("foto", resultUser.getFoto());
 							session.setAttribute("user_type_id", resultUser.getUser_type_id());
-							map.put("message","Вы успешно вошли");
-                            map.put("target","index");
+
+                            switch ((int)resultUser.getUser_type_id()){
+                                case 1: map.put("target","admin"); break;
+                                case 2: map.put("target","hr"); break;
+                                case 3: map.put("target","interview"); break;
+                                case 4: map.put("target","candidate"); break;
+                            }
+
+                            map.put("message","Рады снова Вас видеть "+resultUser.getFirst_name());
                             return "redirect";
 						}
 						else{

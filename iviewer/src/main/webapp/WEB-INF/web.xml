@@ -47,4 +47,34 @@
     <servlet-name>RegistrationController</servlet-name>
     <url-pattern>/RegistrationController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CandidateController</display-name>
+    <servlet-name>CandidateController</servlet-name>
+    <servlet-class>com.ncteam.iviewer.web.CandidateController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CandidateController</servlet-name>
+    <url-pattern>/CandidateController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FormController</display-name>
+    <servlet-name>FormController</servlet-name>
+    <servlet-class>com.ncteam.iviewer.web.FormController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FormController</servlet-name>
+    <url-pattern>/FormController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadFotoController</display-name>
+    <servlet-name>UploadFotoController</servlet-name>
+    <servlet-class>com.ncteam.iviewer.web.UploadFotoController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadFotoController</servlet-name>
+    <url-pattern>/UploadFotoController</url-pattern>
+  </servlet-mapping>
 </web-app>

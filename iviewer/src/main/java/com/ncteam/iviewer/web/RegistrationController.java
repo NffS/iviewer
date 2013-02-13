@@ -18,7 +18,7 @@ import com.ncteam.iviewer.domain.User;
 public class RegistrationController{
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registerUser(HttpServletRequest request) {
+    public String createUser(HttpServletRequest request) {
 		
 		System.out.println(request.getParameter("first_name"));
         return "registration";

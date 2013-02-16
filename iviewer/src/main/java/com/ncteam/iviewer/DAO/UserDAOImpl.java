@@ -21,12 +21,12 @@ public class UserDAOImpl extends TablesDAOImpl {
 	}
 	
 	public User getUserByEmail(String email){
-		String query="FROM User WHERE email='"+email+"'";
+		String query="FROM User WHERE email=:email";
 		Session sess=sessionFactory.openSession();
 		User user=null;
 		sess.getTransaction().begin();
 		try{
-		user = (User) sess.createQuery(query).list().get(0);
+		user = (User) sess.createQuery(query).setString("email", email).uniqueResult();
 		sess.getTransaction().commit();
 		sess.close();
 		}

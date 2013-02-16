@@ -1,6 +1,7 @@
 package com.ncteam.iviewer.domain;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,8 +17,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Form")
-public class Form implements Serializable{
-
+public class Form implements Serializable, Comparable<Form>{
+	
 	@Id
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
@@ -509,6 +510,9 @@ public class Form implements Serializable{
 	public void setForm_backup(Form_backup form_backup) {
 		this.form_backup = form_backup;
 	}
-	
-	
+
+	@Override
+	public int compareTo(Form comparedForm) {
+		return this.user.getSurname().compareTo(comparedForm.getUser().getSurname());
+	}
 }

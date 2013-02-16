@@ -3,6 +3,8 @@ package com.ncteam.iviewer.web;
 import com.ncteam.iviewer.support.FormListFilter;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -79,8 +81,8 @@ public class FormListController {
 	public String form_list(Map<String, Object> map){
 		
 		
-		List<Form> forms=tablesService.getAllRecords(Form.class);
-		
+		ArrayList<Form> forms=(ArrayList<Form>) tablesService.getAllRecords(Form.class);
+		Collections.sort(forms);
 		map.put("interviewsDates", getAllInterviewsDates());
 		map.put("forms", forms);
 		map.put("universities", getAllUniversities(forms));
@@ -114,8 +116,8 @@ public class FormListController {
 	/*
 	 * Метод используется для размещения объекта класса фильтра для списка форм.
 	 */
-	@ModelAttribute("formListFilter")
+	/*@ModelAttribute("formListFilter")
 	public FormListFilter addFilter(){
 		return new FormListFilter();
-	}
+	}*/
 }

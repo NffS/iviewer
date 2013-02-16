@@ -84,31 +84,8 @@ public class TablesDAOImpl implements TablesDAO{
 	@SuppressWarnings("unchecked")
 	public <T> List<T> getAllRecords(Class<T> recordClass) {
 		Session curSession=getSession();
-		if(recordClass==User.class){
-		return curSession.createQuery("from User").list();
-		}
-		else if(recordClass==Form.class){
-			return curSession.createQuery("from Form").list();
-		}
-		else if(recordClass==HR_mark.class){
-			return curSession.createQuery("from HR_mark").list();
-		}
-		else if(recordClass==News.class){
-			return curSession.createQuery("from News").list();
-		}
-		else if(recordClass==Interview.class){
-			return curSession.createQuery("from Interview").list();
-		}
-		else if(recordClass==Users_type.class){
-			return curSession.createQuery("from Users_type").list();
-		}
-		else if(recordClass==Tech_mark.class){
-			return curSession.createQuery("from Tech_mark").list();
-		}
-		else if(recordClass==Form_backup.class){
-			return curSession.createQuery("from Form_backup").list();
-		}
-		else return null;
+		String s=recordClass.getName();
+		return curSession.createQuery("from "+s).list();
 	}
 
 	

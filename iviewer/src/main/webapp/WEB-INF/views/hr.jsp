@@ -18,7 +18,7 @@
 
 <a href="form_list"><font size="3" color="000000">Просмотр анкет</font></a>
 <br><br>
-<a href=""><font size="3" color="000000">Управление отчётами </font></a>
+<a href="hr_reports"><font size="3" color="000000">Управление отчётами </font></a>
 <br><br>
 <a href="index"><font size="3" color="000000">На главную</font></a>
 

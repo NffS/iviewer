@@ -10,8 +10,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="News")
-public class News {
-	
+public class News{
+
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")

@@ -17,6 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="Users_type")
 public class Users_type implements Serializable{
 
+	
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")

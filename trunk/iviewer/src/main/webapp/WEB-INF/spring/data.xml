@@ -49,7 +49,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <value>com.ncteam.iviewer.domain.News</value>
         <value>com.ncteam.iviewer.domain.Users_type</value>    
         <value>com.ncteam.iviewer.domain.Tech_mark</value>
-        <value>com.ncteam.iviewer.domain.Form_backup</value>
+        <value>com.ncteam.iviewer.domain.University</value>
+        <value>com.ncteam.iviewer.domain.Faculty</value>
+        <value>com.ncteam.iviewer.domain.Source</value>
          </list>
     </property>
   </bean>

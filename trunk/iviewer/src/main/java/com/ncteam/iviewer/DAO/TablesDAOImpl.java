@@ -11,15 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.ncteam.iviewer.domain.Form;
-import com.ncteam.iviewer.domain.Form_backup;
-import com.ncteam.iviewer.domain.HR_mark;
-import com.ncteam.iviewer.domain.Interview;
-import com.ncteam.iviewer.domain.News;
-import com.ncteam.iviewer.domain.Tech_mark;
-import com.ncteam.iviewer.domain.User;
-import com.ncteam.iviewer.domain.Users_type;
-
 
 @Repository
 public class TablesDAOImpl implements TablesDAO{
@@ -84,8 +75,7 @@ public class TablesDAOImpl implements TablesDAO{
 	@SuppressWarnings("unchecked")
 	public <T> List<T> getAllRecords(Class<T> recordClass) {
 		Session curSession=getSession();
-		String s=recordClass.getName();
-		return curSession.createQuery("from "+s).list();
+		return curSession.createQuery("from "+recordClass.getName()).list();
 	}
 
 	

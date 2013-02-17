@@ -5,15 +5,35 @@ DROP TABLE Tech_mark	CASCADE CONSTRAINTS;
 DROP TABLE Interview	CASCADE CONSTRAINTS;
 DROP TABLE Form			CASCADE CONSTRAINTS;
 DROP TABLE News			CASCADE CONSTRAINTS;
-DROP TABLE Form_backup	CASCADE CONSTRAINTS;
-
+DROP TABLE Universities	CASCADE CONSTRAINTS;
+DROP TABLE Faculties	CASCADE CONSTRAINTS;
+DROP TABLE Sources		CASCADE CONSTRAINTS;
 
 CREATE TABLE Users_type
     ( 
-		user_type_id    NUMBER(6) NOT NULL PRIMARY KEY,
-		type_name    	VARCHAR2(25) NOT NULL
+		user_type_id    NUMBER(3) NOT NULL PRIMARY KEY,
+		type_name    	VARCHAR2(2000) NOT NULL
     );
 
+CREATE TABLE Sources
+    ( 
+		source_id   	NUMBER(3) NOT NULL PRIMARY KEY,
+		source_name  	VARCHAR2(2000) NOT NULL 
+    );
+	
+CREATE TABLE Universities
+    ( 
+		university_id   	NUMBER(3) NOT NULL PRIMARY KEY,
+		univerisity_name  	VARCHAR2(2000) NOT NULL
+    );
+
+CREATE TABLE Faculties
+    ( 
+		faculty_id   	NUMBER(3) NOT NULL PRIMARY KEY,
+		faculty_name  	VARCHAR2(2000) NOT NULL,
+		university_id	NUMBER(3) REFERENCES Universities (university_id) ON DELETE CASCADE
+    );	
+	
 CREATE TABLE Users
     ( 
 		user_id    		NUMBER(6) NOT NULL PRIMARY KEY,
@@ -27,7 +47,8 @@ CREATE TABLE Users
 		last_name		VARCHAR2(100) NOT NULL CONSTRAINT last_name
 		CHECK (last_name = INITCAP(last_name) AND REGEXP_LIKE(last_name,'[a-zA-Zа-яА-Я]{1,40}$')),
 		foto			VARCHAR2(80),
-		user_type_id	NUMBER(6) REFERENCES Users_type (user_type_id) ON DELETE CASCADE 
+		user_type_id	NUMBER(6) REFERENCES Users_type (user_type_id) ON DELETE CASCADE,
+		reg_date		DATE NOT NULL
     );
 		
 CREATE TABLE Interview
@@ -42,10 +63,8 @@ CREATE TABLE Form
 	(
 		form_id		 		NUMBER(6) NOT NULL PRIMARY KEY,
 		user_id				NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE CASCADE,
-		university			VARCHAR2(400) CONSTRAINT university
-		CHECK (REGEXP_LIKE(university,'[a-zA-Zа-яА-Я0-9]{1,199}$')),
-		faculty 			VARCHAR2(400) CONSTRAINT faculty
-		CHECK (REGEXP_LIKE(faculty,'[a-zA-Zа-яА-Я0-9]{1,199}')),
+		university_id		NUMBER(3) REFERENCES Universities (university_id) ON DELETE CASCADE,
+		faculty_id 			NUMBER(3) REFERENCES Faculties (faculty_id) ON DELETE CASCADE,
 		course	 			NUMBER(1),
 		end_year			VARCHAR2(5),
 		email2				VARCHAR2(30) CONSTRAINT email2 
@@ -97,54 +116,15 @@ CREATE TABLE Form
 		CHECK (english_write between 0 and 5),
 		english_spoken	 	NUMBER(1) NOT NULL CONSTRAINT english_spoken
 		CHECK (english_spoken between 0 and 5),
-		source				VARCHAR2(800) NOT NULL,
+		source_id			NUMBER(3) NOT NULL  REFERENCES Sources (source_id) ON DELETE CASCADE,
 		motivation_comment	VARCHAR2(2000) NOT NULL,
 		comment2			VARCHAR2(2000) NOT NULL,
 		status	 			NUMBER(1) NOT NULL,
-		interview_id		NUMBER(6) REFERENCES Interview (interview_id),
+		interview_id		NUMBER(6) REFERENCES Interview (interview_id) ON DELETE CASCADE,
 		visit_status		NUMBER(1)
 	);
 	
 	
-CREATE TABLE Form_backup
-	(
-		form_backup_id		NUMBER(6) NOT NULL PRIMARY KEY,
-		form_id		 		NUMBER(6) NOT NULL REFERENCES Form (form_id),
-		university			VARCHAR2(400),
-		faculty 			VARCHAR2(400),
-		course	 			NUMBER(1),
-		end_year			VARCHAR2(5),
-		email2				VARCHAR2(30),
-		phone				VARCHAR2(13),
-		another_contact		VARCHAR2(400),
-		interest_tc 		VARCHAR2(2) NOT NULL,
-		interest_nc 		VARCHAR2(2) NOT NULL,
-		interest_area_po 	VARCHAR2(2)	NOT NULL,
-		interest_area_other VARCHAR2(800),
-		job_ar_deep_spec 	VARCHAR2(2) NOT NULL,
-		job_ar_varied 		VARCHAR2(2) NOT NULL,
-		job_ar_manage 		VARCHAR2(2) NOT NULL,
-		job_ar_sales		VARCHAR2(2) NOT NULL,
-		job_ar_other 		VARCHAR2(800),
-		prog_lang_c 		NUMBER(1) NOT NULL,
-		prog_lang_java		NUMBER(1) NOT NULL,
-		prog_lang_other 	VARCHAR2(800),
-		cs_network_tech 	NUMBER(1) NOT NULL,
-		cs_algorithms 		NUMBER(1) NOT NULL,
-		cs_oop	 			NUMBER(1) NOT NULL,
-		cs_gui 				NUMBER(1) NOT NULL,
-		cs_db 				NUMBER(1) NOT NULL,
-		cs_web 				NUMBER(1) NOT NULL,
-		cs_network_prog 	NUMBER(1) NOT NULL,
-		cs_design 			NUMBER(1) NOT NULL,
-		experience			VARCHAR2(4000),
-		english_read 		NUMBER(1) NOT NULL,
-		english_write		NUMBER(1) NOT NULL,
-		english_spoken	 	NUMBER(1) NOT NULL,
-		source				VARCHAR2(800) NOT NULL,
-		motivation_comment	VARCHAR2(2000) NOT NULL,
-		comment2			VARCHAR2(2000) NOT NULL		
-	);
 	
 CREATE TABLE HR_mark
 	(
@@ -198,9 +178,46 @@ INSERT INTO Users_type
 VALUES ( 4, 'Candidate' );
 
 
+INSERT INTO Sources 
+VALUES ( 1, 'Увидел рекламу' );
+
+INSERT INTO Sources 
+VALUES ( 2, 'Узнал от друга' );
+
+INSERT INTO Sources 
+VALUES ( 3, 'Нашел в нтернете' );
+
+INSERT INTO Sources 
+VALUES ( 4, 'Другое' );
+
+
+INSERT INTO Universities 
+VALUES ( 1, 'ОНПУ' );
+
+INSERT INTO Universities 
+VALUES ( 2, 'ОНУ им. Мечникова' );
+
+INSERT INTO Universities 
+VALUES ( 3, 'Другое' );
+
+
+INSERT INTO Faculties 
+VALUES ( 1, 'ИКС', 1 );
+
+INSERT INTO Faculties 
+VALUES ( 2, 'Программная инженерия', 1 );
+
+INSERT INTO Faculties 
+VALUES ( 3, 'Другой', 1);
+
+INSERT INTO Faculties 
+VALUES ( 4, 'Прикладная математика', 2);
+
+INSERT INTO Faculties 
+VALUES ( 5, 'Другой', 2);
+
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	1, 
@@ -209,11 +226,12 @@ VALUES
 	'Администратор',
 	'Админов',
 	'Админович',
-	1
+	null,
+	1,
+	to_date('2013/04/03 16:00:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	2, 
@@ -222,11 +240,12 @@ VALUES
 	'Егор',
 	'Тюленев',
 	'Афанасьевич',
-	2
+	null,
+	2,
+	to_date('2013/04/03 17:00:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	3, 
@@ -235,11 +254,12 @@ VALUES
 	'Герасим',
 	'Ламантинов',
 	'Макарович',
-	2
+	null,
+	2,
+	to_date('2013/04/03 17:30:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	4, 
@@ -248,11 +268,12 @@ VALUES
 	'Лилия',
 	'Моржёва',
 	'Радионовна',
-	3
+	null,
+	3,
+	to_date('2013/04/04 17:30:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	5, 
@@ -261,11 +282,12 @@ VALUES
 	'Диана',
 	'Коровьева',
 	'Алексеевна',
-	3
+	null,
+	3,
+	to_date('2013/04/04 15:30:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	6, 
@@ -274,11 +296,12 @@ VALUES
 	'Светлана',
 	'Крыжовникова',
 	'Ренатовна',
-	3
+	null,
+	3,
+	to_date('2013/04/04 16:30:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	7, 
@@ -287,11 +310,12 @@ VALUES
 	'Радослав',
 	'Бананов',
 	'Маркович',
-	3
+	null,
+	3,
+	to_date('2013/04/04 17:38:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	8, 
@@ -300,11 +324,12 @@ VALUES
 	'Еремей',
 	'Гвоздёв',
 	'Матвеевич',
-	4
+	null,
+	4,
+	to_date('2013/04/05 17:38:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	9, 
@@ -313,11 +338,12 @@ VALUES
 	'Марфа',
 	'Кременчикова',
 	'Станиславовна',
-	4
+	null,
+	4,
+	to_date('2013/04/05 21:38:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	10, 
@@ -326,11 +352,12 @@ VALUES
 	'Афанасий',
 	'Бредов',
 	'Степанович',
-	4
+	null,
+	4,
+	to_date('2013/04/06 11:23:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	11, 
@@ -339,11 +366,12 @@ VALUES
 	'Стелла',
 	'Манкова',
 	'Гавриловна',
-	4
+	null,
+	4,
+	to_date('2013/04/06 12:38:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
-(user_id, email, password, first_name, surname, last_name, user_type_id)
 VALUES 
 ( 
 	12, 
@@ -352,7 +380,9 @@ VALUES
 	'Игнатий',
 	'Мотросов',
 	'Фомович',
-	4
+	null,
+	4,
+	to_date('2013/04/06 14:14:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 
@@ -371,28 +401,28 @@ INSERT INTO Interview VALUES(
 );
 
 INSERT INTO Form values
-(1, 8, 'ОНПУ', 'ИКС', 4, 2013, 'double@gmail.com', '+380996661633',
+(1, 8, 1, 1, 4, 2013, 'double@gmail.com', '+380996661633',
  '', '+', '+', '+', '', '+', '+-', '+', '-', '', 4, 2, 'Python - 2; C# - 1',
- 4, 4, 4, 2, 2, 3, 4, 1, 'RFID project', 3, 1, 1, 'преподаватели',
+ 4, 4, 4, 2, 2, 3, 4, 1, 'RFID project', 3, 1, 1, 1,
  'очень хочу получить опыт работы в компании NetCracker', 'без комментариев',
  0, 1, 0);
  INSERT INTO Form values
-(2, 9, 'ОНУ им. Мечникова', 'Прикладная математика', 4, 2015, 'float@gmail.com', 
+(2, 9, 2, 4, 4, 2015, 'float@gmail.com', 
  '+380994473463', '', '-', '-', '+', '', '+', '-', '-', '-', '', 0, 4, 
- 'С++ - 5; C# - 4', 2, 5, 4, 1,	1, 1, 2, 1, 'олимпиады', 3, 3, 3, 'Одесский форум',
+ 'С++ - 5; C# - 4', 2, 5, 4, 1,	1, 1, 2, 1, 'олимпиады', 3, 3, 3, 3,
  'просто люблю проходить собеседования', 'это комментарий', 0, 1, 0);
  INSERT INTO Form values
-(3, 10, 'ОНПУ', 'ИКС', 4, 2013, 'int@gmail.com', '+380573573488',
+(3, 10, 1, 1, 4, 2013, 'int@gmail.com', '+380573573488',
  '', '+', '+', '+', '', '+', '+', '+', '+', '', 5, 2, 'PHP - 1',
- 5, 5, 5, 5, 5, 5, 5, 5, 'Лабораторки в универе сама делала', 5, 5, 5, 'декан',
+ 5, 5, 5, 5, 5, 5, 5, 5, 'Лабораторки в универе сама делала', 5, 5, 5, 2,
  'Сама не знаю', 'без комментариев', 0, 1, 0);
 
 INSERT INTO Form VALUES
 (
 		4,
 		11,
-		'Одесский национальный политехнический университет',
-		'Программная инженерия',
+		1,
+		2,
 		4,
 		'2010',
 		'email@mail.ru',
@@ -422,7 +452,7 @@ INSERT INTO Form VALUES
 		'3',
 		'3',
 		'1',
-		'Прочитал на заборе',
+		2,
 		'Ну я очень умный, целеустремленный и жажду приключений',
 		'Ходил на курсы вязания и программирования на android',
 		0,
@@ -434,8 +464,8 @@ INSERT INTO Form VALUES
 (
 		5,
 		12,
-		'Одесский национальный политехнический университет',
-		'Программная инженерия',
+		1,
+		2,
 		4,
 		'2012',
 		'email2000@mail.ru',
@@ -465,7 +495,7 @@ INSERT INTO Form VALUES
 		'1',
 		'2',
 		'1',
-		'В интернете',
+		4,
 		'Пунктуален, энергичен, очень красив и обаятелен',
 		'Ходил в универ на все пары',
 		0,
@@ -496,7 +526,7 @@ INSERT INTO Tech_mark values
 (5, 4, 5, 10, 10, 10, 10, 10, 10, 0, 'aaa');
 
 INSERT INTO News 
-VALUES ( 1, 'Текст новости 1' );
+VALUES ( 1, 'какой то текст' );
 
 INSERT INTO News 
 VALUES ( 2, 'Текст новости 2' );
@@ -505,6 +535,6 @@ INSERT INTO News
 VALUES ( 3, 'Текст новости 3' );
 
 INSERT INTO News 
-VALUES ( 4, 'Текст главной страницы 4' );
+VALUES ( 4, 'Добро пожаловсь в Учебный Центр Net Cracker. Тут Вы сможете получить кучу полезных знаний' );
 
 COMMIT;

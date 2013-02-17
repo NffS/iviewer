@@ -24,7 +24,7 @@ CREATE TABLE Sources
 CREATE TABLE Universities
     ( 
 		university_id   	NUMBER(3) NOT NULL PRIMARY KEY,
-		univerisity_name  	VARCHAR2(2000) NOT NULL
+		university_name  	VARCHAR2(2000) NOT NULL
     );
 
 CREATE TABLE Faculties

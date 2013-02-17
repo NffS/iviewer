@@ -25,14 +25,14 @@ public class Form implements Serializable, Comparable<Form>{
 	@Column(name="form_id")
 	private Integer form_id;
 	
-	@Column(name="candidate_id")
-	private Integer candidate_id;
+	@Column(name="user_id", insertable=false, updatable=false)
+	private Integer user_id;
 	
-	@Column(name="university")
-	private String university;
+	@Column(name="university_id", insertable=false, updatable=false)
+	private Integer university_id;
 	
-	@Column(name="faculty")
-	private String faculty;
+	@Column(name="faculty_id", insertable=false, updatable=false)
+	private Integer faculty_id;
 	
 	@Column(name="course")
 	private Integer course;
@@ -121,8 +121,8 @@ public class Form implements Serializable, Comparable<Form>{
 	@Column(name="english_spoken")
 	private Integer english_spoken;
 	
-	@Column(name="source")
-	private String source;
+	@Column(name="source_id", insertable=false, updatable=false)
+	private Integer source_id;
 	
 	@Column(name="motivation_comment")
 	private String motivation_comment;
@@ -135,10 +135,6 @@ public class Form implements Serializable, Comparable<Form>{
 	
 	@Column(name="visit_status")
 	private Integer visit_status;
-	
-	@OneToOne
-	@JoinColumn(name="form_id")
-	private Form_backup form_backup;
 	
 	@OneToOne
 	@JoinColumn(name="user_id")
@@ -155,6 +151,18 @@ public class Form implements Serializable, Comparable<Form>{
 	@ManyToOne
 	@JoinColumn(name="interview_id")
 	private Interview interview;
+	
+	@ManyToOne
+	@JoinColumn(name="university_id")
+	private University university;
+	
+	@ManyToOne
+	@JoinColumn(name="faculty_id")
+	private Faculty faculty;
+	
+	@ManyToOne
+	@JoinColumn(name="source_id")
+	private Source source;
 
 	public Integer getForm_id() {
 		return form_id;
@@ -165,20 +173,20 @@ public class Form implements Serializable, Comparable<Form>{
 	}
 
 
-	public String getUniversity() {
-		return university;
+	public Integer getUniversity_id() {
+		return university_id;
 	}
 
-	public void setUniversity(String university) {
-		this.university = university;
+	public void setUniversity_id(Integer university_id) {
+		this.university_id = university_id;
 	}
 
-	public String getFaculty() {
-		return faculty;
+	public Integer getFaculty_id() {
+		return faculty_id;
 	}
 
-	public void setFaculty(String faculty) {
-		this.faculty = faculty;
+	public void setFaculty_id(Integer faculty_id) {
+		this.faculty_id = faculty_id;
 	}
 
 	public Integer getCourse() {
@@ -413,12 +421,12 @@ public class Form implements Serializable, Comparable<Form>{
 		this.english_spoken = english_spoken;
 	}
 
-	public String getSource() {
-		return source;
+	public Integer getSource_id() {
+		return source_id;
 	}
 
-	public void setSource(String source) {
-		this.source = source;
+	public void setSource_id(Integer source_id) {
+		this.source_id = source_id;
 	}
 
 	public String getMotivation_comment() {
@@ -479,12 +487,12 @@ public class Form implements Serializable, Comparable<Form>{
 	}
 
 
-	public Integer getCandidate_id() {
-		return candidate_id;
+	public Integer getUser_id() {
+		return user_id;
 	}
 
-	public void setCandidate_id(Integer candidate_id) {
-		this.candidate_id = candidate_id;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public HR_mark getHr_mark() {
@@ -503,16 +511,32 @@ public class Form implements Serializable, Comparable<Form>{
 		this.tech_mark = tech_mark;
 	}
 
-	public Form_backup getForm_backup() {
-		return form_backup;
-	}
-
-	public void setForm_backup(Form_backup form_backup) {
-		this.form_backup = form_backup;
-	}
-
 	@Override
 	public int compareTo(Form comparedForm) {
 		return this.user.getSurname().compareTo(comparedForm.getUser().getSurname());
+	}
+
+	public University getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(University university) {
+		this.university = university;
+	}
+
+	public Faculty getFaculty() {
+		return faculty;
+	}
+
+	public void setFaculty(Faculty faculty) {
+		this.faculty = faculty;
+	}
+
+	public Source getSource() {
+		return source;
+	}
+
+	public void setSource(Source source) {
+		this.source = source;
 	}
 }

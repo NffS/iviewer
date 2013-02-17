@@ -1,5 +1,8 @@
 package com.ncteam.iviewer.web;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +41,9 @@ public class ReportsController {
 			return "redirect:/index";
 		}
 		
-		List<Form> forms=tablesService.getAllRecords(Form.class);
+		ArrayList<Form> forms=(ArrayList<Form>) tablesService.getAllRecords(Form.class);
+		Collections.sort(forms);
+		map.put("attendances", forms);
 		
 		
 		return "hr_reports";

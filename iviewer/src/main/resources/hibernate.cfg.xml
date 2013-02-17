@@ -22,7 +22,9 @@
     <mapping class="com.ncteam.iviewer.domain.HR_mark" />
     <mapping class="com.ncteam.iviewer.domain.News" />
     <mapping class="com.ncteam.iviewer.domain.Tech_mark"/>
-    <mapping class="com.ncteam.iviewer.domain.Form_backup"/>
+    <mapping class="com.ncteam.iviewer.domain.University"/>
+    <mapping class="com.ncteam.iviewer.domain.Faculty"/>
+    <mapping class="com.ncteam.iviewer.domain.Source"/>
    
   </session-factory>
 </hibernate-configuration>

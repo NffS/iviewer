@@ -4,7 +4,6 @@ import com.ncteam.iviewer.support.FormListFilter;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -106,8 +105,8 @@ public class FormListController {
 		
 		List<String> universities=new ArrayList<String>();
 		for(int i=0; i<forms.size();i++){
-			if(!universities.contains(forms.get(i).getUniversity())){
-				universities.add(forms.get(i).getUniversity());
+			if(!universities.contains(forms.get(i).getUniversity().getUniversity_name())){
+				universities.add(forms.get(i).getUniversity().getUniversity_name());
 			}
 		}
 		return universities;

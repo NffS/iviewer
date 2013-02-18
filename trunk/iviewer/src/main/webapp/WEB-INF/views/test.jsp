@@ -42,7 +42,7 @@ if(request.getAttribute("formList")!=null){
 	<table class="data">
 	<%for(int i=0; i<forms.size();i++){%>
 	<tr>
-		<td><%=i+1%>. Идентификатор абитуриента: <%=forms.get(i).getCandidate_id() %>.</td>
+		<td><%=i+1%>. Идентификатор абитуриента: <%=forms.get(i).getUser_id() %>.</td>
 		<td> <%=forms.get(i).getUniversity()%>.</td><td> <%=forms.get(i).getFaculty()%>.</td>
 	</tr>
 <%	}%>

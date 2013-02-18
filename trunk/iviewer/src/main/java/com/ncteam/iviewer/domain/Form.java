@@ -1,8 +1,6 @@
 package com.ncteam.iviewer.domain;
 
 import java.io.Serializable;
-import java.util.Comparator;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;

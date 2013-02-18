@@ -1,7 +1,6 @@
 package com.ncteam.iviewer.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,10 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity(name="Sources")
+@Entity
+@Table(name="Sources")
 public class Source  implements Serializable{
 
 	@Id

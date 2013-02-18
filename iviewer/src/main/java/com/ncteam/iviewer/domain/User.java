@@ -1,6 +1,8 @@
 package com.ncteam.iviewer.domain;
 
 import java.io.Serializable;
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,6 +44,12 @@ private String foto;
 
 @Column(name="user_type_id")
 private Integer user_type_id;
+
+@Column(name="reg_date")
+private String stringReg_date;
+
+@Column(name="reg_date", updatable=false, insertable=false)
+private Date reg_date;
 
 @OneToOne
 @JoinColumn(name="user_id")
@@ -174,6 +182,26 @@ public Tech_mark getTech_mark() {
 
 public void setTech_mark(Tech_mark tech_mark) {
 	this.tech_mark = tech_mark;
+}
+
+
+public String getStringReg_date() {
+	return stringReg_date;
+}
+
+
+public void setStringReg_date(String stringReg_date) {
+	this.stringReg_date = stringReg_date;
+}
+
+
+public Date getReg_date() {
+	return reg_date;
+}
+
+
+public void setReg_date(Date reg_date) {
+	this.reg_date = reg_date;
 }
 
 

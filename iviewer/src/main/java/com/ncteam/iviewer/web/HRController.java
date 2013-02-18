@@ -55,10 +55,12 @@ public class HRController {
 					(String)request.getParameter("endTime"))){
 		Interview redactedInterview=userService.getRecordById(interview_id, Interview.class);
 		if(!redactedInterview.getStringStart_date().equals(updateStartDateString)
-				||!redactedInterview.getStringEnd_date().equals(updateEndDateString)){
+				||!redactedInterview.getStringEnd_date().equals(updateEndDateString)
+				||redactedInterview.getSeats()!=Integer.parseInt((String)request.getParameter("seats"))){
 			
 			redactedInterview.setStringStart_date(updateStartDateString);
 			redactedInterview.setStringEnd_date(updateEndDateString);
+			redactedInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
 		}
 		userService.updateRecord(redactedInterview);
 		}
@@ -82,11 +84,7 @@ public class HRController {
 		if(!validator.isUserHR(session)){
 			return "redirect:/index";
 		}
-		
-		if(!((String)request.getParameter("date")).isEmpty()
-				&&!((String)request.getParameter("startTime")).isEmpty()
-				&&!((String)request.getParameter("endTime")).isEmpty()){
-			
+					
 		String newStartDateString=((String)request.getParameter("date"))
 				.concat(" "+(String)request.getParameter("startTime"));
 		
@@ -101,7 +99,7 @@ public class HRController {
 		Interview newInterview=new Interview();
 		newInterview.setStringEnd_date(newEndDateString);
 		newInterview.setStringStart_date(newStartDateString);
-		newInterview.setSeats(0);
+		newInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
 		userService.addRecord(newInterview);
 		}
 			else{
@@ -111,7 +109,7 @@ public class HRController {
 		else{
 			map.put("erroMessage","Введённые данные не соответствуют шаблону.");
 		}
-		}
+		
 		
 		List<Interview> interviews=userService.getAllRecords(Interview.class);		
 		map.put("interviews",interviews);

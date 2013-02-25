@@ -9,7 +9,7 @@
     <property name="connection.username">ncteam</property>
     <property name="connection.password">1234</property>
     <property name="connection.pool_size">10</property>
-    <property name="dialect">org.hibernate.dialect.OracleDialect</property>
+    <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
     <property name="show_sql">true</property>
     <property name="hbm2ddl.auto">update</property>
     <property name="hibernate.connection.autocommit">false</property>

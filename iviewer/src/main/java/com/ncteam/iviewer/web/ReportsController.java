@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ncteam.iviewer.domain.Faculty;
 import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.University;
+import com.ncteam.iviewer.service.FormService;
 import com.ncteam.iviewer.service.TablesService;
 import com.ncteam.iviewer.service.ValidationService;
 
 @Controller
 public class ReportsController {
 	
-	@Autowired
-	 private TablesService tablesService;
+	 private FormService formService=new FormService();
 	 private ValidationService validator=new ValidationService();
 	
 	 
@@ -43,9 +43,7 @@ public class ReportsController {
 			return "redirect:/index";
 		}
 		
-		ArrayList<Form> forms=(ArrayList<Form>) tablesService.getAllRecords(Form.class);
-		Collections.sort(forms);
-		map.put("attendances", forms);
+		map.put("attendances", formService.getShortFormInformation());
 		
 		
 		return "hr_reports";
@@ -58,41 +56,10 @@ public class ReportsController {
 			return "redirect:/index";
 		}
 		
-		List<Form> forms=tablesService.getAllRecords(Form.class);
-		List<University> universities=tablesService.getAllRecords(University.class);
-		List<Faculty> faculties=tablesService.getAllRecords(Faculty.class);
-		
-		Hashtable<String, Integer> studentsInUniversitiesTable=new Hashtable<String, Integer>();
-		Hashtable<Hashtable<Integer, Integer>, Integer> studentsInFacultiesTable=new Hashtable<Hashtable<Integer, Integer>, Integer>();
-		
-		int universityCount = 0;
-		int facultyCount = 0;
-		
-		for(University university : universities){
-			universityCount = 0;
-			for(Form form : forms){
-				if(form.getUniversity_id().equals(university.getUniversity_id())){
-					universityCount++;
-				}
-			}
-			studentsInUniversitiesTable.put(university.getUniversity_name(), universityCount);
-		}
-		for(Faculty faculty : faculties){
-			facultyCount = 0;
-			for(Form form : forms){
-				if(faculty.getUniversity_id().equals(form.getUniversity_id())
-						&&faculty.getFaculty_id().equals(form.getFaculty_id())){
-					facultyCount++;
-				}
-			}
-			Hashtable<Integer, Integer> facultiesInUniversitiesTable=new Hashtable<Integer, Integer>();
-			facultiesInUniversitiesTable.put(faculty.getUniversity_id(),faculty.getFaculty_id());
-			studentsInFacultiesTable.put(facultiesInUniversitiesTable, facultyCount);
-		}
-		map.put("studentsInUniversitiesTable", studentsInUniversitiesTable);
-		map.put("studentsInFacultiesTable", studentsInFacultiesTable);
-		map.put("universities", universities);
-		map.put("faculties", faculties);
+		map.put("studentsInUniversitiesTable", formService.getStudentsInUniversities());
+		map.put("studentsInFacultiesTable", formService.getStudentsInFaculties());
+		map.put("universities", formService.getAllRecords(University.class));
+		map.put("faculties", formService.getAllRecords(Faculty.class));
 		return "hr_reports";
 	}
 	
@@ -102,7 +69,7 @@ public class ReportsController {
 		if(!validator.isUserHR(session)){
 			return "redirect:/index";
 		}
-		map.put("recordIncreaseForms", tablesService.getAllRecords(Form.class));
+		map.put("recordIncreaseForms", formService.getCandidatesRegistrationDates());
 		return "hr_reports";
 	}
 }

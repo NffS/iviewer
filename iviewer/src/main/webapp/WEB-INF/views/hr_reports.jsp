@@ -33,11 +33,11 @@
 <a href="graphic_pr_report"><font size="5" color="#0000FF">Графический отчёт эффективности видов рекламы</font></a>
 
 <br><br>
-<% List<Form> forms=(ArrayList<Form>)request.getAttribute("attendances");
+<% List<String[]> forms=(ArrayList<String[]>)request.getAttribute("attendances");
 List<Faculty> faculties=(List<Faculty>)request.getAttribute("faculties");
 List<University> universities=(List<University>)request.getAttribute("universities");
-Hashtable<String, Integer> studentsInUniversitiesTable=(Hashtable<String, Integer>)request.getAttribute("studentsInUniversitiesTable");
-Hashtable<Hashtable<Integer, Integer>, Integer> studentsInFacultiesTable=(Hashtable<Hashtable<Integer, Integer>, Integer>)request.getAttribute("studentsInFacultiesTable");
+Hashtable<String, Long> studentsInUniversitiesTable=(Hashtable<String, Long>)request.getAttribute("studentsInUniversitiesTable");
+Hashtable<Integer, Long> studentsInFacultiesTable=(Hashtable<Integer, Long>)request.getAttribute("studentsInFacultiesTable");
 int i=-1;
 int cameCount=0;
 int doesntCameCount=0;
@@ -48,8 +48,8 @@ if(forms!=null){%>
 	</tr>
 	<c:forEach var="form" items ="${attendances }">
 	<tr height=40 align="center">
-		<td>${form.user.surname}  ${form.user.first_name} ${form.user.last_name}</td>	
-		<td><%if(forms.get(i+1).getVisit_status()==1){cameCount++; %>+<%}else{doesntCameCount++; %>-<%} %></td>
+		<td>${form[0]}  ${form[1]} ${form[2]}</td>	
+		<td><%if(forms.get(i+1)[3].equals("1")){cameCount++; %>+<%}else{doesntCameCount++; %>-<%} %></td>
 	</tr>
 	</c:forEach>
 </table>
@@ -68,12 +68,10 @@ if(forms!=null){%>
 	<td colspan=2 width=300><%=university.getUniversity_name() %></td> <td><%=studentsInUniversitiesTable.get(university.getUniversity_name()) %></td>
 </tr>
 	<%for(Faculty faculty :faculties){%>
-		<%if(faculty.getUniversity_id().equals(university.getUniversity_id())){ 
-		Hashtable<Integer, Integer> facultiesInUniversitiesTable=new Hashtable<Integer, Integer>();
-		facultiesInUniversitiesTable.put(faculty.getUniversity_id(),faculty.getFaculty_id());%>
+		<%if(faculty.getUniversity_id().equals(university.getUniversity_id())){%>
 		<tr align="center" height=40>
 		<td width=75/><td><%=faculty.getFaculty_name() %></td> 
-		<td><%=studentsInFacultiesTable.get(facultiesInUniversitiesTable)%></td>
+		<td><%=studentsInFacultiesTable.get(faculty.getFaculty_id())%></td>
 		</tr>
 		<%}
 	}%>
@@ -89,26 +87,32 @@ if(forms!=null){%>
    <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
-      <% List<Form> recordIncreaseForms=(List<Form>)request.getAttribute("recordIncreaseForms");
+      <% List<String> recordIncreaseForms=(List<String>)request.getAttribute("recordIncreaseForms");
           if(recordIncreaseForms!=null){%>
       function drawChart() {
           var numberAtDates = google.visualization.arrayToDataTable([
           ['Месяц', 'Всего студентов'],
           <% String date;
           int studentsCount=0;
-          for(int j=0; j<6; j++){ 
-          date="2013-0"+j;%>
+          for(i=4; i<5;i++)
+          for(int j=1; (j<31&&i==3)||(j<7&&i==4); j++){ 
+        	  if(j<10){
+          		date="2013-0"+i+"-0"+j;
+        	  }
+          	else{
+          		date="2013-0"+i+"-"+j;
+          		}%>
           ['<%=date%>',
-          <%for(Form form:recordIncreaseForms){
-          		if(date.equals(form.getUser().getStringReg_date().substring(0, 7))) studentsCount++; 
+          <%for(String record:recordIncreaseForms){
+          		if(date.equals(record)) studentsCount++; 
           	}%>
           <%=studentsCount %>]
-          <%if(j<6){%>,<%}}%>
+          <%if((j<31&&i==3)||(j<6&&i==4)){%>,<%}}%>
         ]);
         
         var options = {
                 title: 'График увеличения записи студентов',
-                hAxis: {title: 'Месяцы',  titleTextStyle: {color: 'red'},
+                hAxis: {title: 'Дни',  titleTextStyle: {color: 'red'},
                 	dataColumnType:'string'}
               };
 

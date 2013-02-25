@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page import="com.ncteam.iviewer.domain.Form, java.util.ArrayList"%>
+<%@page import="com.ncteam.iviewer.domain.FormInformation, java.util.List"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@include file="/resources/design/header.jsp" %>%>
+<%@include file="/resources/design/header.jsp" %>
 <style>
    a { 
     text-decoration: none;
@@ -54,8 +54,8 @@
 	<c:forEach var="form" items="${forms}">
 	<%k++; %>
 		<tr ALIGN=center height=40>
-			<td><%=k %></td> <td>${form.user.surname}  ${form.user.first_name} ${form.user.last_name}</td>
-			<td>${form.interview.stringStart_date}</td> <td>${form.status}</td> <td><a href="/form.jsp?form_id=${form.form_id}">Просмотр</a></td>
+			<td><%=k %></td> <td>${form.surname}  ${form.first_name} ${form.last_name}</td>
+			<td>${form.start_date}</td> <td>${form.status}</td> <td><a href="/form.jsp?form_id=${form.form_id}">Просмотр</a></td>
 			<td></td>
 		</tr>
 	</c:forEach>
@@ -78,10 +78,10 @@ function filter(_id){
        table.rows[r].style.display = '';
     }
     <%int j=-1;
-    ArrayList<Form> forms=(ArrayList<Form>)request.getAttribute("forms");%>
+    List<FormInformation> forms=(List<FormInformation>)request.getAttribute("forms");%>
      for (var r = 1; r < table.rows.length; r++){
     	 <%j++;%>
-    	 var universityOfTheForm='<%=forms.get(j).getUniversity().getUniversity_name()%>';
+    	 var universityOfTheForm='<%=forms.get(j).getUniversity_name()%>';
          var displayStyle = '';
          for (var i = 0; i < university.length; i++) {
             if (universityOfTheForm.toLowerCase().indexOf(university[i])>=0)

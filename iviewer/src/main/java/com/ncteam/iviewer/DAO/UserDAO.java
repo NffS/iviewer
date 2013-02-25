@@ -8,7 +8,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import com.ncteam.iviewer.domain.User;
 
 
-public class UserDAOImpl extends TablesDAOImpl {
+public class UserDAO extends TablesDAOImpl {
 
 	static{
 	  	  Locale.setDefault(Locale.ENGLISH);
@@ -16,7 +16,7 @@ public class UserDAOImpl extends TablesDAOImpl {
 	
 	private SessionFactory sessionFactory=new AnnotationConfiguration().configure().buildSessionFactory();
 	
-	public UserDAOImpl(){
+	public UserDAO(){
 		super.setSessionFactory(sessionFactory);
 	}
 	

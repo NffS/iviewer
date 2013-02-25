@@ -131,6 +131,9 @@ public class Form implements Serializable, Comparable<Form>{
 	@Column(name="status")
 	private Integer status;
 	
+	@Column(name="interview_id", insertable=false, updatable=false)
+	private Integer interview_id;
+	
 	@Column(name="visit_status")
 	private Integer visit_status;
 	
@@ -536,5 +539,13 @@ public class Form implements Serializable, Comparable<Form>{
 
 	public void setSource(Source source) {
 		this.source = source;
+	}
+
+	public Integer getInterview_id() {
+		return interview_id;
+	}
+
+	public void setInterview_id(Integer interview_id) {
+		this.interview_id = interview_id;
 	}
 }

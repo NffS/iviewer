@@ -2,14 +2,14 @@ package com.ncteam.iviewer.service;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ncteam.iviewer.DAO.UserDAOImpl;
+import com.ncteam.iviewer.DAO.UserDAO;
 import com.ncteam.iviewer.domain.User;
 
 
 public class UserServiceImpl extends TablesServiceImpl {
 
 	
-	private UserDAOImpl userDAO=new UserDAOImpl();
+	private UserDAO userDAO=new UserDAO();
 	
 	public UserServiceImpl(){
 		super.setTablesDAO(userDAO);

@@ -53,15 +53,13 @@ public class HRController {
 			
 			if(validator.isInterviewStartEarlierThanEnd((String)request.getParameter("startTime"),
 					(String)request.getParameter("endTime"))){
+				
 		Interview redactedInterview=userService.getRecordById(interview_id, Interview.class);
-		if(!redactedInterview.getStringStart_date().equals(updateStartDateString)
-				||!redactedInterview.getStringEnd_date().equals(updateEndDateString)
-				||redactedInterview.getSeats()!=Integer.parseInt((String)request.getParameter("seats"))){
-			
-			redactedInterview.setStringStart_date(updateStartDateString);
-			redactedInterview.setStringEnd_date(updateEndDateString);
-			redactedInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
-		}
+		
+		redactedInterview.setStringStart_date(updateStartDateString);
+		redactedInterview.setStringEnd_date(updateEndDateString);
+		redactedInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
+		
 		userService.updateRecord(redactedInterview);
 		}
 		else{
@@ -96,10 +94,13 @@ public class HRController {
 		{
 			if(validator.isInterviewStartEarlierThanEnd((String)request.getParameter("startTime"),
 					(String)request.getParameter("endTime"))){
+				
 		Interview newInterview=new Interview();
+		
 		newInterview.setStringEnd_date(newEndDateString);
 		newInterview.setStringStart_date(newStartDateString);
 		newInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
+		
 		userService.addRecord(newInterview);
 		}
 			else{

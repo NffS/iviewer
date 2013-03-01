@@ -31,9 +31,44 @@
 <a href="graphic_forms_report"><font size="5" color="#0000FF">Графический общий отчёт по анкетам</font></a>
 <br><br>
 <a href="graphic_pr_report"><font size="5" color="#0000FF">Графический отчёт эффективности видов рекламы</font></a>
+
 <br><br>
+ <div id="chart_div" style="width: 700px; height: 800px;"></div>
+ <%@ include file="/resources/design/footer.jsp" %>
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      <% List<String> recordIncreaseForms=(List<String>)request.getAttribute("recordIncreaseForms");%>
+      function drawChart() {
+          var numberAtDates = google.visualization.arrayToDataTable([
+          ['Месяц', 'Всего студентов'],
+          <% String date;
+          int i;
+          int studentsCount=0;
+          for(i=4; i<5;i++)
+          for(int j=1; (j<31&&i==3)||(j<7&&i==4); j++){ 
+        	  if(j<10){
+          		date="2013-0"+i+"-0"+j;
+        	  }
+          	else{
+          		date="2013-0"+i+"-"+j;
+          		}%>
+          ['<%=date%>',
+          <%for(String record:recordIncreaseForms){
+          		if(date.equals(record)) studentsCount++; 
+          	}%>
+          <%=studentsCount %>]
+          <%if((j<31&&i==3)||(j<6&&i==4)){%>,<%}}%>
+        ]);
+        
+        var options = {
+                title: 'График увеличения записи студентов',
+                hAxis: {title: 'Дни',  titleTextStyle: {color: 'red'}},
+                vAxis: {format:'#', maxValue:10}
+              };
 
-<br><br><br><br>
-<%@ include file="/resources/design/footer.jsp" %>
-
- 
+ 		var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(numberAtDates, options);
+      }
+</script>

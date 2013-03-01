@@ -7,6 +7,10 @@ import org.hibernate.transform.ResultTransformer;
 
 import com.ncteam.iviewer.domain.FormInformation;
 
+/*
+ * This class is used to transform results of a query to objects of the FormInformation class.
+ * The class is used in the FormDAO class.
+ */
 public class FormInformationTransformer implements ResultTransformer {
 
 	@Override

@@ -33,7 +33,31 @@
 <a href="graphic_pr_report"><font size="5" color="#0000FF">Графический отчёт эффективности видов рекламы</font></a>
 <br><br>
 
+ <div id="chart_div" style="width: 600px; height: 500px;"></div>
+ 
 <br><br><br><br>
 <%@ include file="/resources/design/footer.jsp" %>
 
- 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+<%byte[] cameDoesntCameStudents=(byte[])request.getAttribute("cameDoesntCameStudents");%>
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Вид', 'Количество'],
+          ['Запланировано',  20],
+          ['Зарегистрировано',  <%=cameDoesntCameStudents[0]+cameDoesntCameStudents[1]%>],
+          ['Пришло',  <%=cameDoesntCameStudents[1]%>],
+          ['Не пришло',  <%=cameDoesntCameStudents[0]%>]
+        ]);
+
+        var options = {
+          title: 'Графический общий отчёт по анкетам',
+          hAxis: {title: 'Вид', titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+</script>

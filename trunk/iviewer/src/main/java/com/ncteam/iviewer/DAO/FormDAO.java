@@ -63,6 +63,11 @@ public class FormDAO extends TablesDAOImpl {
 		return universities;
 	}
 	
+	/*
+	 * The method picks some fields from Form, Users and Universities tables.
+	 * 
+	 * @return The list of FormInformation class. Uses FormInformationTransformer class to achieve this.
+	 */
 	public List<FormInformation> getFormsInformation(){
 		Session sess=sessionFactory.openSession();
 		Query query=sess.createQuery("SELECT u.first_name, u.surname, u.last_name," +
@@ -86,6 +91,11 @@ public class FormDAO extends TablesDAOImpl {
 		return result;
 	}
 	
+	/*
+	 * The method picks some fields from Form and Users tables, but less than the getFormsInformation() method.
+	 * 
+	 * @return The list, every element of which contains information about one candidate. 
+	 */
 	public List<String[]> getShortFormInformation(){
 		Session sess=sessionFactory.openSession();
 		Query query=sess.createQuery("SELECT  u.surname, u.first_name, u.last_name," +
@@ -163,6 +173,74 @@ public class FormDAO extends TablesDAOImpl {
 		sess.getTransaction().begin();
 		try{
 			result =(List<String>) query.list();
+			sess.getTransaction().commit();
+			sess.close();
+		}
+		catch(Exception e){
+			sess.getTransaction().rollback();
+			sess.close();
+		}
+		return result;
+	}
+	
+	/*
+	 * Элемент [0] возвращаемого массива - количество студентов, которые не пришли на собеседование
+	 * Элемент [1] возвращаемого массива - количество студентов, которые пришли на собеседование
+	 */
+	public byte[] getCameDoesntCameStudents(){
+
+		Session sess=sessionFactory.openSession();
+		Query query=sess.createQuery("SELECT count(*)" +
+				"FROM Form where visit_status=:visit_status");
+		byte[] result=new byte[2];
+		sess.getTransaction().begin();
+		try{
+			result[0] =((Long) query.setInteger("visit_status", 0).uniqueResult()).byteValue();
+			result[1]=((Long) query.setInteger("visit_status", 1).uniqueResult()).byteValue();
+			sess.getTransaction().commit();
+			sess.close();
+		}
+		catch(Exception e){
+			sess.getTransaction().rollback();
+			sess.close();
+		}
+		return result;
+	}
+	
+	/*
+	 * @return The hastable's key is the advertisement name, 
+	 * the value is the number of candidates, that has chosen this type of advertisement.
+	 */
+	public Hashtable<String, Integer> getAdvertisementEfficiency(){
+		
+		Session sess=sessionFactory.openSession();
+		Query query=sess.createQuery("SELECT s.source_name, count(*)" +
+				"FROM Form f RIGHT OUTER JOIN f.source s " +
+				"GROUP BY s.source_name");
+		Hashtable<String, Integer> result=new Hashtable<String, Integer>();
+		sess.getTransaction().begin();
+		try{
+			List<Object[]> temp= query.list();
+			for(Object[] o:temp){
+				result.put((String)o[0], ((Long)o[1]).intValue());
+			}
+			sess.getTransaction().commit();
+			sess.close();
+		}
+		catch(Exception e){
+			sess.getTransaction().rollback();
+			sess.close();
+		}
+		return result;
+	}
+	
+	public List<String> getAllAdvertisementNames(){
+		String query="SELECT source_name FROM Source";
+		Session sess=sessionFactory.openSession();
+		List<String> result=null;
+		sess.getTransaction().begin();
+		try{
+			result = (List<String>) sess.createQuery(query).list();
 			sess.getTransaction().commit();
 			sess.close();
 		}

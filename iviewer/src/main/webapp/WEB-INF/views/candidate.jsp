@@ -8,6 +8,7 @@
 <title>Личный кабинет</title>
 <%@include file="/resources/design/header.jsp" %>
 </head>
+
 <body>
  <style>
    a { 
@@ -15,11 +16,15 @@
    } 
   </style>
 
-<a href="candidate_form"><font size="3" color="000000">Заполнение анкеты </font></a>
+<a href="form"><font size="3" color="000000">Заполнить анкету</font></a>
 <br><br>
-<a href="choose_interview"><font size="3" color="000000">Выбрать собеседование </font></a>
+<a href="hr_reports"><font size="3" color="000000">Выбрать собеседование</font></a>
 <br><br>
 <a href="index"><font size="3" color="000000">На главную</font></a>
+
+<%@ include file="/resources/design/center.jsp" %>
+
+Приветствуем, <%=session.getAttribute("first_name") %>.
 
 <%@ include file="/resources/design/center.jsp" %>
 

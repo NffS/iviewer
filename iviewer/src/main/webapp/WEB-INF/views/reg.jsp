@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
-         pageEncoding="utf8"%>
+<%@ page language="java" contentType="text/html; charset=utf8" pageEncoding="utf8"%>
 <%@include file="/resources/design/header.jsp" %>
 
 <a href="index"><font size="3" color="000000">На главную</font></a>
@@ -27,7 +26,6 @@
     		<td><input class="input-large" type="password" style="height:30px" name="password" pattern="[A-Za-z0-9]+"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${passwordMessage }</font></td>
 		</tr>
 		<tr>
-		<br>
 			<td colspan="2" align="center"><input type="submit" style="height:30px; width:100px; font-size: 15px" value="Регистрация"></td>
 </table>
 </form:form>

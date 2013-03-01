@@ -45,4 +45,16 @@ public class FormService extends TablesServiceImpl {
 	public List<String> getCandidatesRegistrationDates(){
 		return formDAO.getCandidatesRegistrationDates();
 	}
+	
+	public byte[] getCameDoesntCameStudents(){
+		return formDAO.getCameDoesntCameStudents();
+	}
+	
+	public Hashtable<String, Integer> getAdvertisementEfficiency(){
+		return formDAO.getAdvertisementEfficiency();
+	}
+	
+	public List<String> getAllAdvertisementNames(){
+		return formDAO.getAllAdvertisementNames();
+	}
 }

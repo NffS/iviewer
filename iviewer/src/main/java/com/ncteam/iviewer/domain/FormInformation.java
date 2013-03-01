@@ -1,5 +1,9 @@
 package com.ncteam.iviewer.domain;
 
+/*
+ * This class is used to get not full information about candidate not from only Form table,
+ * but from Users and Universities tables too. The class is used in the FormDAO class.
+ */
 public class FormInformation implements Comparable<FormInformation> {
 
 	private String first_name;

@@ -4,18 +4,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.ncteam.iviewer.domain.User;
-import com.ncteam.iviewer.service.UserServiceImpl;
+import com.ncteam.iviewer.service.Impl.UserServiceImpl;
 
 @Controller
 public class LoginAndLogoutController {
 
-	
-	private UserServiceImpl userService=new UserServiceImpl();
+	@Autowired
+	private UserServiceImpl userService;
 	
 	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
 	public String checkUserLogin(@ModelAttribute("user") User user, Map<String, Object> map,

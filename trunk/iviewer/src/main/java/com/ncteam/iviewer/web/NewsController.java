@@ -6,7 +6,8 @@ import com.ncteam.iviewer.domain.News;
 import com.ncteam.iviewer.domain.User;
 
 
-import com.ncteam.iviewer.service.TablesService;
+import com.ncteam.iviewer.service.Impl.NewsServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class NewsController {
 
     @Autowired
-    private TablesService tablesService;
+    private NewsServiceImpl tablesService;
 
     @RequestMapping(value = "/index_{news_id}")
     public String getNewsById(Model model,

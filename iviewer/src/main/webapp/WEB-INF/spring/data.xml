@@ -10,7 +10,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
 <!-- Настраивает управление транзакциями с помощью аннотации @Transactional -->
 
-<tx:annotation-driven transaction-manager="transactionManager"/>
+<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
 <!-- Менеджер транзакций -->
 
@@ -55,5 +55,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
          </list>
     </property>
   </bean>
+  
+
+
 
 </beans>

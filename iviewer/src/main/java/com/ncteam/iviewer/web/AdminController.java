@@ -1,9 +1,12 @@
 package com.ncteam.iviewer.web;
 
 
+import com.ncteam.iviewer.DAO.Impl.UserDAOImpl;
 import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.domain.Users_type;
 import com.ncteam.iviewer.service.TablesService;
+import com.ncteam.iviewer.service.Impl.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +29,7 @@ import java.util.Map;
 public class AdminController {
 
     @Autowired
-    private TablesService tablesService;
+    private UserServiceImpl tablesService;
 
     @RequestMapping("/admin")
     public String showAdmin(Map<String, Object> map, HttpSession session) {

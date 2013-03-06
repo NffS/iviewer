@@ -4,18 +4,20 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ncteam.iviewer.domain.Faculty;
 import com.ncteam.iviewer.domain.University;
-import com.ncteam.iviewer.service.FormService;
 import com.ncteam.iviewer.service.ValidationService;
+import com.ncteam.iviewer.service.Impl.FormServiceImpl;
 
 @Controller
 public class ReportsController {
 	
-	 private FormService formService=new FormService();
+	@Autowired
+	 private FormServiceImpl formService;
 	 private ValidationService validator=new ValidationService();
 	
 	 

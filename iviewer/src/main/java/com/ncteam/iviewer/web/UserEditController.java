@@ -1,7 +1,8 @@
 package com.ncteam.iviewer.web;
 
 import com.ncteam.iviewer.domain.User;
-import com.ncteam.iviewer.service.TablesService;
+import com.ncteam.iviewer.service.Impl.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,7 +24,7 @@ import java.util.regex.Pattern;
 public class UserEditController {
 
     @Autowired
-    private TablesService tablesService;
+    private UserServiceImpl tablesService;
 
     @RequestMapping("/user_edit")
     public String userEdit(Map<String, Object> map, HttpSession session) {

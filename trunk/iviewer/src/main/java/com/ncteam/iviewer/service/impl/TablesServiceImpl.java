@@ -1,8 +1,8 @@
-package com.ncteam.iviewer.service.Impl;
+package com.ncteam.iviewer.service.impl;
 
 import java.util.List;
 
-import com.ncteam.iviewer.DAO.Impl.TablesDAOImpl;
+import com.ncteam.iviewer.DAO.impl.TablesDAOImpl;
 import com.ncteam.iviewer.service.TablesService;
 
 

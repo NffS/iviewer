@@ -1,11 +1,11 @@
 package com.ncteam.iviewer.web;
 
 
-import com.ncteam.iviewer.DAO.Impl.UserDAOImpl;
+import com.ncteam.iviewer.DAO.impl.UserDAOImpl;
 import com.ncteam.iviewer.domain.User;
-import com.ncteam.iviewer.domain.Users_type;
+import com.ncteam.iviewer.domain.UsersType;
 import com.ncteam.iviewer.service.TablesService;
-import com.ncteam.iviewer.service.Impl.UserServiceImpl;
+import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +36,7 @@ public class AdminController {
         if(((Integer)session.getAttribute("user_type_id")).equals(1)){
 
             List<User> users=tablesService.getAllRecords(User.class);
-            List<Users_type> users_types=tablesService.getAllRecords(Users_type.class);
+            List<UsersType> users_types=tablesService.getAllRecords(UsersType.class);
 
             map.put("users_types", users_types);
             map.put("users", users);

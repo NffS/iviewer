@@ -14,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="HR_mark")
-public class HR_mark implements Serializable{
+public class HRMark implements Serializable{
 	
 	@Id
 	@GeneratedValue(generator="increment")

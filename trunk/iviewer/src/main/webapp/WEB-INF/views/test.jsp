@@ -53,8 +53,9 @@ if(request.getAttribute("formList")!=null){
 <br>
 <br>
 <%
-if(request.getAttribute("HR_markList")!=null){
-	List<HR_mark> HR_marks=(List<HR_mark>)request.getAttribute("HR_markList");%>
+	if(request.getAttribute("HR_markList")!=null){
+	List<HRMark> HR_marks=(List<HRMark>)request.getAttribute("HR_markList");
+%>
 	<h1>==========All HR marks==========</h1>
 	<table class="data">
 	<%for(int i=0; i<HR_marks.size();i++){%>
@@ -88,8 +89,9 @@ if(request.getAttribute("interviewList")!=null){
 <br>
 <br>
 <%
-if(request.getAttribute("users_typeList")!=null){
-	List<Users_type> users_types=(List<Users_type>)request.getAttribute("users_typeList");%>
+	if(request.getAttribute("users_typeList")!=null){
+	List<UsersType> users_types=(List<UsersType>)request.getAttribute("users_typeList");
+%>
 	<h1>==========All user types==========</h1>
 	<table class="data">
 	<%for(int i=0; i<users_types.size();i++){%>

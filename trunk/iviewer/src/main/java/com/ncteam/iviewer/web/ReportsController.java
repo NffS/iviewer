@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ncteam.iviewer.domain.Faculty;
 import com.ncteam.iviewer.domain.University;
 import com.ncteam.iviewer.service.ValidationService;
-import com.ncteam.iviewer.service.Impl.FormServiceImpl;
+import com.ncteam.iviewer.service.impl.FormServiceImpl;
 
 @Controller
 public class ReportsController {

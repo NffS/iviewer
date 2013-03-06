@@ -1,11 +1,11 @@
-package com.ncteam.iviewer.service.Impl;
+package com.ncteam.iviewer.service.impl;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ncteam.iviewer.DAO.Impl.NewsDAOImpl;
+import com.ncteam.iviewer.DAO.impl.NewsDAOImpl;
 
 @Service
 public class NewsServiceImpl extends TablesServiceImpl<NewsDAOImpl> {

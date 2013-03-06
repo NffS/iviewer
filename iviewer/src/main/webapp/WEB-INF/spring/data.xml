@@ -44,11 +44,11 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
       <list>
         <value>com.ncteam.iviewer.domain.User</value> 
         <value>com.ncteam.iviewer.domain.Form</value>   
-        <value>com.ncteam.iviewer.domain.HR_mark</value>
+        <value>com.ncteam.iviewer.domain.HRMark</value>
         <value>com.ncteam.iviewer.domain.Interview</value>
         <value>com.ncteam.iviewer.domain.News</value>
-        <value>com.ncteam.iviewer.domain.Users_type</value>    
-        <value>com.ncteam.iviewer.domain.Tech_mark</value>
+        <value>com.ncteam.iviewer.domain.UsersType</value>    
+        <value>com.ncteam.iviewer.domain.TechMark</value>
         <value>com.ncteam.iviewer.domain.University</value>
         <value>com.ncteam.iviewer.domain.Faculty</value>
         <value>com.ncteam.iviewer.domain.Source</value>

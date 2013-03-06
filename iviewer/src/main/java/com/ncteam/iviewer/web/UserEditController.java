@@ -1,7 +1,7 @@
 package com.ncteam.iviewer.web;
 
 import com.ncteam.iviewer.domain.User;
-import com.ncteam.iviewer.service.Impl.UserServiceImpl;
+import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

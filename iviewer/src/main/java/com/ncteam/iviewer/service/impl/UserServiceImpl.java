@@ -1,11 +1,12 @@
-package com.ncteam.iviewer.service.Impl;
+package com.ncteam.iviewer.service.impl;
 
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ncteam.iviewer.DAO.Impl.UserDAOImpl;
+
+import com.ncteam.iviewer.DAO.impl.UserDAOImpl;
 import com.ncteam.iviewer.domain.User;
 
 @Service

@@ -1,4 +1,4 @@
-package com.ncteam.iviewer.DAO.Impl;
+package com.ncteam.iviewer.DAO.impl;
 
 import org.springframework.stereotype.Repository;
 

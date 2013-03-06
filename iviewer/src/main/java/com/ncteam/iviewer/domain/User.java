@@ -57,15 +57,15 @@ private Form form;
 
 @OneToOne
 @JoinColumn(name="user_id")
-private HR_mark hr_mark;
+private HRMark hr_mark;
 
 @OneToOne
 @JoinColumn(name="user_id")
-private Tech_mark tech_mark;
+private TechMark tech_mark;
 
 @ManyToOne
 @JoinColumn(name="user_type_id", referencedColumnName = "user_type_id", insertable=false, updatable=false)
-private Users_type users_type;
+private UsersType users_type;
 
 
 public void setUser_id(Integer id){
@@ -148,39 +148,39 @@ public void setForm(Form form) {
 	this.form=form;
 }
 
-public Users_type getUsers_type() {
+public UsersType getUsers_type() {
 	return users_type;
 }
 
-public void setUsers_type(Users_type users_type) {
+public void setUsers_type(UsersType users_type) {
 	this.users_type = users_type;
 }
 
-public HR_mark getHR_mark() {
+public HRMark getHR_mark() {
 	return hr_mark;
 }
 
-public void setHR_mark(HR_mark hr_mark) {
+public void setHR_mark(HRMark hr_mark) {
 	this.hr_mark = hr_mark;
 }
 
 
-public HR_mark getHr_mark() {
+public HRMark getHr_mark() {
 	return hr_mark;
 }
 
 
-public void setHr_mark(HR_mark hr_mark) {
+public void setHr_mark(HRMark hr_mark) {
 	this.hr_mark = hr_mark;
 }
 
 
-public Tech_mark getTech_mark() {
+public TechMark getTech_mark() {
 	return tech_mark;
 }
 
 
-public void setTech_mark(Tech_mark tech_mark) {
+public void setTech_mark(TechMark tech_mark) {
 	this.tech_mark = tech_mark;
 }
 

@@ -15,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Users_type")
-public class Users_type implements Serializable{
+public class UsersType implements Serializable{
 
 	
 	@Id

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.service.ValidationService;
-import com.ncteam.iviewer.service.Impl.UserServiceImpl;
+import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 @Controller
 public class HRController {

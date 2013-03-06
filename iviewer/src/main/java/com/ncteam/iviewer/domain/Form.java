@@ -143,11 +143,11 @@ public class Form implements Serializable, Comparable<Form>{
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="hr_mark_id")
-	private HR_mark hr_mark;
+	private HRMark hr_mark;
 	
 	@OneToOne
 	@JoinColumn(name="form_id")
-	private Tech_mark tech_mark;	
+	private TechMark tech_mark;	
 	
 	@ManyToOne
 	@JoinColumn(name="interview_id")
@@ -479,11 +479,11 @@ public class Form implements Serializable, Comparable<Form>{
 		this.interview = interview;
 	}
 	
-	public HR_mark getHR_mark() {
+	public HRMark getHR_mark() {
 		return hr_mark;
 	}
 
-	public void setHR_mark(HR_mark hr_mark) {
+	public void setHR_mark(HRMark hr_mark) {
 		this.hr_mark = hr_mark;
 	}
 
@@ -496,19 +496,19 @@ public class Form implements Serializable, Comparable<Form>{
 		this.user_id = user_id;
 	}
 
-	public HR_mark getHr_mark() {
+	public HRMark getHr_mark() {
 		return hr_mark;
 	}
 
-	public void setHr_mark(HR_mark hr_mark) {
+	public void setHr_mark(HRMark hr_mark) {
 		this.hr_mark = hr_mark;
 	}
 
-	public Tech_mark getTech_mark() {
+	public TechMark getTech_mark() {
 		return tech_mark;
 	}
 
-	public void setTech_mark(Tech_mark tech_mark) {
+	public void setTech_mark(TechMark tech_mark) {
 		this.tech_mark = tech_mark;
 	}
 

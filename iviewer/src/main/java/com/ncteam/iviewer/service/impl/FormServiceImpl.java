@@ -1,4 +1,4 @@
-package com.ncteam.iviewer.service.Impl;
+package com.ncteam.iviewer.service.impl;
 
 import java.util.Collections;
 import java.util.Hashtable;
@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ncteam.iviewer.DAO.Impl.FormDAOImpl;
+import com.ncteam.iviewer.DAO.impl.FormDAOImpl;
 import com.ncteam.iviewer.domain.FormInformation;
 
 @Service

@@ -6,7 +6,7 @@ import com.ncteam.iviewer.domain.News;
 import com.ncteam.iviewer.domain.User;
 
 
-import com.ncteam.iviewer.service.Impl.NewsServiceImpl;
+import com.ncteam.iviewer.service.impl.NewsServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.ncteam.iviewer.domain.User;
-import com.ncteam.iviewer.service.Impl.UserServiceImpl;
+import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 @Controller
 public class LoginAndLogoutController {

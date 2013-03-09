@@ -37,6 +37,9 @@ public class Interview implements Serializable{
 	@Column(name="end_date", updatable=false, insertable=false)
 	private Date end_date;
 	
+	@Column(name="extra_time")
+	private Integer extra_time;
+	
 	@Column(name="seats")
 	private Integer seats;
 		
@@ -99,6 +102,14 @@ public class Interview implements Serializable{
 
 	public void setStringEnd_date(String stringEnd_date) {
 		this.stringEnd_date = stringEnd_date;
+	}
+
+	public Integer getExtra_time() {
+		return extra_time;
+	}
+
+	public void setExtra_time(Integer extra_time) {
+		this.extra_time = extra_time;
 	}
 
 }

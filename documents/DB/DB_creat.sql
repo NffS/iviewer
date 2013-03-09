@@ -48,7 +48,7 @@ CREATE TABLE Users
 		CHECK (last_name = INITCAP(last_name) AND REGEXP_LIKE(last_name,'[a-zA-Zà-ÿÀ-ß]{1,40}$')),
 		foto			VARCHAR2(80),
 		user_type_id	NUMBER(6) REFERENCES Users_type (user_type_id) ON DELETE CASCADE,
-		reg_date		DATE NOT NULL
+		reg_date		DATE
     );
 		
 CREATE TABLE Interview
@@ -56,6 +56,7 @@ CREATE TABLE Interview
 		interview_id	NUMBER(6) NOT NULL PRIMARY KEY,
 		start_date		DATE NOT NULL,
 		end_date		DATE NOT NULL,
+		extra_time		NUMBER(3) NOT NULL,
 		seats	 		NUMBER(3) NOT NULL
 	);
 	
@@ -390,13 +391,15 @@ INSERT INTO Interview VALUES(
 		1,
 		to_date('2013/05/03 16:00:00', 'yyyy/mm/dd hh24:mi:ss'),
 		to_date('2013/05/03 18:00:00', 'yyyy/mm/dd hh24:mi:ss'),
+		30,
 		4
 );
 
 INSERT INTO Interview VALUES(
 		2,
-		to_date('2013/05/03 18:00:00', 'yyyy/mm/dd hh24:mi:ss'),
-		to_date('2013/05/03 20:00:00', 'yyyy/mm/dd hh24:mi:ss'),
+		to_date('2013/05/03 18:30:00', 'yyyy/mm/dd hh24:mi:ss'),
+		to_date('2013/05/03 20:30:00', 'yyyy/mm/dd hh24:mi:ss'),
+		30,
 		4
 );
 

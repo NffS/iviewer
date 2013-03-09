@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.service.ValidationService;
-import com.ncteam.iviewer.service.impl.UserServiceImpl;
+import com.ncteam.iviewer.service.impl.InterviewServiceImpl;
 
 @Controller
 public class HRController {
 
 	 
 	 @Autowired
-	 private UserServiceImpl userService;
+	 private InterviewServiceImpl interviewService;
 	 private ValidationService validator=new ValidationService();
 	
 	@RequestMapping(value="/hr")
@@ -30,8 +30,7 @@ public class HRController {
 			return "redirect:/index";
 		}
 		
-		List<Interview> interviews=userService.getAllRecords(Interview.class);		
-		map.put("interviews",interviews);
+		map.put("interviews",interviewService.getAllRecords(Interview.class));
 		return "hr";
 	}
 	
@@ -42,7 +41,7 @@ public class HRController {
 		if(!validator.isUserHR(session)){
 			return "redirect:/index";
 		}
-		
+				
 		String updateStartDateString=((String)request.getParameter("date"))
 				.concat(" "+(String)request.getParameter("startTime"));
 		
@@ -55,13 +54,26 @@ public class HRController {
 			if(validator.isInterviewStartEarlierThanEnd((String)request.getParameter("startTime"),
 					(String)request.getParameter("endTime"))){
 				
-		Interview redactedInterview=userService.getRecordById(interview_id, Interview.class);
+		Interview redactedInterview=interviewService.getRecordById(interview_id, Interview.class);
+		
+		
+			
 		
 		redactedInterview.setStringStart_date(updateStartDateString);
 		redactedInterview.setStringEnd_date(updateEndDateString);
+		redactedInterview.setExtra_time(Integer.parseInt((String)request.getParameter("extraTime")));
 		redactedInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
 		
-		userService.updateRecord(redactedInterview);
+		String errorMessage=validator.checkInterviewsIntersection(redactedInterview,
+				interviewService.getAllRecords(Interview.class), false);
+		
+		if(errorMessage!=null){
+			map.put("erroMessage",errorMessage);
+			map.put("interviews",interviewService.getAllRecords(Interview.class));
+			return "hr";
+		}
+		
+		interviewService.updateRecord(redactedInterview);
 		}
 		else{
 			map.put("erroMessage", "Конец собеседования не может быть раньше его начала или совпадать с ним.");
@@ -71,7 +83,7 @@ public class HRController {
 		map.put("erroMessage","Введённые данные не соответствуют шаблону.");
 	}
 
-		map.put("interviews",userService.getAllRecords(Interview.class));
+		map.put("interviews",interviewService.getAllRecords(Interview.class));
 		return "hr";
 	}
 	
@@ -84,25 +96,35 @@ public class HRController {
 			return "redirect:/index";
 		}
 					
-		String newStartDateString=((String)request.getParameter("date"))
-				.concat(" "+(String)request.getParameter("startTime"));
+		String newStartDateString=((String)request.getParameter("newDate"))
+				.concat(" "+(String)request.getParameter("newStartTime"));
 		
-		String newEndDateString=((String)request.getParameter("date"))
-				.concat(" "+(String)request.getParameter("endTime"));
+		String newEndDateString=((String)request.getParameter("newDate"))
+				.concat(" "+(String)request.getParameter("newEndTime"));
 		
 		if(validator.isInterviewDateStringValid(newStartDateString)
 				&&validator.isInterviewDateStringValid(newEndDateString))
 		{
-			if(validator.isInterviewStartEarlierThanEnd((String)request.getParameter("startTime"),
-					(String)request.getParameter("endTime"))){
+			if(validator.isInterviewStartEarlierThanEnd((String)request.getParameter("newStartTime"),
+					(String)request.getParameter("newEndTime"))){
 				
 		Interview newInterview=new Interview();
 		
 		newInterview.setStringEnd_date(newEndDateString);
 		newInterview.setStringStart_date(newStartDateString);
-		newInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
+		newInterview.setExtra_time(Integer.parseInt((String)request.getParameter("newExtraTime")));
+		newInterview.setSeats(Integer.parseInt((String)request.getParameter("newSeats")));
 		
-		userService.addRecord(newInterview);
+		String errorMessage=validator.checkInterviewsIntersection(newInterview,
+				interviewService.getAllRecords(Interview.class), true);
+		
+		if(errorMessage!=null){
+			map.put("erroMessage",errorMessage);
+			map.put("interviews",interviewService.getAllRecords(Interview.class));
+			return "hr";
+		}
+		
+		interviewService.addRecord(newInterview);
 		}
 			else{
 				map.put("erroMessage", "Конец собеседования не может быть раньше его начала или совпадать с ним.");
@@ -113,7 +135,7 @@ public class HRController {
 		}
 		
 		
-		List<Interview> interviews=userService.getAllRecords(Interview.class);		
+		List<Interview> interviews=interviewService.getAllRecords(Interview.class);		
 		map.put("interviews",interviews);
 		return "hr";
 	}
@@ -125,9 +147,9 @@ public class HRController {
 		if(!validator.isUserHR(session)){
 			return "redirect:/index";
 		}
-			userService.deleteRecord(userService.getRecordById(interview_id, Interview.class));
+		interviewService.deleteRecord(interviewService.getRecordById(interview_id, Interview.class));
 		
-		map.put("interviews",userService.getAllRecords(Interview.class));
+		map.put("interviews",interviewService.getAllRecords(Interview.class));
 		return "hr";
 	}
 

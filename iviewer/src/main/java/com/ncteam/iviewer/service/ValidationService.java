@@ -1,6 +1,10 @@
 package com.ncteam.iviewer.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
+import com.ncteam.iviewer.domain.Interview;
 
 public class ValidationService {
 	
@@ -89,5 +93,37 @@ public class ValidationService {
 		else{
 			return true;
 		}
+	}
+	
+	public String checkInterviewsIntersection(Interview checkedInterview, List<Interview> allInterviews,
+			boolean isCreating){
+				
+		long startTime=convertDateStringToItsLongValue(checkedInterview.getStringStart_date());
+		
+		long endTimePlusExtraTime=convertDateStringToItsLongValue(checkedInterview.getStringEnd_date())
+				+checkedInterview.getExtra_time()*60000;
+		
+		
+		for(Interview interview:allInterviews){
+			if(endTimePlusExtraTime>convertDateStringToItsLongValue(interview.getStringStart_date())
+					
+					&&startTime<convertDateStringToItsLongValue(interview.getStringEnd_date())){
+				if(!isCreating&&checkedInterview.getInterview_id().equals(interview.getInterview_id()))
+					continue;
+				
+				return "Невозможно отредактировать или создать интервью:\n" +
+						"Такое интервью пересекается с другим по времени.";
+			}
+		}
+		return null;
+	}
+	
+	private long convertDateStringToItsLongValue(String dateString){
+		int year=Integer.parseInt(dateString.split(" ")[0].substring(0, 4));
+		int month=Integer.parseInt(dateString.split(" ")[0].substring(5, 7));
+		int day=Integer.parseInt(dateString.split(" ")[0].substring(8, 10));
+		int hour=Integer.parseInt(dateString.split(" ")[1].substring(0, 2));
+		int minute=Integer.parseInt(dateString.split(" ")[1].substring(3, 5));
+		return new java.sql.Timestamp(year,month,day,hour,minute,0,0).getTime();
 	}
 }

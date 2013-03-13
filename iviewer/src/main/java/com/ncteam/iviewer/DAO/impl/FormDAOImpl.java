@@ -58,7 +58,8 @@ public class FormDAOImpl extends TablesDAOImpl {
 	public List<FormInformation> getFormsInformation(){
 		Session sess=sessionFactory.openSession();
 		Query query=sess.createQuery("SELECT u.first_name, u.surname, u.last_name," +
-				"to_char(i.start_date,'yyyy-mm-dd HH24:mi'), f.status, f.form_id, un.university_name" +
+				"to_char(i.start_date,'yyyy-mm-dd HH24:mi'), f.status, f.visit_status," +
+				" f.form_id, un.university_name" +
 				"  FROM Form f, User u, Interview i, University un " +
 				"where f.user_id=u.user_id " +
 				"and f.interview_id=i.interview_id " +
@@ -72,7 +73,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	}
 	
 	/*
-	 * The method picks some fields from Form and Users tables, but less than the getFormsInformation() method.
+	 * Picks some fields from Form and Users tables, but less than the getFormsInformation() method.
 	 * 
 	 * @return The list, every element of which contains information about one candidate. 
 	 */

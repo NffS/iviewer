@@ -27,7 +27,6 @@
 								<li><a href="index"><p>Главная</p></a></li>
 								<li><a href="index_1"><p>О компании</p></a></li>
 								<li><a href="index_2"><p>Контакты</p></a></li>
-								<li><a href="testdb"><p>testDB</p></a></li>
 							</ul>
 						</div>
 						<%if((Integer)session.getAttribute("user_type_id")==null){	%>

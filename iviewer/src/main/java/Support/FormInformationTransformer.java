@@ -26,8 +26,8 @@ public class FormInformationTransformer implements ResultTransformer {
 	public Object transformTuple(Object[] columns, String[] aliases) {
 	
 		return new FormInformation((String)columns[0],(String)columns[1],(String)columns[2],
-				(String)columns[3],(Integer)columns[4],(Integer)columns[5],
-				(String)columns[6]);
+				(String)columns[3],(Integer)columns[4],(Integer) columns[5], (Integer)columns[6],
+				(String)columns[7]);
 	}
 
 }

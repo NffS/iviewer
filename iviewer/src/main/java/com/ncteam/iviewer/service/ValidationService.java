@@ -95,6 +95,15 @@ public class ValidationService {
 		}
 	}
 	
+	/*
+	 * Checks, if the interview and its extra time intersects with any other interview. Uses long values
+	 * of dates to compare them.
+	 * 
+	 * @param checkedInterview Interview to check.
+	 * @param allInterviews List of all available interviews.
+	 * @isCreating Shows, if the interview is creating or updating.
+	 * @return If interview doesn't intersect other interviews, returns null. Otherwise returns the error message.
+	 */
 	public String checkInterviewsIntersection(Interview checkedInterview, List<Interview> allInterviews,
 			boolean isCreating){
 				
@@ -118,12 +127,19 @@ public class ValidationService {
 		return null;
 	}
 	
+	/*
+	 * Converts date string of a certain format to its long value.
+	 * 
+	 * @param dateString A string representing a date in format "yyyy-mm-dd hh:mi".
+	 */
 	private long convertDateStringToItsLongValue(String dateString){
+		
 		int year=Integer.parseInt(dateString.split(" ")[0].substring(0, 4));
 		int month=Integer.parseInt(dateString.split(" ")[0].substring(5, 7));
 		int day=Integer.parseInt(dateString.split(" ")[0].substring(8, 10));
 		int hour=Integer.parseInt(dateString.split(" ")[1].substring(0, 2));
 		int minute=Integer.parseInt(dateString.split(" ")[1].substring(3, 5));
+		
 		return new java.sql.Timestamp(year,month,day,hour,minute,0,0).getTime();
 	}
 }

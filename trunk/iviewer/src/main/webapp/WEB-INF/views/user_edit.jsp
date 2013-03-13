@@ -5,13 +5,14 @@
   Time: 14:30
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 
 
 <%@include file="/resources/design/header.jsp" %>
 
-<li>текст левого блока</li>
-
+<%if(((Integer)session.getAttribute("user_type_id")).equals(new Integer(2))){ %>
+<%@include file="/resources/design/hr_left_part.jsp" %>
+<%} %>
 <%@ include file="/resources/design/center.jsp" %>
 <center>
     <%User usr= (User) request.getAttribute("user");%>

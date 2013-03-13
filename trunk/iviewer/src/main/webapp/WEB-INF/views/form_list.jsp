@@ -5,16 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@include file="/resources/design/header.jsp" %>
-<style>
-   a { 
-    text-decoration: none;
-   } 
-</style>
-<a href="hr"><font size="3" color="000000">Просмотр собеседований</font></a>
-<br><br>
-<a href="hr_reports"><font size="3" color="000000">Управление отчётами </font></a>
-<br><br>
-<a href="index"><font size="3" color="000000">На главную</font></a>
+<%if(((Integer)session.getAttribute("user_type_id")).equals(new Integer(2))){ %>
+<%@include file="/resources/design/hr_left_part.jsp" %>
+<%} %>
 <%@ include file="/resources/design/center.jsp" %>
 
 <table>

@@ -11,16 +11,18 @@ public class FormInformation implements Comparable<FormInformation> {
 	private String last_name;
 	private String start_date;
 	private Integer status;
+	private Integer visit_status;
 	private Integer form_id;
 	private String university_name;
 	
 	public FormInformation(String first_name, String surname, String last_name,
-			String start_date, Integer status, Integer form_id, String university_name){
+			String start_date, Integer status, Integer visit_status, Integer form_id, String university_name){
 		this.first_name=first_name;
 		this.surname=surname;
 		this.last_name=last_name;
 		this.start_date=start_date;
 		this.status=status;
+		this.visit_status=visit_status;
 		this.form_id=form_id;
 		this.university_name=university_name;
 	}
@@ -72,5 +74,13 @@ public class FormInformation implements Comparable<FormInformation> {
 	@Override
 	public int compareTo(FormInformation comparedFormInformation) {
 		return this.surname.compareTo(comparedFormInformation.surname);
+	}
+
+	public Integer getVisit_status() {
+		return visit_status;
+	}
+
+	public void setVisit_status(Integer visit_status) {
+		this.visit_status = visit_status;
 	}
 }

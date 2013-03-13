@@ -46,7 +46,7 @@
         <tr ALIGN=center height=40>
             <td>${users.user_id}</td> <td width=300>${users.surname}  ${users.first_name} ${users.last_name}</td>
             <td>${users.email}</td> <td>${users.user_type_id}</td>
-            <td><input type="button" class="btn btn-primary" value="Редактировать" onclick="javascript:document.location='/user_edit_${users.user_id}'"></td>
+            <td><input type="button" class="btn btn-primary" value="Редактировать" onclick="javascript:document.location='/iviewer/user_edit_${users.user_id}'"></td>
         </tr>
     </c:forEach>
     </tbody>

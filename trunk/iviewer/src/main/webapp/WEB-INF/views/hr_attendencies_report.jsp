@@ -21,9 +21,10 @@ int doesntCameCount=0;%>
 		<th  width=300>ФИО</th> <th width=100>Посещение</th>
 	</tr>
 	<c:forEach var="form" items ="${attendances }">
+	<%i++; %>
 	<tr height=40 align="center">
 		<td>${form[0]}  ${form[1]} ${form[2]}</td>	
-		<td><%if(forms.get(i+1)[3].equals("1")){cameCount++; %>+<%}else{doesntCameCount++; %>-<%} %></td>
+		<td><%if(forms.get(i)[3].equals("1")){cameCount++; %>+<%}else{doesntCameCount++; %>-<%} %></td>
 	</tr>
 	</c:forEach>
 </table>

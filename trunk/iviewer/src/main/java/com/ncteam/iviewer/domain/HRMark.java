@@ -22,10 +22,10 @@ public class HRMark implements Serializable{
 	@Column(name="hr_mark_id")
 	private Integer hr_mark_id;
 	
-	@Column(name="user_id")
+	@Column(name="user_id", insertable=false, updatable=false)
 	private Integer user_id;
 	
-	@Column(name="form_id")
+	@Column(name="form_id", insertable=false, updatable=false)
 	private Integer form_id;
 	
 	@Column(name="motivation")
@@ -39,20 +39,20 @@ public class HRMark implements Serializable{
 		
 	
 	@OneToOne
-	@JoinColumn(name="user_id", referencedColumnName = "user_id", insertable=false, updatable=false)
+	@JoinColumn(name="user_id")
 	private User user;
 	
 	@OneToOne
-    @JoinColumn(name="form_id", referencedColumnName = "form_id", insertable=false, updatable=false)
+    @JoinColumn(name="form_id")
     private Form Form;
 	
 
 	
-	public Integer getHR_mark_id() {
+	public Integer getHr_mark_id() {
 		return hr_mark_id;
 	}
 	
-	public void setHR_mark_id(Integer hr_mark_id) {
+	public void setHr_mark_id(Integer hr_mark_id) {
 		this.hr_mark_id = hr_mark_id;
 	}
 			

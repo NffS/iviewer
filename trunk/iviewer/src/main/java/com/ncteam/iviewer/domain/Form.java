@@ -141,7 +141,7 @@ public class Form implements Serializable, Comparable<Form>{
 	@JoinColumn(name="user_id")
     private User user;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="hr_mark_id")
 	private HRMark hr_mark;
 	
@@ -478,15 +478,6 @@ public class Form implements Serializable, Comparable<Form>{
 	public void setInterview(Interview interview) {
 		this.interview = interview;
 	}
-	
-	public HRMark getHR_mark() {
-		return hr_mark;
-	}
-
-	public void setHR_mark(HRMark hr_mark) {
-		this.hr_mark = hr_mark;
-	}
-
 
 	public Integer getUser_id() {
 		return user_id;

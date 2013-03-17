@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import Support.FormInformationTransformer;
 
 import com.ncteam.iviewer.domain.FormInformation;
+import com.ncteam.iviewer.domain.HRMark;
 
 @Repository
 public class FormDAOImpl extends TablesDAOImpl {
@@ -31,7 +32,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	public List<String> getAllInterviewsDates(){
 		
 		String query="SELECT to_char(start_date, :format) FROM Interview";
-		Session sess=sessionFactory.openSession();
+		Session sess=sessionFactory.getCurrentSession();
 		List<String> interviewsDates=null;
 
 			interviewsDates = (List<String>) sess.createQuery(query).setString("format", "yyyy-mm-dd hh24:mi")
@@ -40,26 +41,16 @@ public class FormDAOImpl extends TablesDAOImpl {
 		return interviewsDates;
 	}
 	
-	public List<String> getAllUniversityNames(){
-		String query="SELECT university_name FROM University";
-		Session sess=sessionFactory.openSession();
-		List<String> universities=null;
-
-			universities = (List<String>) sess.createQuery(query).list();
-
-		return universities;
-	}
-	
 	/*
 	 * The method picks some fields from Form, Users and Universities tables.
 	 * 
 	 * @return The list of FormInformation class. Uses FormInformationTransformer class to achieve this.
 	 */
 	public List<FormInformation> getFormsInformation(){
-		Session sess=sessionFactory.openSession();
+		Session sess=sessionFactory.getCurrentSession();
 		Query query=sess.createQuery("SELECT u.first_name, u.surname, u.last_name," +
 				"to_char(i.start_date,'yyyy-mm-dd HH24:mi'), f.status, f.visit_status," +
-				" f.form_id, un.university_name" +
+				" f.form_id, un.university_name, f.university_id" +
 				"  FROM Form f, User u, Interview i, University un " +
 				"where f.user_id=u.user_id " +
 				"and f.interview_id=i.interview_id " +
@@ -78,7 +69,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	 * @return The list, every element of which contains information about one candidate. 
 	 */
 	public List<String[]> getShortFormInformation(){
-		Session sess=sessionFactory.openSession();
+		Session sess=sessionFactory.getCurrentSession();
 		Query query=sess.createQuery("SELECT  u.surname, u.first_name, u.last_name," +
 				"to_char(f.visit_status) FROM Form f, User u where f.user_id=u.user_id");
 		List<Object[]> queryList=null;
@@ -94,7 +85,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	
 	public Hashtable<String, Long> getStudentsInUniversities(){
 
-		Session sess=sessionFactory.openSession();
+		Session sess=sessionFactory.getCurrentSession();
 		Query query=sess.createQuery("SELECT  u.university_name, count(f.form_id)" +
 				" FROM Form f RIGHT OUTER JOIN f.university u  " +
 				"group by u.university_name");
@@ -109,7 +100,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	}
 	
 	public Hashtable<Integer, Long> getStudentsInFaculties(){
-		Session sess=sessionFactory.openSession();
+		Session sess=sessionFactory.getCurrentSession();
 		Query query=sess.createQuery("SELECT  fa.faculty_id, count(f.form_id) " +
 				" FROM Form f RIGHT OUTER JOIN f.faculty fa  " +
 				"group by fa.faculty_id");
@@ -125,7 +116,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	}
 	
 	public List<String> getCandidatesRegistrationDates(){
-		Session sess=sessionFactory.openSession();
+		Session sess=sessionFactory.getCurrentSession();
 		Query query=sess.createQuery("SELECT  to_char(u.reg_date,'yyyy-mm-dd')" +
 				"FROM Form f, User u where f.user_id=u.user_id");
 		List<String> result=new ArrayList<String>();
@@ -141,7 +132,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	 */
 	public byte[] getCameDoesntCameStudents(){
 
-		Session sess=sessionFactory.openSession();
+		Session sess=sessionFactory.getCurrentSession();
 		Query query=sess.createQuery("SELECT count(*)" +
 				"FROM Form where visit_status=:visit_status");
 		byte[] result=new byte[2];
@@ -158,7 +149,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	 */
 	public Hashtable<String, Integer> getAdvertisementEfficiency(){
 		
-		Session sess=sessionFactory.openSession();
+		Session sess=sessionFactory.getCurrentSession();
 		Query query=sess.createQuery("SELECT s.source_name, count(*)" +
 				"FROM Form f RIGHT OUTER JOIN f.source s " +
 				"GROUP BY s.source_name");
@@ -173,11 +164,17 @@ public class FormDAOImpl extends TablesDAOImpl {
 	
 	public List<String> getAllAdvertisementNames(){
 		String query="SELECT source_name FROM Source";
-		Session sess=sessionFactory.openSession();
+		Session sess=sessionFactory.getCurrentSession();
 		List<String> result=null;
 		
 			result = (List<String>) sess.createQuery(query).list();
 			
 		return result;
+	}
+	
+	public HRMark getHRMarkByFormId(int id){
+		String query="FROM HRMark where form_id=:id";
+		Session sess=sessionFactory.getCurrentSession();
+		return (HRMark)sess.createQuery(query).setInteger("id", id).uniqueResult();
 	}
 }

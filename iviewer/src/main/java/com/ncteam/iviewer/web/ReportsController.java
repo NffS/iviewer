@@ -1,7 +1,5 @@
 package com.ncteam.iviewer.web;
 
-import java.awt.Color;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -21,12 +19,10 @@ import com.ncteam.iviewer.service.ValidationService;
 import com.ncteam.iviewer.service.impl.FormServiceImpl;
 
 import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
@@ -167,7 +163,7 @@ public class ReportsController {
 	    	if(forms.get(i).getVisit_status().equals(new Integer(0)))
 	    		comeStatusCell=new PdfPCell(new Phrase("Не пришёл",new Font(times,14)));
 	    	else
-	    		comeStatusCell=new PdfPCell(new Phrase("Не пришёл",new Font(times,14)));
+	    		comeStatusCell=new PdfPCell(new Phrase("Пришёл",new Font(times,14)));
 	    	comeStatusCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 	    	table.addCell(comeStatusCell);
 	    }

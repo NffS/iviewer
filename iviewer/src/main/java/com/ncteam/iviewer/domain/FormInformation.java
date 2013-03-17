@@ -14,9 +14,11 @@ public class FormInformation implements Comparable<FormInformation> {
 	private Integer visit_status;
 	private Integer form_id;
 	private String university_name;
+	private Integer university_id;
 	
 	public FormInformation(String first_name, String surname, String last_name,
-			String start_date, Integer status, Integer visit_status, Integer form_id, String university_name){
+			String start_date, Integer status, Integer visit_status, Integer form_id, 
+			String university_name, Integer university_id){
 		this.first_name=first_name;
 		this.surname=surname;
 		this.last_name=last_name;
@@ -25,6 +27,7 @@ public class FormInformation implements Comparable<FormInformation> {
 		this.visit_status=visit_status;
 		this.form_id=form_id;
 		this.university_name=university_name;
+		this.university_id=university_id;
 	}
 	
 	public String getFirst_name() {
@@ -82,5 +85,13 @@ public class FormInformation implements Comparable<FormInformation> {
 
 	public void setVisit_status(Integer visit_status) {
 		this.visit_status = visit_status;
+	}
+
+	public Integer getUniversity_id() {
+		return university_id;
+	}
+
+	public void setUniversity_id(Integer university_id) {
+		this.university_id = university_id;
 	}
 }

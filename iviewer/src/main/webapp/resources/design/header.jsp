@@ -1,9 +1,5 @@
 ﻿<%@page session="true"%>
 
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@page import="com.ncteam.iviewer.domain.User"%>
-
 <html>
 <head>
     <title>NetCracker</title>

@@ -25,13 +25,15 @@ Hashtable<Integer, Long> studentsInFacultiesTable=(Hashtable<Integer, Long>)requ
 	</tr>
 <%for(University university :universities){%>
 <tr align="center" height=40>
-	<td colspan=2 width=300><%=university.getUniversity_name() %></td> <td><%=studentsInUniversitiesTable.get(university.getUniversity_name()) %></td>
+	<td colspan=2 width=300><%=university.getUniversityName()%></td> <td><%=studentsInUniversitiesTable.get(university.getUniversityName())%></td>
 </tr>
 	<%for(Faculty faculty :faculties){%>
-		<%if(faculty.getUniversity_id().equals(university.getUniversity_id())){%>
+		<%
+			if(faculty.getUniversityId().equals(university.getUniversityId())){
+		%>
 		<tr align="center" height=40>
-		<td width=75/><td><%=faculty.getFaculty_name() %></td> 
-		<td><%=studentsInFacultiesTable.get(faculty.getFaculty_id())%></td>
+		<td width=75/><td><%=faculty.getFacultyName() %></td> 
+		<td><%=studentsInFacultiesTable.get(faculty.getFacultyId())%></td>
 		</tr>
 		<%}
 	}%>

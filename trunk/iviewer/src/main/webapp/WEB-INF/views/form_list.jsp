@@ -30,7 +30,7 @@ List<FormInformation> forms=(List<FormInformation>)request.getAttribute("forms")
 			<select id ="university" onchange="filter('sf')">
 				<option value="-1">Поиск по университету</option>
 				<c:forEach var="university" items="${universities }">
-				 	<option value="${university.university_name }">${university.university_name }</option>
+				 	<option value="${university.universityName }">${university.universityName }</option>
 				</c:forEach>
 			</select>
 		</td>
@@ -49,10 +49,10 @@ List<FormInformation> forms=(List<FormInformation>)request.getAttribute("forms")
 	<c:forEach var="form" items="${forms}">
 	<%k++; %>
 		<tr ALIGN=center height=40>
-			<td><%=k %></td> <td>${form.surname}  ${form.first_name} ${form.last_name}</td>
-			<td>${form.start_date}</td> <td><%if(forms.get(k-1).getStatus().intValue()==1){  %>Да<%}else{ %>Нет<%} %></td> <td><a href="/form.jsp?form_id=${form.form_id}">Просмотр</a></td>
-			<td><a href="hr_mark_${form.form_id}">Оценить</a></td>
-			<td style="display:none;">${form.university_name}</td>
+			<td><%=k %></td> <td>${form.surname}  ${form.firstName} ${form.lastName}</td>
+			<td>${form.startDate}</td> <td><%if(forms.get(k-1).getStatus().intValue()==1){  %>Да<%}else{ %>Нет<%} %></td> <td><a href="/form.jsp?form_id=${form.formId}" target="_blank">Просмотр</a></td>
+			<td><a href="hr_mark_${form.formId}" target="_blank">Оценить</a></td>
+			<td style="display:none;">${form.universityName}</td>
 		</tr>
 	</c:forEach>
 </table>

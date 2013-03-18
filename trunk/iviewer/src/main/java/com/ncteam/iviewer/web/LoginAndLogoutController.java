@@ -43,21 +43,21 @@ public class LoginAndLogoutController {
 					if(resultUser!=null){
 						if(resultUser.getPassword().equals(password)){
 							session.setAttribute("user", resultUser);
-							session.setAttribute("user_id", resultUser.getUser_id());
+							session.setAttribute("user_id", resultUser.getUserId());
 							session.setAttribute("email", resultUser.getEmail());
-							session.setAttribute("first_name", resultUser.getFirst_name());
+							session.setAttribute("first_name", resultUser.getFirstName());
 							session.setAttribute("surname", resultUser.getSurname());
 							session.setAttribute("foto", resultUser.getFoto());
-							session.setAttribute("user_type_id", resultUser.getUser_type_id());
+							session.setAttribute("user_type_id", resultUser.getUserTypeId());
 
-                            switch ((int)resultUser.getUser_type_id()){
+                            switch ((int)resultUser.getUserTypeId()){
                                 case 1: map.put("target","admin"); break;
                                 case 2: map.put("target","hr"); break;
                                 case 3: map.put("target","interview"); break;
                                 case 4: map.put("target","candidate"); break;
                             }
 
-                            map.put("message","Рады снова Вас видеть "+resultUser.getFirst_name());
+                            map.put("message","Рады снова Вас видеть "+resultUser.getFirstName());
                             return "redirect";
 						}
 						else{

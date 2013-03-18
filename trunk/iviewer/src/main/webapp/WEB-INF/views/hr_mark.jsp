@@ -10,20 +10,19 @@
 
 <h1>HR оценка</h1>
 <br><br>
-<h3>${form.user.surname}  ${form.user.first_name} ${form.user.last_name}</h3>
+<h3>${form.user.surname}  ${form.user.firstName} ${form.user.lastName}</h3>
 <br>
 <br>
-<%request.setCharacterEncoding("UTF-8"); %>
 <form action="hr_mark_save">
-	<label><font size=4>Мотивация  (0-100) </font><input class="input-mini" type="text" name="motivation" value="${form.hr_mark.motivation }"></label>
- 	<label><font size=4>Английский (0-100) </font><input class="input-mini" type="text" name="english" value="${form.hr_mark.english }"></label>
+	<label><font size=4>Мотивация  (0-100) </font><input class="input-mini" type="text" name="motivation" value="${form.hrMark.motivation }"></label>
+ 	<label><font size=4>Английский (0-100) </font><input class="input-mini" type="text" name="english" value="${form.hrMark.english }"></label>
  	<br>
  	<label for="general"><font size=4>Общий отзыв</font></label>
-    <textarea class="input-block-level" name="general" id="general" rows="10">${form.hr_mark.general_mark }</textarea>
+    <textarea class="input-block-level" name="general" id="general" rows="10">${form.hrMark.generalMark }</textarea>
     <br>
     <button type="submit" class="btn btn-primary" >Сохранить оценку</button>
-    <input type="hidden" name="form_id" value="${form.form_id }">
-    <input type="hidden" name="hr_mark_id" value="${form.hr_mark.hr_mark_id}">
+    <input type="hidden" name="form_id" value="${form.formId }">
+    <input type="hidden" name="hr_mark_id" value="${form.hrMark.hrMarkId}">
 </form>
 
 <%@ include file="/resources/design/footer.jsp" %>

@@ -48,13 +48,13 @@ public class FormDAOImpl extends TablesDAOImpl {
 	 */
 	public List<FormInformation> getFormsInformation(){
 		Session sess=sessionFactory.getCurrentSession();
-		Query query=sess.createQuery("SELECT u.first_name, u.surname, u.last_name," +
-				"to_char(i.start_date,'yyyy-mm-dd HH24:mi'), f.status, f.visit_status," +
-				" f.form_id, un.university_name, f.university_id" +
+		Query query=sess.createQuery("SELECT u.firstName, u.surname, u.lastName," +
+				"to_char(i.startDate,'yyyy-mm-dd HH24:mi'), f.status, f.visitStatus," +
+				" f.formId, un.universityName, f.universityId" +
 				"  FROM Form f, User u, Interview i, University un " +
-				"where f.user_id=u.user_id " +
-				"and f.interview_id=i.interview_id " +
-				"and f.university_id=un.university_id");
+				"where f.userId=u.userId " +
+				"and f.interviewId=i.interviewId " +
+				"and f.universityId=un.universityId");
 		query.setResultTransformer(new FormInformationTransformer());
 		List<FormInformation> result=null;
 
@@ -70,8 +70,8 @@ public class FormDAOImpl extends TablesDAOImpl {
 	 */
 	public List<String[]> getShortFormInformation(){
 		Session sess=sessionFactory.getCurrentSession();
-		Query query=sess.createQuery("SELECT  u.surname, u.first_name, u.last_name," +
-				"to_char(f.visit_status) FROM Form f, User u where f.user_id=u.user_id");
+		Query query=sess.createQuery("SELECT  u.surname, u.firstName, u.lastName," +
+				"to_char(f.visitStatus) FROM Form f, User u where f.userId=u.userId");
 		List<Object[]> queryList=null;
 		List<String[]> result=new ArrayList<String[]>();
 
@@ -86,9 +86,9 @@ public class FormDAOImpl extends TablesDAOImpl {
 	public Hashtable<String, Long> getStudentsInUniversities(){
 
 		Session sess=sessionFactory.getCurrentSession();
-		Query query=sess.createQuery("SELECT  u.university_name, count(f.form_id)" +
+		Query query=sess.createQuery("SELECT  u.universityName, count(f.formId)" +
 				" FROM Form f RIGHT OUTER JOIN f.university u  " +
-				"group by u.university_name");
+				"group by u.universityName");
 		List<Object[]> queryList=null;
 		Hashtable<String, Long> result=new Hashtable<String, Long>();
 		queryList =(List<Object[]>) query.list();
@@ -101,9 +101,9 @@ public class FormDAOImpl extends TablesDAOImpl {
 	
 	public Hashtable<Integer, Long> getStudentsInFaculties(){
 		Session sess=sessionFactory.getCurrentSession();
-		Query query=sess.createQuery("SELECT  fa.faculty_id, count(f.form_id) " +
+		Query query=sess.createQuery("SELECT  fa.facultyId, count(f.formId) " +
 				" FROM Form f RIGHT OUTER JOIN f.faculty fa  " +
-				"group by fa.faculty_id");
+				"group by fa.facultyId");
 		List<Object[]> queryList=null;
 		Hashtable<Integer, Long> result=new Hashtable<Integer, Long>();
 
@@ -117,8 +117,8 @@ public class FormDAOImpl extends TablesDAOImpl {
 	
 	public List<String> getCandidatesRegistrationDates(){
 		Session sess=sessionFactory.getCurrentSession();
-		Query query=sess.createQuery("SELECT  to_char(u.reg_date,'yyyy-mm-dd')" +
-				"FROM Form f, User u where f.user_id=u.user_id");
+		Query query=sess.createQuery("SELECT  to_char(u.regDate,'yyyy-mm-dd')" +
+				"FROM Form f, User u where f.userId=u.userId");
 		List<String> result=new ArrayList<String>();
 		
 			result =(List<String>) query.list();
@@ -134,7 +134,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 
 		Session sess=sessionFactory.getCurrentSession();
 		Query query=sess.createQuery("SELECT count(*)" +
-				"FROM Form where visit_status=:visit_status");
+				"FROM Form f where f.visitStatus=:visit_status");
 		byte[] result=new byte[2];
 	
 			result[0] =((Long) query.setInteger("visit_status", 0).uniqueResult()).byteValue();
@@ -150,9 +150,9 @@ public class FormDAOImpl extends TablesDAOImpl {
 	public Hashtable<String, Integer> getAdvertisementEfficiency(){
 		
 		Session sess=sessionFactory.getCurrentSession();
-		Query query=sess.createQuery("SELECT s.source_name, count(*)" +
+		Query query=sess.createQuery("SELECT s.sourceName, count(*)" +
 				"FROM Form f RIGHT OUTER JOIN f.source s " +
-				"GROUP BY s.source_name");
+				"GROUP BY s.sourceName");
 		Hashtable<String, Integer> result=new Hashtable<String, Integer>();
 		List<Object[]> temp= query.list();
 			for(Object[] o:temp){
@@ -163,7 +163,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	}
 	
 	public List<String> getAllAdvertisementNames(){
-		String query="SELECT source_name FROM Source";
+		String query="SELECT sourceName FROM Source";
 		Session sess=sessionFactory.getCurrentSession();
 		List<String> result=null;
 		
@@ -173,7 +173,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	}
 	
 	public HRMark getHRMarkByFormId(int id){
-		String query="FROM HRMark where form_id=:id";
+		String query="FROM HRMark h where h.formId=:id";
 		Session sess=sessionFactory.getCurrentSession();
 		return (HRMark)sess.createQuery(query).setInteger("id", id).uniqueResult();
 	}

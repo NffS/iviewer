@@ -20,13 +20,13 @@ public class HRMark implements Serializable{
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
 	@Column(name="hr_mark_id")
-	private Integer hr_mark_id;
+	private Integer hrMarkId;
 	
 	@Column(name="user_id", insertable=false, updatable=false)
-	private Integer user_id;
+	private Integer userId;
 	
 	@Column(name="form_id", insertable=false, updatable=false)
-	private Integer form_id;
+	private Integer formId;
 	
 	@Column(name="motivation")
 	private Integer motivation;
@@ -35,7 +35,7 @@ public class HRMark implements Serializable{
 	private Integer english;
 	
 	@Column(name="general_mark")
-	private String general_mark;
+	private String generalMark;
 		
 	
 	@OneToOne
@@ -45,71 +45,68 @@ public class HRMark implements Serializable{
 	@OneToOne
     @JoinColumn(name="form_id")
     private Form Form;
-	
 
-	
-	public Integer getHr_mark_id() {
-		return hr_mark_id;
-	}
-	
-	public void setHr_mark_id(Integer hr_mark_id) {
-		this.hr_mark_id = hr_mark_id;
-	}
-			
-	public Integer getUser_id() {
-		return user_id;
-	}
-	
-	public void setUser_id(Integer hr_id) {
-		this.user_id = user_id;
+	public Integer getHrMarkId() {
+		return hrMarkId;
 	}
 
-	public Integer getForm_id() {
-		return form_id;
+	public void setHrMarkId(Integer hrMarkId) {
+		this.hrMarkId = hrMarkId;
 	}
-	
-	public void setForm_id(Integer form_id) {
-		this.form_id = form_id;
+
+	public Integer getUserId() {
+		return userId;
 	}
-	
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public Integer getFormId() {
+		return formId;
+	}
+
+	public void setFormId(Integer formId) {
+		this.formId = formId;
+	}
+
 	public Integer getMotivation() {
 		return motivation;
 	}
-	
+
 	public void setMotivation(Integer motivation) {
 		this.motivation = motivation;
 	}
-	
+
 	public Integer getEnglish() {
 		return english;
 	}
-	
+
 	public void setEnglish(Integer english) {
 		this.english = english;
 	}
-	
-	public String getGeneral_mark() {
-		return general_mark;
+
+	public String getGeneralMark() {
+		return generalMark;
 	}
-	
-	public void setGeneral_mark(String general_mark) {
-		this.general_mark = general_mark;
+
+	public void setGeneralMark(String generalMark) {
+		this.generalMark = generalMark;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
-	
-	public void setUser(User users) {
-		this.user = users;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
-	
+
 	public Form getForm() {
 		return Form;
 	}
-	
-	public void setForm(Form Form) {
-		this.Form = Form;
+
+	public void setForm(Form form) {
+		Form = form;
 	}
-	
 }

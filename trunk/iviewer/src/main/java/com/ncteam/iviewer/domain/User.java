@@ -22,7 +22,7 @@ public class User implements Serializable{
 @GeneratedValue(generator="increment")
 @GenericGenerator(name="increment", strategy = "increment")
 @Column(name="user_id")
-private Integer user_id;
+private Integer userId;
 
 @Column(name="email")
 private String email;
@@ -31,25 +31,25 @@ private String email;
 private String password;
 
 @Column(name="first_name")
-private String first_name;
+private String firstName;
 
 @Column(name="surname")
 private String surname;
 
 @Column(name="last_name")
-private String last_name;
+private String lastName;
 
 @Column(name="foto")
 private String foto;
 
 @Column(name="user_type_id")
-private Integer user_type_id;
+private Integer userTypeId;
 
 @Column(name="reg_date")
-private String stringReg_date;
+private String stringRegDate;
 
 @Column(name="reg_date", updatable=false, insertable=false)
-private Date reg_date;
+private Date regDate;
 
 @OneToOne
 @JoinColumn(name="user_id")
@@ -57,24 +57,24 @@ private Form form;
 
 @OneToOne
 @JoinColumn(name="user_id")
-private HRMark hr_mark;
+private HRMark hrMark;
 
 @OneToOne
 @JoinColumn(name="user_id")
-private TechMark tech_mark;
+private TechMark techMark;
 
 @ManyToOne
 @JoinColumn(name="user_type_id", referencedColumnName = "user_type_id", insertable=false, updatable=false)
-private UsersType users_type;
+private UsersType usersType;
 
 
-public void setUser_id(Integer id){
-	this.user_id=id;
+public void setUserId(Integer id){
+	this.userId=id;
 }
 
 
-public Integer getUser_id(){
-	return user_id;
+public Integer getUserId(){
+	return userId;
 }
 
 public void setPassword(String password){
@@ -91,12 +91,12 @@ public void setSurname(String surname) {
 }
 
 
-public String getLast_name() {
-	return last_name;
+public String getLastName() {
+	return lastName;
 }
 
-public void setLast_name(String last_name) {
-	this.last_name = last_name;
+public void setLastName(String last_name) {
+	this.lastName = last_name;
 }
 
 
@@ -109,12 +109,12 @@ public void setFoto(String foto) {
 }
 
 
-public Integer getUser_type_id() {
-	return user_type_id;
+public Integer getUserTypeId() {
+	return userTypeId;
 }
 
-public void setUser_type_id(Integer user_type_id) {
-	this.user_type_id = user_type_id;
+public void setUserTypeId(Integer user_type_id) {
+	this.userTypeId = user_type_id;
 }
 
 
@@ -123,12 +123,12 @@ public String getPassword() {
 }
 
 
-public String getFirst_name() {
-	return first_name;
+public String getFirstName() {
+	return firstName;
 }
 
-public void setFirst_name(String first_name) {
-	this.first_name = first_name;
+public void setFirstName(String first_name) {
+	this.firstName = first_name;
 }
 
 
@@ -148,60 +148,60 @@ public void setForm(Form form) {
 	this.form=form;
 }
 
-public UsersType getUsers_type() {
-	return users_type;
+public UsersType getUsersType() {
+	return usersType;
 }
 
-public void setUsers_type(UsersType users_type) {
-	this.users_type = users_type;
+public void setUsersType(UsersType users_type) {
+	this.usersType = users_type;
 }
 
 public HRMark getHR_mark() {
-	return hr_mark;
+	return hrMark;
 }
 
 public void setHR_mark(HRMark hr_mark) {
-	this.hr_mark = hr_mark;
+	this.hrMark = hr_mark;
 }
 
 
-public HRMark getHr_mark() {
-	return hr_mark;
+public HRMark getHrMark() {
+	return hrMark;
 }
 
 
-public void setHr_mark(HRMark hr_mark) {
-	this.hr_mark = hr_mark;
+public void setHrMark(HRMark hr_mark) {
+	this.hrMark = hr_mark;
 }
 
 
-public TechMark getTech_mark() {
-	return tech_mark;
+public TechMark getTechMark() {
+	return techMark;
 }
 
 
-public void setTech_mark(TechMark tech_mark) {
-	this.tech_mark = tech_mark;
+public void setTechMark(TechMark tech_mark) {
+	this.techMark = tech_mark;
 }
 
 
-public String getStringReg_date() {
-	return stringReg_date;
+public String getStringRegDate() {
+	return stringRegDate;
 }
 
 
-public void setStringReg_date(String stringReg_date) {
-	this.stringReg_date = stringReg_date;
+public void setStringRegDate(String stringReg_date) {
+	this.stringRegDate = stringReg_date;
 }
 
 
-public Date getReg_date() {
-	return reg_date;
+public Date getRegDate() {
+	return regDate;
 }
 
 
-public void setReg_date(Date reg_date) {
-	this.reg_date = reg_date;
+public void setRegDate(Date reg_date) {
+	this.regDate = reg_date;
 }
 
 

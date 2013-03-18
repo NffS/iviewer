@@ -20,16 +20,16 @@ public class TechMark implements Serializable{
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
 	@Column(name="tech_mark_id")
-	private Integer tech_mark_id;
+	private Integer techMarkId;
 	
 	@Column(name="user_id")
-	private Integer user_id;
+	private Integer userId;
 	
 	@Column(name="form_id")
-	private Integer form_id;
+	private Integer formId;
 	
 	@Column(name="prog_lang")
-	private Integer prog_lang;
+	private Integer progLang;
 	
 	@Column(name="oop")
 	private Integer oop;
@@ -50,7 +50,7 @@ public class TechMark implements Serializable{
 	private Integer other;
 	
 	@Column(name="general_mark")
-	private String general_mark;
+	private String generalMark;
 	
 	@OneToOne
 	@JoinColumn(name="form_id", insertable=false, updatable=false)
@@ -60,36 +60,36 @@ public class TechMark implements Serializable{
 	@JoinColumn(name="user_id", insertable=false, updatable=false)
 	private User user;
 
-	public Integer getTech_mark_id() {
-		return tech_mark_id;
+	public Integer getTechMarkId() {
+		return techMarkId;
 	}
 
-	public void setTech_mark_id(Integer tech_mark_id) {
-		this.tech_mark_id = tech_mark_id;
+	public void setTechMarkId(Integer tech_mark_id) {
+		this.techMarkId = tech_mark_id;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer user_id) {
+		this.userId = user_id;
 	}
 
-	public Integer getForm_id() {
-		return form_id;
+	public Integer getFormId() {
+		return formId;
 	}
 
-	public void setForm_id(Integer form_id) {
-		this.form_id = form_id;
+	public void setFormId(Integer form_id) {
+		this.formId = form_id;
 	}
 
-	public Integer getProg_lang() {
-		return prog_lang;
+	public Integer getProgLang() {
+		return progLang;
 	}
 
-	public void setProg_lang(Integer prog_lang) {
-		this.prog_lang = prog_lang;
+	public void setProgLang(Integer prog_lang) {
+		this.progLang = prog_lang;
 	}
 
 	public Integer getOop() {
@@ -140,12 +140,12 @@ public class TechMark implements Serializable{
 		this.other = other;
 	}
 
-	public String getGeneral_mark() {
-		return general_mark;
+	public String getGeneralMark() {
+		return generalMark;
 	}
 
-	public void setGeneral_mark(String general_mark) {
-		this.general_mark = general_mark;
+	public void setGeneralMark(String general_mark) {
+		this.generalMark = general_mark;
 	}
 
 	public Form getForm() {

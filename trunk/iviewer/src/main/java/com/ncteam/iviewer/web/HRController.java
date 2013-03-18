@@ -59,9 +59,9 @@ public class HRController {
 		
 			
 		
-		redactedInterview.setStringStart_date(updateStartDateString);
-		redactedInterview.setStringEnd_date(updateEndDateString);
-		redactedInterview.setExtra_time(Integer.parseInt((String)request.getParameter("extraTime")));
+		redactedInterview.setStringStartDate(updateStartDateString);
+		redactedInterview.setStringEndDate(updateEndDateString);
+		redactedInterview.setExtraTime(Integer.parseInt((String)request.getParameter("extraTime")));
 		redactedInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
 		
 		String errorMessage=validator.checkInterviewsIntersection(redactedInterview,
@@ -110,9 +110,9 @@ public class HRController {
 				
 		Interview newInterview=new Interview();
 		
-		newInterview.setStringEnd_date(newEndDateString);
-		newInterview.setStringStart_date(newStartDateString);
-		newInterview.setExtra_time(Integer.parseInt((String)request.getParameter("newExtraTime")));
+		newInterview.setStringEndDate(newEndDateString);
+		newInterview.setStringStartDate(newStartDateString);
+		newInterview.setExtraTime(Integer.parseInt((String)request.getParameter("newExtraTime")));
 		newInterview.setSeats(Integer.parseInt((String)request.getParameter("newSeats")));
 		
 		String errorMessage=validator.checkInterviewsIntersection(newInterview,

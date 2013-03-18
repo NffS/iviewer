@@ -22,10 +22,10 @@ public class University implements Serializable{
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
 	@Column(name="university_id")
-	private Integer university_id;
+	private Integer universityId;
 	
 	@Column(name="university_name")
-	private String university_name;
+	private String universityName;
 	
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="university_id")
@@ -35,20 +35,20 @@ public class University implements Serializable{
 	@JoinColumn(name="university_id")
 	private Set<Faculty> faculties;
 
-	public Integer getUniversity_id() {
-		return university_id;
+	public Integer getUniversityId() {
+		return universityId;
 	}
 
-	public void setUniversity_id(Integer university_id) {
-		this.university_id = university_id;
+	public void setUniversityId(Integer university_id) {
+		this.universityId = university_id;
 	}
 
-	public String getUniversity_name() {
-		return university_name;
+	public String getUniversityName() {
+		return universityName;
 	}
 
-	public void setUniversity_name(String university_name) {
-		this.university_name = university_name;
+	public void setUniversityName(String university_name) {
+		this.universityName = university_name;
 	}
 
 	public Set<Form> getForms() {

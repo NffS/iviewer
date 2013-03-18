@@ -16,18 +16,18 @@ public class News{
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
 	@Column(name="news_id")
-	private Integer news_id;
+	private Integer newsId;
 	
 	@Column(name="text")
 	private String text;
 	
 	
-	public Integer getNews_id() {
-		return news_id;
+	public Integer getNewsId() {
+		return newsId;
 	}
 	
-	public void setNews_id(Integer news_id) {
-		this.news_id = news_id;
+	public void setNewsId(Integer news_id) {
+		this.newsId = news_id;
 	}
 	
 	

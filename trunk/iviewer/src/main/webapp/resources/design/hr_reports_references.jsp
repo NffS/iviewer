@@ -11,6 +11,6 @@
 <br><br>
 <a href="graphic_pr_report"><font size="5" color="#0000FF">Графический отчёт эффективности видов рекламы</font></a>
 <br><br>
-<a href="pdf_report"><font size="5" color="#0000FF">PDF-отчёт</font></a>
+<a href="pdf_report" target="_blank"><font size="5" color="#0000FF">PDF-отчёт</font></a>
 
 <br><br>

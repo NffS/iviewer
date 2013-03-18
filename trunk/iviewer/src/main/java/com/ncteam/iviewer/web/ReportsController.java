@@ -154,13 +154,13 @@ public class ReportsController {
 	    	table.addCell(""+(i+1));
 	    	
 	    	nameCell=new PdfPCell(new Phrase(forms.get(i).getSurname()+" "
-	    			+forms.get(i).getFirst_name()+" "+forms.get(i).getLast_name(),new Font(times,14)));
+	    			+forms.get(i).getFirstName()+" "+forms.get(i).getLastName(),new Font(times,14)));
 	    	nameCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 	    	table.addCell(nameCell);
 	    	
-	    	table.addCell(forms.get(i).getStart_date());
+	    	table.addCell(forms.get(i).getStartDate());
 	    	
-	    	if(forms.get(i).getVisit_status().equals(new Integer(0)))
+	    	if(forms.get(i).getVisitStatus().equals(new Integer(0)))
 	    		comeStatusCell=new PdfPCell(new Phrase("Не пришёл",new Font(times,14)));
 	    	else
 	    		comeStatusCell=new PdfPCell(new Phrase("Пришёл",new Font(times,14)));

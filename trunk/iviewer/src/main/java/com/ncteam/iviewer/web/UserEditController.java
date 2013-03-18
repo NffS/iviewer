@@ -57,14 +57,14 @@ public class UserEditController {
             //     if (Pattern.matches("[a-zA-Zа-яА-Я]$",userEdit.getLast_name()))
             if (userEdit.getPassword().length() > 0){
                 tablesService.updateRecord(userEdit);
-                if((Integer)session.getAttribute("user_id")==userEdit.getUser_id()){
+                if((Integer)session.getAttribute("user_id")==userEdit.getUserId()){
                     session.setAttribute("user", userEdit);
-                    session.setAttribute("user_id", userEdit.getUser_id());
+                    session.setAttribute("user_id", userEdit.getUserId());
                     session.setAttribute("email", userEdit.getEmail());
-                    session.setAttribute("first_name", userEdit.getFirst_name());
+                    session.setAttribute("first_name", userEdit.getFirstName());
                     session.setAttribute("surname", userEdit.getSurname());
                     session.setAttribute("foto", userEdit.getFoto());
-                    session.setAttribute("user_type_id", userEdit.getUser_type_id());
+                    session.setAttribute("user_type_id", userEdit.getUserTypeId());
                 }
                 map.put("newsText","Ok");
                 return "index";

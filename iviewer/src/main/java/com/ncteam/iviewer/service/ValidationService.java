@@ -107,17 +107,17 @@ public class ValidationService {
 	public String checkInterviewsIntersection(Interview checkedInterview, List<Interview> allInterviews,
 			boolean isCreating){
 				
-		long startTime=convertDateStringToItsLongValue(checkedInterview.getStringStart_date());
+		long startTime=convertDateStringToItsLongValue(checkedInterview.getStringStartDate());
 		
-		long endTimePlusExtraTime=convertDateStringToItsLongValue(checkedInterview.getStringEnd_date())
-				+checkedInterview.getExtra_time()*60000;
+		long endTimePlusExtraTime=convertDateStringToItsLongValue(checkedInterview.getStringEndDate())
+				+checkedInterview.getExtraTime()*60000;
 		
 		
 		for(Interview interview:allInterviews){
-			if(endTimePlusExtraTime>convertDateStringToItsLongValue(interview.getStringStart_date())
+			if(endTimePlusExtraTime>convertDateStringToItsLongValue(interview.getStringStartDate())
 					
-					&&startTime<convertDateStringToItsLongValue(interview.getStringEnd_date())){
-				if(!isCreating&&checkedInterview.getInterview_id().equals(interview.getInterview_id()))
+					&&startTime<convertDateStringToItsLongValue(interview.getStringEndDate())){
+				if(!isCreating&&checkedInterview.getInterviewId().equals(interview.getInterviewId()))
 					continue;
 				
 				return "Невозможно отредактировать или создать интервью:\n" +

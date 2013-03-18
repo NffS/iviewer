@@ -28,7 +28,7 @@
             <select id="types" onchange="filter('sf')">
                 <option value="">Фильтр по типу</option>
                 <c:forEach var="users_types" items="${users_types}">
-                    <option value="${users_types.user_type_id}">${users_types.type_name}</option>
+                    <option value="${users_types.userTypeId}">${users_types.typeName}</option>
                 </c:forEach>
             </select>
         </td>
@@ -44,9 +44,9 @@
     <tbody>
     <c:forEach var="users" items="${users}">
         <tr ALIGN=center height=40>
-            <td>${users.user_id}</td> <td width=300>${users.surname}  ${users.first_name} ${users.last_name}</td>
-            <td>${users.email}</td> <td>${users.user_type_id}</td>
-            <td><input type="button" class="btn btn-primary" value="Редактировать" onclick="javascript:document.location='/iviewer/user_edit_${users.user_id}'"></td>
+            <td>${users.userId}</td> <td width=300>${users.surname}  ${users.firstName} ${users.lastName}</td>
+            <td>${users.email}</td> <td>${users.userTypeId}</td>
+            <td><input type="button" class="btn btn-primary" value="Редактировать" onclick="javascript:document.location='/iviewer/user_edit_${users.userId}'"></td>
         </tr>
     </c:forEach>
     </tbody>

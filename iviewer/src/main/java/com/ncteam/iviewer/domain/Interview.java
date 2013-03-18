@@ -23,22 +23,30 @@ public class Interview implements Serializable{
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
 	@Column(name="interview_id")
-	private Integer interview_id;
+	private Integer interviewId;
 	
+	/*
+	 * Field is added, because for column of the date data type in java there should be a
+	 * field with java.sql.Date, which doesn't hold time of the day. And String does.
+	 */
 	@Column(name="start_date")
-	private String stringStart_date;
+	private String stringStartDate;
 	
+	/*
+	 * Field is added, because for column of the date data type in java there should be a
+	 * field with java.sql.Date, which doesn't hold time of the day. And String does.
+	 */
 	@Column(name="end_date")
-	private String stringEnd_date;
+	private String stringEndDate;
 	
 	@Column(name="start_date", updatable=false, insertable=false)
-	private Date start_date;
+	private Date startDate;
 	
 	@Column(name="end_date", updatable=false, insertable=false)
-	private Date end_date;
+	private Date endDate;
 	
 	@Column(name="extra_time")
-	private Integer extra_time;
+	private Integer extraTime;
 	
 	@Column(name="seats")
 	private Integer seats;
@@ -46,40 +54,63 @@ public class Interview implements Serializable{
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="interview_id")
 	private List<Form> forms;
-	
-	
-	public Integer getInterview_id() {
-		return interview_id;
+
+	public Integer getInterviewId() {
+		return interviewId;
 	}
-	
-	public void setInterview_id(Integer interview_id) {
-		this.interview_id = interview_id;
+
+	public void setInterviewId(Integer interviewId) {
+		this.interviewId = interviewId;
 	}
-	
-	public Date  getStart_date() {
-		return start_date;
+
+	public String getStringStartDate() {
+		return stringStartDate;
 	}
-	
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
+
+	public void setStringStartDate(String stringStartDate) {
+		this.stringStartDate = stringStartDate;
 	}
-	
-	public Date  getEnd_date() {
-		return end_date;
+
+	public String getStringEndDate() {
+		return stringEndDate;
 	}
-	
-	public void setEnd_date(Date end_date) {
-		this.end_date = end_date;
+
+	public void setStringEndDate(String stringEndDate) {
+		this.stringEndDate = stringEndDate;
 	}
-	
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Integer getExtraTime() {
+		return extraTime;
+	}
+
+	public void setExtraTime(Integer extraTime) {
+		this.extraTime = extraTime;
+	}
+
 	public Integer getSeats() {
 		return seats;
 	}
-	
+
 	public void setSeats(Integer seats) {
 		this.seats = seats;
 	}
-	
+
 	public List<Form> getForms() {
 		return forms;
 	}
@@ -87,29 +118,5 @@ public class Interview implements Serializable{
 	public void setForms(List<Form> forms) {
 		this.forms = forms;
 	}
-
-	public String getStringStart_date() {
-		return stringStart_date;
-	}
-
-	public void setStringStart_date(String stringStart_date) {
-		this.stringStart_date = stringStart_date;
-	}
-
-	public String getStringEnd_date() {
-		return stringEnd_date;
-	}
-
-	public void setStringEnd_date(String stringEnd_date) {
-		this.stringEnd_date = stringEnd_date;
-	}
-
-	public Integer getExtra_time() {
-		return extra_time;
-	}
-
-	public void setExtra_time(Integer extra_time) {
-		this.extra_time = extra_time;
-	}
-
+	
 }

@@ -21,13 +21,13 @@
     <%User usr= (User) request.getAttribute("user");%>
 <form:form  method="POST" commandName="userEdit" modelAttribute="userEdit" action="do_user_edit">
 <table width="250px">
-     <form:hidden path="user_id" value="<%=usr.getUser_id()%>"></form:hidden>
+     <form:hidden path="userId" value="<%=usr.getUserId()%>"></form:hidden>
     <tr>
         <td>
             Имя:
         </td>
         <td>
-            <form:input path="first_name" value="<%=usr.getFirst_name()%>" pattern="[a-zA-Zа-яА-Я]{1,40}$"/>
+            <form:input path="firstName" value="<%=usr.getFirstName()%>" pattern="[a-zA-Zа-яА-Я]{1,40}$"/>
         </td>
     </tr>
     <tr>
@@ -43,7 +43,7 @@
             Отчество:
         </td>
         <td>
-            <form:input path="last_name" value="<%=usr.getLast_name()%>" pattern="[a-zA-Zа-яА-Я]{1,40}$"/>
+            <form:input path="lastName" value="<%=usr.getLastName()%>" pattern="[a-zA-Zа-яА-Я]{1,40}$"/>
         </td>
     </tr>
     <tr>
@@ -58,23 +58,33 @@
         <td>
             Пароль:
         </td>
-        <td><%if((Integer)session.getAttribute("user_type_id")==1){%>
+        <td><%
+        	if((Integer)session.getAttribute("user_type_id")==1){
+        %>
             <form:password  path="password" value="<%=usr.getPassword()%>"/>
-            <%}else{%>
+            <%
+            	}else{
+            %>
             <form:password path="password"/>
-            <%}%>
+            <%
+            	}
+            %>
         </td>
     </tr>
-    <%  if((Integer)session.getAttribute("user_type_id")==1){%>
+    <%
+    	if((Integer)session.getAttribute("user_type_id")==1){
+    %>
     <tr>
         <td>
             Тип:
         </td>
         <td>
-            <form:input path="user_type_id" value="<%=usr.getUser_type_id()%>" />
+            <form:input path="userTypeId" value="<%=usr.getUserTypeId()%>" />
         </td>
     </tr>
-    <%}%>
+    <%
+    	}
+    %>
     <tr>
         <td>
 
@@ -89,8 +99,10 @@
 </form:form>
 </center>
  <br>
-<%  if((Integer)session.getAttribute("user_type_id")==1){%>
-    <div align="right"><input class="btn btn-warning" type="button" value="!Удалить!" onclick="javascript:document.location='/user_delete_<%=usr.getUser_id()%>'"/></div>
+<%
+	if((Integer)session.getAttribute("user_type_id")==1){
+%>
+    <div align="right"><input class="btn btn-warning" type="button" value="!Удалить!" onclick="javascript:document.location='/user_delete_<%=usr.getUserId()%>'"/></div>
 <%}%>
 
 <%@ include file="/resources/design/footer.jsp" %>

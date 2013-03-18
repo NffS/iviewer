@@ -23,13 +23,13 @@ public class Faculty  implements Serializable{
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
 	@Column(name="faculty_id")
-	private Integer faculty_id;
+	private Integer facultyId;
 	
 	@Column(name="faculty_name")
-	private String faculty_name;
+	private String facultyName;
 	
 	@Column(name="university_id")
-	private Integer university_id;
+	private Integer universityId;
 	
 	@ManyToOne
 	@JoinColumn(name="university_id", insertable=false, updatable=false)
@@ -39,28 +39,28 @@ public class Faculty  implements Serializable{
 	@JoinColumn(name="faculty_id")
 	private Set<Form> forms;
 
-	public Integer getFaculty_id() {
-		return faculty_id;
+	public Integer getFacultyId() {
+		return facultyId;
 	}
 
-	public void setFaculty_id(Integer faculty_id) {
-		this.faculty_id = faculty_id;
+	public void setFacultyId(Integer faculty_id) {
+		this.facultyId = faculty_id;
 	}
 
-	public String getFaculty_name() {
-		return faculty_name;
+	public String getFacultyName() {
+		return facultyName;
 	}
 
-	public void setFaculty_name(String faculty_name) {
-		this.faculty_name = faculty_name;
+	public void setFacultyName(String faculty_name) {
+		this.facultyName = faculty_name;
 	}
 
-	public Integer getUniversity_id() {
-		return university_id;
+	public Integer getUniversityId() {
+		return universityId;
 	}
 
-	public void setUniversity_id(Integer university_id) {
-		this.university_id = university_id;
+	public void setUniversityId(Integer university_id) {
+		this.universityId = university_id;
 	}
 
 	public University getUniversity() {

@@ -23,15 +23,15 @@
 				</tr>
 				<c:forEach var="interview" items="${interviews}">
 				<tr ALIGN=center height=40>
-				<form action="hr_red_${interview.interview_id}">
-				<td width="50px"><input class="input-small" name="date" type="text" style="text-align:center" pattern="201[3-9]-([0][1-9]|[1][0-2])-([0-2][0-9]|[3][0-1])" value="${interview.stringStart_date.split(" ")[0]}"/></td> 
-				<td ><input class="input-mini" name="startTime" type="text" style="text-align:center" pattern="([0-1][0-9]|2[0-4]):[0-5][0-9]" value="${interview.stringStart_date.split(" ")[1].substring(0,5)}"/></td>
-				<td><input class="input-mini" name="endTime" type="text" style="text-align:center" pattern="([0-1][0-9]|2[0-4]):[0-5][0-9]" value="${interview.stringEnd_date.split(" ")[1].substring(0,5)}"/></td>
-				<td><input class="input-mini" name="extraTime" type="text" style="text-align:center" pattern="[0-9]+" value="${interview.extra_time }"/></td>
+				<form action="hr_red_${interview.interviewId}">
+				<td width="50px"><input class="input-small" name="date" type="text" style="text-align:center" pattern="201[3-9]-([0][1-9]|[1][0-2])-([0-2][0-9]|[3][0-1])" value="${interview.stringStartDate.split(" ")[0]}"/></td> 
+				<td ><input class="input-mini" name="startTime" type="text" style="text-align:center" pattern="([0-1][0-9]|2[0-4]):[0-5][0-9]" value="${interview.stringStartDate.split(" ")[1].substring(0,5)}"/></td>
+				<td><input class="input-mini" name="endTime" type="text" style="text-align:center" pattern="([0-1][0-9]|2[0-4]):[0-5][0-9]" value="${interview.stringEndDate.split(" ")[1].substring(0,5)}"/></td>
+				<td><input class="input-mini" name="extraTime" type="text" style="text-align:center" pattern="[0-9]+" value="${interview.extraTime }"/></td>
 				<td><input class="input-mini" name="seats" type="text" style="text-align:center" pattern="[0-9]+" value="${interview.seats }"/></td>
 				<td width=100>${interview.forms.size()}</td> <td><input type="submit" value="Сохранить изменения"/></td>
 				</form>
-				<form action="hr_delete_interview_${interview.interview_id}">
+				<form action="hr_delete_interview_${interview.interviewId}">
 				<td align="center" width=100><input type="submit" value="Удалить"/></td>
 				</form>
 				</tr>

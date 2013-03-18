@@ -22,29 +22,29 @@ public class Source  implements Serializable{
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
 	@Column(name="source_id")
-	private Integer source_id;
+	private Integer sourceId;
 	
 	@Column(name="source_name")
-	private String source_name;
+	private String sourceName;
 	
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="source_id")
 	private Set<Form> forms;
 
-	public Integer getSource_id() {
-		return source_id;
+	public Integer getSourceId() {
+		return sourceId;
 	}
 
-	public void setSource_id(Integer source_id) {
-		this.source_id = source_id;
+	public void setSourceId(Integer source_id) {
+		this.sourceId = source_id;
 	}
 
-	public String getSource_name() {
-		return source_name;
+	public String getSourceName() {
+		return sourceName;
 	}
 
-	public void setSource_name(String source_name) {
-		this.source_name = source_name;
+	public void setSourceName(String source_name) {
+		this.sourceName = source_name;
 	}
 
 	public Set<Form> getForms() {

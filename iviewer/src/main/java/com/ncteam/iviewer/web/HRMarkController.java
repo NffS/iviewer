@@ -32,7 +32,7 @@ public class HRMarkController {
 			return "redirect:/index";
 		}
 		Form form=formService.getRecordById(form_id,Form.class);
-		form.setHr_mark(formService.getHRMarkByFormId(form_id));
+		form.setHrMark(formService.getHRMarkByFormId(form_id));
 		map.put("form", form);
 		response.setCharacterEncoding("UTF-8");
 		return "hr_mark";
@@ -48,22 +48,22 @@ public class HRMarkController {
 		HRMark mark=null;
 		if(request.getParameter("hr_mark_id")==""){
 			mark=new HRMark();
-			mark.setForm_id(Integer.parseInt(request.getParameter("form_id")));
+			mark.setFormId(Integer.parseInt(request.getParameter("form_id")));
 			mark.setEnglish(Integer.parseInt(request.getParameter("english")));
 			mark.setMotivation(Integer.parseInt(request.getParameter("motivation")));
-			mark.setGeneral_mark(new String(request.getParameter("general").getBytes("ISO-8859-1")));
+			mark.setGeneralMark(new String(request.getParameter("general").getBytes("ISO-8859-1")));
 			formService.addRecord(mark);
 		}
 		else{
 			mark=formService.getRecordById(Integer.parseInt(request.getParameter("hr_mark_id")), HRMark.class);
 			mark.setEnglish(Integer.parseInt(request.getParameter("english")));
 			mark.setMotivation(Integer.parseInt(request.getParameter("motivation")));
-			mark.setGeneral_mark(new String(request.getParameter("general").getBytes("ISO-8859-1")));
+			mark.setGeneralMark(new String(request.getParameter("general").getBytes("ISO-8859-1")));
 			formService.updateRecord(mark);
 		}
 		
 		Form markedForm=formService.getRecordById(Integer.parseInt(request.getParameter("form_id")), Form.class);
-		markedForm.setVisit_status(1);
+		markedForm.setVisitStatus(1);
 		formService.updateRecord(markedForm);
 		
 		map.put("target", "form_list");

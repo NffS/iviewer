@@ -22,31 +22,31 @@ public class UsersType implements Serializable{
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
 	@Column(name="user_type_id")
-	private Integer user_type_id;
+	private Integer userTypeId;
 	
 	@Column(name="type_name")
-	private String type_name;
+	private String typeName;
 	
 	@OneToMany
 	@JoinColumn(name="user_type_id")
 	private Set<User> users;
 	
 
-	public Integer getUser_type_id() {
-		return user_type_id;
+	public Integer getUserTypeId() {
+		return userTypeId;
 	}
 	
-	public void setUser_type_id(Integer user_type_id) {
-		this.user_type_id = user_type_id;
+	public void setUserTypeId(Integer user_type_id) {
+		this.userTypeId = user_type_id;
 	}
 	
 	
-	public String getType_name() {
-		return type_name;
+	public String getTypeName() {
+		return typeName;
 	}
 	
-	public void setType_name(String type_name) {
-		this.type_name = type_name;
+	public void setTypeName(String type_name) {
+		this.typeName = type_name;
 	}
 
 	public Set<User> getUsers() {

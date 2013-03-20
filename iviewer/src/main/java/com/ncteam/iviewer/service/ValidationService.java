@@ -84,10 +84,20 @@ public class ValidationService {
 		else
 			return false;
 	}
-	
+
 	public boolean isUserHR(HttpSession session){
 		if((Integer)session.getAttribute("user_type_id")==null
 				||(Integer)session.getAttribute("user_type_id")!=2){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	public boolean isUserTech(HttpSession session){
+		if((Integer)session.getAttribute("user_type_id")==null
+				||(Integer)session.getAttribute("user_type_id")!=3){
 			return false;
 		}
 		else{

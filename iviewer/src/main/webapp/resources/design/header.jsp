@@ -1,5 +1,4 @@
 ﻿<%@page session="true"%>
-
 <html>
 <head>
     <title>NetCracker</title>

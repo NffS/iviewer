@@ -15,6 +15,7 @@ import Support.FormInformationTransformer;
 
 import com.ncteam.iviewer.domain.FormInformation;
 import com.ncteam.iviewer.domain.HRMark;
+import com.ncteam.iviewer.domain.TechMark;
 
 @Repository
 public class FormDAOImpl extends TablesDAOImpl {
@@ -176,5 +177,11 @@ public class FormDAOImpl extends TablesDAOImpl {
 		String query="FROM HRMark h where h.formId=:id";
 		Session sess=sessionFactory.getCurrentSession();
 		return (HRMark)sess.createQuery(query).setInteger("id", id).uniqueResult();
+	}	
+	
+	public TechMark getTechMarkByFormId(int id){
+		String query="FROM TechMark h where h.formId=:id";
+		Session sess=sessionFactory.getCurrentSession();
+		return (TechMark)sess.createQuery(query).setInteger("id", id).uniqueResult();
 	}
 }

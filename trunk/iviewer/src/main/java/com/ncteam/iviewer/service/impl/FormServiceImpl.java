@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.ncteam.iviewer.DAO.impl.FormDAOImpl;
 import com.ncteam.iviewer.domain.FormInformation;
 import com.ncteam.iviewer.domain.HRMark;
+import com.ncteam.iviewer.domain.TechMark;
 
 @Service
 public class FormServiceImpl extends TablesServiceImpl<FormDAOImpl> {
@@ -65,8 +66,11 @@ public class FormServiceImpl extends TablesServiceImpl<FormDAOImpl> {
 	public List<String> getAllAdvertisementNames(){
 		return formDAO.getAllAdvertisementNames();
 	}
-	
+
 	public HRMark getHRMarkByFormId(int id){
 		return formDAO.getHRMarkByFormId(id);
+	}
+	public TechMark getTechMarkByFormId(int id){
+		return formDAO.getTechMarkByFormId(id);
 	}
 }

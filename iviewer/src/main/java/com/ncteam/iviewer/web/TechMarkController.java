@@ -1,8 +1,8 @@
 package com.ncteam.iviewer.web;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
+import javax.persistence.Column;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,7 +26,7 @@ public class TechMarkController {
 	
 	@RequestMapping("/tech_mark_{form_id}")
 	public String techMark(HttpServletResponse response, HttpSession session,
-			@PathVariable("form_id") Integer form_id,	Map<String, Object> map) throws UnsupportedEncodingException{
+			@PathVariable("form_id") Integer form_id,	Map<String, Object> map) {
 			
 		if(!validator.isUserTech(session)){
 			return "redirect:/index";
@@ -42,45 +42,51 @@ public class TechMarkController {
 	public String techMarkSave(HttpSession session, HttpServletRequest request,
 			Map<String, Object> map) {
 		
+		int progLang, oop, patterns, db, cs, experience, other;
+		
 		if(!validator.isUserTech(session)){
 			return "redirect:/index";
 		}
+		
+		try {
+			progLang = Integer.parseInt(request.getParameter("prog_lang"));
+			oop = Integer.parseInt(request.getParameter("oop"));
+			patterns = Integer.parseInt(request.getParameter("patterns"));
+			db = Integer.parseInt(request.getParameter("db"));
+			cs = Integer.parseInt(request.getParameter("cs"));
+			experience = Integer.parseInt(request.getParameter("experience"));
+			other = Integer.parseInt(request.getParameter("other"));
+			if (progLang<0 || progLang>100 || oop<0 || oop>100 || patterns<0 || patterns>100 || 
+					db<0 || db>100 || cs<0 || cs>100 || experience<0 || experience>100 || other<0 || other>100){
+				throw new Exception("Значение вне допустимого диапазона");
+			}
+		} catch(Exception e) {
+			map.put("target", "tech_mark_"+request.getParameter("form_id"));
+			map.put("message", "Ошибка сохранения оценки ("+e.getMessage()+")");
+			return "redirect";
+		}
+		
 		TechMark mark = null;
+		
 		if(request.getParameter("it_mark_id")==""){
 			mark=new TechMark();
 			mark.setFormId(Integer.parseInt(request.getParameter("form_id")));
-			try {
-				mark.setProgLang(Integer.parseInt(request.getParameter("prog_lang")));
-				mark.setOop(Integer.parseInt(request.getParameter("oop")));
-				mark.setPatterns(Integer.parseInt(request.getParameter("patterns")));
-				mark.setDb(Integer.parseInt(request.getParameter("db")));
-				mark.setCs(Integer.parseInt(request.getParameter("computer_science")));
-				mark.setExperience(Integer.parseInt(request.getParameter("experience")));
-				mark.setOther(Integer.parseInt(request.getParameter("other")));
-			} catch(Exception e) {
-				map.put("target", "tech_mark_"+request.getParameter("form_id"));
-				map.put("message", "Ошибка сохранения оценки ("+e.getMessage()+")");
-				return "redirect";
-			}
-			mark.setGeneralMark(new String(request.getParameter("general")));
-			formService.addRecord(mark);
-		}
-		else{
+		} else {
 			mark=formService.getRecordById(Integer.parseInt(request.getParameter("tech_mark_id")), TechMark.class);
-			try {
-				mark.setProgLang(Integer.parseInt(request.getParameter("prog_lang")));
-				mark.setOop(Integer.parseInt(request.getParameter("oop")));
-				mark.setPatterns(Integer.parseInt(request.getParameter("patterns")));
-				mark.setDb(Integer.parseInt(request.getParameter("db")));
-				mark.setCs(Integer.parseInt(request.getParameter("cs")));
-				mark.setExperience(Integer.parseInt(request.getParameter("experience")));
-				mark.setOther(Integer.parseInt(request.getParameter("other")));
-			} catch(Exception e) {
-				map.put("target", "tech_mark_"+request.getParameter("form_id"));
-				map.put("message", "Ошибка сохранения оценки ("+e.getMessage()+")");
-				return "redirect";
-			}
-			mark.setGeneralMark(request.getParameter("general"));
+		}
+		
+		mark.setProgLang(progLang);
+		mark.setOop(oop);
+		mark.setPatterns(patterns);
+		mark.setDb(db);
+		mark.setCs(cs);
+		mark.setExperience(experience);
+		mark.setOther(other);
+		mark.setGeneralMark(new String(request.getParameter("general")));
+		
+		if(request.getParameter("it_mark_id")==""){
+			formService.addRecord(mark);
+		} else {
 			formService.updateRecord(mark);
 		}
 		

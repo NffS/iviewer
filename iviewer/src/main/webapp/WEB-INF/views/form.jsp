@@ -39,7 +39,7 @@
 							<div class="controls form-inline">
 								<label for="inputValue"><font size=4>вуз: </font></label>
 								<select style="height:27px" class="input-medium" id="inputValue" name="univerid">
-				  					<option value="ONPU">ОНПУ</option>
+				  					<option value="OНПУ">ОНПУ</option>
 				  					<option value="ОНУ им. Мечникова">ОНУ им. Мечникова</option>
 				  					<option selected value="другой">другой</option>
 				  					<option value="я не студент">я не студент</option>
@@ -52,10 +52,10 @@
 							<div class="controls form-inline">
 								<label for="inputValue"><font size=4>факультет: </font></label>
 								<select  style="height:27px" class="input-medium" id="inputValue" name="faculty">
-				  					<option>ИКС</option>
-				  					<option>Прикладная математика</option>
-				  					<option>другой</option>
-				  					<option>я не студент</option>
+				  					<option value="ИКС">ИКС</option>
+				  					<option value="Прикладная математика">Прикладная математика</option>
+				  					<option selected value="другой">другой</option>
+				  					<option value="я не студент">я не студент</option>
 								</select>
 							</div>
 						
@@ -65,12 +65,12 @@
 							<div class="controls form-inline">
 								<label for="inputValue"><font size=4>курс: </font></label>
 								<select  style="height:27px" class="input-medium" id="inputValue" name="course">
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
-				  					<option>я не студент</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
+				  					<option selected value="я не студент">я не студент</option>
 								</select>
 							</div>
 						
@@ -146,10 +146,10 @@
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>учебный центр/стажировка </font></label>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="interest_lc">
-				  					<option>да</option>
-				  					<option>возможно</option>
-				  					<option>нет</option>
-				  					<option>хочу узнать больше</option>
+				  					<option value="да">да</option>
+				  					<option value="возможно">возможно</option>
+				  					<option value="нет">нет</option>
+				  					<option value="хочу узнать больше"> хочу узнать больше</option>
 								</select>
         				  </div>
 						
@@ -163,10 +163,10 @@
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>работа в компании NetCracker: </font></label>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="interest_job">
-				  					<option>да</option>
-				  					<option>возможно</option>
-				  					<option>нет</option>
-				  					<option>хочу узнать больше</option>
+				  					<option value="да">да</option>
+				  					<option value="возможно">возможно</option>
+				  					<option value="нет">нет</option>
+				  					<option value="хочу узнать больше">хочу узнать больше</option>
 								</select>
         				  </div>
 						
@@ -185,10 +185,10 @@
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>разработка ПО: </font></label>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="interest_po">
-				  					<option>да</option>
-				  					<option>возможно</option>
-				  					<option>нет</option>
-				  					<option>хочу узнать больше</option>
+				  					<option value="да">да</option>
+				  					<option value="возможно">возможно</option>
+				  					<option value="нет">нет</option>
+				  					<option value="хочу узнать больше">хочу узнать больше</option>
 								</select>
         				  </div>
 						
@@ -219,10 +219,10 @@
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>глубокая специализация: </font></label>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_gc">
-				  					<option>да</option>
-				  					<option>возможно</option>
-				  					<option>нет</option>
-				  					<option>хочу узнать больше</option>
+				  					<option value="ИКС">да</option>
+				  					<option value="ИКС">возможно</option>
+				  					<option value="ИКС">нет</option>
+				  					<option value="ИКС">хочу узнать больше</option>
 								</select>
         				  </div>
 						
@@ -236,10 +236,27 @@
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>разнообразная работа: </font></label>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_rj">
-				  					<option>да</option>
-				  					<option>возможно</option>
-				  					<option>нет</option>
-				  					<option>хочу узнать больше</option>
+				  					<option value="ИКС">да</option>
+				  					<option value="ИКС">возможно</option>
+				  					<option value="ИКС">нет</option>
+				  					<option value="ИКС">хочу узнать больше</option>
+								</select>
+        				  </div>
+						
+					</td>
+				</tr>
+				<tr>
+					<td width=10%>
+					</td>
+					<td>
+						
+						  <div class="controls form-inline">
+	            				<label for="inputValue"><font size=4>Управление персоналом: </font></label>
+	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_manage">
+				  					<option value="да">да</option>
+				  					<option value=">возможно">возможно</option>
+				  					<option value="нет">нет</option>
+				  					<option value="хочу узнать больше">хочу узнать больше</option>
 								</select>
         				  </div>
 						
@@ -253,10 +270,10 @@
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>продажи: </font></label>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_sales">
-				  					<option>да</option>
-				  					<option>возможно</option>
-				  					<option>нет</option>
-				  					<option>хочу узнать больше</option>
+				  					<option value="да">да</option>
+				  					<option value=">возможно">возможно</option>
+				  					<option value="нет">нет</option>
+				  					<option value="хочу узнать больше">хочу узнать больше</option>
 								</select>
         				  </div>
 						
@@ -292,11 +309,11 @@
 							<div class="controls form-inline">
 								<label for="inputValue"><font size=4>C++: </font></label>
 								<select  style="height:27px" class="input-small" id="inputValue" name="lan_c">
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
 							</div>
 						
@@ -306,11 +323,11 @@
 							<div class="controls form-inline">
 								<label for="inputValue"><font size=4>Java: </font></label>
 								<select  style="height:27px" class="input-small" id="inputValue" name="lan_java">
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
 							</div>
 						
@@ -320,11 +337,11 @@
 							<div class="controls form-inline">
 								<input type="text" class="input-small" id="inputValue">
 								<select  style="height:27px" class="input-small" id="inputValue" name="lan_another1">
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
 							</div>
 						
@@ -334,11 +351,11 @@
 							<div class="controls form-inline">
 								<input type="text" class="input-small" id="inputValue">
 								<select  style="height:27px" class="input-small" id="inputValue" name="lan_another2">
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
 							</div>
 						
@@ -363,12 +380,12 @@
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>сетевые технологии: </font></label>
 	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_net">
-	            					<option>0</option>
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            					<option value="0">0</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -381,13 +398,13 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>эффективные алгоритмы: </font></label>
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-	            					<option>0</option>
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_algorithm">
+	            					<option value="0">0</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -400,13 +417,13 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>ООП: </font></label>
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-	            					<option>0</option>
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_oop">
+	            					<option value="0">0</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -419,13 +436,13 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>базы данных: </font></label>
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-	            					<option>0</option>
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_bd">
+	            					<option value="0">0</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -438,13 +455,13 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>Web: </font></label>
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-	            					<option>0</option>
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_web">
+	            					<option value="0">0</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -457,13 +474,13 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>графический интерфейс (не Web): </font></label>
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-	            					<option>0</option>
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_gui">
+	            					<option value="0">0</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -476,13 +493,13 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>сетевое программирование: </font></label>
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-	            					<option>0</option>
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_netprog">
+	            					<option value="0">0</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -495,13 +512,13 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>проектирование программ: </font></label>
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-	            					<option>0</option>
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_design">
+	            					<option value="0">0</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -514,13 +531,13 @@
 						
 						  <div class="controls form-inline">
 	            				<input type="text" class="input-small" id="inputValue">
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-	            					<option>0</option>
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_another">
+	            					<option value="0">0</option>
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -542,12 +559,12 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>чтение: </font></label>
-	            				<<select  style="height:27px" class="input-small" id="inputValue">
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="eng_reading">
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -560,12 +577,12 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>письмо: </font></label>
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="eng_writting">
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -578,12 +595,12 @@
 					
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>устная речь: </font></label>
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-				  					<option>1</option>
-				  					<option>2</option>
-				  					<option>3</option>
-				  					<option>4</option>
-				  					<option>5</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="eng_speaking">
+				  					<option value="1">1</option>
+				  					<option value="2">2</option>
+				  					<option value="3">3</option>
+				  					<option value="4">4</option>
+				  					<option value="5">5</option>
 								</select>
         				  </div>
 						
@@ -598,12 +615,12 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>Откуда ты узнал о наборе в учебный центр?: </font></label>
-	            				<select  style="height:27px" class="input-small" id="inputValue">
-				  					<option>в интернетах прочитал</option>
-				  					<option>друзья рассказали</option>
-				  					<option>Бровков посоветовал</option>
-				  					<option>флаер увидел</option>
-				  					<option>какой учебный центр?</option>
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="source">
+				  					<option value="в интернетах прочитал">в интернетах прочитал</option>
+				  					<option value="друзья рассказали">друзья рассказали</option>
+				  					<option value="Бровков посоветовал">Бровков посоветовал</option>
+				  					<option value="флаер увидел">флаер увидел</option>
+				  					<option value="какой учебный центр?">какой учебный центр?</option>
 								</select>
         				  </div>
 						
@@ -618,7 +635,7 @@
 				</tr>
 				<tr>
 					<td>
-						<textarea rows="3"></textarea>
+						<textarea rows="3" name="experience"></textarea>
 					</td>
 				</tr>
 			</table>
@@ -630,7 +647,7 @@
 				</tr>
 				<tr>
 					<td>
-						<textarea rows="3"></textarea>
+						<textarea rows="3" name="promises"></textarea>
 					</td>
 				</tr>
 			</table>
@@ -642,14 +659,14 @@
 				</tr>
 				<tr>
 					<td>
-						<textarea rows="3"></textarea>
+						<textarea rows="3" name="more_information"></textarea>
 					</td>
 				</tr>
 			</table>
 			<table>
 				<tr>	
 					<td>
-						<input type="submit" style="height:30px; width:300px; font-size: 15px" value="Жми кнопку и почту проверяй">
+						<input type="submit" style="height:30px; width:300px; font-size: 15px" value="Жми кнопку @ почту проверяй">
 					</td>
 				</tr>
 			</table>

@@ -35,16 +35,16 @@ public class Source  implements Serializable{
 		return sourceId;
 	}
 
-	public void setSourceId(Integer source_id) {
-		this.sourceId = source_id;
+	public void setSourceId(Integer sourceId) {
+		this.sourceId = sourceId;
 	}
 
 	public String getSourceName() {
 		return sourceName;
 	}
 
-	public void setSourceName(String source_name) {
-		this.sourceName = source_name;
+	public void setSourceName(String sourceName) {
+		this.sourceName = sourceName;
 	}
 
 	public Set<Form> getForms() {

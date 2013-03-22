@@ -1,6 +1,5 @@
 package com.ncteam.iviewer.web;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,10 +54,7 @@ public class HRController {
 					(String)request.getParameter("endTime"))){
 				
 		Interview redactedInterview=interviewService.getRecordById(interview_id, Interview.class);
-		
-		
-			
-		
+				
 		redactedInterview.setStringStartDate(updateStartDateString);
 		redactedInterview.setStringEndDate(updateEndDateString);
 		redactedInterview.setExtraTime(Integer.parseInt((String)request.getParameter("extraTime")));
@@ -134,9 +130,7 @@ public class HRController {
 			map.put("erroMessage","Введённые данные не соответствуют шаблону.");
 		}
 		
-		
-		List<Interview> interviews=interviewService.getAllRecords(Interview.class);		
-		map.put("interviews",interviews);
+		map.put("interviews",interviewService.getAllRecords(Interview.class));
 		return "hr";
 	}
 	

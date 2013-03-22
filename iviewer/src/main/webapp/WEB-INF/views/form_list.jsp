@@ -51,7 +51,7 @@ List<FormInformation> forms=(List<FormInformation>)request.getAttribute("forms")
 		<tr ALIGN=center height=40>
 			<td><%=k %></td> <td>${form.surname}  ${form.firstName} ${form.lastName}</td>
 			<td>${form.startDate}</td> <td><%if(forms.get(k-1).getStatus().intValue()==1){  %>Да<%}else{ %>Нет<%} %></td> <td><a href="/form.jsp?form_id=${form.formId}" target="_blank">Просмотр</a></td>
-			<td><a href="hr_mark_${form.formId}" target="_blank">Оценить</a></td>
+			<td><a href="hr_mark_${form.formId}">Оценить</a></td>
 			<td style="display:none;">${form.universityName}</td>
 		</tr>
 	</c:forEach>

@@ -39,16 +39,16 @@ public class University implements Serializable{
 		return universityId;
 	}
 
-	public void setUniversityId(Integer university_id) {
-		this.universityId = university_id;
+	public void setUniversityId(Integer universityId) {
+		this.universityId = universityId;
 	}
 
 	public String getUniversityName() {
 		return universityName;
 	}
 
-	public void setUniversityName(String university_name) {
-		this.universityName = university_name;
+	public void setUniversityName(String universityName) {
+		this.universityName = universityName;
 	}
 
 	public Set<Form> getForms() {

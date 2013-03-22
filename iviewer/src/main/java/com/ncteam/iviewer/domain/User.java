@@ -95,8 +95,8 @@ public String getLastName() {
 	return lastName;
 }
 
-public void setLastName(String last_name) {
-	this.lastName = last_name;
+public void setLastName(String lastName) {
+	this.lastName = lastName;
 }
 
 
@@ -113,8 +113,8 @@ public Integer getUserTypeId() {
 	return userTypeId;
 }
 
-public void setUserTypeId(Integer user_type_id) {
-	this.userTypeId = user_type_id;
+public void setUserTypeId(Integer userTypeId) {
+	this.userTypeId = userTypeId;
 }
 
 
@@ -127,8 +127,8 @@ public String getFirstName() {
 	return firstName;
 }
 
-public void setFirstName(String first_name) {
-	this.firstName = first_name;
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
 }
 
 
@@ -152,26 +152,17 @@ public UsersType getUsersType() {
 	return usersType;
 }
 
-public void setUsersType(UsersType users_type) {
-	this.usersType = users_type;
+public void setUsersType(UsersType usersType) {
+	this.usersType = usersType;
 }
-
-public HRMark getHR_mark() {
-	return hrMark;
-}
-
-public void setHR_mark(HRMark hr_mark) {
-	this.hrMark = hr_mark;
-}
-
 
 public HRMark getHrMark() {
 	return hrMark;
 }
 
 
-public void setHrMark(HRMark hr_mark) {
-	this.hrMark = hr_mark;
+public void setHrMark(HRMark hrMark) {
+	this.hrMark = hrMark;
 }
 
 
@@ -180,8 +171,8 @@ public TechMark getTechMark() {
 }
 
 
-public void setTechMark(TechMark tech_mark) {
-	this.techMark = tech_mark;
+public void setTechMark(TechMark techMark) {
+	this.techMark = techMark;
 }
 
 
@@ -190,8 +181,8 @@ public String getStringRegDate() {
 }
 
 
-public void setStringRegDate(String stringReg_date) {
-	this.stringRegDate = stringReg_date;
+public void setStringRegDate(String stringRegDate) {
+	this.stringRegDate = stringRegDate;
 }
 
 
@@ -200,8 +191,8 @@ public Date getRegDate() {
 }
 
 
-public void setRegDate(Date reg_date) {
-	this.regDate = reg_date;
+public void setRegDate(Date regDate) {
+	this.regDate = regDate;
 }
 
 

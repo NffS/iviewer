@@ -18,14 +18,11 @@
 
 <a href="form"><font size="3" color="000000">Заполнить анкету</font></a>
 <br><br>
-<a href="hr_reports"><font size="3" color="000000">Выбрать собеседование</font></a>
+<a href="choose"><font size="3" color="000000">Выбрать собеседование</font></a>
+<br><br>
+<a href="candidate_options"><font size="3" color="000000">Настройки кандидата</font></a>
 <br><br>
 <a href="index"><font size="3" color="000000">На главную</font></a>
-
-<%@ include file="/resources/design/center.jsp" %>
-
-Приветствуем, <%=session.getAttribute("first_name") %>.
-
 <%@ include file="/resources/design/center.jsp" %>
 
 Приветствуем, <%=session.getAttribute("first_name") %>.

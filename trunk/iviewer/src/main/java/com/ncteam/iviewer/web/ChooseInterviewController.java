@@ -18,22 +18,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.User;
+import com.ncteam.iviewer.service.impl.InterviewServiceImpl;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 @Controller
 public class ChooseInterviewController{
 
-	@Autowired
-	private UserServiceImpl userService;
+	 @Autowired
+	 private InterviewServiceImpl interviewService;
 	
 	@RequestMapping(value = "/choose")
     public String chooseInterview(HttpSession session, Map<String, Object> map) {
 		
-		List<Interview> interviews=userService.getAllRecords(Interview.class);
-		map.put("interviews",interviews);
+		map.put("interviews",interviewService.getAllRecords(Interview.class));
         return "/choose_interview";
     }
 	
-
-
 }

@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf8" pageEncoding="utf8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@include file="/resources/design/header.jsp" %>
 
 <a href="index"><font size="3" color="000000">На главную</font></a>

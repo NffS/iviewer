@@ -45,20 +45,39 @@ public class HRMarkController {
 		if(!validator.isUserHR(session)){
 			return "redirect:/index";
 		}
+		int english;
+		int motivation;
+		try{
+			english=Integer.parseInt(request.getParameter("english"));
+			motivation=Integer.parseInt(request.getParameter("motivation"));
+			if(english>100||english<0||motivation>100||motivation<0){
+				throw new Exception();
+			}
+		}
+		catch(NumberFormatException e){
+			map.put("target", "hr_mark_"+request.getParameter("form_id"));
+			map.put("message", " Оценка не сохранена.\n Введённое значение оценки не является числом.");
+			return "redirect";
+		}
+		catch(Exception e){
+			map.put("target", "hr_mark_"+request.getParameter("form_id"));
+			map.put("message", " Оценка не сохранена.\n Введённое значение оценки не соответствует формату поля (0-100).");
+			return "redirect";
+		}
 		HRMark mark=null;
 		if(request.getParameter("hr_mark_id")==""){
 			mark=new HRMark();
 			mark.setFormId(Integer.parseInt(request.getParameter("form_id")));
-			mark.setEnglish(Integer.parseInt(request.getParameter("english")));
-			mark.setMotivation(Integer.parseInt(request.getParameter("motivation")));
-			mark.setGeneralMark(new String(request.getParameter("general").getBytes("ISO-8859-1")));
+			mark.setEnglish(english);
+			mark.setMotivation(motivation);
+			mark.setGeneralMark(request.getParameter("general"));
 			formService.addRecord(mark);
 		}
 		else{
 			mark=formService.getRecordById(Integer.parseInt(request.getParameter("hr_mark_id")), HRMark.class);
 			mark.setEnglish(Integer.parseInt(request.getParameter("english")));
 			mark.setMotivation(Integer.parseInt(request.getParameter("motivation")));
-			mark.setGeneralMark(new String(request.getParameter("general").getBytes("ISO-8859-1")));
+			mark.setGeneralMark(request.getParameter("general"));
 			formService.updateRecord(mark);
 		}
 		

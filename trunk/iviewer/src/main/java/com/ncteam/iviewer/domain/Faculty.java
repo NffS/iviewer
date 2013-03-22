@@ -43,24 +43,24 @@ public class Faculty  implements Serializable{
 		return facultyId;
 	}
 
-	public void setFacultyId(Integer faculty_id) {
-		this.facultyId = faculty_id;
+	public void setFacultyId(Integer facultyId) {
+		this.facultyId = facultyId;
 	}
 
 	public String getFacultyName() {
 		return facultyName;
 	}
 
-	public void setFacultyName(String faculty_name) {
-		this.facultyName = faculty_name;
+	public void setFacultyName(String facultyName) {
+		this.facultyName = facultyName;
 	}
 
 	public Integer getUniversityId() {
 		return universityId;
 	}
 
-	public void setUniversityId(Integer university_id) {
-		this.universityId = university_id;
+	public void setUniversityId(Integer universityId) {
+		this.universityId = universityId;
 	}
 
 	public University getUniversity() {

@@ -36,8 +36,8 @@ public class UsersType implements Serializable{
 		return userTypeId;
 	}
 	
-	public void setUserTypeId(Integer user_type_id) {
-		this.userTypeId = user_type_id;
+	public void setUserTypeId(Integer userTypeId) {
+		this.userTypeId = userTypeId;
 	}
 	
 	

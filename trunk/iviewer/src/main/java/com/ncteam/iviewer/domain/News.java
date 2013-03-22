@@ -26,8 +26,8 @@ public class News{
 		return newsId;
 	}
 	
-	public void setNewsId(Integer news_id) {
-		this.newsId = news_id;
+	public void setNewsId(Integer newsId) {
+		this.newsId = newsId;
 	}
 	
 	

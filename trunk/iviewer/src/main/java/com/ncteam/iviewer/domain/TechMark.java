@@ -64,45 +64,39 @@ public class TechMark implements Serializable{
 		return techMarkId;
 	}
 
-	public void setTechMarkId(Integer tech_mark_id) {
-		this.techMarkId = tech_mark_id;
+	public void setTechMarkId(Integer techMarkId) {
+		this.techMarkId = techMarkId;
 	}
 
 	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer user_id) {
-		this.userId = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public Integer getFormId() {
 		return formId;
 	}
 
-	public void setFormId(Integer form_id) {
-		this.formId = form_id;
+	public void setFormId(Integer formId) {
+		this.formId = formId;
 	}
 
 	public Integer getProgLang() {
 		return progLang;
 	}
 
-	public void setProgLang(Integer prog_lang) throws Exception {
-		if (prog_lang>100 || prog_lang<0) {
-			throw new Exception("Оценка вне допустимого диапазона");
-		}
-		this.progLang = prog_lang;
+	public void setProgLang(Integer progLang) {
+		this.progLang = progLang;
 	}
 
 	public Integer getOop() {
 		return oop;
 	}
 
-	public void setOop(Integer oop) throws Exception {
-		if (oop>100 || oop<0) {
-			throw new Exception("Оценка вне допустимого диапазона");
-		}
+	public void setOop(Integer oop) {
 		this.oop = oop;
 	}
 
@@ -110,10 +104,7 @@ public class TechMark implements Serializable{
 		return patterns;
 	}
 
-	public void setPatterns(Integer patterns) throws Exception {
-		if (patterns>100 || patterns<0) {
-			throw new Exception("Оценка вне допустимого диапазона");
-		}
+	public void setPatterns(Integer patterns) {
 		this.patterns = patterns;
 	}
 
@@ -121,10 +112,7 @@ public class TechMark implements Serializable{
 		return db;
 	}
 
-	public void setDb(Integer db) throws Exception {
-		if (db>100 || db<0) {
-			throw new Exception("Оценка вне допустимого диапазона");
-		}
+	public void setDb(Integer db) {
 		this.db = db;
 	}
 
@@ -132,10 +120,7 @@ public class TechMark implements Serializable{
 		return cs;
 	}
 
-	public void setCs(Integer cs) throws Exception {
-		if (cs>100 || cs<0) {
-			throw new Exception("Оценка вне допустимого диапазона");
-		}
+	public void setCs(Integer cs) {
 		this.cs = cs;
 	}
 
@@ -143,10 +128,7 @@ public class TechMark implements Serializable{
 		return experience;
 	}
 
-	public void setExperience(Integer experience) throws Exception {
-		if (experience>100 || experience<0) {
-			throw new Exception("Оценка вне допустимого диапазона");
-		}
+	public void setExperience(Integer experience) {
 		this.experience = experience;
 	}
 
@@ -154,10 +136,7 @@ public class TechMark implements Serializable{
 		return other;
 	}
 
-	public void setOther(Integer other) throws Exception {
-		if (other>100 || other<0) {
-			throw new Exception("Оценка вне допустимого диапазона");
-		}
+	public void setOther(Integer other) {
 		this.other = other;
 	}
 
@@ -165,8 +144,8 @@ public class TechMark implements Serializable{
 		return generalMark;
 	}
 
-	public void setGeneralMark(String general_mark) {
-		this.generalMark = general_mark;
+	public void setGeneralMark(String generalMark) {
+		this.generalMark = generalMark;
 	}
 
 	public Form getForm() {
@@ -184,5 +163,6 @@ public class TechMark implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	
 }

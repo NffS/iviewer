@@ -35,8 +35,8 @@ List<FormInformation> forms=(List<FormInformation>)request.getAttribute("forms")
 			</select>
 		</td>
 		<td colspan="2" width=300 align="right">
-			Только требующие подтверждения&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" onchange="filter('sf')" name="stateOnly" id="stateOnly"/>
+			Только требующие подтверждения
+			<input type="checkbox" onchange="filter('sf')" name="stateOnly" id="stateOnly" style="margin-left: 20px;"/>
 		</td>
 	</tr>
 </table>

@@ -40,7 +40,7 @@ public class TechMarkController {
 	
 	@RequestMapping("/tech_mark_save")
 	public String techMarkSave(HttpSession session, HttpServletRequest request,
-			Map<String, Object> map) throws UnsupportedEncodingException{
+			Map<String, Object> map) {
 		
 		if(!validator.isUserTech(session)){
 			return "redirect:/index";
@@ -49,25 +49,37 @@ public class TechMarkController {
 		if(request.getParameter("it_mark_id")==""){
 			mark=new TechMark();
 			mark.setFormId(Integer.parseInt(request.getParameter("form_id")));
-			mark.setProgLang(Integer.parseInt(request.getParameter("prog_lang")));
-			mark.setOop(Integer.parseInt(request.getParameter("oop")));
-			mark.setPatterns(Integer.parseInt(request.getParameter("patterns")));
-			mark.setDb(Integer.parseInt(request.getParameter("db")));
-			mark.setCs(Integer.parseInt(request.getParameter("computer_science")));
-			mark.setExperience(Integer.parseInt(request.getParameter("experience")));
-			mark.setOther(Integer.parseInt(request.getParameter("other")));
+			try {
+				mark.setProgLang(Integer.parseInt(request.getParameter("prog_lang")));
+				mark.setOop(Integer.parseInt(request.getParameter("oop")));
+				mark.setPatterns(Integer.parseInt(request.getParameter("patterns")));
+				mark.setDb(Integer.parseInt(request.getParameter("db")));
+				mark.setCs(Integer.parseInt(request.getParameter("computer_science")));
+				mark.setExperience(Integer.parseInt(request.getParameter("experience")));
+				mark.setOther(Integer.parseInt(request.getParameter("other")));
+			} catch(Exception e) {
+				map.put("target", "tech_mark_"+request.getParameter("form_id"));
+				map.put("message", "Ошибка сохранения оценки ("+e.getMessage()+")");
+				return "redirect";
+			}
 			mark.setGeneralMark(new String(request.getParameter("general")));
 			formService.addRecord(mark);
 		}
 		else{
 			mark=formService.getRecordById(Integer.parseInt(request.getParameter("tech_mark_id")), TechMark.class);
-			mark.setProgLang(Integer.parseInt(request.getParameter("prog_lang")));
-			mark.setOop(Integer.parseInt(request.getParameter("oop")));
-			mark.setPatterns(Integer.parseInt(request.getParameter("patterns")));
-			mark.setDb(Integer.parseInt(request.getParameter("db")));
-			mark.setCs(Integer.parseInt(request.getParameter("cs")));
-			mark.setExperience(Integer.parseInt(request.getParameter("experience")));
-			mark.setOther(Integer.parseInt(request.getParameter("other")));
+			try {
+				mark.setProgLang(Integer.parseInt(request.getParameter("prog_lang")));
+				mark.setOop(Integer.parseInt(request.getParameter("oop")));
+				mark.setPatterns(Integer.parseInt(request.getParameter("patterns")));
+				mark.setDb(Integer.parseInt(request.getParameter("db")));
+				mark.setCs(Integer.parseInt(request.getParameter("cs")));
+				mark.setExperience(Integer.parseInt(request.getParameter("experience")));
+				mark.setOther(Integer.parseInt(request.getParameter("other")));
+			} catch(Exception e) {
+				map.put("target", "tech_mark_"+request.getParameter("form_id"));
+				map.put("message", "Ошибка сохранения оценки ("+e.getMessage()+")");
+				return "redirect";
+			}
 			mark.setGeneralMark(request.getParameter("general"));
 			formService.updateRecord(mark);
 		}

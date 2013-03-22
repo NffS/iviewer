@@ -3,33 +3,28 @@
 
 <a href="index"><font size="3" color="000000">На главную</font></a>
 <%@ include file="/resources/design/center.jsp" %>
-<form:form  method="POST" action="choose_interview">
-	<table>
-		<tr>
-			<td width=110><font size=5>Имя:</font></td>
-   			 <td><input class="input-large" type="text" style="height:30px" name="firstname" pattern="[A-Za-z]" value="${firstname}"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${firstnameMessage }</font> </td>
-   		</tr>
-   		<tr>
-			<td width=110><font size=5>Фамилия:</font></td>
-   			 <td><input class="input-large" type="text" style="height:30px" name="surname" pattern="[A-Za-z]" value="${surname}"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${surnameMessage }</font> </td>
-   		</tr>
-   		<tr>
-			<td width=110><font size=5>Отчество:</font></td>
-   			 <td><input class="input-large" type="text" style="height:30px" name="lastname" pattern="[A-Za-z]" value="${lastname}"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${lastnameMessage }</font> </td>
-   		</tr>
-		<tr>
-			<td width=110><font size=5>E-mail:</font></td>
-   			 <td><input class="input-large" type="text" style="height:30px" name="email" pattern="[\w_]+@\w+(.\w+)*.[a-z]{2,4}" value="${email}"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${emailMessage }</font> </td>
-   		</tr>
-    	<tr>
-    		<td width=110><font size=5>Пароль:</font></td>
-    		<td><input class="input-large" type="password" style="height:30px" name="password" pattern="[A-Za-z0-9]+"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${passwordMessage }</font></td>
-		</tr>
-		<br>
-			<td colspan="2" align="center"><input type="submit" style="height:30px; width:100px; font-size: 15px" value="Регистрация"></td>
-</table>
-</form:form>
-<br><br><br><br>
-<font color="#FF0000" id="error" size="15px">${message }</font>
+Приветствуем, <%=session.getAttribute("first_name") %>.
+<br><br><br>
+<h1>Доступные собеседования</h1>
+<br>
+<%int k=0; %>
+			<table border=2 align="center">
+				<tr ALIGN=center bgcolor="FFFF66">
+					<th>№</th> <th>Дата</th> <th>Начало</th> <th>Конец</th> <th>Количество мест</th> <th>Количество участников</th> <th> </th>
+				</tr>
+				<c:forEach var="interview" items="${interviews}">
+				<%k++; %>
+				<tr ALIGN=center height=40>
+				<form action="choose">
+				<td><%=k %></td> 
+				<td width="50px">${interview.stringStart_date.split(" ")[0]}</td> 
+				<td >${interview.stringStart_date.split(" ")[1].substring(0,5)}</td>
+				<td>${interview.stringEnd_date.split(" ")[1].substring(0,5)}</td>
+				<td>${interview.seats}</td>
+				<td width=100>${interview.forms.size()}</td> <td><input type="submit" value="Выбрать"/></td>
+				</tr>
+				</c:forEach>
+			</table>
 
+<br><br>
 <%@ include file="/resources/design/footer.jsp" %>

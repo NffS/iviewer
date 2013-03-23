@@ -49,20 +49,25 @@ public class HRMarkController {
 		int motivation;
 		try{
 			english=Integer.parseInt(request.getParameter("english"));
-			motivation=Integer.parseInt(request.getParameter("motivation"));
-			if(english>100||english<0||motivation>100||motivation<0){
-				throw new Exception();
-			}
 		}
 		catch(NumberFormatException e){
-			map.put("target", "hr_mark_"+request.getParameter("form_id"));
-			map.put("message", " Оценка не сохранена.\n Введённое значение оценки не является числом.");
-			return "redirect";
+			map.put("englishErrorMessage", "Введённое значение оценки не является числом.");
+			return "hr_mark_"+request.getParameter("form_id");
 		}
-		catch(Exception e){
-			map.put("target", "hr_mark_"+request.getParameter("form_id"));
-			map.put("message", " Оценка не сохранена.\n Введённое значение оценки не соответствует формату поля (0-100).");
-			return "redirect";
+		try{
+			motivation=Integer.parseInt(request.getParameter("motivation"));
+		}
+		catch(NumberFormatException e){
+			map.put("motivationErrorMessage", "Введённое значение оценки не является числом.");
+			return "hr_mark_"+request.getParameter("form_id");
+		}
+		if(english>100||english<0){
+			map.put("englishErrorMessage", "Оценка должна быть в диапазоне 0-100.");
+			return "hr_mark_"+request.getParameter("form_id");
+		}
+		if(motivation>100||motivation<0){
+			map.put("motivationErrorMessage", "Оценка должна быть в диапазоне 0-100.");
+			return "hr_mark_"+request.getParameter("form_id");
 		}
 		HRMark mark=null;
 		if(request.getParameter("hr_mark_id")==""){

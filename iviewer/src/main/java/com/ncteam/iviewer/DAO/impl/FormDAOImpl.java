@@ -1,5 +1,6 @@
 package com.ncteam.iviewer.DAO.impl;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import Support.FormInformationTransformer;
 
+import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.FormInformation;
 import com.ncteam.iviewer.domain.HRMark;
 import com.ncteam.iviewer.domain.TechMark;
@@ -183,5 +185,11 @@ public class FormDAOImpl extends TablesDAOImpl {
 		String query="FROM TechMark h where h.formId=:id";
 		Session sess=sessionFactory.getCurrentSession();
 		return (TechMark)sess.createQuery(query).setInteger("id", id).uniqueResult();
+	}
+	
+	public Form getFormByUserId(int userID){
+		String query="FROM Form where userId=:userID";
+		Session sess=sessionFactory.getCurrentSession();
+		return (Form) sess.createQuery(query).setInteger("userID", userID).uniqueResult();
 	}
 }

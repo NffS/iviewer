@@ -9,28 +9,94 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.ncteam.iviewer.domain.Faculty;
+import com.ncteam.iviewer.domain.Form;
+import com.ncteam.iviewer.domain.University;
 import com.ncteam.iviewer.domain.User;
+import com.ncteam.iviewer.service.impl.PDFservice;
+import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 @Controller
 public class FormController{
-
+	
+	@Autowired
+	 private UserServiceImpl userService;
+	
 	@RequestMapping(value = "form", method = RequestMethod.POST)
-    public String createUser(HttpServletRequest request) {
+    public String createUser(HttpServletRequest request, HttpSession session) throws DocumentException, IOException {
 		
+		Form newForm = new Form();
+			User user = userService.getUserByEmail(session.getAttribute("email").toString());
+			newForm.setUserId(user.getUserId());
+		newForm.setUser(user);
+			University university = new University();
+			university.setUniversityId(1);
+			university.setUniversityName(request.getParameter("univerid"));
+		newForm.setUniversity(university);
+			Faculty faculty = new Faculty();
+			faculty.setFacultyId(1);
+			faculty.setFacultyName(request.getParameter("faculty"));
+			faculty.setUniversityId(1);
+			faculty.setUniversity(university);
+		
+		newForm.setCourse(Integer.getInteger(request.getParameter("univerid")));
+		newForm.setEndYear(request.getParameter("year"));
+		
+		newForm.setEmail2(request.getParameter("email2"));
+		newForm.setPhone(request.getParameter("phone"));
+		newForm.setAnotherContact(request.getParameter("another_contact"));
+		
+		newForm.setInterestNc("+");
+		newForm.setInterestTc("+");
+		newForm.setInterestAreaPo("+");
+		newForm.setInterestAreaOther("+");
+		
+		newForm.setJobArDeepSpec("+");
+		newForm.setJobArVaried("+");
+		newForm.setJobArManage("+");
+		newForm.setJobArSales("+");
+		newForm.setJobArOther("+");
+		
+		newForm.setProgLangC(Integer.getInteger(request.getParameter("lan_c")));
+		newForm.setProgLangJava(Integer.getInteger(request.getParameter("lan_java")));
+		newForm.setProgLangOther("lan_another1");
+		
+		newForm.setCsNetworkTech(Integer.getInteger(request.getParameter("cs_net")));
+		newForm.setCsAlgorithms(Integer.getInteger(request.getParameter("cs_algorithm")));
+		newForm.setCsOop(Integer.getInteger(request.getParameter("cs_oop")));
+		newForm.setCsDb(Integer.getInteger(request.getParameter("cs_bd")));
+		newForm.setCsWeb(Integer.getInteger(request.getParameter("cs_web")));
+		newForm.setCsGui(Integer.getInteger(request.getParameter("cs_gui")));
+		newForm.setCsNetworkProg(Integer.getInteger(request.getParameter("cs_netprog")));
+		newForm.setCsDesign(Integer.getInteger(request.getParameter("cs_design")));
+		
+		newForm.setEnglishRead(Integer.getInteger(request.getParameter("eng_reading")));
+		newForm.setEnglishWrite(Integer.getInteger(request.getParameter("eng_writting")));
+		newForm.setEnglishSpoken(Integer.getInteger(request.getParameter("eng_speaking")));
+		
+		newForm.setExperience(request.getParameter("experience"));
+		newForm.setMotivation_comment(request.getParameter("promises"));
+		newForm.setComment2(request.getParameter("more_information"));
+		
+		newForm.setStatus(1);
+		newForm.setVisitStatus(1);
+		
+		createPDF(user, newForm);
 		
         return "form";
     }
 	
-	void createPDF(){
-		Document document = new Document();
-		
-		
+	void createPDF(User user, Form form) throws DocumentException, IOException{
+		PDFservice pdf = new PDFservice("~//iviewer//forms//"+user.getFirstName()+"_"+user.getSurname()+"_"+user.getUserId());
+		pdf.createPDF(user, form);
 	}
 	
 	@RequestMapping("form")

@@ -107,6 +107,9 @@ public class Form implements Serializable, Comparable<Form>{
 	@Column(name="cs_design")
 	private Integer csDesign;
 	
+	@Column(name="cs_other")
+	private Integer csOther;
+	
 	@Column(name="experience")
 	private String experience;
 	
@@ -520,6 +523,16 @@ public class Form implements Serializable, Comparable<Form>{
 		this.csDesign = csDesign;
 	}
 
+	
+	public Integer getCsOther() {
+		return csOther;
+	}
+
+
+
+	public void setCsOther(Integer csOther) {
+		this.csOther = csOther;
+	}
 
 
 	public String getExperience() {

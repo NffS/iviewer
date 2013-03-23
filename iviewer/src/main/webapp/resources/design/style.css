@@ -161,7 +161,9 @@ margin-bottom:30;
 	font-family: Geneva, Arial, Helvetica, sans-serif; 
 	margin-top:5px;
 }
-
+#text-input {
+	height: 30px;
+}
 #info
 {
 	margin-top:0px;

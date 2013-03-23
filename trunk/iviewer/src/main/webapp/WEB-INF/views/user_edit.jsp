@@ -24,9 +24,6 @@
 <center>
     <form action="do_user_edit" method="post">
 	    <input type="hidden" name="user_id" value="${user.userId}">
-	    <c:if test="${user.userId==3}">
-	    test
-	    </c:if>
 	    <table width="250px">
 		    <tr><td>Фамилия:</td>
 		    	<td><input type="text" id="text-input" name="surname" value="${user.surname}" pattern="[a-zA-Zа-яА-ЯёЁ]{1,40}$"></td></tr>

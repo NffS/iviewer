@@ -15,6 +15,8 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfWriter;
+import com.ncteam.iviewer.domain.Form;
+import com.ncteam.iviewer.domain.User;
 
 
 public class PDFservice {
@@ -26,13 +28,13 @@ public class PDFservice {
     private Document document;
     private PdfContentByte cb;
     
-    PDFservice(String filename) throws DocumentException, IOException{
+    public PDFservice(String filename) throws DocumentException, IOException{
     	moveX(20);
         moveY(775);
         setTab(0);
         baseFont = BaseFont.createFont(FONT_LOCATION, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
         document = new Document(PageSize.A4,20,20,20,20);
-        filename = "d://test.pdf";
+        //filename = "d://test.pdf";
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filename));
         document.open();
         cb = writer.getDirectContent();
@@ -42,81 +44,81 @@ public class PDFservice {
        document.add(paragraph);
     }
     
-    void createPDF(){
+    public void createPDF(User user, Form form) throws DocumentException, MalformedURLException, IOException{
     	
-        addFoto("d://zold.png");
+        addFoto(user.getFoto());
         addTitle("Персональная информация");
         setTab(30);
-        addLine("Имя:", "Тут будет имя", 120);
-        addLine("Фамилия:", "Тут будет фамилия", 120);
-        addLine("Отчество:", "Тут будет отчество", 120);
-        addLine("Вуз:", "ОНУ им. Мечникова", 120);
-        addLine("Факультет:", "Прикладная математика", 120);
-        addLine("Курс:", "я не студент", 120);
-        addLine("Год окончания:", "я не студент", 120);
+        addLine("Имя:", user.getFirstName(), 120);
+        addLine("Фамилия:", user.getSurname(), 120);
+        addLine("Отчество:", user.getLastName(), 120);
+        addLine("Вуз:", form.getUniversity().getUniversityName(), 120);
+        addLine("Факультет:", form.getFaculty().getFacultyName(), 120);
+        addLine("Курс:", form.getCourse().toString(), 120);
+        addLine("Год окончания:", form.getEndYear(), 120);
         setTab(20);
         addTitle("Контакты");
         setTab(90);
-        addLine("email1:", "Тут будет email1@gmail.com", 120);
-        addLine("email2:", "Тут будет email2@gmail.com", 120);
-        addLine("телефон:", "Тут будет номер телефона", 120);
-        addLine("другое:", "Тут будет другой контакт, йцукенйцукен", 120);
+        addLine("email1:", user.getEmail(), 120);
+        addLine("email2:", form.getEmail2(), 120);
+        addLine("телефон:", form.getPhone(), 120);
+        addLine("другое:", form.getAnotherContact(), 120);
         setTab(20);
         addTitle("Интересы");
         setTab(30);
         addLine("Что заинтересовало?", "", 120);
         setTab(90);
-        addLine("учебный центр/стажировка:", "хочу узнать больше", 210);
-        addLine("работа в компании NetCracker:", "хочу узнать больше", 210);
+        addLine("учебный центр/стажировка:", form.getInterestTc(), 210);
+        addLine("работа в компании NetCracker:", form.getInterestNc(), 210);
         setTab(30);
         addLine("Тип работы", "", 120);
         setTab(90);
-        addLine("глубокая специализация", "хочу узнать больше", 210);
-        addLine("разнообразная работа", "хочу узнать больше", 210);
-        addLine("руководство специалистами", "хочу узнать больше", 210);
-        addLine("продажи", "хочу узнать больше", 210);
-        addLine("другое", "хочу узнать больше", 210);
+        addLine("глубокая специализация", form.getJobArDeepSpec(), 210);
+        addLine("разнообразная работа", form.getJobArVaried(), 210);
+        addLine("руководство специалистами", form.getJobArManage(), 210);
+        addLine("продажи", form.getJobArSales(), 210);
+        addLine("другое", form.getJobArOther(), 210);
         setTab(20);
         addTitle("Достоинства");
         setTab(25);
         addLine("Владение языками программирования (по шкале от 1 до 5): 1 – писал простые ", "", 0);
         setTab(25);
         addLine("программы сo справкой; 3 – хорошо помню синтаксис; 5 – написал крупный проект", "", 0);
-        addTable("1", "2", "3");
+        addTable(form.getProgLangJava().toString(), form.getProgLangC().toString(), form.getProgLangOther());
         document.newPage();
         moveX(20);
         moveY(775);
         setTab(30);
         addLine("Как ты оцениваешь свои знания по разделам (по шкале от 0 до 5):", "", 0);
         setTab(90);
-        addLine("сетевые технологии", "5", 260);
-        addLine("эффективные алгоритмы", "5", 260);
-        addLine("объектно-ориент. программирование", "5", 260);
-        addLine("графический интерфейс (не Web)", "5", 260);
-        addLine("базы данных", "5", 260);
-        addLine("Web", "5", 260);
-        addLine("сетевое программирование", "5", 260);
-        addLine("проектирование программ", "5", 260);
-        addLine("другой раздел ", "5", 260);
+        addLine("сетевые технологии", form.getCsNetworkTech().toString(), 260);
+        addLine("эффективные алгоритмы", form.getCsAlgorithms().toString(), 260);
+        addLine("объектно-ориент. программирование", form.getCsOop().toString(), 260);
+        addLine("графический интерфейс (не Web)", form.getCsGui().toString(), 260);
+        addLine("базы данных", form.getCsDb().toString(), 260);
+        addLine("Web", form.getCsWeb().toString(), 260);
+        addLine("сетевое программирование", form.getCsNetworkProg().toString(), 260);
+        addLine("проектирование программ", form.getCsDesign().toString(), 260);
+        addLine("другой раздел ", form.getCsOther().toString(), 260);
         setTab(30);
         addLine("Уровень английского языка (от 1 = elementary до 5 = advanced):", "", 0);
         setTab(90);
-        addEnglish("3", "2", "1");
+        addEnglish(form.getEnglishRead().toString(), form.getEnglishWrite().toString(), form.getEnglishSpoken().toString());
         setTab(30);
         for (int i=0;i<19;i++)
 			try {
 				document.add(new Paragraph(" "));
 		        document.add(new Paragraph("Если у тебя уже есть опыт работы и/или выполненные учебные проекты, опиши их:", 
 		                new Font(baseFont, 14, Font.BOLD)));
-		        document.add(new Paragraph("Геометрическая прогрессия традиционно оправдывает эмпирический натуральный логарифм, таким образом сбылась мечта идиота - утверждение полностью доказано. Дифференциальное исчисление, конечно, осмысленно позиционирует нормальный критерий интегрируемости, что известно даже школьникам. Криволинейный интеграл масштабирует невероятный ротор векторного поля, что и требовалось доказать.:", 
+		        document.add(new Paragraph(form.getExperience(), 
 		                new Font(baseFont, 12, Font.NORMAL)));
 		        document.add(new Paragraph("Почему тебя обязательно надо взять в NetCracker (достоинства, обещания):", 
 		                new Font(baseFont, 14, Font.BOLD)));
-		        document.add(new Paragraph("Геометрическая прогрессия традиционно оправдывает эмпирический натуральный логарифм, таким образом сбылась мечта идиота - утверждение полностью доказано. Дифференциальное исчисление, конечно, осмысленно позиционирует нормальный критерий интегрируемости, что известно даже школьникам. Криволинейный интеграл масштабирует невероятный ротор векторного поля, что и требовалось доказать.:", 
+		        document.add(new Paragraph(form.getMotivation_comment(), 
 		                new Font(baseFont, 12, Font.NORMAL)));
 		        document.add(new Paragraph("Дополнительные сведения о себе: олимпиады, курсы, сертификаты, личные качества:", 
 		                new Font(baseFont, 14, Font.BOLD)));
-		        document.add(new Paragraph("Геометрическая прогрессия традиционно оправдывает эмпирический натуральный логарифм, таким образом сбылась мечта идиота - утверждение полностью доказано. Дифференциальное исчисление, конечно, осмысленно позиционирует нормальный критерий интегрируемости, что известно даже школьникам. Криволинейный интеграл масштабирует невероятный ротор векторного поля, что и требовалось доказать.:", 
+		        document.add(new Paragraph(form.getComment2(), 
 		                new Font(baseFont, 12, Font.NORMAL))); 
 		        document.add(new Paragraph("Я даю согласие на хранение, обработку и использование моих персональных данных с целью возможного обучения и трудоустройства в компании НЕТКРЕКЕР на данный момент и в будущем: ФИО, подпись _________________________", 
 		                new Font(baseFont, 14, Font.BOLD)));

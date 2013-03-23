@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ncteam.iviewer.DAO.impl.FormDAOImpl;
+import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.FormInformation;
 import com.ncteam.iviewer.domain.HRMark;
 import com.ncteam.iviewer.domain.TechMark;
@@ -72,5 +73,8 @@ public class FormServiceImpl extends TablesServiceImpl<FormDAOImpl> {
 	}
 	public TechMark getTechMarkByFormId(int id){
 		return formDAO.getTechMarkByFormId(id);
+	}
+	public Form getFormByUserId(int userID){
+		return formDAO.getFormByUserId(userID);
 	}
 }

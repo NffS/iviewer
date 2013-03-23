@@ -74,6 +74,7 @@ function currentDate(){
 	var startHours = currentTime.getHours();
 	var endHours = currentTime.getHours() + 1;
 	var minutes = currentTime.getMinutes();
+	if(minutes<10) minutes="0"+minutes;
 	date.value=year+"-"+month+"-"+day;
 	start.value=startHours+":"+minutes;
 	end.value=endHours+":"+minutes;

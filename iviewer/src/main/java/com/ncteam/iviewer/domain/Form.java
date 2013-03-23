@@ -134,7 +134,7 @@ public class Form implements Serializable, Comparable<Form>{
 	@Column(name="status")
 	private Integer status;
 	
-	@Column(name="interview_id", insertable=false, updatable=false)
+	@Column(name="interview_id")//, insertable=false, updatable=false)
 	private Integer interviewId;
 	
 	@Column(name="visit_status")
@@ -153,7 +153,7 @@ public class Form implements Serializable, Comparable<Form>{
 	private TechMark techMark;	
 	
 	@ManyToOne
-	@JoinColumn(name="interview_id")
+	//@JoinColumn(name="interview_id")
 	private Interview interview;
 	
 	@ManyToOne

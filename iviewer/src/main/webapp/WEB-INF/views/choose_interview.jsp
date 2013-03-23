@@ -21,7 +21,7 @@
 							<td ALIGN=center>${interview.stringEndDate.split(" ")[1].substring(0,5)}</td>
 							<td ALIGN=center>${interview.seats - interview.forms.size()}</td>				
 						</form>
-						<form action="/choose_${interview.interviewId}">
+						<form action="choose_${interview.interviewId}">
 							<td align="center" width=100><input type="submit" value="Выбрать"/></td>
 						</form>
 					</tr>

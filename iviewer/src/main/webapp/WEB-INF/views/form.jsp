@@ -8,11 +8,19 @@
 			<legend>Персональная информация</legend>
 			<table>
 				<tr>
+				
 					<td width=30% align="left"  valign="top">
         				
         					<div class="controls form-inline">
+        					<table><tr><td width=10% align="left"  valign="top">
+				</td><td width=30% align="left"  valign="top">
 	            				<label for="inputValue"><font size=4>Имя: </font></label>
-	            				<input type="text" class="input-medium" id="inputValue" name="firstname">
+	            			</td>
+	            			<td width=10% align="left"  valign="top">
+							</td>
+	            			<td width=30% align="left"  valign="top">
+	            				<input type="text" class="input-medium" id="inputValue" name="firstname" value="${user.getFirstName()}">
+	            			</td></tr></table>
         					</div>
         				
         			</td>
@@ -20,7 +28,7 @@
         			
         					<div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>Фамилия: </font></label>
-	            				<input type="text" class="input-medium" id="inputValue" name="surname">
+	            				<input type="text" class="input-medium" id="inputValue" name="surname" value="${user.getSurname()}">
         					</div>
         				
         			</td>
@@ -28,7 +36,7 @@
         				
         					<div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>Отчество: </font></label>
-	            				<input type="text" class="input-medium" id="inputValue" name="lastname">
+	            				<input type="text" class="input-medium" id="inputValue" name="lastname" value="${user.getLastName()}">
         					</div>
         				
         			</td>
@@ -41,8 +49,9 @@
 								<select style="height:27px" class="input-medium" id="inputValue" name="univerid">
 				  					<option value="OНПУ">ОНПУ</option>
 				  					<option value="ОНУ им. Мечникова">ОНУ им. Мечникова</option>
-				  					<option selected value="другой">другой</option>
-				  					<option value="я не студент">я не студент</option>
+				  					<option value="Другое">Другое</option>
+				  					<option selected value="${form.getUniversity().getUniversityName()}">
+				  						${form.getUniversity().getUniversityName()}</option>
 								</select>
 							</div>
 						
@@ -54,8 +63,8 @@
 								<select  style="height:27px" class="input-medium" id="inputValue" name="faculty">
 				  					<option value="ИКС">ИКС</option>
 				  					<option value="Прикладная математика">Прикладная математика</option>
-				  					<option selected value="другой">другой</option>
-				  					<option value="я не студент">я не студент</option>
+				  					<option selected value="${form.getFaculty().getFacultyName()}">
+				  						${form.getFaculty().getFacultyName()}</option>
 								</select>
 							</div>
 						
@@ -70,7 +79,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value="я не студент">я не студент</option>
+				  					<option selected value="${form.getCourse()}">${form.getCourse()}</option>
 								</select>
 							</div>
 						
@@ -81,7 +90,7 @@
 					
         					<div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>Год окончания: </font></label>
-	            				<input type="text" class="input-small" id="inputValue" name="year">
+	            				<input type="text" class="input-small" id="inputValue" name="year" value="${form.getEndYear()}">
         					</div>
         				
 					</td>
@@ -105,7 +114,7 @@
 						
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>e-mail 2: </font></label>
-	            				<input type="text" class="input-small" id="inputValue" name="email2">
+	            				<input type="text" class="input-small" id="inputValue" name="email2" value="${form.getEmail2()}">
         				  </div>
 						
 					<td>
@@ -337,20 +346,6 @@
 							<div class="controls form-inline">
 								<input type="text" class="input-small" id="inputValue">
 								<select  style="height:27px" class="input-small" id="inputValue" name="lan_another1">
-				  					<option value="1">1</option>
-				  					<option value="2">2</option>
-				  					<option value="3">3</option>
-				  					<option value="4">4</option>
-				  					<option value="5">5</option>
-								</select>
-							</div>
-						
-					</td>
-					<td width=25% align="left" valign="top">
-						
-							<div class="controls form-inline">
-								<input type="text" class="input-small" id="inputValue">
-								<select  style="height:27px" class="input-small" id="inputValue" name="lan_another2">
 				  					<option value="1">1</option>
 				  					<option value="2">2</option>
 				  					<option value="3">3</option>

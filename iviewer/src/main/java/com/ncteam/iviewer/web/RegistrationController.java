@@ -31,19 +31,13 @@ public class RegistrationController{
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String createUser(HttpServletRequest request) {
 		User newUser = new User();
-			newUser.setUserId(6688);
-			String str="";
-			str=request.getParameter("firstname");
-			newUser.setFirstName(str);
-			str=request.getParameter("surname");
-			newUser.setSurname(str);
-			str=request.getParameter("lastname");
-			newUser.setLastName(str);
-			str=request.getParameter("email");
-			newUser.setEmail(str);
-			str=request.getParameter("password");
-			newUser.setPassword(str);
-			newUser.setFoto(" ");
+			String firstname = request.getParameter("firstname");
+			String surname = request.getParameter("surname");
+			String lastname = request.getParameter("lastname");
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			
+			newUser.setFoto("");
 			newUser.setUserTypeId(4);
 			newUser.setRegDate(new Date(12,12,12));
 		userService.addRecord(newUser);

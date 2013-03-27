@@ -2,6 +2,7 @@ package com.ncteam.iviewer.web;
 
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.ncteam.iviewer.DAO.impl.FormDAOImpl;
 import com.ncteam.iviewer.domain.Faculty;
 import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.University;
 import com.ncteam.iviewer.domain.User;
+import com.ncteam.iviewer.service.impl.FormServiceImpl;
 import com.ncteam.iviewer.service.impl.PDFservice;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
@@ -29,13 +32,17 @@ public class FormController{
 	
 	@Autowired
 	 private UserServiceImpl userService;
+	 private FormServiceImpl formService;
 	
-	@RequestMapping(value = "form", method = RequestMethod.POST)
-    public String createUser(HttpServletRequest request, HttpSession session) throws DocumentException, IOException {
+	//@RequestMapping(value = "form", method = RequestMethod.POST)
+    public String createForm(HttpServletRequest request, HttpSession session) throws DocumentException, IOException {
 		
 		Form newForm = new Form();
 			User user = userService.getUserByEmail(session.getAttribute("email").toString());
 			newForm.setUserId(user.getUserId());
+			
+			
+			
 		newForm.setUser(user);
 			University university = new University();
 			university.setUniversityId(1);
@@ -89,14 +96,25 @@ public class FormController{
 		newForm.setStatus(1);
 		newForm.setVisitStatus(1);
 		
-		createPDF(user, newForm);
+		
 		
         return "form";
     }
 	
-	void createPDF(User user, Form form) throws DocumentException, IOException{
-		PDFservice pdf = new PDFservice("~//iviewer//forms//"+user.getFirstName()+"_"+user.getSurname()+"_"+user.getUserId());
-		pdf.createPDF(user, form);
+	@RequestMapping(value = "form", method = RequestMethod.POST)
+    public String getForm(HttpServletRequest request, HttpSession session, Map<String, Object> map){
+		
+		User user = userService.getUserByEmail(session.getAttribute("email").toString());
+		Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
+		
+		
+		
+		map.put("user", user);
+		map.put("form", form);
+		
+		System.out.println(form.getUniversity().getUniversityName());
+		
+		return "form";
 	}
 	
 	@RequestMapping("form")

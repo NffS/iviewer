@@ -47,13 +47,21 @@ public class ChooseInterviewController{
 	
 	@RequestMapping(value="/choose_{interview_id}")
 	public String chooseInterviewByID(HttpSession session,
-			   @PathVariable("interview_id") Integer interview_id, Map<String, Object> map){
-			  //System.out.println(session.getAttribute("user_id").toString());
-			  Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
-			  Interview inter = interviewService.getRecordById(Integer.parseInt(session.getAttribute("user_id").toString()), Interview.class);
-			  form.setInterviewId(interview_id);
-			  //form.setInterview(inter);
-			  formService.updateRecord(form);
-			  return "choose_interview";
-			 }
+			@PathVariable("interview_id") Integer interview_id,	Map<String, Object> map){
+		
+		Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
+		form.setInterviewId(interview_id);
+		formService.updateRecord(form);
+		
+		List<Interview> allInterviews = interviewService.getAllRecords(Interview.class);
+		List<Interview> interviews = interviewService.getAllRecords(Interview.class);
+		interviews.clear();
+		for (int i=0;i<allInterviews.size();i++)
+			if(allInterviews.get(i).getSeats()>allInterviews.get(i).getForms().size())
+				interviews.add(allInterviews.get(i));
+					
+		map.put("interviews",interviews);
+		
+		return "choose_interview";
+	}
 }

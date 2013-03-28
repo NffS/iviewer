@@ -1,5 +1,7 @@
 package com.ncteam.iviewer.web;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Map;
@@ -32,9 +34,10 @@ public class FormController{
 	
 	@Autowired
 	 private UserServiceImpl userService;
+	@Autowired
 	 private FormServiceImpl formService;
 	
-	//@RequestMapping(value = "form", method = RequestMethod.POST)
+	@RequestMapping(value = "/getform", method = RequestMethod.POST)
     public String createForm(HttpServletRequest request, HttpSession session) throws DocumentException, IOException {
 		
 		Form newForm = new Form();
@@ -101,24 +104,14 @@ public class FormController{
         return "form";
     }
 	
-	@RequestMapping(value = "form", method = RequestMethod.POST)
-    public String getForm(HttpServletRequest request, HttpSession session, Map<String, Object> map){
-		
+    @RequestMapping(value = "/form")
+    public String registration(HttpSession session, Map<String, Object> map){
 		User user = userService.getUserByEmail(session.getAttribute("email").toString());
 		Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
 		
-		
-		
 		map.put("user", user);
 		map.put("form", form);
-		
-		System.out.println(form.getUniversity().getUniversityName());
-		
-		return "form";
-	}
-	
-	@RequestMapping("form")
-    public String registration(HttpSession session){
-        return "/form";
+        return "form";
     }
-}
+    
+  }

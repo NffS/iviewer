@@ -188,7 +188,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	}
 	
 	public Form getFormByUserId(int userID){
-		String query="FROM Form where userId=:userID";
+		String query="FROM Form f where f.userId=:userID";
 		Session sess=sessionFactory.getCurrentSession();
 		return (Form) sess.createQuery(query).setInteger("userID", userID).uniqueResult();
 	}

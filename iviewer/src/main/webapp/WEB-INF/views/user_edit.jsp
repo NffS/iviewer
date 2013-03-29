@@ -10,6 +10,9 @@
 
 <%@ include file="/resources/design/header.jsp" %>
 <c:choose>
+    <c:when test="${sessionScope.user.userTypeId==1}">
+		<c:import url = "/resources/design/admin_left_part.jsp" />
+    </c:when>
 	<c:when test="${sessionScope.user.userTypeId==2}">
 		<c:import url = "/resources/design/hr_left_part.jsp" />
     </c:when>
@@ -33,9 +36,6 @@
 		    	<td><input type="text" id="text-input" name="last_name" value="${user.lastName}" pattern="[A-ZА-ЯЁ][a-zа-яё]{1,40}$"></td></tr>
 		    <tr><td>Email:</td>
 		    	<td><input type="text" id="text-input" name="email" value="${user.email}" pattern="^([a-zA-Z0-9_\.\-]{1,20})@([a-zA-Z0-9\.\-]{1,20})\.([a-z]{2,4})$"></td></tr>
-		    	<c:if test="${sessionScope.user.userTypeId==1}">
-		    		<tr><td>Пароль:</td><td><input type="password" id="text-input" name="password" value="${user.password}" pattern="[a-zA-Z0-9]{4,16}$" /></td><tr>
-		    	</c:if>
 		    <c:if test="${sessionScope.user.userTypeId==1}">
 		    <td>Тип:</td>
 		        <td><select name="user_type_id">
@@ -48,6 +48,7 @@
 					</select>
 		        </td>
 		    </c:if>    
+    		<tr><td></td><td style="padding-bottom: 10px"><a href="change_password">Сменить пароль</a></td><tr>
 		    <tr><td></td>
 		    	<td><input class="btn btn-primary" type="submit" value="Сохранить" /></td></tr>
 	    </table>

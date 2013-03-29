@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="/resources/design/header.jsp" %>
-
+<%@ include file="/resources/design/admin_left_part.jsp" %>
 <%@ include file="/resources/design/center.jsp" %>
 <center>
     <form action="do_user_create" method="post">

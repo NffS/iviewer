@@ -8,6 +8,8 @@
 
 <a href="user_edit"><font size="3" color="000000">Редактирование личных данных</font></a>
 <br><br>
+<a href="change_password"><font size="3" color="000000">Изменить пароль</font></a>
+<br><br>
 <a href="hr"><font size="3" color="000000">Управление собеседованиями</font></a>
 <br><br>
 <a href="form_list"><font size="3" color="000000">Просмотр анкет</font></a>

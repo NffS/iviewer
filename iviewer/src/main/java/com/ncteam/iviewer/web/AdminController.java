@@ -1,10 +1,9 @@
 package com.ncteam.iviewer.web;
 
 
-import com.ncteam.iviewer.DAO.impl.UserDAOImpl;
+
 import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.domain.UsersType;
-import com.ncteam.iviewer.service.TablesService;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import validators.Validator;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +35,7 @@ public class AdminController {
 
     @Autowired
     private UserServiceImpl tablesService;
+    private Validator validator=new Validator();
 
     @RequestMapping("/admin")
     public String showAdmin(Map<String, Object> map, HttpSession session) {
@@ -73,5 +79,58 @@ public class AdminController {
         map.put("target","index");
         return "redirect";
     }
+    
+    @RequestMapping("/user_create")
+    public String createUser(Map<String, Object> map,
+                          HttpSession session) {
+    	
+        if(((Integer)session.getAttribute("user_type_id")).equals(1)){
+
+            map.put("userTypes", tablesService.getAllRecords(UsersType.class));
+            return "user_create";
+        }
+        map.put("message","<font color='red'>Ошибка доступа</font>");
+        map.put("target","index");
+        return "redirect";
+    }
+    
+    @RequestMapping("/do_user_create")
+    public String doCreateUser(Map<String, Object> map,
+                          HttpSession session, HttpServletRequest request) {
+    	
+        if(((Integer)session.getAttribute("user_type_id")).equals(1)){
+        	
+                	User newUser = new User();
+                	newUser.setEmail(request.getParameter("email"));
+                	newUser.setSurname(request.getParameter("surname"));
+                	newUser.setFirstName(request.getParameter("first_name"));
+                	newUser.setLastName(request.getParameter("last_name"));
+                	newUser.setPassword(request.getParameter("password"));
+                	newUser.setUserTypeId(Integer.parseInt(request.getParameter("user_type_id")));
+                	newUser.setStringRegDate(new SimpleDateFormat("yyyy-MM-dd kk:mm").format(new Date()).toString());
+                	newUser.setFoto("");
+                	if(validator.isUserDataCorrect(newUser)){
+                    tablesService.addRecord(newUser);
+                    
+                    map.put("message","Пользователь создан");
+                    map.put("target","admin");
+                    return "redirect";
+                    }
+                	else{
+                		map.put("message","<font color='red'>Введены некорректные данные</font>");
+                        map.put("target","user_create");
+                        return "redirect";
+                	}
+
+                }
+
+        map.put("message","<font color='red'>Ошибка доступа</font>");
+        map.put("target","index");
+        return "redirect";
+        }
 
 }
+    
+    
+
+

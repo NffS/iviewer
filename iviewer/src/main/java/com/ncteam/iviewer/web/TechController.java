@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import validators.Validator;
+
+
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.University;
-import com.ncteam.iviewer.service.ValidationService;
 import com.ncteam.iviewer.service.impl.FormServiceImpl;
 import com.ncteam.iviewer.service.impl.InterviewServiceImpl;
 
@@ -23,7 +25,7 @@ public class TechController {
 	 
 	 @Autowired
 	 private FormServiceImpl formService;
-	 private ValidationService validator=new ValidationService();
+	 private Validator validator=new Validator();
 	
 	@RequestMapping(value="/interview")
 	public String it(HttpSession session, Map<String, Object> map){

@@ -5,13 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@include file="/resources/design/header.jsp" %>
-<%if(((Integer)session.getAttribute("user_type_id")).equals(new Integer(2))){ %>
 <%@include file="/resources/design/hr_left_part.jsp" %>
-<%} %>
 <%@ include file="/resources/design/center.jsp" %>
-<%
-List<FormInformation> forms=(List<FormInformation>)request.getAttribute("forms");
-%>
 <table>
 	<tr><td align="center" colspan="2"><font size=5>Фильтр</font></td></tr>
 	<tr>
@@ -41,16 +36,20 @@ List<FormInformation> forms=(List<FormInformation>)request.getAttribute("forms")
 	</tr>
 </table>
 <br>
-<%int k=0; %>
+<c:set var="k" scope="page" value="${0}"/>
 <table id="sf" border=2 align="center">
 	<tr ALIGN=center bgcolor="9999FF">
 		<td>№</td> <td  width=300>ФИО</td> <td width=150>Дата собеседования</td> <td width=60>Требует подтверждения</td> <td width=85>Просмотр</td><td>Оценивание</td><td style="display:none;"></td>
 	</tr>
 	<c:forEach var="form" items="${forms}">
-	<%k++; %>
 		<tr ALIGN=center height=40>
-			<td><%=k %></td> <td>${form.surname}  ${form.firstName} ${form.lastName}</td>
-			<td>${form.startDate}</td> <td><%if(forms.get(k-1).getStatus().intValue()==1){  %>Да<%}else{ %>Нет<%} %></td> <td><a href="/form.jsp?form_id=${form.formId}" target="_blank">Просмотр</a></td>
+		<c:set var="k" scope="page" value="${k+1}"/>
+			<td>${k }</td> <td>${form.surname}  ${form.firstName} ${form.lastName}</td>
+			<td>${form.startDate}</td> 
+			<td><c:choose>
+					<c:when test="${form.status.intValue()==1}">Да</c:when><c:otherwise>Нет</c:otherwise>
+				</c:choose></td> 
+			<td><a href="/form.jsp?form_id=${form.formId}" target="_blank">Просмотр</a></td>
 			<td><a href="hr_mark_${form.formId}">Оценить</a></td>
 			<td style="display:none;">${form.universityName}</td>
 		</tr>

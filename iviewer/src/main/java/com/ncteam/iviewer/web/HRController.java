@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import validators.Validator;
+
+
 import com.ncteam.iviewer.domain.Interview;
-import com.ncteam.iviewer.service.ValidationService;
 import com.ncteam.iviewer.service.impl.InterviewServiceImpl;
 
 @Controller
@@ -20,13 +22,15 @@ public class HRController {
 	 
 	 @Autowired
 	 private InterviewServiceImpl interviewService;
-	 private ValidationService validator=new ValidationService();
+	 private Validator validator=new Validator();
 	
 	@RequestMapping(value="/hr")
 	public String hr(HttpSession session, Map<String, Object> map){
 		
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 		
 		map.put("interviews",interviewService.getAllRecords(Interview.class));
@@ -38,7 +42,9 @@ public class HRController {
 			@PathVariable("interview_id") Integer interview_id,	Map<String, Object> map){
 		
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 				
 		String updateStartDateString=((String)request.getParameter("date"))
@@ -89,7 +95,9 @@ public class HRController {
 			Map<String, Object> map){
 		
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 					
 		String newStartDateString=((String)request.getParameter("newDate"))
@@ -139,7 +147,9 @@ public class HRController {
 			@PathVariable("interview_id") Integer interview_id,	Map<String, Object> map){
 	
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 		interviewService.deleteRecord(interviewService.getRecordById(interview_id, Interview.class));
 		

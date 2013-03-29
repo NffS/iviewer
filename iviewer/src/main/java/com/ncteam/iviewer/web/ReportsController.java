@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import validators.Validator;
+
+
 import com.ncteam.iviewer.domain.Faculty;
 import com.ncteam.iviewer.domain.FormInformation;
 import com.ncteam.iviewer.domain.University;
-import com.ncteam.iviewer.service.ValidationService;
 import com.ncteam.iviewer.service.impl.FormServiceImpl;
 
 import com.itextpdf.text.BaseColor;
@@ -35,7 +37,7 @@ public class ReportsController {
 	
 	@Autowired
 	 private FormServiceImpl formService;
-	 private ValidationService validator=new ValidationService();
+	 private Validator validator=new Validator();
 	
 	 
 	 
@@ -43,7 +45,9 @@ public class ReportsController {
 	public String hrReports(HttpSession session, Map<String, Object> map){
 		
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 		return "hr_reports";
 	}
@@ -52,7 +56,9 @@ public class ReportsController {
 	public String attendanceReport(HttpSession session, Map<String, Object> map){
 		
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 		
 		map.put("attendances", formService.getShortFormInformation());
@@ -65,7 +71,9 @@ public class ReportsController {
 	public String universitiesReport(HttpSession session, Map<String, Object> map){
 		
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 		
 		map.put("studentsInUniversitiesTable", formService.getStudentsInUniversities());
@@ -79,7 +87,9 @@ public class ReportsController {
 	public String recordsIncreaseReport(HttpSession session, Map<String, Object> map){
 		
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 		map.put("recordIncreaseForms", formService.getCandidatesRegistrationDates());
 		return "hr_records_increase_report";
@@ -89,7 +99,9 @@ public class ReportsController {
 	public String graphicFormsReport(HttpSession session, Map<String, Object> map){
 		
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 		map.put("cameDoesntCameStudents", formService.getCameDoesntCameStudents());
 		return "hr_graphic_forms_report";
@@ -99,7 +111,9 @@ public class ReportsController {
 	public String graphicPRReport(HttpSession session, Map<String, Object> map){
 		
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 		map.put("advertisementEfficiency", formService.getAdvertisementEfficiency());
 		map.put("advertisementNames", formService.getAllAdvertisementNames());
@@ -107,7 +121,14 @@ public class ReportsController {
 	}
 	
 	@RequestMapping(value="pdf_report")
-	public String pdfReport(HttpServletRequest request,HttpSession session) throws DocumentException, IOException{
+	public String pdfReport(HttpServletRequest request,HttpSession session,
+			 Map<String, Object> map) throws DocumentException, IOException{
+		
+		if(!validator.isUserHR(session)){
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
+		}
 		
 		String file =request.getRealPath("") + "/resources/files/hr_reports/report.pdf";
 		Document document = new Document();

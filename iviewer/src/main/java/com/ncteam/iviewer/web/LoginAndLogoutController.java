@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import validators.Validator;
+
 import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
@@ -17,6 +20,7 @@ public class LoginAndLogoutController {
 
 	@Autowired
 	private UserServiceImpl userService;
+	 private Validator validator=new Validator();
 	
 	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
 	public String checkUserLogin(@ModelAttribute("user") User user, Map<String, Object> map,
@@ -30,10 +34,10 @@ public class LoginAndLogoutController {
 		if(!email.isEmpty()){
 				if(!password.isEmpty()){
 			
-					if(!email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")){
+					if(!validator.checkEmail(email).equals("ok")){
 						emailMessage="E-Mail не введён некорректно.";
 					}
-					else if(!password.matches("[A-Za-z0-9]+")){
+					else if(!validator.isPasswordCorrect(password)){
 						passwordMessage="Пароль введён некорректно.";
 					}
 					else{

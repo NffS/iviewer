@@ -44,16 +44,6 @@ public class Validator {
 		return "ok";
 	}
 	
-	public String checkPassword(String password){
-		if (!password.matches("[A-Za-z0-9]+"))
-			return "invalid characters";
-		if (!checkLength(password, 16, 4).equals("ok"))
-			return checkLength(password, 16, 4)+" email";
-		if (!checkIsEmpty(password).equals("ok"))
-			return "password "+checkIsEmpty(password);
-		return "ok";
-	}
-	
 	public String checkPassword(String password, String pattern){
 		if (!password.matches(pattern))
 			return "invalid characters";
@@ -113,7 +103,8 @@ public class Validator {
 	 * 
 	 * @param checkedInterview Interview to check.
 	 * @param allInterviews List of all available interviews.
-	 * @isCreating Shows, if the interview is creating or updating.
+	 * @isCreating Shows, if the interview is creating or updating. If true - interview is creating,
+	 *  if false - updating.
 	 * @return If interview doesn't intersect other interviews, returns null. Otherwise returns the error message.
 	 */
 	public String checkInterviewsIntersection(Interview checkedInterview, List<Interview> allInterviews,

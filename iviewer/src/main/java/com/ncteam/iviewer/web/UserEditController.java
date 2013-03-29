@@ -69,10 +69,11 @@ public class UserEditController {
             	userEdit.setSurname(request.getParameter("surname"));
             	userEdit.setFirstName(request.getParameter("first_name"));
             	userEdit.setLastName(request.getParameter("last_name"));
+            	if(((int)session.getAttribute("user_type_id"))==1){
+            		userEdit.setPassword(request.getParameter("password"));
+            	}
             	if (request.getParameter("user_type_id")!=null && (int)session.getAttribute("user_type_id")==1) {
             		userEdit.setUserTypeId(Integer.parseInt(request.getParameter("user_type_id")));
-            	} else { 
-            		userEdit.setUserTypeId((int)session.getAttribute("user_type_id"));
             	}
             	if(validator.isUserDataCorrect(userEdit)){
                     tablesService.updateRecord(userEdit);

@@ -46,7 +46,8 @@ List<FormInformation> forms=(List<FormInformation>)request.getAttribute("forms")
 	<c:forEach var="form" items="${forms}">
 	<%k++; %>
 		<tr ALIGN=center height=40>
-			<td><%=k %></td> <td>${form.surname}  ${form.firstName} ${form.lastName}</td>
+			<td><%=k %></td>
+			<td>${form.surname}  ${form.firstName} ${form.lastName}</td>
 			<td>${form.startDate}</td>
 			<td><a href="tech_mark_${form.formId}">Оценить</a></td>
 			<td style="display:none;">${form.universityName}</td>
@@ -71,7 +72,7 @@ function filter(_id){
      for (var r = 1; r < table.rows.length; r++){
      	var displayStyle = '';
      	if(university!="-1"){
-    		ele = table.rows[r].cells[6].innerHTML.replace(/<[^>]+>/g,"");
+    		ele = table.rows[r].cells[4].innerHTML.replace(/<[^>]+>/g,"");
     		for (var i = 0; i < university.length; i++) {
          	   if (ele.toLowerCase().indexOf(university[i])>=0)
         	        continue;
@@ -101,11 +102,6 @@ function filter(_id){
                 displayStyle = 'none';
                 break;
             }
-        }
-		
-        if(state.checked){
-        	if(table.rows[r].cells[3]!="Нет")
-        		displayStyle = 'none';
         }
         
         table.rows[r].style.display = displayStyle;

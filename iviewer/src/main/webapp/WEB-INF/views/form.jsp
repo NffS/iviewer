@@ -11,29 +11,62 @@
 			<td width=15%></td>
 			<td>
         					<div class="controls form-inline">
+        					<table>
+						  		<tr>
+						  			<td align="left" width=130>
 	            			<label for="inputValue"><font size=4>имя: </font></label>
+	            			</td>
+	            					
+	            					<td align="right" width=80>
 	            			<input type="text" class="input-medium" id="inputValue" name="firstname" value="${user.getFirstName()}">
+	            			</td>
+								</tr>
+							</table>
         					</div>
         	</td>
         	<td ROWSPAN=7>
-        	<img src="resources/design/logo.jpg" width="120" height="180">
+        	<img src="resources/design/zold.jpg" width="120" height="180">
         	</td>
         	</tr>
         	<tr><td width=15%></td><td>
         					<div class="controls form-inline">
+        					<table>
+						  		<tr>
+						  			<td align="left" width=130>
 	            				<label for="inputValue"><font size=4>фамилия: </font></label>
+	            				</td>
+	            					
+	            					<td align="right" width=80>
 	            				<input type="text" class="input-medium" id="inputValue" name="surname" value="${user.getSurname()}">
+        					</td>
+								</tr>
+							</table>
         					</div>
 			</td></tr>
 			<tr><td width=15%></td><td>
         					<div class="controls form-inline">
+        					<table>
+						  		<tr>
+						  			<td align="left" width=130>
 	            				<label for="inputValue"><font size=4>отчество: </font></label>
+	            				</td>
+	            					
+	            					<td align="right" width=80>
 	            				<input type="text" class="input-medium" id="inputValue" name="lastname" value="${user.getLastName()}">
+        					</td>
+								</tr>
+							</table>
         					</div>
 			</td></tr>
 			<tr><td width=15%></td><td>
 							<div class="controls form-inline">
+							<table>
+						  		<tr>
+						  			<td align="left" width=130>
 								<label for="inputValue"><font size=4>вуз: </font></label>
+								</td>
+	            					
+	            					<td align="right" width=80>
 								<select style="height:27px" class="input-medium" id="inputValue" name="univerid">
 				  					<option value="OНПУ">ОНПУ</option>
 				  					<option value="ОНУ им. Мечникова">ОНУ им. Мечникова</option>
@@ -41,22 +74,40 @@
 				  					<option selected value="${form.getUniversity().getUniversityName()}">
 				  						${form.getUniversity().getUniversityName()}</option>
 								</select>
+								</td>
+								</tr>
+							</table>
 							</div>
 			</td></tr>
 			<tr><td width=15%></td><td>
 							<div class="controls form-inline">
+							<table>
+						  		<tr>
+						  			<td align="left" width=130>
 								<label for="inputValue"><font size=4>факультет: </font></label>
+								</td>
+	            					
+	            					<td align="right" width=80>
 								<select  style="height:27px" class="input-medium" id="inputValue" name="faculty">
 				  					<option value="ИКС">ИКС</option>
 				  					<option value="Прикладная математика">Прикладная математика</option>
 				  					<option selected value="${form.getFaculty().getFacultyName()}">
 				  						${form.getFaculty().getFacultyName()}</option>
 								</select>
+								</td>
+								</tr>
+							</table>
 							</div>
 			</td></tr>
 			<tr><td width=15%></td><td>
 							<div class="controls form-inline">
+							<table>
+						  		<tr>
+						  			<td align="left" width=130>
 								<label for="inputValue"><font size=4>курс: </font></label>
+								</td>
+	            					
+	            					<td align="right" width=80>
 								<select  style="height:27px" class="input-medium" id="inputValue" name="course">
 				  					<option value="1">1</option>
 				  					<option value="2">2</option>
@@ -65,14 +116,27 @@
 				  					<option value="5">5</option>
 				  					<option selected value="${form.getCourse()}">${form.getCourse()}</option>
 								</select>
+								</td>
+								</tr>
+							</table>
 							</div>
 		</td></tr>
 		<tr><td width=15%></td><td>
 		
         					<div class="controls form-inline">
+        					<table>
+						  		<tr>
+						  			<td align="left" width=130>
 	            				<label for="inputValue"><font size=4>год окончания: </font></label>
+	            				</td>
+	            					
+	            					<td align="right" width=80>
 	            				<input type="text" class="input-small" id="inputValue" name="year" value="${form.getEndYear()}">
+	            				</td>
+								</tr>
+							</table>
         					</div>
+        					
 		</td></tr>
 			</table>
 
@@ -852,7 +916,9 @@
 				</tr>
 			</table>
 			<table>
-				<tr>	
+				<tr>
+					<td>
+					</td>
 					<td>
 						<input type="submit" style="height:30px; width:300px; font-size: 15px" value="Жми кнопку @ почту проверяй">
 					</td>

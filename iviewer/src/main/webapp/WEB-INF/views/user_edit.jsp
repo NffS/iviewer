@@ -48,14 +48,19 @@
 					</select>
 		        </td>
 		    </c:if>    
-    		<tr><td></td><td style="padding-bottom: 10px"><a href="change_password">Сменить пароль</a></td><tr>
-		    <tr><td></td>
+		    <c:if test="${sessionScope.user.userTypeId==1 && sessionScope.user.userId!=user.userId}">
+		    	<tr><td>Пароль:</td><td><input type="password" id="text-input" name="password" value="${user.password}" pattern="[a-zA-Z0-9]{4,16}$" /></td><tr>
+		    </c:if>   
+		    <c:if test="${sessionScope.user.userId==user.userId}">
+		    	<tr><td></td><td style="padding-bottom: 10px"><a href="change_password">Сменить пароль</a></td><tr>
+		    </c:if>
+    		<tr><td></td>
 		    	<td><input class="btn btn-primary" type="submit" value="Сохранить" /></td></tr>
 	    </table>
     </form>
 </center>
  <br>
-<c:if test="${sessionScope.user.userTypeId==1}">
+<c:if test="${sessionScope.user.userTypeId==1 && sessionScope.user.userId!=user.userId}">
     <div align="right"><input class="btn btn-warning" type="button" value="!Удалить!" onclick="javascript:document.location='/iviewer/user_delete_${user.userId}'"/></div>
 </c:if>
 

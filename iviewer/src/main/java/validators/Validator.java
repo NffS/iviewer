@@ -25,7 +25,7 @@ public class Validator {
 	}
 	
 	public String checkEmail(String email){
-		if (!email.matches("[A-Za-z0-9_]+@[A-Za-z0-9]+(.[A-Za-z0-9]+)*.[a-z]{2,4}"))
+		if (!email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"))
 			return "invalid characters";
 		if (!checkLength(email, 30, 6).equals("ok"))
 			return checkLength(email, 30, 6)+" email";

@@ -30,7 +30,7 @@ public class LoginAndLogoutController {
 		if(!email.isEmpty()){
 				if(!password.isEmpty()){
 			
-					if(!email.matches("[A-Za-z0-9_]+@[A-Za-z0-9]+(.[A-Za-z0-9]+)*.[a-z]{2,4}")){
+					if(!email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")){
 						emailMessage="E-Mail не введён некорректно.";
 					}
 					else if(!password.matches("[A-Za-z0-9]+")){

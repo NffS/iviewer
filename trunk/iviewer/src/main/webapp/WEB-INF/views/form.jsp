@@ -3,6 +3,14 @@
 
 <a href="index"><font size="3" color="000000">На главную</font></a>
 <%@ include file="/resources/design/center.jsp" %>
+<style>
+   textarea {
+    width: 720px; /* Ширина поля в процентах */
+    height: 80px; /* Высота поля в пикселах */
+    resize: none; /* Запрещаем изменять размер */
+   } 
+  </style>
+
 <form:form  method="POST" action="getform">
 		<fieldset>
 			<legend>Персональная информация</legend>
@@ -63,16 +71,15 @@
 							<table>
 						  		<tr>
 						  			<td align="left" width=130>
-								<label for="inputValue"><font size=4>вуз: </font></label>
+								<label for="f1"><font size=4>вуз: </font></label>
 								</td>
 	            					
 	            					<td align="right" width=80>
-								<select style="height:27px" class="input-medium" id="inputValue" name="univerid">
-				  					<option value="OНПУ">ОНПУ</option>
-				  					<option value="ОНУ им. Мечникова">ОНУ им. Мечникова</option>
-				  					<option value="Другое">Другое</option>
-				  					<option selected value="${form.getUniversity().getUniversityName()}">
-				  						${form.getUniversity().getUniversityName()}</option>
+								<select style="height:27px" class="input-medium" id="f1" onchange="filter()" name="univerid">
+									<option value="0">Другое</option>
+				  					<option value="1">ОНПУ</option>
+				  					<option value="2">ОНУ им. Мечникова</option>
+				  					<option selected value="1">${form.getUniversity().getUniversityName()}</option>
 								</select>
 								</td>
 								</tr>
@@ -84,15 +91,18 @@
 							<table>
 						  		<tr>
 						  			<td align="left" width=130>
-								<label for="inputValue"><font size=4>факультет: </font></label>
+								<label for="f2"><font size=4>факультет: </font></label>
 								</td>
 	            					
 	            					<td align="right" width=80>
-								<select  style="height:27px" class="input-medium" id="inputValue" name="faculty">
-				  					<option value="ИКС">ИКС</option>
-				  					<option value="Прикладная математика">Прикладная математика</option>
-				  					<option selected value="${form.getFaculty().getFacultyName()}">
-				  						${form.getFaculty().getFacultyName()}</option>
+								<select  style="height:27px" class="input-medium" id="f2" name="faculty" disabled>
+									<option value="0"></option>
+				  					<option value="1">ИКС</option>
+				  					<option value="1">Программная инженерия</option>
+				  					<option value="1">Другой</option>
+				  					<option value="2">Прикладная математика</option>
+				  					<option value="2">Другой</option>
+				  					<option selected value="${form.getFaculty().getFacultyName()}">${form.getFaculty().getFacultyName()}</option>
 								</select>
 								</td>
 								</tr>
@@ -143,7 +153,7 @@
 			<legend>Контакты</legend>
 			<table width =700px>
 				<tr>
-					<td  width=30%></td>
+					<td  width=25%></td>
 					<td>
 						
 						  <div class="controls form-inline">
@@ -154,7 +164,7 @@
 	            				</td>
 	            					
 	            					<td align="right" width=80>
-	            				<input type="text" class="input-small" id="inputValue" name="email1">
+	            				<input type="text" class="input-big" id="inputValue" name="email1" value="${user.getEmail()}">
 	            				</td>
 								</tr>
 							</table>
@@ -163,7 +173,7 @@
 					<td>
 				</tr>
 				<tr>
-					<td width=30%></td>
+					<td width=25%></td>
 					<td>
 						
 						  <div class="controls form-inline">
@@ -174,7 +184,7 @@
 	            				</td>
 	            					
 	            					<td align="right" width=80>
-	            				<input type="text" class="input-small" id="inputValue" name="email2" value="${form.getEmail2()}">
+	            				<input type="text" class="input-big" id="inputValue" name="email2" value="${form.getEmail2()}">
 	            				</td>
 								</tr>
 							</table>
@@ -183,7 +193,7 @@
 					<td>
 				</tr>
 				<tr>
-					<td  width=30%></td>
+					<td  width=25%></td>
 					<td>
 						
 						  <div class="controls form-inline">
@@ -194,7 +204,7 @@
 	            				</td>
 	            					
 	            					<td align="right" width=80>
-	            				<input type="text" class="input-small" id="inputValue" name="phone">
+	            				<input type="text" class="input-big" id="inputValue" name="phone" value="${form.getPhone()}">
 	            				</td>
 								</tr>
 							</table>
@@ -203,7 +213,7 @@
 					<td>
 				</tr>
 				<tr>
-					<td  width=30%></td>
+					<td  width=25%></td>
 					<td>
 						
 						  <div class="controls form-inline">
@@ -214,7 +224,7 @@
 	            				</td>
 	            					
 	            					<td align="right" width=80>
-	            				<input type="text" class="input-small" id="inputValue" name="another_contact">
+	            				<input type="text" class="input-big" id="inputValue" name="another_contact" value="${form.getAnotherContact()}">
 	            				</td>
 								</tr>
 							</table>
@@ -489,6 +499,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value="${form.getProgLangC()}">${form.getProgLangC()}</option>
 								</select>
 							</div>
 						
@@ -503,6 +514,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value="${form.getProgLangJava()}">${form.getProgLangJava()}</option>
 								</select>
 							</div>
 						
@@ -511,12 +523,13 @@
 						
 							<div class="controls form-inline">
 								<input type="text" class="input-small" id="inputValue">
-								<select  style="height:27px" class="input-small" id="inputValue" name="lan_another1">
+								<select  style="height:27px" class="input-small" id="inputValue" name="lan_another1" value="${form.getProgLangOther()}">
 				  					<option value="1">1</option>
 				  					<option value="2">2</option>
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 							</div>
 						
@@ -552,6 +565,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 								</td>
 								</tr>
@@ -578,6 +592,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 								</td>
 								</tr>
@@ -605,6 +620,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 								</td>
 								</tr>
@@ -632,6 +648,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 								</td>
 								</tr>
@@ -659,6 +676,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 								</td>
 								</tr>
@@ -686,6 +704,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 								</td>
 								</tr>
@@ -713,6 +732,7 @@
 						  					<option value="3">3</option>
 						  					<option value="4">4</option>
 						  					<option value="5">5</option>
+						  					<option selected value=""></option>
 										</select>
 									</td>
 								</tr>
@@ -739,6 +759,7 @@
 						  					<option value="3">3</option>
 						  					<option value="4">4</option>
 						  					<option value="5">5</option>
+						  					<option selected value=""></option>
 										</select>
 									</td>
 								</tr>
@@ -765,6 +786,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 								</td>
 								</tr>
@@ -800,6 +822,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 								</td>
 								</tr>
@@ -825,6 +848,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 								</td>
 								</tr>
@@ -850,6 +874,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
+				  					<option selected value=""></option>
 								</select>
 								</td>
 								</tr>
@@ -873,6 +898,7 @@
 				  					<option value="Бровков посоветовал">Бровков посоветовал</option>
 				  					<option value="флаер увидел">флаер увидел</option>
 				  					<option value="какой учебный центр?">какой учебный центр?</option>
+				  					<option selected value=""></option>
 								</select>
         				  </div>
 						
@@ -887,7 +913,7 @@
 				</tr>
 				<tr>
 					<td>
-						<textarea rows="3" name="experience"></textarea>
+						<textarea maxlength="420" name="experience">${form.getExperience()}</textarea>
 					</td>
 				</tr>
 			</table>
@@ -899,7 +925,7 @@
 				</tr>
 				<tr>
 					<td>
-						<textarea rows="3" name="promises"></textarea>
+						<textarea maxlength="420" name="promises">${form.getMotivation_comment()}</textarea>
 					</td>
 				</tr>
 			</table>
@@ -911,13 +937,13 @@
 				</tr>
 				<tr>
 					<td>
-						<textarea rows="3" name="more_information"></textarea>
+						<textarea maxlength="420" name="more_information">${form.getComment2()}</textarea>
 					</td>
 				</tr>
 			</table>
 			<table>
 				<tr>
-					<td>
+					<td width=42%>
 					</td>
 					<td>
 						<input type="submit" style="height:30px; width:300px; font-size: 15px" value="Жми кнопку @ почту проверяй">
@@ -927,6 +953,30 @@
 		</fieldset>
 </form:form>
 <br><br><br><br>
+
+<script type="text/javascript">
+
+    function filter(_id){
+        var f1 = document.getElementById("f1");
+        var f2 = document.getElementById("f2");
+		
+		
+		if(f1.value == 0) {
+			f2.disabled = 1; 
+		}else{		
+			f2.disabled = 0;
+		
+			for (var r = 0; r < f2.options.length;  r++){
+				if(f2.options[r].value != f1.value){ 
+					f2.options[r].style.display = "none";
+				}else {
+					f2.options[r].style.display = "";
+				}
+			}
+		}
+    }
+</script>
+
 <font color="#FF0000" id="error" size="15px">${message }</font>
 
 <%@ include file="/resources/design/footer.jsp" %>

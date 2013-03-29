@@ -1,6 +1,5 @@
 package com.ncteam.iviewer.DAO.impl;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -52,12 +51,9 @@ public class FormDAOImpl extends TablesDAOImpl {
 	public List<FormInformation> getFormsInformation(){
 		Session sess=sessionFactory.getCurrentSession();
 		Query query=sess.createQuery("SELECT u.firstName, u.surname, u.lastName," +
-				"to_char(i.startDate,'yyyy-mm-dd HH24:mi'), f.status, f.visitStatus," +
+				"coalesce(to_char(i.startDate,'yyyy-mm-dd HH24:mi'),'Нет записи'), f.status, f.visitStatus," +
 				" f.formId, un.universityName, f.universityId" +
-				"  FROM Form f, User u, Interview i, University un " +
-				"where f.userId=u.userId " +
-				"and f.interviewId=i.interviewId " +
-				"and f.universityId=un.universityId");
+				"  FROM Form f LEFT JOIN f.university un LEFT JOIN f.interview as i LEFT JOIN f.user u");
 		query.setResultTransformer(new FormInformationTransformer());
 		List<FormInformation> result=null;
 

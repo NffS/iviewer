@@ -1,7 +1,6 @@
 package com.ncteam.iviewer.domain;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,13 +22,13 @@ public class Form implements Serializable, Comparable<Form>{
 	@Column(name="form_id")
 	private Integer formId;
 	
-	@Column(name="user_id", insertable=false, updatable=false)
+	@Column(name="user_id")
 	private Integer userId;
 	
-	@Column(name="university_id", insertable=false, updatable=false)
+	@Column(name="university_id")
 	private Integer universityId;
 	
-	@Column(name="faculty_id", insertable=false, updatable=false)
+	@Column(name="faculty_id")
 	private Integer facultyId;
 	
 	@Column(name="course")
@@ -122,7 +121,7 @@ public class Form implements Serializable, Comparable<Form>{
 	@Column(name="english_spoken")
 	private Integer englishSpoken;
 	
-	@Column(name="source_id", insertable=false, updatable=false)
+	@Column(name="source_id")
 	private Integer sourceId;
 	
 	@Column(name="motivation_comment")
@@ -134,38 +133,38 @@ public class Form implements Serializable, Comparable<Form>{
 	@Column(name="status")
 	private Integer status;
 	
-	@Column(name="interview_id")//, insertable=false, updatable=false)
+	@Column(name="interview_id")
 	private Integer interviewId;
 	
 	@Column(name="visit_status")
 	private Integer visitStatus;
 	
 	@OneToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="user_id", insertable=false, updatable=false)
     private User user;
 	
 	@OneToOne
-	@JoinColumn(name="hr_mark_id")
+	@JoinColumn(name="hr_mark_id", insertable=false, updatable=false)
 	private HRMark hrMark;
 	
 	@OneToOne
-	@JoinColumn(name="form_id")
+	@JoinColumn(name="form_id", insertable=false, updatable=false)
 	private TechMark techMark;	
 	
 	@ManyToOne
-	//@JoinColumn(name="interview_id")
+	@JoinColumn(name="interview_id", insertable=false, updatable=false)
 	private Interview interview;
 	
 	@ManyToOne
-	@JoinColumn(name="university_id")
+	@JoinColumn(name="university_id", insertable=false, updatable=false)
 	private University university;
 	
 	@ManyToOne
-	@JoinColumn(name="faculty_id")
+	@JoinColumn(name="faculty_id", insertable=false, updatable=false)
 	private Faculty faculty;
 	
 	@ManyToOne
-	@JoinColumn(name="source_id")
+	@JoinColumn(name="source_id", insertable=false, updatable=false)
 	private Source source;
 
 

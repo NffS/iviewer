@@ -77,4 +77,8 @@
     <servlet-name>UploadFotoController</servlet-name>
     <url-pattern>/UploadFotoController</url-pattern>
   </servlet-mapping>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+  	<location>/resources/design/error_page_500.jsp</location>
+  </error-page>
 </web-app>

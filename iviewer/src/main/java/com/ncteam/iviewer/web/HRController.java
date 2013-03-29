@@ -60,7 +60,8 @@ public class HRController {
 					(String)request.getParameter("endTime"))){
 				
 		Interview redactedInterview=interviewService.getRecordById(interview_id, Interview.class);
-				
+		updateStartDateString=updateStartDateString+":00";
+		updateEndDateString=updateEndDateString+":00";
 		redactedInterview.setStringStartDate(updateStartDateString);
 		redactedInterview.setStringEndDate(updateEndDateString);
 		redactedInterview.setExtraTime(Integer.parseInt((String)request.getParameter("extraTime")));
@@ -113,7 +114,8 @@ public class HRController {
 					(String)request.getParameter("newEndTime"))){
 				
 		Interview newInterview=new Interview();
-		
+		newEndDateString=newEndDateString+":00";
+		newStartDateString=newStartDateString+":00";
 		newInterview.setStringEndDate(newEndDateString);
 		newInterview.setStringStartDate(newStartDateString);
 		newInterview.setExtraTime(Integer.parseInt((String)request.getParameter("newExtraTime")));

@@ -26,7 +26,7 @@ public class TablesDAOImpl implements TablesDAO{
 		
 			try{
 					Statement stmt=sessionFactory.getCurrentSession().connection().createStatement();
-					stmt.execute( "alter session set NLS_DATE_FORMAT='yyyy-mm-dd HH24:MI'" );
+					stmt.execute( "alter session set NLS_DATE_FORMAT='yyyy-mm-dd HH24:MI:ss'" );
 			}
 			catch(Exception e){}
 			sessionFactory.getCurrentSession().save(record);
@@ -36,7 +36,7 @@ public class TablesDAOImpl implements TablesDAO{
 	public <T> void updateRecord(T record) {
 		try{
 			Statement stmt=sessionFactory.getCurrentSession().connection().createStatement();
-			stmt.execute( "alter session set NLS_DATE_FORMAT='yyyy-mm-dd HH24:MI'" );
+			stmt.execute( "alter session set NLS_DATE_FORMAT='yyyy-mm-dd HH24:MI:ss'" );
 		}
 		catch(Exception e){}
 		sessionFactory.getCurrentSession().update(record);

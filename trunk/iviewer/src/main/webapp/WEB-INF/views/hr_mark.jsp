@@ -14,8 +14,8 @@
 <br>
 <br>
 <form action="hr_mark_save" method="post">
-	<label><font size=4>Мотивация  (0-100) </font><input class="input-mini" type="text" name="motivation" pattern="([0-9])|([1-9][0-9])|(100)" value="${form.hrMark.motivation }"></label>${motivationErrorMessage}
- 	<label><font size=4>Английский (0-100) </font><input class="input-mini" type="text" name="english" pattern="([0-9])|([1-9][0-9])|(100)" value="${form.hrMark.english }"></label>${englishErrorMessage }
+	<label><font size=4>Мотивация  (0-100) </font><input class="input-mini" maxlength="3" type="text" name="motivation" pattern="([0-9])|([1-9][0-9])|(100)" value="${form.hrMark.motivation }"></label>${motivationErrorMessage}
+ 	<label><font size=4>Английский (0-100) </font><input class="input-mini" maxlength="3" type="text" name="english" pattern="([0-9])|([1-9][0-9])|(100)" value="${form.hrMark.english }"></label>${englishErrorMessage }
  	<br>
  	<label for="general"><font size=4>Общий отзыв</font></label>
     <textarea class="input-block-level" name="general" id="general" rows="10">${form.hrMark.generalMark }</textarea>

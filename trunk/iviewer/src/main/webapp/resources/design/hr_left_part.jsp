@@ -1,19 +1,6 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <style>
-   a { 
-    text-decoration: none;
-   } 
-  </style>
-
-<a href="user_edit"><font size="3" color="000000">Редактирование личных данных</font></a>
-<br><br>
-<a href="change_password"><font size="3" color="000000">Изменить пароль</font></a>
-<br><br>
-<a href="hr"><font size="3" color="000000">Управление собеседованиями</font></a>
-<br><br>
-<a href="form_list"><font size="3" color="000000">Просмотр анкет</font></a>
-<br><br>
-<a href="hr_reports"><font size="3" color="000000">Управление отчётами </font></a>
-<br><br>
-<a href="index"><font size="3" color="000000">На главную</font></a>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<li><a href="user_edit"><p>Редактирование личных данных</p></a></li>
+<li><a href="hr"><p>Управление собеседованиями</p></a></li>
+<li><a href="form_list"><p>Просмотр анкет</p></a></li>
+<li><a href="hr_reports"><p>Управление отчётами</p></a></li>
+<li><a href="index"><p>На главную</p></a></li>

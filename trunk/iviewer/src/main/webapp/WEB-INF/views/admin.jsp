@@ -5,12 +5,8 @@
 
 <%@include file="/resources/table_sort.jsp" %>
 <%@include file="/resources/design/header.jsp" %>
-
-<button type="button" class="btn btn-primary" data-toggle="button">Редактировать</button>
-
-<li><a href="user_create">Создать пользователя</a></li>
-
-<%@ include file="/resources/design/center.jsp" %>
+<%@include file="/resources/design/admin_left_part.jsp" %>
+<%@include file="/resources/design/center.jsp" %>
 
 <table width="100%" align="center">
     <tr align="center">

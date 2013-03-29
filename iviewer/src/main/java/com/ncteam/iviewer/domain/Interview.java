@@ -2,7 +2,7 @@ package com.ncteam.iviewer.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -57,7 +57,7 @@ public class Interview implements Serializable{
 	@OneToMany( fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
 	@Cascade( org.hibernate.annotations.CascadeType.SAVE_UPDATE )
 	@JoinColumn(name="interview_id")
-	private List<Form> forms;
+	private Set<Form> forms;
 
 	public Integer getInterviewId() {
 		return interviewId;
@@ -115,11 +115,11 @@ public class Interview implements Serializable{
 		this.seats = seats;
 	}
 
-	public List<Form> getForms() {
+	public Set<Form> getForms() {
 		return forms;
 	}
 
-	public void setForms(List<Form> forms) {
+	public void setForms(Set<Form> forms) {
 		this.forms = forms;
 	}
 	

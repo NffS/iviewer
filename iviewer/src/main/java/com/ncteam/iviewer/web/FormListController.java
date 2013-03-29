@@ -1,5 +1,6 @@
 package com.ncteam.iviewer.web;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import validators.Validator;
 
 
+import com.ncteam.iviewer.domain.FormInformation;
 import com.ncteam.iviewer.domain.University;
 import com.ncteam.iviewer.service.impl.FormServiceImpl;
 
@@ -31,6 +33,7 @@ public class FormListController {
 	        return "redirect";
 		}
 		
+		List<FormInformation> fi=formService.getFormsInformation();
 		map.put("interviewsDates", formService.getAllInterviewsDates());
 		map.put("forms", formService.getFormsInformation());
 		map.put("universities", formService.getAllRecords(University.class));

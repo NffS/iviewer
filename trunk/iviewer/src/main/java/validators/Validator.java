@@ -1,12 +1,14 @@
-package com.ncteam.iviewer.service;
+package validators;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
 import com.ncteam.iviewer.domain.Interview;
+import com.ncteam.iviewer.domain.User;
 
-public class ValidationService {
+public class Validator {
 	
 	private String checkLength(String str, int max, int min){
 		if (str.length()>max)
@@ -151,5 +153,27 @@ public class ValidationService {
 		int minute=Integer.parseInt(dateString.split(" ")[1].substring(3, 5));
 		
 		return new java.sql.Timestamp(year,month,day,hour,minute,0,0).getTime();
+	}
+	
+	public boolean isUserDataCorrect(User user){
+		if(!Pattern.matches("^([a-zA-Z0-9_\\.\\-]{1,20})@([a-zA-Z0-9\\.\\-]{1,20})\\.([a-z]{2,4})$",user.getEmail()))
+				return false;
+		if(!Pattern.matches("[A-ZА-ЯЁ][a-zа-яё]{1,40}$",user.getFirstName()))
+				return false;
+		if(!Pattern.matches("[A-ZА-ЯЁ][a-zа-яё]{1,40}$",user.getSurname()))
+			return false;
+		if(!Pattern.matches("[A-ZА-ЯЁ][a-zа-яё]{1,40}$",user.getLastName()))
+			return false;
+		if(user.getPassword().length()<0||!Pattern.matches("[a-zA-Z0-9]{4,16}$",user.getPassword()))
+			return false;
+		
+		return true;
+	}
+	
+	public boolean isPasswordCorrect(String password){
+		if(password.length()<0||!Pattern.matches("[a-zA-Z0-9]{4,16}$",password))
+			return false;
+		
+		return true;
 	}
 }

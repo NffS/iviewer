@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import validators.Validator;
+
+
 import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.HRMark;
-import com.ncteam.iviewer.service.ValidationService;
 import com.ncteam.iviewer.service.impl.FormServiceImpl;
 
 @Controller
@@ -22,19 +24,20 @@ public class HRMarkController {
 
 	@Autowired
 	private FormServiceImpl formService;
-	private ValidationService validator=new ValidationService();
+	private Validator validator=new Validator();
 	
 	@RequestMapping("/hr_mark_{form_id}")
 	public String hrMark(HttpServletResponse response, HttpSession session,
 			@PathVariable("form_id") Integer form_id,	Map<String, Object> map) throws UnsupportedEncodingException{
 			
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 		Form form=formService.getRecordById(form_id,Form.class);
 		form.setHrMark(formService.getHRMarkByFormId(form_id));
 		map.put("form", form);
-		response.setCharacterEncoding("UTF-8");
 		return "hr_mark";
 	}
 	
@@ -43,7 +46,9 @@ public class HRMarkController {
 			Map<String, Object> map) throws UnsupportedEncodingException{
 		
 		if(!validator.isUserHR(session)){
-			return "redirect:/index";
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
 		}
 		int english;
 		int motivation;

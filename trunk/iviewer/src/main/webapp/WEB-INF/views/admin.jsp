@@ -8,8 +8,7 @@
 
 <button type="button" class="btn btn-primary" data-toggle="button">Редактировать</button>
 
-<li><a href="#">Редактировать пользователя</a></li>
-            <li><a href="#">что то еще</a></li>
+<li><a href="user_create">Создать пользователя</a></li>
 
 <%@ include file="/resources/design/center.jsp" %>
 
@@ -28,7 +27,7 @@
             <select id="types" onchange="filter('sf')">
                 <option value="">Фильтр по типу</option>
                 <c:forEach var="users_types" items="${users_types}">
-                    <option value="${users_types.userTypeId}">${users_types.typeName}</option>
+                    <option value="${users_types.typeName}">${users_types.typeName}</option>
                 </c:forEach>
             </select>
         </td>
@@ -45,7 +44,7 @@
     <c:forEach var="users" items="${users}">
         <tr ALIGN=center height=40>
             <td>${users.userId}</td> <td width=300>${users.surname}  ${users.firstName} ${users.lastName}</td>
-            <td>${users.email}</td> <td>${users.userTypeId}</td>
+            <td>${users.email}</td> <td>${users.usersType.typeName}</td>
             <td><input type="button" class="btn btn-primary" value="Редактировать" onclick="javascript:document.location='/iviewer/user_edit_${users.userId}'"></td>
         </tr>
     </c:forEach>

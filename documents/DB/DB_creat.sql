@@ -229,7 +229,7 @@ VALUES
 	'Админович',
 	null,
 	1,
-	to_date('2013/04/03 16:00:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/03 16:00', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -243,7 +243,7 @@ VALUES
 	'Афанасьевич',
 	null,
 	2,
-	to_date('2013/04/03 17:00:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/03 17:00', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -257,7 +257,7 @@ VALUES
 	'Макарович',
 	null,
 	2,
-	to_date('2013/04/03 17:30:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/03 17:30', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -271,7 +271,7 @@ VALUES
 	'Радионовна',
 	null,
 	3,
-	to_date('2013/04/04 17:30:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/04 17:30', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -285,7 +285,7 @@ VALUES
 	'Алексеевна',
 	null,
 	3,
-	to_date('2013/04/04 15:30:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/04 15:30', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -299,7 +299,7 @@ VALUES
 	'Ренатовна',
 	null,
 	3,
-	to_date('2013/04/04 16:30:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/04 16:30', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -313,7 +313,7 @@ VALUES
 	'Маркович',
 	null,
 	3,
-	to_date('2013/04/04 17:38:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/04 17:38', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -327,7 +327,7 @@ VALUES
 	'Матвеевич',
 	null,
 	4,
-	to_date('2013/04/05 17:38:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/05 17:38', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -341,7 +341,7 @@ VALUES
 	'Станиславовна',
 	null,
 	4,
-	to_date('2013/04/05 21:38:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/05 21:38', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -355,7 +355,7 @@ VALUES
 	'Степанович',
 	null,
 	4,
-	to_date('2013/04/06 11:23:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/06 11:23', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -369,7 +369,7 @@ VALUES
 	'Гавриловна',
 	null,
 	4,
-	to_date('2013/04/06 12:38:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/06 12:38', 'yyyy/mm/dd hh24:mi')
 );
 
 INSERT INTO Users 
@@ -383,22 +383,22 @@ VALUES
 	'Фомович',
 	null,
 	4,
-	to_date('2013/04/06 14:14:00', 'yyyy/mm/dd hh24:mi:ss')
+	to_date('2013/04/06 14:14', 'yyyy/mm/dd hh24:mi')
 );
 
 
 INSERT INTO Interview VALUES(
 		1,
-		to_date('2013/05/03 16:00:00', 'yyyy/mm/dd hh24:mi:ss'),
-		to_date('2013/05/03 18:00:00', 'yyyy/mm/dd hh24:mi:ss'),
+		to_date('2013/05/03 16:00', 'yyyy/mm/dd hh24:mi'),
+		to_date('2013/05/03 18:00', 'yyyy/mm/dd hh24:mi'),
 		30,
 		4
 );
 
 INSERT INTO Interview VALUES(
 		2,
-		to_date('2013/05/03 18:30:00', 'yyyy/mm/dd hh24:mi:ss'),
-		to_date('2013/05/03 20:30:00', 'yyyy/mm/dd hh24:mi:ss'),
+		to_date('2013/05/03 18:30', 'yyyy/mm/dd hh24:mi'),
+		to_date('2013/05/03 20:30', 'yyyy/mm/dd hh24:mi'),
 		30,
 		4
 );

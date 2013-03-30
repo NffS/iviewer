@@ -82,6 +82,9 @@ public class Form implements Serializable, Comparable<Form>{
 	@Column(name="prog_lang_other")
 	private String  progLangOther;
 	
+	@Column(name="prog_lang_other_mark")
+	private Integer  progLangOtherMark;
+	
 	@Column(name="cs_network_tech")
 	private Integer csNetworkTech;
 	
@@ -107,7 +110,10 @@ public class Form implements Serializable, Comparable<Form>{
 	private Integer csDesign;
 	
 	@Column(name="cs_other")
-	private Integer csOther;
+	private String  csOther;
+	
+	@Column(name="cs_other_mark")
+	private Integer csOtherMark;
 	
 	@Column(name="experience")
 	private String experience;
@@ -174,563 +180,394 @@ public class Form implements Serializable, Comparable<Form>{
 		return this.user.getSurname().compareTo(comparedForm.getUser().getSurname());
 	}
 
-
-
 	public Integer getFormId() {
 		return formId;
 	}
-
-
 
 	public void setFormId(Integer formId) {
 		this.formId = formId;
 	}
 
-
-
 	public Integer getUserId() {
 		return userId;
 	}
-
-
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
-
-
 	public Integer getUniversityId() {
 		return universityId;
 	}
-
-
 
 	public void setUniversityId(Integer universityId) {
 		this.universityId = universityId;
 	}
 
-
-
 	public Integer getFacultyId() {
 		return facultyId;
 	}
-
-
 
 	public void setFacultyId(Integer facultyId) {
 		this.facultyId = facultyId;
 	}
 
-
-
 	public Integer getCourse() {
 		return course;
 	}
-
-
 
 	public void setCourse(Integer course) {
 		this.course = course;
 	}
 
-
-
 	public String getEndYear() {
 		return endYear;
 	}
-
-
 
 	public void setEndYear(String endYear) {
 		this.endYear = endYear;
 	}
 
-
-
 	public String getEmail2() {
 		return email2;
 	}
-
-
 
 	public void setEmail2(String email2) {
 		this.email2 = email2;
 	}
 
-
-
 	public String getPhone() {
 		return phone;
 	}
-
-
 
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-
-
 	public String getAnotherContact() {
 		return anotherContact;
 	}
-
-
 
 	public void setAnotherContact(String anotherContact) {
 		this.anotherContact = anotherContact;
 	}
 
-
-
 	public String getInterestTc() {
 		return interestTc;
 	}
-
-
 
 	public void setInterestTc(String interestTc) {
 		this.interestTc = interestTc;
 	}
 
-
-
 	public String getInterestNc() {
 		return interestNc;
 	}
-
-
 
 	public void setInterestNc(String interestNc) {
 		this.interestNc = interestNc;
 	}
 
-
-
 	public String getInterestAreaPo() {
 		return interestAreaPo;
 	}
-
-
 
 	public void setInterestAreaPo(String interestAreaPo) {
 		this.interestAreaPo = interestAreaPo;
 	}
 
-
-
 	public String getInterestAreaOther() {
 		return interestAreaOther;
 	}
-
-
 
 	public void setInterestAreaOther(String interestAreaOther) {
 		this.interestAreaOther = interestAreaOther;
 	}
 
-
-
 	public String getJobArDeepSpec() {
 		return jobArDeepSpec;
 	}
-
-
 
 	public void setJobArDeepSpec(String jobArDeepSpec) {
 		this.jobArDeepSpec = jobArDeepSpec;
 	}
 
-
-
 	public String getJobArVaried() {
 		return jobArVaried;
 	}
-
-
 
 	public void setJobArVaried(String jobArVaried) {
 		this.jobArVaried = jobArVaried;
 	}
 
-
-
 	public String getJobArManage() {
 		return jobArManage;
 	}
-
-
 
 	public void setJobArManage(String jobArManage) {
 		this.jobArManage = jobArManage;
 	}
 
-
-
 	public String getJobArSales() {
 		return jobArSales;
 	}
-
-
 
 	public void setJobArSales(String jobArSales) {
 		this.jobArSales = jobArSales;
 	}
 
-
-
 	public String getJobArOther() {
 		return jobArOther;
 	}
-
-
 
 	public void setJobArOther(String jobArOther) {
 		this.jobArOther = jobArOther;
 	}
 
-
-
 	public Integer getProgLangC() {
 		return progLangC;
 	}
-
-
 
 	public void setProgLangC(Integer progLangC) {
 		this.progLangC = progLangC;
 	}
 
-
-
 	public Integer getProgLangJava() {
 		return progLangJava;
 	}
-
-
 
 	public void setProgLangJava(Integer progLangJava) {
 		this.progLangJava = progLangJava;
 	}
 
-
-
 	public String getProgLangOther() {
 		return progLangOther;
 	}
-
-
 
 	public void setProgLangOther(String progLangOther) {
 		this.progLangOther = progLangOther;
 	}
 
+	public Integer getProgLangOtherMark() {
+		return progLangOtherMark;
+	}
+
+	public void setProgLangOther(Integer progLangOtherMark) {
+		this.progLangOtherMark = progLangOtherMark;
+	}
 
 
 	public Integer getCsNetworkTech() {
 		return csNetworkTech;
 	}
 
-
-
 	public void setCsNetworkTech(Integer csNetworkTech) {
 		this.csNetworkTech = csNetworkTech;
 	}
-
-
 
 	public Integer getCsAlgorithms() {
 		return csAlgorithms;
 	}
 
-
-
 	public void setCsAlgorithms(Integer csAlgorithms) {
 		this.csAlgorithms = csAlgorithms;
 	}
-
-
 
 	public Integer getCsOop() {
 		return csOop;
 	}
 
-
-
 	public void setCsOop(Integer csOop) {
 		this.csOop = csOop;
 	}
-
-
 
 	public Integer getCsGui() {
 		return csGui;
 	}
 
-
-
 	public void setCsGui(Integer csGui) {
 		this.csGui = csGui;
 	}
-
-
 
 	public Integer getCsDb() {
 		return csDb;
 	}
 
-
-
 	public void setCsDb(Integer csDb) {
 		this.csDb = csDb;
 	}
-
-
 
 	public Integer getCsWeb() {
 		return csWeb;
 	}
 
-
-
 	public void setCsWeb(Integer csWeb) {
 		this.csWeb = csWeb;
 	}
-
-
 
 	public Integer getCsNetworkProg() {
 		return csNetworkProg;
 	}
 
-
-
 	public void setCsNetworkProg(Integer csNetworkProg) {
 		this.csNetworkProg = csNetworkProg;
 	}
-
-
 
 	public Integer getCsDesign() {
 		return csDesign;
 	}
 
-
-
 	public void setCsDesign(Integer csDesign) {
 		this.csDesign = csDesign;
 	}
 
-	
-	public Integer getCsOther() {
+	public String getCsOther() {
 		return csOther;
 	}
 
-
-
-	public void setCsOther(Integer csOther) {
+	public void setCsOther(String csOther) {
 		this.csOther = csOther;
 	}
 
+	public Integer getCsOtherMark() {
+		return csOtherMark;
+	}
+
+	public void setCsOtherMark(Integer csOtherMark) {
+		this.csOtherMark = csOtherMark;
+	}
 
 	public String getExperience() {
 		return experience;
 	}
 
-
-
 	public void setExperience(String experience) {
 		this.experience = experience;
 	}
-
-
 
 	public Integer getEnglishRead() {
 		return englishRead;
 	}
 
-
-
 	public void setEnglishRead(Integer englishRead) {
 		this.englishRead = englishRead;
 	}
-
-
 
 	public Integer getEnglishWrite() {
 		return englishWrite;
 	}
 
-
-
 	public void setEnglishWrite(Integer englishWrite) {
 		this.englishWrite = englishWrite;
 	}
-
-
 
 	public Integer getEnglishSpoken() {
 		return englishSpoken;
 	}
 
-
-
 	public void setEnglishSpoken(Integer englishSpoken) {
 		this.englishSpoken = englishSpoken;
 	}
-
-
 
 	public Integer getSourceId() {
 		return sourceId;
 	}
 
-
-
 	public void setSourceId(Integer sourceId) {
 		this.sourceId = sourceId;
 	}
-
-
 
 	public String getMotivation_comment() {
 		return motivation_comment;
 	}
 
-
-
 	public void setMotivation_comment(String motivation_comment) {
 		this.motivation_comment = motivation_comment;
 	}
-
-
 
 	public String getComment2() {
 		return comment2;
 	}
 
-
-
 	public void setComment2(String comment2) {
 		this.comment2 = comment2;
 	}
-
-
 
 	public Integer getStatus() {
 		return status;
 	}
 
-
-
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-
-
 
 	public Integer getInterviewId() {
 		return interviewId;
 	}
 
-
-
 	public void setInterviewId(Integer interviewId) {
 		this.interviewId = interviewId;
 	}
-
-
 
 	public Integer getVisitStatus() {
 		return visitStatus;
 	}
 
-
-
 	public void setVisitStatus(Integer visitStatus) {
 		this.visitStatus = visitStatus;
 	}
-
-
 
 	public User getUser() {
 		return user;
 	}
 
-
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
 
 	public HRMark getHrMark() {
 		return hrMark;
 	}
 
-
-
 	public void setHrMark(HRMark hrMark) {
 		this.hrMark = hrMark;
 	}
-
-
 
 	public TechMark getTechMark() {
 		return techMark;
 	}
 
-
-
 	public void setTechMark(TechMark techMark) {
 		this.techMark = techMark;
 	}
-
-
 
 	public Interview getInterview() {
 		return interview;
 	}
 
-
-
 	public void setInterview(Interview interview) {
 		this.interview = interview;
 	}
-
-
 
 	public University getUniversity() {
 		return university;
 	}
 
-
-
 	public void setUniversity(University university) {
 		this.university = university;
 	}
-
-
 
 	public Faculty getFaculty() {
 		return faculty;
 	}
 
-
-
 	public void setFaculty(Faculty faculty) {
 		this.faculty = faculty;
 	}
 
-
-
 	public Source getSource() {
 		return source;
 	}
-
-
 
 	public void setSource(Source source) {
 		this.source = source;

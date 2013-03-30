@@ -94,6 +94,8 @@ CREATE TABLE Form
 		prog_lang_java		NUMBER(1) NOT NULL CONSTRAINT prog_lang_java
 		CHECK (prog_lang_java between 0 and 5),
 		prog_lang_other 	VARCHAR2(800),
+		prog_lang_other_mark NUMBER(1) NOT NULL CONSTRAINT prog_lang_other_mark
+		CHECK (prog_lang_other_mark between 0 and 5),
 		cs_network_tech 	NUMBER(1) NOT NULL CONSTRAINT cs_network_tech
 		CHECK (cs_network_tech between 0 and 5),
 		cs_algorithms 		NUMBER(1) NOT NULL CONSTRAINT cs_algorithms
@@ -110,6 +112,9 @@ CREATE TABLE Form
 		CHECK (cs_network_prog between 0 and 5),
 		cs_design 			NUMBER(1) NOT NULL CONSTRAINT cs_design
 		CHECK (cs_design between 0 and 5),
+		cs_other 	VARCHAR2(800),
+		cs_other_mark 		NUMBER(1) NOT NULL CONSTRAINT cs_other_mark
+		CHECK (cs_other_mark between 0 and 5),
 		experience			VARCHAR2(4000),
 		english_read 		NUMBER(1) NOT NULL CONSTRAINT english_read
 		CHECK (english_read between 0 and 5),
@@ -186,7 +191,7 @@ INSERT INTO Sources
 VALUES ( 2, 'Узнал от друга' );
 
 INSERT INTO Sources 
-VALUES ( 3, 'Нашел в нтернете' );
+VALUES ( 3, 'Нашел в интернете' );
 
 INSERT INTO Sources 
 VALUES ( 4, 'Другое' );
@@ -405,19 +410,19 @@ INSERT INTO Interview VALUES(
 
 INSERT INTO Form values
 (1, 8, 1, 1, 4, 2013, 'double@gmail.com', '+380996661633',
- '', '+', '+', '+', '', '+', '+-', '+', '-', '', 4, 2, 'Python - 2; C# - 1',
- 4, 4, 4, 2, 2, 3, 4, 1, 'RFID project', 3, 1, 1, 1,
+ '', '+', '+', '+', '', '+', '+-', '+', '-', '', 4, 2, 'Python', 3,
+ 4, 4, 4, 2, 2, 3, 4, 1, 'Криптография', 4, 'RFID project', 3, 1, 1, 1,
  'очень хочу получить опыт работы в компании NetCracker', 'без комментариев',
  0, 1, 0);
  INSERT INTO Form values
 (2, 9, 2, 4, 4, 2015, 'float@gmail.com', 
  '+380994473463', '', '-', '-', '+', '', '+', '-', '-', '-', '', 0, 4, 
- 'С++ - 5; C# - 4', 2, 5, 4, 1,	1, 1, 2, 1, 'олимпиады', 3, 3, 3, 3,
+ 'C#', 4, 2, 5, 4, 1, 1, 1, 2, 1, 'Физика', 5,'олимпиады', 3, 3, 3, 3,
  'просто люблю проходить собеседования', 'это комментарий', 0, 1, 0);
  INSERT INTO Form values
 (3, 10, 1, 1, 4, 2013, 'int@gmail.com', '+380573573488',
- '', '+', '+', '+', '', '+', '+', '+', '+', '', 5, 2, 'PHP - 1',
- 5, 5, 5, 5, 5, 5, 5, 5, 'Лабораторки в универе сама делала', 5, 5, 5, 2,
+ '', '+', '+', '+', '', '+', '+', '+', '+', '', 5, 2, 'PHP', 1,
+ 5, 5, 5, 5, 5, 5, 5, 5, 'Android', 2, 'Лабораторки в универе сама делала', 5, 5, 5, 2,
  'Сама не знаю', 'без комментариев', 0, 1, 0);
 
 INSERT INTO Form VALUES
@@ -440,21 +445,22 @@ INSERT INTO Form VALUES
 		'+',
 		'-',
 		'нет',
-		'4',
-		'3',
-		'C# - 5; JS - 3;',		
-		'3',
-		'2',
-		'3',
-		'4',
-		'2',
-		'4',
-		'2',
-		'4',
+		4,
+		3,
+		'JS', 
+		3,		
+		3,
+		2,
+		3,
+		4,
+		2,
+		4,
+		2,
+		4, 'iOS', 4,
 		'ну была курсовая по предмету на тему и какой-то студенческий проект',
-		'3',
-		'3',
-		'1',
+		3,
+		3,
+		1,
 		2,
 		'Ну я очень умный, целеустремленный и жажду приключений',
 		'Ходил на курсы вязания и программирования на android',
@@ -483,21 +489,22 @@ INSERT INTO Form VALUES
 		'+',
 		'+-',
 		'нет',
-		'4',
-		'3',
-		'C# - 5; JS - 3;',		
-		'5',
-		'2',
-		'3',
-		'4',
-		'2',
-		'2',
-		'2',
-		'4',
+		4,
+		3,
+		'JS', 
+		3,		
+		5,
+		2,
+		3,
+		4,
+		2,
+		2,
+		2,
+		4, 'Linux', 3,
 		'сайт для интернет магазина',
-		'1',
-		'2',
-		'1',
+		1,
+		2,
+		1,
 		4,
 		'Пунктуален, энергичен, очень красив и обаятелен',
 		'Ходил в универ на все пары',

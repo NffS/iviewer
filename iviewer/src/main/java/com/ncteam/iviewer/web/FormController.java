@@ -25,6 +25,7 @@ import com.ncteam.iviewer.domain.Faculty;
 import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.University;
 import com.ncteam.iviewer.domain.User;
+import com.ncteam.iviewer.service.ValidationService;
 import com.ncteam.iviewer.service.impl.FormServiceImpl;
 import com.ncteam.iviewer.service.impl.PDFservice;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
@@ -38,80 +39,159 @@ public class FormController{
 	 private FormServiceImpl formService;
 	
 	@RequestMapping(value = "/getform", method = RequestMethod.POST)
-    public String createForm(HttpServletRequest request, HttpSession session) throws DocumentException, IOException {
+    public String getForm(HttpServletRequest request, HttpSession session, Map<String, Object> map){
+		//if (!getErrorMessage(request).equals("ok")) 
+			//return "form";
 		
-		Form newForm = new Form();
-			User user = userService.getUserByEmail(session.getAttribute("email").toString());
+		Form newForm = createNewForm(request);
+		User user = userService.getUserByEmail(session.getAttribute("email").toString());
+		
+		/*if (formService.getFormByUserId(user.getUserId())==null){
 			newForm.setUserId(user.getUserId());
+			newForm.setUser(user);
+			newForm.setStatus(1);
+			newForm.setVisitStatus(1);
 			
+			formService.addRecord(newForm);
+			*/
+		//} else {
+			newForm.setUserId(user.getUserId());
+			newForm.setUser(user);
+			newForm.setStatus(2);
 			
-			
-		newForm.setUser(user);
-			University university = new University();
-			university.setUniversityId(1);
-			university.setUniversityName(request.getParameter("univerid"));
-		newForm.setUniversity(university);
-			Faculty faculty = new Faculty();
-			faculty.setFacultyId(1);
-			faculty.setFacultyName(request.getParameter("faculty"));
-			faculty.setUniversityId(1);
-			faculty.setUniversity(university);
-		
-		newForm.setCourse(Integer.getInteger(request.getParameter("univerid")));
-		newForm.setEndYear(request.getParameter("year"));
-		
-		newForm.setEmail2(request.getParameter("email2"));
-		newForm.setPhone(request.getParameter("phone"));
-		newForm.setAnotherContact(request.getParameter("another_contact"));
-		
-		newForm.setInterestNc("+");
-		newForm.setInterestTc("+");
-		newForm.setInterestAreaPo("+");
-		newForm.setInterestAreaOther("+");
-		
-		newForm.setJobArDeepSpec("+");
-		newForm.setJobArVaried("+");
-		newForm.setJobArManage("+");
-		newForm.setJobArSales("+");
-		newForm.setJobArOther("+");
-		
-		newForm.setProgLangC(Integer.getInteger(request.getParameter("lan_c")));
-		newForm.setProgLangJava(Integer.getInteger(request.getParameter("lan_java")));
-		newForm.setProgLangOther("lan_another1");
-		
-		newForm.setCsNetworkTech(Integer.getInteger(request.getParameter("cs_net")));
-		newForm.setCsAlgorithms(Integer.getInteger(request.getParameter("cs_algorithm")));
-		newForm.setCsOop(Integer.getInteger(request.getParameter("cs_oop")));
-		newForm.setCsDb(Integer.getInteger(request.getParameter("cs_bd")));
-		newForm.setCsWeb(Integer.getInteger(request.getParameter("cs_web")));
-		newForm.setCsGui(Integer.getInteger(request.getParameter("cs_gui")));
-		newForm.setCsNetworkProg(Integer.getInteger(request.getParameter("cs_netprog")));
-		newForm.setCsDesign(Integer.getInteger(request.getParameter("cs_design")));
-		
-		newForm.setEnglishRead(Integer.getInteger(request.getParameter("eng_reading")));
-		newForm.setEnglishWrite(Integer.getInteger(request.getParameter("eng_writting")));
-		newForm.setEnglishSpoken(Integer.getInteger(request.getParameter("eng_speaking")));
-		
-		newForm.setExperience(request.getParameter("experience"));
-		newForm.setMotivation_comment(request.getParameter("promises"));
-		newForm.setComment2(request.getParameter("more_information"));
-		
-		newForm.setStatus(1);
-		newForm.setVisitStatus(1);
-		
-		
-		
+			formService.updateRecord(newForm);
+		//}
         return "form";
     }
+
+	Form createNewForm(HttpServletRequest request){
+		
+		Form newForm = new Form();
+		/*
+		University university = new University();
+		university.setUniversityId(1);
+		Faculty faculty = new Faculty();
+		faculty.setFacultyId(2);
+		faculty.setUniversity(university);
+		newForm.setUniversity(university);
+		newForm.setFaculty(faculty);
+		*/
+		
+			newForm.setCourse(Integer.parseInt(request.getParameter("course")));
+			newForm.setEndYear(request.getParameter("endYear"));
+			newForm.setEmail2(request.getParameter("email2"));
+			newForm.setPhone(request.getParameter("phone"));
+			newForm.setAnotherContact(request.getParameter("another_contact"));
+			
+			newForm.setInterestTc(request.getParameter("interest_tc"));
+			newForm.setInterestNc(request.getParameter("interest_job"));
+			
+			newForm.setInterestAreaPo(request.getParameter("interest_po"));
+			newForm.setInterestAreaOther(request.getParameter("interest_another"));
+			
+			newForm.setJobArDeepSpec(request.getParameter("jobtype_ds"));
+			newForm.setJobArVaried(request.getParameter("jobtype_vj"));
+			newForm.setJobArManage(request.getParameter("jobtype_manage"));
+			newForm.setJobArSales(request.getParameter("jobtype_sales"));
+			newForm.setJobArOther(request.getParameter("jobtype_another"));
+			
+			newForm.setProgLangC(Integer.parseInt(request.getParameter("lan_c")));
+			newForm.setProgLangJava(Integer.parseInt(request.getParameter("lan_java")));
+			newForm.setProgLangOther(request.getParameter("lan_other"));
+			newForm.setProgLangOther(Integer.parseInt(request.getParameter("lan_other_mark")));
+			
+			newForm.setCsNetworkTech(Integer.parseInt(request.getParameter("cs_net")));
+			newForm.setCsAlgorithms(Integer.parseInt(request.getParameter("cs_algorithm")));
+			newForm.setCsOop(Integer.parseInt(request.getParameter("cs_oop")));
+			newForm.setCsGui(Integer.parseInt(request.getParameter("cs_bd")));
+			newForm.setCsDb(Integer.parseInt(request.getParameter("cs_web")));
+			newForm.setCsWeb(Integer.parseInt(request.getParameter("cs_gui")));
+			newForm.setCsNetworkProg(Integer.parseInt(request.getParameter("cs_netprog")));
+			newForm.setCsDesign(Integer.parseInt(request.getParameter("cs_design")));
+			newForm.setCsOther(request.getParameter("cs_another"));
+			newForm.setCsOtherMark(Integer.parseInt(request.getParameter("cs_another_mark")));
+			
+			newForm.setEnglishRead(Integer.parseInt(request.getParameter("eng_reading")));
+			newForm.setEnglishWrite(Integer.parseInt(request.getParameter("eng_writting")));
+			newForm.setEnglishSpoken(Integer.parseInt(request.getParameter("eng_speaking")));
+			
+			newForm.setSourceId(Integer.parseInt(request.getParameter("source")));
+			
+			newForm.setExperience(request.getParameter("experience"));
+			newForm.setMotivation_comment(request.getParameter("promises"));
+			newForm.setComment2(request.getParameter("more_information"));
+			
+		return newForm;
+	}
+
+	String getErrorMessage(HttpServletRequest request){
+		String errorMessage="ok";
+		ValidationService validationService = new ValidationService();
+		if (!validationService.checkName(request.getParameter("firstname"), "first").equals("ok"))
+			return errorMessage=validationService.checkName(request.getParameter("firstname"), "first");
+		if (!validationService.checkName(request.getParameter("surname"), "sur").equals("ok"))
+			return errorMessage=validationService.checkName(request.getParameter("surname"), "sur");
+		if (!validationService.checkName(request.getParameter("lastname"), "last").equals("ok"))
+			return errorMessage=validationService.checkName(request.getParameter("lastname"), "last");
+		if (!validationService.checkYear(request.getParameter("year")).equals("ok"))
+			return errorMessage=validationService.checkYear(request.getParameter("year"));
+		
+		
+		if (!validationService.checkEmail(request.getParameter("email1")).equals("ok"))
+			return errorMessage=validationService.checkEmail(request.getParameter("email1"));
+		if (!validationService.checkEmail(request.getParameter("email2")).equals("ok"))
+			return errorMessage=validationService.checkEmail(request.getParameter("email2"));
+		if (!validationService.checkPhone(request.getParameter("phone")).equals("ok"))
+			return errorMessage=validationService.checkPhone(request.getParameter("phone"));
+		if (!validationService.checkLength(request.getParameter("another_contact"), 40, 1).equals("ok"))
+			return errorMessage=validationService.checkPhone(request.getParameter("another_contact"));
+		
+		if (!validationService.checkLength(request.getParameter("interest_another"), 20, 1).equals("ok"))
+			return errorMessage=validationService.checkPhone(request.getParameter("interest_another")); 
+		if (!validationService.checkLength(request.getParameter("jobtype_another"), 20, 1).equals("ok"))
+			return errorMessage=validationService.checkPhone(request.getParameter("jobtype_another"));
+		if (!validationService.checkLength(request.getParameter("lan_other"), 12, 1).equals("ok"))
+			return errorMessage=validationService.checkPhone(request.getParameter("lan_other"));
+		if (!validationService.checkLength(request.getParameter("cs_another"), 20, 1).equals("ok"))
+			return errorMessage=validationService.checkPhone(request.getParameter("cs_another"));
+		
+		if (!validationService.checkLength(request.getParameter("form.getExperience()"), 420, 1).equals("ok"))
+			return errorMessage=validationService.checkPhone(request.getParameter("form.getExperience()"));
+		if (!validationService.checkLength(request.getParameter("promises"), 420, 1).equals("ok"))
+			return errorMessage=validationService.checkPhone(request.getParameter("promises"));
+		if (!validationService.checkLength(request.getParameter("more_information"), 420, 1).equals("ok"))
+			return errorMessage=validationService.checkPhone(request.getParameter("more_information"));
+		
+		return errorMessage;
+	}
 	
     @RequestMapping(value = "/form")
-    public String registration(HttpSession session, Map<String, Object> map){
+    public String form(HttpSession session, Map<String, Object> map){
 		User user = userService.getUserByEmail(session.getAttribute("email").toString());
 		Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
 		
 		map.put("user", user);
 		map.put("form", form);
+		
+		map.put("interesttc", convertFromDB(form.getInterestTc()));
+		map.put("interestnc", convertFromDB(form.getInterestNc()));
+		
+		map.put("interestpo", convertFromDB(form.getInterestAreaPo()));
+		
+		map.put("job_vj", convertFromDB(form.getJobArVaried()));
+		map.put("job_man", convertFromDB(form.getJobArManage()));
+		map.put("job_sales", convertFromDB(form.getJobArSales()));
+
         return "form";
     }
     
+    private String convertFromDB(String input){
+    	switch (input){
+    	case "+": return "да";
+    	case "+-": return "возможно";
+    	case "-": return "нет";
+    	case "?": return "хочу узнать больше";
+    	}
+    	return "";
+    }
   }

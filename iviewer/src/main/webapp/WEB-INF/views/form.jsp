@@ -11,7 +11,7 @@
    } 
   </style>
 
-<form:form  method="POST" action="getform">
+<form  method="POST" action="getform">
 		<fieldset>
 			<legend>Персональная информация</legend>
 			<table width =700px>
@@ -33,7 +33,7 @@
         					</div>
         	</td>
         	<td ROWSPAN=7>
-        	<img src="resources/design/zold.jpg" width="120" height="180">
+        	<img src="${user.getFoto()}" width="120" height="180">
         	</td>
         	</tr>
         	<tr><td width=15%></td><td>
@@ -76,10 +76,10 @@
 	            					
 	            					<td align="right" width=80>
 								<select style="height:27px" class="input-medium" id="f1" onchange="filter()" name="univerid">
-									<option value="0">Другое</option>
 				  					<option value="1">ОНПУ</option>
 				  					<option value="2">ОНУ им. Мечникова</option>
-				  					<option selected value="1">${form.getUniversity().getUniversityName()}</option>
+				  					<option value="3">Другое</option>
+				  					<option selected value="${form.getUniversity().getUniversityId()}">${form.getUniversity().getUniversityName()}</option>
 								</select>
 								</td>
 								</tr>
@@ -96,13 +96,13 @@
 	            					
 	            					<td align="right" width=80>
 								<select  style="height:27px" class="input-medium" id="f2" name="faculty" disabled>
-									<option value="0"></option>
+									<option value="3"></option>
 				  					<option value="1">ИКС</option>
 				  					<option value="1">Программная инженерия</option>
 				  					<option value="1">Другой</option>
 				  					<option value="2">Прикладная математика</option>
 				  					<option value="2">Другой</option>
-				  					<option selected value="${form.getFaculty().getFacultyName()}">${form.getFaculty().getFacultyName()}</option>
+				  					<option selected value="${form.getUniversity().getUniversityId()}">${form.getFaculty().getFacultyName()}</option>
 								</select>
 								</td>
 								</tr>
@@ -254,11 +254,12 @@
 	            				</td>
 	            					
 	            					<td align="right" width=150>
-	            					<select  style="height:27px" class="input-medium" id="inputValue" name="interest_lc">
-				  					<option value="да">да</option>
-				  					<option value="возможно">возможно</option>
-				  					<option value="нет">нет</option>
-				  					<option value="хочу узнать больше"> хочу узнать больше</option>
+	            					<select  style="height:27px" class="input-medium" id="inputValue" name="interest_tc">
+				  					<option value="+">да</option>
+				  					<option value="+-">возможно</option>
+				  					<option value="-">нет</option>
+				  					<option value="?"> хочу узнать больше</option>
+				  					<option selected value="${form.getInterestTc()}">${interesttc}</option>
 								</select>
 								</td>
 								</tr>
@@ -280,10 +281,11 @@
 	            					
 	            					<td align="right" width=150>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="interest_job">
-				  					<option value="да">да</option>
-				  					<option value="возможно">возможно</option>
-				  					<option value="нет">нет</option>
-				  					<option value="хочу узнать больше">хочу узнать больше</option>
+				  					<option value="+">да</option>
+				  					<option value="+-">возможно</option>
+				  					<option value="-">нет</option>
+				  					<option value="?">хочу узнать больше</option>
+				  					<option selected value="${form.getInterestNc()}">${interestnc}</option>
 								</select>
 								</td>
 								</tr>
@@ -318,6 +320,7 @@
 				  					<option value="возможно">возможно</option>
 				  					<option value="нет">нет</option>
 				  					<option value="хочу узнать больше">хочу узнать больше</option>
+				  					<option selected value="${form.getInterestTc()}">${interestpo}</option>
 								</select>
 								</td>
 								</tr>
@@ -367,11 +370,12 @@
 	            				</td>
 	            					
 	            					<td align="right" width=150>
-	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_gc">
-				  					<option value="ИКС">да</option>
-				  					<option value="ИКС">возможно</option>
-				  					<option value="ИКС">нет</option>
-				  					<option value="ИКС">хочу узнать больше</option>
+	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_ds">
+				  					<option value="+">да</option>
+				  					<option value="+-">возможно</option>
+				  					<option value="-">нет</option>
+				  					<option value="?">хочу узнать больше</option>
+				  					<option selected value="${form.getInterestTc()}">${interestpo}</option>
 								</select>
 								</td>
 								</tr>
@@ -392,11 +396,12 @@
 	            				</td>
 	            					
 	            					<td align="right" width=150>
-	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_rj">
-				  					<option value="ИКС">да</option>
-				  					<option value="ИКС">возможно</option>
-				  					<option value="ИКС">нет</option>
-				  					<option value="ИКС">хочу узнать больше</option>
+	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_vj">
+				  					<option value="+">да</option>
+				  					<option value="+-">возможно</option>
+				  					<option value="-">нет</option>
+				  					<option value="?">хочу узнать больше</option>
+				  					<option selected value="${form.getJobArVaried()}">${job_rj}</option>
 								</select>
 								</td>
 								</tr>
@@ -422,6 +427,7 @@
 				  					<option value=">возможно">возможно</option>
 				  					<option value="нет">нет</option>
 				  					<option value="хочу узнать больше">хочу узнать больше</option>
+				  					<option selected value="${form.getJobArManage()}">${job_man}</option>
 								</select>
 								</td>
 								</tr>
@@ -447,6 +453,7 @@
 				  					<option value=">возможно">возможно</option>
 				  					<option value="нет">нет</option>
 				  					<option value="хочу узнать больше">хочу узнать больше</option>
+				  					<option selected value="${form.getJobArSales()}">${job_sales}</option>
 								</select>
 								</td>
 								</tr>
@@ -522,14 +529,14 @@
 					<td width=25% align="left" valign="top">
 						
 							<div class="controls form-inline">
-								<input type="text" class="input-small" id="inputValue">
-								<select  style="height:27px" class="input-small" id="inputValue" name="lan_another1" value="${form.getProgLangOther()}">
+								<input type="text" class="input-small" id="inputValue" name="lan_other" value="${form.getProgLangOther()}">
+								<select  style="height:27px" class="input-small" id="inputValue" name="lan_other_mark">
 				  					<option value="1">1</option>
 				  					<option value="2">2</option>
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getProgLangOtherMark()}">${form.getProgLangOtherMark()}</option>
 								</select>
 							</div>
 						
@@ -565,7 +572,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getCsNetworkTech()}">${form.getCsNetworkTech()}</option>
 								</select>
 								</td>
 								</tr>
@@ -592,7 +599,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getCsAlgorithms()}">${form.getCsAlgorithms()}</option>
 								</select>
 								</td>
 								</tr>
@@ -620,7 +627,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getCsOop()}">${form.getCsOop()}</option>
 								</select>
 								</td>
 								</tr>
@@ -648,7 +655,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getCsDb()}">${form.getCsDb()}</option>
 								</select>
 								</td>
 								</tr>
@@ -676,7 +683,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getCsWeb()}">${form.getCsWeb()}</option>
 								</select>
 								</td>
 								</tr>
@@ -704,7 +711,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getCsGui()}">${form.getCsGui()}</option>
 								</select>
 								</td>
 								</tr>
@@ -732,7 +739,7 @@
 						  					<option value="3">3</option>
 						  					<option value="4">4</option>
 						  					<option value="5">5</option>
-						  					<option selected value=""></option>
+						  					<option selected value="${form.getCsNetworkProg()}">${form.getCsNetworkProg()}</option>
 										</select>
 									</td>
 								</tr>
@@ -759,7 +766,7 @@
 						  					<option value="3">3</option>
 						  					<option value="4">4</option>
 						  					<option value="5">5</option>
-						  					<option selected value=""></option>
+						  					<option selected value="${form.getCsDesign()}">${form.getCsDesign()}</option>
 										</select>
 									</td>
 								</tr>
@@ -775,18 +782,18 @@
 						  	<table>
 						  		<tr>
 						  			<td align="left" width=300>
-	            				<input type="text" class="input-big" id="inputValue">
+	            				<input type="text" class="input-big" id="inputValue" value="${form.getCsOther()}" name="cs_another">
 	            				</td>
 	            					
 	            					<td align="right" width=150>
-	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_another">
+	            				<select  style="height:27px" class="input-small" id="inputValue" name="cs_another_mark">
 	            					<option value="0">0</option>
 				  					<option value="1">1</option>
 				  					<option value="2">2</option>
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getCsOtherMark()}">${form.getCsOtherMark()}</option>
 								</select>
 								</td>
 								</tr>
@@ -822,7 +829,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getEnglishRead()}">${form.getEnglishRead()}</option>
 								</select>
 								</td>
 								</tr>
@@ -848,7 +855,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getEnglishWrite()}">${form.getEnglishWrite()}</option>
 								</select>
 								</td>
 								</tr>
@@ -874,7 +881,7 @@
 				  					<option value="3">3</option>
 				  					<option value="4">4</option>
 				  					<option value="5">5</option>
-				  					<option selected value=""></option>
+				  					<option selected value="${form.getEnglishSpoken()}">${form.getEnglishSpoken()}</option>
 								</select>
 								</td>
 								</tr>
@@ -893,12 +900,11 @@
 						  <div class="controls form-inline">
 	            				<label for="inputValue"><font size=4>Откуда ты узнал о наборе в учебный центр? </font></label>
 	            				<select  style="height:27px" class="input-big" id="inputValue" name="source">
-				  					<option value="в интернетах прочитал">в интернетах прочитал</option>
-				  					<option value="друзья рассказали">друзья рассказали</option>
-				  					<option value="Бровков посоветовал">Бровков посоветовал</option>
-				  					<option value="флаер увидел">флаер увидел</option>
-				  					<option value="какой учебный центр?">какой учебный центр?</option>
-				  					<option selected value=""></option>
+				  					<option value="1">Увидел рекламу</option>
+				  					<option value="2">Узнал от друга</option>
+				  					<option value="3">Нашел в интернете</option>
+				  					<option value="4">Другое</option>
+				  					<option selected value="${form.getSource().getSourceId()}">${form.getSource().getSourceName()}</option>
 								</select>
         				  </div>
 						
@@ -951,7 +957,7 @@
 				</tr>
 			</table>
 		</fieldset>
-</form:form>
+</form>
 <br><br><br><br>
 
 <script type="text/javascript">
@@ -961,7 +967,7 @@
         var f2 = document.getElementById("f2");
 		
 		
-		if(f1.value == 0) {
+		if(f1.value == 3) {
 			f2.disabled = 1; 
 		}else{		
 			f2.disabled = 0;

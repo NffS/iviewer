@@ -2,7 +2,6 @@ package com.ncteam.iviewer.web;
 
 import java.util.Map;
 
-import javax.persistence.Column;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,7 +29,7 @@ public class TechMarkController {
 	public String techMark(HttpServletResponse response, HttpSession session,
 			@PathVariable("form_id") Integer form_id,	Map<String, Object> map) {
 			
-		if(!validator.isUserTech(session)){
+		if(!validator.isUserTech(session)&&!validator.isUserHR(session)){
 			return "redirect:/index";
 		}
 		Form form=formService.getRecordById(form_id,Form.class);

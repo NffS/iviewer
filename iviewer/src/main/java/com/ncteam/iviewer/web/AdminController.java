@@ -107,7 +107,7 @@ public class AdminController {
                 	newUser.setLastName(request.getParameter("last_name"));
                 	newUser.setPassword(request.getParameter("password"));
                 	newUser.setUserTypeId(Integer.parseInt(request.getParameter("user_type_id")));
-                	newUser.setStringRegDate(new SimpleDateFormat("yyyy-MM-dd kk:mm").format(new Date()).toString());
+                	newUser.setStringRegDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()).toString());
                 	newUser.setFoto("");
                 	if(validator.isUserDataCorrect(newUser)){
                     tablesService.addRecord(newUser);

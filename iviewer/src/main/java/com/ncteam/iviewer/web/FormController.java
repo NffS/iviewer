@@ -219,14 +219,8 @@ public class FormController{
 	        map.put("target","/form_");
 	        return "redirect";
 		}
-		try{
-			formService.deleteRecord(formService.getRecordById(formId, Form.class));
-		}catch(org.springframework.dao.DataIntegrityViolationException e){
-			 map.put("message","<font color='red'>Анкета уже оценена и не может быть удалена</font>");
-		     map.put("target","form_"+((Form)formService.getRecordById(formId, Form.class)).getUserId());
-		     return "redirect";
-		}
-		
+		formService.deleteRecord(formService.getRecordById(formId, Form.class));
+				
 		 map.put("message","Анкета успешно удалена.");
 	     map.put("target","form_list");
 	     return "redirect";

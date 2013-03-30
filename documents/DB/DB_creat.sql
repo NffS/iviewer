@@ -136,7 +136,7 @@ CREATE TABLE HR_mark
 	(
 		hr_mark_id 		NUMBER(6) NOT NULL PRIMARY KEY,
 		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE  SET NULL,
-		form_id			NUMBER(6) NOT NULL REFERENCES Form (form_id),
+		form_id			NUMBER(6) NOT NULL REFERENCES Form (form_id) ON DELETE CASCADE,
 		motivation 		NUMBER(3) NOT NULL,
 		english			NUMBER(3) NOT NULL,
 		general_mark    VARCHAR2(2000) NOT NULL
@@ -146,7 +146,7 @@ CREATE TABLE Tech_mark
 	(
 		tech_mark_id 	NUMBER(6) NOT NULL PRIMARY KEY,
 		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE  SET NULL,
-		form_id			NUMBER(6) NOT NULL REFERENCES Form (form_id),
+		form_id			NUMBER(6) NOT NULL REFERENCES Form (form_id) ON DELETE CASCADE,
 		prog_lang 		NUMBER(3) NOT NULL,
 		oop				NUMBER(3) NOT NULL,
 		patterns		NUMBER(3) NOT NULL,

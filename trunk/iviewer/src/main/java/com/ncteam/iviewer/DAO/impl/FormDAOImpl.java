@@ -50,7 +50,7 @@ public class FormDAOImpl extends TablesDAOImpl {
 	 */
 	public List<FormInformation> getFormsInformation(){
 		Session sess=sessionFactory.getCurrentSession();
-		Query query=sess.createQuery("SELECT u.firstName, u.surname, u.lastName," +
+		Query query=sess.createQuery("SELECT u.firstName, u.surname, u.lastName, u.userId," +
 				"coalesce(to_char(i.startDate,'yyyy-mm-dd HH24:mi'),'Нет записи'), f.status, f.visitStatus," +
 				" f.formId, un.universityName, f.universityId" +
 				"  FROM Form f LEFT JOIN f.university un LEFT JOIN f.interview as i LEFT JOIN f.user u");

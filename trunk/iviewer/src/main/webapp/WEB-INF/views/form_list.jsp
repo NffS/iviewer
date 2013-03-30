@@ -39,19 +39,16 @@
 <c:set var="k" scope="page" value="${0}"/>
 <table id="sf" border=2 align="center">
 	<tr ALIGN=center bgcolor="9999FF">
-		<td>№</td> <td  width=300>ФИО</td> <td width=150>Дата собеседования</td> <td width=60>Требует подтверждения</td> <td width=85>Просмотр</td><td>Оценивание</td><td style="display:none;"></td>
+		<td>№</td> <td  width=300>ФИО</td> <td width=150>Дата собеседования</td> <td width=85>Просмотр</td><td width=90>Оценивание</td><td width=100>Посмотреть <br> тех. оценку</td><td style="display:none;"></td>
 	</tr>
 	<c:forEach var="form" items="${forms}">
 		<tr ALIGN=center height=40>
 		<c:set var="k" scope="page" value="${k+1}"/>
 			<td>${k }</td> <td>${form.surname}  ${form.firstName} ${form.lastName}</td>
-			<td>${form.startDate}</td> 
-			<td><c:choose>
-					<c:when test="${form.status.intValue()==1}">Да</c:when><c:otherwise>Нет</c:otherwise>
-				</c:choose></td> 
-			<td><a href="/form.jsp?form_id=${form.formId}" target="_blank">Просмотр</a></td>
-			<td><a href="hr_mark_${form.formId}">HR оценка/ <br>
-			<a href="tech_mark_${form.formId}">Тех. оценка</a></a></td>
+			<td>${form.startDate}</td>
+			<td><a href="form_${form.userId}">Просмотр</a></td>
+			<td><a href="hr_mark_${form.formId}">HR оценка</a></td>
+			<td><a href="tech_mark_${form.formId}">Тех. оценка</a></td>
 			<td style="display:none;">${form.universityName}</td>
 		</tr>
 	</c:forEach>

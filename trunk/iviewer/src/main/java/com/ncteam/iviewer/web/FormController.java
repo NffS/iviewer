@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import validators.Validator;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.ncteam.iviewer.DAO.impl.FormDAOImpl;
@@ -38,6 +40,7 @@ public class FormController{
 	 private UserServiceImpl userService;
 	@Autowired
 	 private FormServiceImpl formService;
+	private Validator validator=new Validator();
 	
 	@RequestMapping(value = "/getform_{userid}", method = RequestMethod.POST)
     public String getForm(HttpServletRequest request, @PathVariable("userid") Integer userID, HttpSession session, Map<String, Object> map){
@@ -186,7 +189,8 @@ public class FormController{
 	
     @RequestMapping(value = "/form_{userid}")
     public String form(HttpSession session, @PathVariable("userid") Integer userID, Map<String, Object> map){
-		User user = userService.getRecordById(userID, User.class);
+		    	
+    	User user = userService.getRecordById(userID, User.class);
 		Form form = formService.getFormByUserId(userID);
 		
 		map.put("user", user);
@@ -204,6 +208,28 @@ public class FormController{
 		map.put("job_sales", convertFromDB(form.getJobArSales()));
 
         return "form";
+    }
+    
+    @RequestMapping(value = "/delete_form_{formId}")
+    public String deleteForm(HttpSession session, @PathVariable("formId") Integer formId, 
+    		Map<String, Object> map){
+    	
+		if(!validator.isUserHR(session)){
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","/form_");
+	        return "redirect";
+		}
+		try{
+			formService.deleteRecord(formService.getRecordById(formId, Form.class));
+		}catch(org.springframework.dao.DataIntegrityViolationException e){
+			 map.put("message","<font color='red'>Анкета уже оценена и не может быть удалена</font>");
+		     map.put("target","form_"+((Form)formService.getRecordById(formId, Form.class)).getUserId());
+		     return "redirect";
+		}
+		
+		 map.put("message","Анкета успешно удалена.");
+	     map.put("target","form_list");
+	     return "redirect";
     }
     
     private String convertFromDB(String input){

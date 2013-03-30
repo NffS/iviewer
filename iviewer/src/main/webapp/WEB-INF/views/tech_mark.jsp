@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <%@include file="/resources/design/header.jsp" %>
-<%@include file="/resources/design/tech_left_part.jsp" %>
+<c:choose>
+	<c:when test="${sessionScope.user.userTypeId==2}">
+		<c:import url = "/resources/design/hr_left_part.jsp" />
+    </c:when>
+    <c:when test="${sessionScope.user.userTypeId==3}">
+		<c:import url = "/resources/design/tech_left_part.jsp" />
+    </c:when>
+     <c:otherwise>
+    	
+    </c:otherwise>
+</c:choose>
 <%@ include file="/resources/design/center.jsp" %>
 
 <h1>IT оценка</h1>
@@ -37,7 +48,9 @@
  	<label for="general"><font size=4>Общий отзыв</font></label>
     <textarea class="input-block-level" name="general" id="general" rows="10">${form.techMark.generalMark }</textarea>
     <br>
+    <c:if test="${sessionScope.user.userTypeId==3}">
     <button type="submit" class="btn btn-primary">Сохранить оценку</button>
+    </c:if>
     <input type="hidden" name="form_id" value="${form.formId }">
     <input type="hidden" name="tech_mark_id" value="${form.techMark.techMarkId}">
 </form>

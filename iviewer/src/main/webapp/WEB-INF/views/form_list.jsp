@@ -50,7 +50,8 @@
 					<c:when test="${form.status.intValue()==1}">Да</c:when><c:otherwise>Нет</c:otherwise>
 				</c:choose></td> 
 			<td><a href="/form.jsp?form_id=${form.formId}" target="_blank">Просмотр</a></td>
-			<td><a href="hr_mark_${form.formId}">Оценить</a></td>
+			<td><a href="hr_mark_${form.formId}">HR оценка/ <br>
+			<a href="tech_mark_${form.formId}">Тех. оценка</a></a></td>
 			<td style="display:none;">${form.universityName}</td>
 		</tr>
 	</c:forEach>

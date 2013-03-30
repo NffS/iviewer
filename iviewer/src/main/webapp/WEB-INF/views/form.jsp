@@ -11,7 +11,7 @@
    } 
   </style>
 
-<form  method="POST" action="getform">
+<form  method="POST" action="getform_${request}">
 		<fieldset>
 			<legend>Персональная информация</legend>
 			<table width =700px>
@@ -97,12 +97,12 @@
 	            					<td align="right" width=80>
 								<select  style="height:27px" class="input-medium" id="f2" name="faculty" disabled>
 									<option value="3"></option>
-				  					<option value="1">ИКС</option>
-				  					<option value="1">Программная инженерия</option>
-				  					<option value="1">Другой</option>
-				  					<option value="2">Прикладная математика</option>
-				  					<option value="2">Другой</option>
-				  					<option selected value="${form.getUniversity().getUniversityId()}">${form.getFaculty().getFacultyName()}</option>
+				  					<option value="11">ИКС</option>
+				  					<option value="21">Программная инженерия</option>
+				  					<option value="31">Другой</option>
+				  					<option value="12">Прикладная математика</option>
+				  					<option value="22">Другой</option>
+				  					<option selected value="${form.getFaculty().getFacultyId()}">${form.getFaculty().getFacultyName()}</option>
 								</select>
 								</td>
 								</tr>
@@ -397,11 +397,11 @@
 	            					
 	            					<td align="right" width=150>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_vj">
-				  					<option value="+">да</option>
-				  					<option value="+-">возможно</option>
-				  					<option value="-">нет</option>
-				  					<option value="?">хочу узнать больше</option>
-				  					<option selected value="${form.getJobArVaried()}">${job_rj}</option>
+				  					<option value="да">да</option>
+				  					<option value="возможно">возможно</option>
+				  					<option value="нет">нет</option>
+				  					<option value="хочу узнать больше">хочу узнать больше</option>
+				  					<option selected value="${form.getJobArVaried()}">${job_vj}</option>
 								</select>
 								</td>
 								</tr>
@@ -973,7 +973,7 @@
 			f2.disabled = 0;
 		
 			for (var r = 0; r < f2.options.length;  r++){
-				if(f2.options[r].value != f1.value){ 
+				if(f2.options[r].value % 10 != f1.value){ 
 					f2.options[r].style.display = "none";
 				}else {
 					f2.options[r].style.display = "";

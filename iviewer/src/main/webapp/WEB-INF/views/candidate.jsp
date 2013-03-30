@@ -16,7 +16,7 @@
    } 
   </style>
 
-<a href="form"><font size="3" color="000000">Заполнить анкету</font></a>
+<a href="form_${sessionScope.user_id}"><font size="3" color="000000">Заполнить анкету</font></a>
 <br><br>
 <a href="choose"><font size="3" color="000000">Выбрать собеседование</font></a>
 <br><br>

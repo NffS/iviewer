@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,47 +39,65 @@ public class FormController{
 	@Autowired
 	 private FormServiceImpl formService;
 	
-	@RequestMapping(value = "/getform", method = RequestMethod.POST)
-    public String getForm(HttpServletRequest request, HttpSession session, Map<String, Object> map){
+	@RequestMapping(value = "/getform_{userid}", method = RequestMethod.POST)
+    public String getForm(HttpServletRequest request, @PathVariable("userid") Integer userID, HttpSession session, Map<String, Object> map){
 		//if (!getErrorMessage(request).equals("ok")) 
 			//return "form";
+		User user = userService.getRecordById(userID, User.class);
+		Form newForm;
 		
-		Form newForm = createNewForm(request);
-		User user = userService.getUserByEmail(session.getAttribute("email").toString());
 		
-		/*if (formService.getFormByUserId(user.getUserId())==null){
+		if (formService.getFormByUserId(user.getUserId())==null){
+			newForm = createNewForm(request, formService.getFormByUserId(user.getUserId()));
 			newForm.setUserId(user.getUserId());
 			newForm.setUser(user);
 			newForm.setStatus(1);
 			newForm.setVisitStatus(1);
 			
 			formService.addRecord(newForm);
-			*/
-		//} else {
+			
+		} else {
+			newForm = createNewForm(request, formService.getFormByUserId(user.getUserId()));
 			newForm.setUserId(user.getUserId());
 			newForm.setUser(user);
-			newForm.setStatus(2);
+			newForm.setStatus(1);
 			
 			formService.updateRecord(newForm);
-		//}
+		}
+		
+		
+		map.put("user", user);
+		map.put("form", newForm);
+		
+		map.put("interesttc", convertFromDB(newForm.getInterestTc()));
+		map.put("interestnc", convertFromDB(newForm.getInterestNc()));
+		
+		map.put("interestpo", convertFromDB(newForm.getInterestAreaPo()));
+		
+		map.put("job_vj", convertFromDB(newForm.getJobArVaried()));
+		map.put("job_man", convertFromDB(newForm.getJobArManage()));
+		map.put("job_sales", convertFromDB(newForm.getJobArSales()));
+		
         return "form";
     }
 
-	Form createNewForm(HttpServletRequest request){
+	Form createNewForm(HttpServletRequest request, Form newForm){
 		
-		Form newForm = new Form();
-		/*
+		if (newForm == null)
+			newForm = new Form();
+		
 		University university = new University();
-		university.setUniversityId(1);
+			university.setUniversityId(1);
 		Faculty faculty = new Faculty();
-		faculty.setFacultyId(2);
-		faculty.setUniversity(university);
+			faculty.setFacultyId(1);
+	
+		newForm.getUniversity().setUniversityId(1);
 		newForm.setUniversity(university);
+		newForm.getFaculty().setFacultyId(1);
 		newForm.setFaculty(faculty);
-		*/
 		
 			newForm.setCourse(Integer.parseInt(request.getParameter("course")));
-			newForm.setEndYear(request.getParameter("endYear"));
+			newForm.setEndYear(request.getParameter("year"));
 			newForm.setEmail2(request.getParameter("email2"));
 			newForm.setPhone(request.getParameter("phone"));
 			newForm.setAnotherContact(request.getParameter("another_contact"));
@@ -165,14 +184,16 @@ public class FormController{
 		return errorMessage;
 	}
 	
-    @RequestMapping(value = "/form")
-    public String form(HttpSession session, Map<String, Object> map){
-		User user = userService.getUserByEmail(session.getAttribute("email").toString());
-		Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
+    @RequestMapping(value = "/form_{userid}")
+    public String form(HttpSession session, @PathVariable("userid") Integer userID, Map<String, Object> map){
+		User user = userService.getRecordById(userID, User.class);
+		Form form = formService.getFormByUserId(userID);
 		
 		map.put("user", user);
 		map.put("form", form);
 		
+		 map.put("request", userID);
+		 
 		map.put("interesttc", convertFromDB(form.getInterestTc()));
 		map.put("interestnc", convertFromDB(form.getInterestNc()));
 		

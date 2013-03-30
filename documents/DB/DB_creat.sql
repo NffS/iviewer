@@ -31,7 +31,7 @@ CREATE TABLE Faculties
     ( 
 		faculty_id   	NUMBER(3) NOT NULL PRIMARY KEY,
 		faculty_name  	VARCHAR2(2000) NOT NULL,
-		university_id	NUMBER(3) REFERENCES Universities (university_id) ON DELETE CASCADE
+		university_id	NUMBER(3) REFERENCES Universities (university_id) ON DELETE  SET NULL
     );	
 	
 CREATE TABLE Users
@@ -64,8 +64,8 @@ CREATE TABLE Form
 	(
 		form_id		 		NUMBER(6) NOT NULL PRIMARY KEY,
 		user_id				NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE CASCADE,
-		university_id		NUMBER(3) REFERENCES Universities (university_id) ON DELETE CASCADE,
-		faculty_id 			NUMBER(3) REFERENCES Faculties (faculty_id) ON DELETE CASCADE,
+		university_id		NUMBER(3) REFERENCES Universities (university_id) ON DELETE  SET NULL,
+		faculty_id 			NUMBER(3) REFERENCES Faculties (faculty_id) ON DELETE  SET NULL,
 		course	 			NUMBER(1),
 		end_year			VARCHAR2(5),
 		email2				VARCHAR2(30) CONSTRAINT email2 
@@ -122,11 +122,11 @@ CREATE TABLE Form
 		CHECK (english_write between 0 and 5),
 		english_spoken	 	NUMBER(1) NOT NULL CONSTRAINT english_spoken
 		CHECK (english_spoken between 0 and 5),
-		source_id			NUMBER(3) NOT NULL  REFERENCES Sources (source_id) ON DELETE CASCADE,
+		source_id			NUMBER(3) NOT NULL  REFERENCES Sources (source_id) ON DELETE  SET NULL,
 		motivation_comment	VARCHAR2(2000) NOT NULL,
 		comment2			VARCHAR2(2000) NOT NULL,
 		status	 			NUMBER(1) NOT NULL,
-		interview_id		NUMBER(6) REFERENCES Interview (interview_id) ON DELETE CASCADE,
+		interview_id		NUMBER(6) REFERENCES Interview (interview_id) ON DELETE  SET NULL,
 		visit_status		NUMBER(1)
 	);
 	
@@ -135,7 +135,7 @@ CREATE TABLE Form
 CREATE TABLE HR_mark
 	(
 		hr_mark_id 		NUMBER(6) NOT NULL PRIMARY KEY,
-		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE CASCADE,
+		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE  SET NULL,
 		form_id			NUMBER(6) NOT NULL REFERENCES Form (form_id),
 		motivation 		NUMBER(3) NOT NULL,
 		english			NUMBER(3) NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE HR_mark
 CREATE TABLE Tech_mark
 	(
 		tech_mark_id 	NUMBER(6) NOT NULL PRIMARY KEY,
-		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE CASCADE,
+		user_id			NUMBER(6) NOT NULL REFERENCES Users (user_id) ON DELETE  SET NULL,
 		form_id			NUMBER(6) NOT NULL REFERENCES Form (form_id),
 		prog_lang 		NUMBER(3) NOT NULL,
 		oop				NUMBER(3) NOT NULL,
@@ -234,7 +234,7 @@ VALUES
 	'Админович',
 	null,
 	1,
-	to_date('2013/04/03 16:00', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/03 16:00:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -248,7 +248,7 @@ VALUES
 	'Афанасьевич',
 	null,
 	2,
-	to_date('2013/04/03 17:00', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/03 17:00:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -262,7 +262,7 @@ VALUES
 	'Макарович',
 	null,
 	2,
-	to_date('2013/04/03 17:30', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/03 17:30:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -276,7 +276,7 @@ VALUES
 	'Радионовна',
 	null,
 	3,
-	to_date('2013/04/04 17:30', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/04 17:30:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -290,7 +290,7 @@ VALUES
 	'Алексеевна',
 	null,
 	3,
-	to_date('2013/04/04 15:30', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/04 15:30:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -304,7 +304,7 @@ VALUES
 	'Ренатовна',
 	null,
 	3,
-	to_date('2013/04/04 16:30', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/04 16:30:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -318,7 +318,7 @@ VALUES
 	'Маркович',
 	null,
 	3,
-	to_date('2013/04/04 17:38', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/04 17:38:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -332,7 +332,7 @@ VALUES
 	'Матвеевич',
 	null,
 	4,
-	to_date('2013/04/05 17:38', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/05 17:38:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -346,7 +346,7 @@ VALUES
 	'Станиславовна',
 	null,
 	4,
-	to_date('2013/04/05 21:38', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/05 21:38:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -360,7 +360,7 @@ VALUES
 	'Степанович',
 	null,
 	4,
-	to_date('2013/04/06 11:23', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/06 11:23:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -374,7 +374,7 @@ VALUES
 	'Гавриловна',
 	null,
 	4,
-	to_date('2013/04/06 12:38', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/06 12:38:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 INSERT INTO Users 
@@ -388,22 +388,22 @@ VALUES
 	'Фомович',
 	null,
 	4,
-	to_date('2013/04/06 14:14', 'yyyy/mm/dd hh24:mi')
+	to_date('2013/04/06 14:14:00', 'yyyy/mm/dd hh24:mi:ss')
 );
 
 
 INSERT INTO Interview VALUES(
 		1,
-		to_date('2013/05/03 16:00', 'yyyy/mm/dd hh24:mi'),
-		to_date('2013/05/03 18:00', 'yyyy/mm/dd hh24:mi'),
+		to_date('2013/05/03 16:00:00', 'yyyy/mm/dd hh24:mi:ss'),
+		to_date('2013/05/03 18:00:00', 'yyyy/mm/dd hh24:mi:ss'),
 		30,
 		4
 );
 
 INSERT INTO Interview VALUES(
 		2,
-		to_date('2013/05/03 18:30', 'yyyy/mm/dd hh24:mi'),
-		to_date('2013/05/03 20:30', 'yyyy/mm/dd hh24:mi'),
+		to_date('2013/05/03 18:30:00', 'yyyy/mm/dd hh24:mi:ss'),
+		to_date('2013/05/03 20:30:00', 'yyyy/mm/dd hh24:mi:ss'),
 		30,
 		4
 );

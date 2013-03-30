@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=utf8" pageEncoding="utf8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="/resources/design/header.jsp" %>
-
-<a href="index"><font size="3" color="000000">На главную</font></a>
+    <c:if test="${sessionScope.user.userTypeId==2}">
+    <%@include file="/resources/design/hr_left_part.jsp" %>
+    </c:if>
 <%@ include file="/resources/design/center.jsp" %>
 <style>
    textarea {
@@ -955,6 +957,16 @@
 						<input type="submit" style="height:30px; width:300px; font-size: 15px" value="Жми кнопку @ почту проверяй">
 					</td>
 				</tr>
+				<c:if test="${sessionScope.user.userTypeId==2}">
+				<tr>
+				<td width=42%>
+				</td>
+				<td align="center">
+				<br>
+					<input type="button" class="btn btn-primary" value="Удалить анкету" onclick="javascript:document.location='/iviewer/delete_form_${form.formId}'">
+				</td>
+				</tr>
+				</c:if>
 			</table>
 		</fieldset>
 </form>

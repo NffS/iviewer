@@ -66,7 +66,7 @@ public class UserEditController {
             	User userEdit = tablesService.getRecordById(Integer.parseInt(request.getParameter("user_id")), User.class);
             	userEdit.setUserId(Integer.parseInt(request.getParameter("user_id")));
             	userEdit.setEmail(request.getParameter("email"));
-            	if (userEdit.getEmail() != session.getAttribute("email") && 
+            	if (!userEdit.getEmail().equals((String)session.getAttribute("email")) && 
             		tablesService.getUserByEmail(userEdit.getEmail()) != null) {
             		map.put("message","<font color='red'>Email "+ userEdit.getEmail() +" уже зарегистрирован</font>");
                     map.put("target","user_edit");

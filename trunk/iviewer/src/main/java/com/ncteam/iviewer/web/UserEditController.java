@@ -64,10 +64,8 @@ public class UserEditController {
 
     	if((session.getAttribute("user_type_id"))!=null){
             	User userEdit = tablesService.getRecordById(Integer.parseInt(request.getParameter("user_id")), User.class);
-            	userEdit.setUserId(Integer.parseInt(request.getParameter("user_id")));
             	userEdit.setEmail(request.getParameter("email"));
-            	if (!userEdit.getEmail().equals((String)session.getAttribute("email")) && 
-            		tablesService.getUserByEmail(userEdit.getEmail()) != null) {
+            	if (validator.emailChangingFailCheck(request.getParameter("email"), session, tablesService, Integer.parseInt(request.getParameter("user_id")))) {
             		map.put("message","<font color='red'>Email "+ userEdit.getEmail() +" уже зарегистрирован</font>");
                     map.put("target","user_edit");
                     return "redirect";            	
@@ -75,7 +73,7 @@ public class UserEditController {
             	userEdit.setSurname(request.getParameter("surname"));
             	userEdit.setFirstName(request.getParameter("first_name"));
             	userEdit.setLastName(request.getParameter("last_name"));
-            	if(((int)session.getAttribute("user_type_id"))==1){
+            	if((int)session.getAttribute("user_type_id")==1&&(int)session.getAttribute("user_id")!=1){
             		userEdit.setPassword(request.getParameter("password"));
             	}
             	if (request.getParameter("user_type_id")!=null && (int)session.getAttribute("user_type_id")==1) {

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.User;
+import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 public class Validator {
 	
@@ -163,6 +164,25 @@ public class Validator {
 	
 	public boolean isPasswordCorrect(String password){
 		if(password.length()<0||!Pattern.matches("[a-zA-Z0-9]{4,16}$",password))
+			return false;
+		
+		return true;
+	}
+	
+	/*
+	 * Checks if the e-mail is changing and if there is the same e-mail in the database.
+	 * 
+	 * @return Returns true if e-mail is changing and there is the same e-mail in the database.
+	 * Otherwise returns false
+	 */
+	public boolean emailChangingFailCheck(String email, HttpSession session, UserServiceImpl userService,
+			Integer userId){
+		if(email.equals((String)session.getAttribute("email")))
+			return false;	
+		if(userService.getUserByEmail(email) == null)
+			return false;
+		if((int)session.getAttribute("user_type_id")==1 &&
+				userService.getUserByEmail(email).getUserId().equals(userId))
 			return false;
 		
 		return true;

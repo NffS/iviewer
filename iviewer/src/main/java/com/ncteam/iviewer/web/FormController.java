@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import validators.Validator;
-
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.ncteam.iviewer.DAO.impl.FormDAOImpl;
@@ -40,7 +38,6 @@ public class FormController{
 	 private UserServiceImpl userService;
 	@Autowired
 	 private FormServiceImpl formService;
-	private Validator validator=new Validator();
 	
 	@RequestMapping(value = "/getform_{userid}", method = RequestMethod.POST)
     public String getForm(HttpServletRequest request, @PathVariable("userid") Integer userID, HttpSession session, Map<String, Object> map){
@@ -146,15 +143,15 @@ public class FormController{
 		return newForm;
 	}
 
-	String getErrorMessage(HttpServletRequest request){
+	/*String getErrorMessage(HttpServletRequest request){
 		String errorMessage="ok";
 		ValidationService validationService = new ValidationService();
-		if (!validationService.checkName(request.getParameter("firstname"), "first").equals("ok"))
-			return errorMessage=validationService.checkName(request.getParameter("firstname"), "first");
-		if (!validationService.checkName(request.getParameter("surname"), "sur").equals("ok"))
-			return errorMessage=validationService.checkName(request.getParameter("surname"), "sur");
-		if (!validationService.checkName(request.getParameter("lastname"), "last").equals("ok"))
-			return errorMessage=validationService.checkName(request.getParameter("lastname"), "last");
+		if (!validationService.checkName(request.getParameter("firstname")).equals("ok"))
+			return errorMessage=validationService.checkName(request.getParameter("firstname"));
+		if (!validationService.checkName(request.getParameter("surname")).equals("ok"))
+			return errorMessage=validationService.checkName(request.getParameter("surname"));
+		if (!validationService.checkName(request.getParameter("lastname")).equals("ok"))
+			return errorMessage=validationService.checkName(request.getParameter("lastname"));
 		if (!validationService.checkYear(request.getParameter("year")).equals("ok"))
 			return errorMessage=validationService.checkYear(request.getParameter("year"));
 		
@@ -185,12 +182,11 @@ public class FormController{
 			return errorMessage=validationService.checkPhone(request.getParameter("more_information"));
 		
 		return errorMessage;
-	}
+	}*/
 	
     @RequestMapping(value = "/form_{userid}")
     public String form(HttpSession session, @PathVariable("userid") Integer userID, Map<String, Object> map){
-		    	
-    	User user = userService.getRecordById(userID, User.class);
+		User user = userService.getRecordById(userID, User.class);
 		Form form = formService.getFormByUserId(userID);
 		
 		map.put("user", user);
@@ -208,22 +204,6 @@ public class FormController{
 		map.put("job_sales", convertFromDB(form.getJobArSales()));
 
         return "form";
-    }
-    
-    @RequestMapping(value = "/delete_form_{formId}")
-    public String deleteForm(HttpSession session, @PathVariable("formId") Integer formId, 
-    		Map<String, Object> map){
-    	
-		if(!validator.isUserHR(session)){
-	        map.put("message","<font color='red'>Ошибка доступа</font>");
-	        map.put("target","/form_");
-	        return "redirect";
-		}
-		formService.deleteRecord(formService.getRecordById(formId, Form.class));
-				
-		 map.put("message","Анкета успешно удалена.");
-	     map.put("target","form_list");
-	     return "redirect";
     }
     
     private String convertFromDB(String input){

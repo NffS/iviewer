@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.User;
-import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 public class Validator {
 	
@@ -35,15 +34,6 @@ public class Validator {
 		return "ok";
 	}
 	
-	public String checkEmail(String email, String pattern){
-		if (!email.matches(pattern))
-			return "invalid characters";
-		if (!checkLength(email, 30, 6).equals("ok"))
-			return checkLength(email, 30, 6)+" email";
-		if (!checkIsEmpty(email).equals("ok"))
-			return "email "+checkIsEmpty(email);
-		return "ok";
-	}
 	
 	public String checkPassword(String password, String pattern){
 		if (!password.matches(pattern))
@@ -54,13 +44,70 @@ public class Validator {
 			return "password "+checkIsEmpty(password);
 		return "ok";
 	}
-	
-	public String checkName(String name, String pattern){
-		
-		return "ok";
+
+	public boolean isEmailCorrect(String email){
+		if(!Pattern.matches("^([a-zA-Z0-9_\\.\\-]{1,16})@([a-zA-Z0-9\\.\\-]{1,8})\\.([a-z]{2,4})$", email))
+			return false;
+
+		return true;
 	}
 	
+	public boolean isPasswordCorrect(String password){
+		if(password.length()<0||!Pattern.matches("[a-zA-Z0-9]{4,16}$",password))
+			return false;
+		
+		return true;
+	}
+	
+		
+	public boolean isNameCorrect(String name){
+		if(!Pattern.matches("[A-ZА-ЯЁ][a-zа-яё]{1,20}$", name))
+			return false;
+		
+		return true;
+	}
+	
+	public boolean isPhoneCorrect(String phone){
+		if(!Pattern.matches("[0-9]{1,16}$", phone))
+			return false;
+		
+		return true;
+	}
+	
+	public boolean isYearCorrect(String year){
+		if(!Pattern.matches("[1970-2020]$", year))
+			return false;
+		
+		return true;
+	}
+	
+	public boolean isFieldCorrect(String field){
+		if(!Pattern.matches("[A-ZА-ЯЁ][a-zа-яё]{1,14}$", field))
+			return false;
+		
+		return true;
+	}
 
+	public boolean isInterestFieldCorrect(String mark){
+		if(!Pattern.matches("[+-?]{1,2}$", mark))
+			return false;
+		
+		return true;
+	}
+	
+	public boolean isAccomplishmentsFieldCorrect(String mark){
+		if(!Pattern.matches("[0-5]$", mark))
+			return false;
+		
+		return true;
+	}
+	
+	public boolean isLanguageFieldCorrect(String mark){
+		if(!Pattern.matches("[1-5]$", mark))
+			return false;
+		
+		return true;
+	}
 	public boolean isInterviewDateStringValid(String interviewDateStrig){
 		String pattern="201[3-9]-([0][1-9]|[1][0-2])-([0-2][0-9]|[3][0-1]) ([0-1][0-9]|2[0-4]):[0-5][0-9]";
 		return interviewDateStrig.matches(pattern);
@@ -81,6 +128,16 @@ public class Validator {
 	public boolean isUserHR(HttpSession session){
 		if((Integer)session.getAttribute("user_type_id")==null
 				||(Integer)session.getAttribute("user_type_id")!=2){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	public boolean isUserCandidate(HttpSession session){
+		if((Integer)session.getAttribute("user_type_id")==null
+				||(Integer)session.getAttribute("user_type_id")!=4){
 			return false;
 		}
 		else{
@@ -157,32 +214,6 @@ public class Validator {
 		if(!Pattern.matches("[A-ZА-ЯЁ][a-zа-яё]{1,40}$",user.getLastName()))
 			return false;
 		if(user.getPassword().length()<0||!Pattern.matches("[a-zA-Z0-9]{4,16}$",user.getPassword()))
-			return false;
-		
-		return true;
-	}
-	
-	public boolean isPasswordCorrect(String password){
-		if(password.length()<0||!Pattern.matches("[a-zA-Z0-9]{4,16}$",password))
-			return false;
-		
-		return true;
-	}
-	
-	/*
-	 * Checks if the e-mail is changing and if there is the same e-mail in the database.
-	 * 
-	 * @return Returns true if e-mail is changing and there is the same e-mail in the database.
-	 * Otherwise returns false
-	 */
-	public boolean emailChangingFailCheck(String email, HttpSession session, UserServiceImpl userService,
-			Integer userId){
-		if(email.equals((String)session.getAttribute("email")))
-			return false;	
-		if(userService.getUserByEmail(email) == null)
-			return false;
-		if((int)session.getAttribute("user_type_id")==1 &&
-				userService.getUserByEmail(email).getUserId().equals(userId))
 			return false;
 		
 		return true;

@@ -1,11 +1,22 @@
 package com.ncteam.iviewer.web;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
+import java.util.Map;
+import java.util.Properties;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Message.RecipientType;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +26,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import validators.Validator;
 
 import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
@@ -27,31 +41,116 @@ public class RegistrationController{
 	@Autowired
 	private UserServiceImpl userService;
 	
+	Validator validator;
 	
-	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String createUser(HttpServletRequest request) {
+	@RequestMapping(value = "/registration_user", method = RequestMethod.POST)
+    public String createUser(HttpServletRequest request, HttpSession session, Map<String, Object> map) {
+		validator = new Validator();
+		//kovalenko.alexandr.ua@gmail.com
 		User newUser = new User();
-			String firstname = request.getParameter("firstname");
-			String surname = request.getParameter("surname");
-			String lastname = request.getParameter("lastname");
-			String email = request.getParameter("email");
-			String password = request.getParameter("password");
-			
+
+		if (isUserDataCorrect(request, map)==null){
+			newUser.setFirstName(request.getParameter("firstname"));
+			newUser.setSurname(request.getParameter("surname"));
+			newUser.setLastName(request.getParameter("lastname"));
+			newUser.setEmail(request.getParameter("email"));
+			newUser.setPassword(request.getParameter("password"));
 			newUser.setFoto("");
+			newUser.setStringRegDate(new SimpleDateFormat("yyyy-MM-dd kk:mm").format(new Date()).toString());
 			newUser.setUserTypeId(4);
-			newUser.setRegDate(new Date(12,12,12));
-		userService.addRecord(newUser);
 			
+			userService.addRecord(newUser);
+			
+			try {
+				sendMail(newUser, "http://localhost:8086/iviewer");
+			} catch (MessagingException e) {
+				map.put("message", "Неккоректный email, невозможно отправить письмо");
+			}
+			
+			map.put("message", "Регистрация прошла успешно, проверьте почту");
+		} else {
+			map = isUserDataCorrect(request, map);
+		}
         return "reg";
     }
 	
-	protected void sendMail(String name, String surname, String lastname, String email){
+	private  Map<String, Object> isUserDataCorrect (HttpServletRequest request, Map<String, Object> map){
+		boolean isCorrect = true;
+		if (!validator.isNameCorrect(request.getParameter("firstname"))){
+			 map.put("firstnameMessage", "Ошибка в имени");
+			 isCorrect = false;
+		}
+		if (!validator.isNameCorrect(request.getParameter("surname"))){
+			 map.put("surnameMessage", "Ошибка в фамилии");
+			 isCorrect = false;
+		}
+		if (!validator.isNameCorrect(request.getParameter("lastname"))){
+			 map.put("lastnameMessage", "Ошибка в отчестве");
+			 isCorrect = false;
+		}
+		if (!validator.isEmailCorrect(request.getParameter("email"))){
+			 map.put("emailMessage", "Ошибка в email");
+			 isCorrect = false;
+		}
+		if (!validator.isPasswordCorrect(request.getParameter("password"))){
+			 map.put("passwordMessage", "Ошибка в пароле");
+			 isCorrect = false;
+		}
 		
-		
+		if(!isCorrect){
+			return map;
+		} else {
+			return null;
+		}
 	}
 	
+	protected void sendMail(User user, String host) throws MessagingException{
+		
+		Properties properties = new Properties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.socketFactory.port", "465");
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.auth", "true");
+        
+        Session session = Session.getInstance(properties, authenticate("ncteam2013","qwertyshmerty"));
+                
+        Message mailMsg = new MimeMessage(session);
+        InternetAddress senderAddress = new InternetAddress("ncteam2013@gmail.com");
+        InternetAddress targetAddress = new InternetAddress(user.getEmail());
+        mailMsg.setFrom(senderAddress);
+        mailMsg.setRecipient(RecipientType.TO, targetAddress);
+        mailMsg.setSubject("Учебный центр NetCracker");
+        String link = host+"/registration_"+user.getUserId();
+        mailMsg.setText("Спасибо за регистрацию, "+user.getFirstName()+". Для регистрации пройдите по ссылке "+link);
+        
+        Transport.send(mailMsg);
+	}
+
+	private Authenticator authenticate(final String userName, final String userPassword){
+        Authenticator authenticator = new javax.mail.Authenticator()
+       {
+           @Override
+           protected PasswordAuthentication getPasswordAuthentication() {
+                 return new PasswordAuthentication(userName, userPassword);
+           }
+       };
+       return authenticator;
+    }
+	
+	@RequestMapping("/registration_{userid}")
+    public String registrationFromEmail(HttpSession session, @PathVariable("userid") Integer userID){
+		if (!validator.isUserCandidate(session)) 
+			;
+		User user = userService.getRecordById(userID, User.class);
+		
+		userService.updateRecord(user);
+        return "candidate";
+    }
+	
 	@RequestMapping("/registration")
-    public String registration(HttpSession session){
-        return "/reg";
+    public String registration(){
+
+        return "reg";
     }
 }

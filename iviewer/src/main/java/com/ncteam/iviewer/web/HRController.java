@@ -65,7 +65,12 @@ public class HRController {
 		redactedInterview.setStringStartDate(updateStartDateString);
 		redactedInterview.setStringEndDate(updateEndDateString);
 		redactedInterview.setExtraTime(Integer.parseInt((String)request.getParameter("extraTime")));
-		redactedInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
+
+        if(redactedInterview.getForms().size()>Integer.parseInt((String)request.getParameter("seats"))){
+            redactedInterview.setSeats(redactedInterview.getForms().size());
+        }else{
+            redactedInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
+        }
 		
 		String errorMessage=validator.checkInterviewsIntersection(redactedInterview,
 				interviewService.getAllRecords(Interview.class), false);

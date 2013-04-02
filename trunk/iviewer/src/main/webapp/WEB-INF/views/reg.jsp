@@ -3,7 +3,7 @@
 
 <a href="index"><font size="3" color="000000">На главную</font></a>
 <%@ include file="/resources/design/center.jsp" %>
-<form:form  method="POST" action="registration">
+<form  method="POST" action="registration_user">
 	<table>
 		<tr>
 			<td width=110><font size=5>Имя:</font></td>
@@ -15,7 +15,7 @@
    		</tr>
    		<tr>
 			<td width=110><font size=5>Отчество:</font></td>
-   			 <td><input class="input-large" type="text" style="height:30px" name="lastname"  value="${lastname}"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${lastnameMessage }</font> </td>
+   			 <td><input class="input-large" type="text" style="height:30px" name="lastname"  value="${lastname}"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${lastnameMessage}</font> </td>
    		</tr>
 		<tr>
 			<td width=110><font size=5>E-mail:</font></td>
@@ -28,8 +28,8 @@
 		<tr>
 			<td colspan="2" align="center"><input type="submit" style="height:30px; width:100px; font-size: 15px" value="Регистрация"></td>
 </table>
-</form:form>
+</form>
 <br><br><br><br>
-<font color="#FF0000" id="error" size="15px">${message }</font>
+<font color="#FF0000" id="error" size="12px">${message}</font>
 
 <%@ include file="/resources/design/footer.jsp" %>

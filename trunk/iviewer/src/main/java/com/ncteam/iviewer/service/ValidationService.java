@@ -22,7 +22,7 @@ public class ValidationService {
 		return ("ok");
 	}
 	
-	public String checkEmail(String email){
+	public String isEmailCorrect(String email){
 		if (!email.matches("[A-Za-z0-9_]+@[A-Za-z0-9]+(.[A-Za-z0-9]+)*.[a-z]{2,4}"))
 			return "invalid characters email";
 		if (!checkLength(email, 30, 6).equals("ok"))
@@ -32,7 +32,7 @@ public class ValidationService {
 		return "ok";
 	}
 	
-	public String checkPassword(String password){
+	public String isPasswordCorrect(String password){
 		if (!password.matches("[A-Za-z0-9]"))
 			return "invalid characters password";
 		if (!checkLength(password, 16, 4).equals("ok"))
@@ -43,17 +43,17 @@ public class ValidationService {
 	}
 
 	
-	public String checkName(String name, String prefix){
-		if (!name.matches("[A-Za-zА-Яа-я]"))
-			return "invalid characters for "+prefix+"name";
+	public String isNameCorrect(String name){
+		if (!name.matches("[A-Za-zРђ-РЇР°-СЏ]"))
+			return "invalid characters for ";
 		if (!checkLength(name, 13, 1).equals("ok"))
-			return checkLength(name, 13, 1)+" "+prefix+"name";
+			return checkLength(name, 13, 1);
 		if (!checkIsEmpty(name).equals("ok"))
-			return prefix+"name "+checkIsEmpty(name);
+			return checkIsEmpty(name);
 		return "ok";
 	}
 	
-	public String checkPhone(String phone){
+	public String isPhoneCorrect(String phone){
 		if (!checkLength(phone, 13, 1).equals("ok"))
 			return checkLength(phone, 13, 1)+" phone number";
 		if (!checkIsEmpty(phone).equals("ok"))
@@ -61,7 +61,7 @@ public class ValidationService {
 		return "ok";
 	}
 	
-	public String checkYear(String year){
+	public String isYearCorrect(String year){
 		if (!year.matches("[0-9]"))
 			return "invalid characters year of graduation";
 		if (!checkLength(year, 5, 3).equals("ok"))
@@ -71,7 +71,35 @@ public class ValidationService {
 		return "ok";
 	}
 	
+	public String isFieldCorrect(String year){
+		if (!year.matches("[0-9]"))
+			return "invalid characters year of graduation";
+		if (!checkLength(year, 5, 3).equals("ok"))
+			return checkLength(year, 5, 3)+" year of graduation";
+		if (!checkIsEmpty(year).equals("ok"))
+			return "year of graduation "+checkIsEmpty(year);
+		return "ok";
+	}
 
+	public String isInterestFieldCorrect(String year){
+		if (!year.matches("[0-9]"))
+			return "invalid characters year of graduation";
+		if (!checkLength(year, 5, 3).equals("ok"))
+			return checkLength(year, 5, 3)+" year of graduation";
+		if (!checkIsEmpty(year).equals("ok"))
+			return "year of graduation "+checkIsEmpty(year);
+		return "ok";
+	}
+	
+	public String isAccomplishmentsFieldCorrect(String year){
+		if (!year.matches("[0-9]"))
+			return "invalid characters year of graduation";
+		if (!checkLength(year, 5, 3).equals("ok"))
+			return checkLength(year, 5, 3)+" year of graduation";
+		if (!checkIsEmpty(year).equals("ok"))
+			return "year of graduation "+checkIsEmpty(year);
+		return "ok";
+	}
 
 	public boolean isInterviewDateStringValid(String interviewDateStrig){
 		String pattern="201[3-9]-([0][1-9]|[1][0-2])-([0-2][0-9]|[3][0-1]) ([0-1][0-9]|2[0-4]):[0-5][0-9]";
@@ -135,8 +163,8 @@ public class ValidationService {
 				if(!isCreating&&checkedInterview.getInterviewId().equals(interview.getInterviewId()))
 					continue;
 				
-				return "Невозможно отредактировать или создать интервью:\n" +
-						"Такое интервью пересекается с другим по времени.";
+				return "РќРµРІРѕР·РјРѕР¶РЅРѕ РѕС‚СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РёР»Рё СЃРѕР·РґР°С‚СЊ РёРЅС‚РµСЂРІСЊСЋ:\n" +
+						"РўР°РєРѕРµ РёРЅС‚РµСЂРІСЊСЋ РїРµСЂРµСЃРµРєР°РµС‚СЃСЏ СЃ РґСЂСѓРіРёРј РїРѕ РІСЂРµРјРµРЅРё.";
 			}
 		}
 		return null;

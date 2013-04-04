@@ -1,7 +1,10 @@
 package com.ncteam.iviewer.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.text.DateFormat;
@@ -17,12 +20,17 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,6 +40,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import validators.Validator;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
@@ -42,15 +53,76 @@ public class CandidateEditController{
 	private UserServiceImpl userService;
 	
 	Validator validator;
+	private static final String STORAGE_DIR = "server_image_storage";
+	private static final int MAX_TMP_MEMORY_SIZE = 2*1024*1024;
+	private static final long MAX_SIZE = 2*1024*1024;
 	
 	@RequestMapping(value = "/edit_this_candidate", method = RequestMethod.POST)
-    public String createUser(HttpServletRequest request, HttpSession session, Map<String, Object> map) {
+    public String createUser(HttpServletRequest request, HttpSession session, Map<String, Object> map) throws ServletException, IOException {
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		 
+		// Создаём класс фабрику 
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+ 
+		// Максимальный буфера данных в байтах,
+		// при его привышении данные начнут записываться на диск во временную директорию
+		// устанавливаем один мегабайт
+		factory.setSizeThreshold(1024*1024);
 		
+		// устанавливаем временную директорию
+		File tempDir = (File)session.getServletContext().getAttribute("javax.servlet.context.tempdir");
+		factory.setRepository(tempDir);
+ 
+		//Создаём сам загрузчик
+		ServletFileUpload upload = new ServletFileUpload(factory);
 		
-		
+		//максимальный размер данных который разрешено загружать в байтах
+		//по умолчанию -1, без ограничений. Устанавливаем 10 мегабайт. 
+		upload.setSizeMax(1024 * 1024 * 10);
+ 
+		try {
+			List items = upload.parseRequest(request);
+			Iterator iter = items.iterator();
+			
+			while (iter.hasNext()) {
+			    FileItem item = (FileItem) iter.next();
+ 
+			    if (item.isFormField()) {
+			    	//если принимаемая часть данных является полем формы			    	
+			        processFormField(item);
+			    } else {
+			    	//в противном случае рассматриваем как файл
+			        processUploadedFile(item, session);
+			    }
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			return "candidate_edit";
+		}
         return "candidate_edit";
     }
-	
+	private void processUploadedFile(FileItem item, HttpSession session) throws Exception {
+		File uploadetFile = null;
+		//выбираем файлу имя пока не найдём свободное
+		do{
+			String path = session.getServletContext().getRealPath("/resources/files/fotos/"+ item.getName());					
+			uploadetFile = new File(path);		
+		}while(uploadetFile.exists());
+		
+		//создаём файл
+		uploadetFile.createNewFile();
+		//записываем в него данные
+		item.write(uploadetFile);
+	}
+ 
+	/**
+	 * Выводит на консоль имя параметра и значение
+	 * @param item
+	 */
+	private void processFormField(FileItem item) {
+		System.out.println(item.getFieldName()+"="+item.getString());		
+	}
 	private  Map<String, Object> isUserDataCorrect (HttpServletRequest request, Map<String, Object> map){
 		boolean isCorrect = true;
 		if (!validator.isNameCorrect(request.getParameter("firstname"))){

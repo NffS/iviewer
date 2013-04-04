@@ -3,7 +3,7 @@
 
 <a href="index"><font size="3" color="000000">На главную</font></a>
 <%@ include file="/resources/design/center.jsp" %>
-<form  method="POST" action="edit_this_candidate">
+<form  method="POST" action="edit_this_candidate" enctype="multipart/form-data">
 	<table>
 		<tr>
    			 <td><input name="data" type="file"><br></td>

@@ -20,7 +20,7 @@
 <br><br>
 <a href="choose"><font size="3" color="000000">Выбрать собеседование</font></a>
 <br><br>
-<a href="candidate_options"><font size="3" color="000000">Настройки кандидата</font></a>
+<a href="candidate_edit"><font size="3" color="000000">Настройки кандидата</font></a>
 <br><br>
 <a href="index"><font size="3" color="000000">На главную</font></a>
 <%@ include file="/resources/design/center.jsp" %>

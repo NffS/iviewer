@@ -94,7 +94,7 @@ CREATE TABLE Form
 		prog_lang_java		NUMBER(1) NOT NULL CONSTRAINT prog_lang_java
 		CHECK (prog_lang_java between 0 and 5),
 		prog_lang_other 	VARCHAR2(800),
-		prog_lang_other_mark NUMBER(1) NOT NULL CONSTRAINT prog_lang_other_mark
+		prog_lang_other_mark NUMBER(1) CONSTRAINT prog_lang_other_mark
 		CHECK (prog_lang_other_mark between 0 and 5),
 		cs_network_tech 	NUMBER(1) NOT NULL CONSTRAINT cs_network_tech
 		CHECK (cs_network_tech between 0 and 5),
@@ -113,7 +113,7 @@ CREATE TABLE Form
 		cs_design 			NUMBER(1) NOT NULL CONSTRAINT cs_design
 		CHECK (cs_design between 0 and 5),
 		cs_other 	VARCHAR2(800),
-		cs_other_mark 		NUMBER(1) NOT NULL CONSTRAINT cs_other_mark
+		cs_other_mark 		NUMBER(1) CONSTRAINT cs_other_mark
 		CHECK (cs_other_mark between 0 and 5),
 		experience			VARCHAR2(4000),
 		english_read 		NUMBER(1) NOT NULL CONSTRAINT english_read

@@ -32,49 +32,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import validators.Validator;
 
-import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.User;
-import com.ncteam.iviewer.service.impl.FormServiceImpl;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 @Controller
-public class RegistrationController{
+public class CandidateEditController{
 	
 	@Autowired
 	private UserServiceImpl userService;
-	@Autowired
-	private FormServiceImpl formService;
+	
 	Validator validator;
 	
-	@RequestMapping(value = "/registration_user", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit_this_candidate", method = RequestMethod.POST)
     public String createUser(HttpServletRequest request, HttpSession session, Map<String, Object> map) {
-		validator = new Validator();
-		//kovalenko.alexandr.ua@gmail.com
-		User newUser = new User();
-
-		if (isUserDataCorrect(request, map)==null){
-			newUser.setFirstName(request.getParameter("firstname"));
-			newUser.setSurname(request.getParameter("surname"));
-			newUser.setLastName(request.getParameter("lastname"));
-			newUser.setEmail(request.getParameter("email"));
-			newUser.setPassword(request.getParameter("password"));
-			newUser.setFoto("");
-			newUser.setStringRegDate(new SimpleDateFormat("yyyy-MM-dd kk:mm").format(new Date()).toString());
-			newUser.setUserTypeId(4);
-			
-			userService.addRecord(newUser);
-			
-			try {
-				sendMail(newUser, "http://localhost:8086/iviewer");
-			} catch (MessagingException e) {
-				map.put("message", "Неккоректный email, невозможно отправить письмо");
-			}
-			
-			map.put("message", "Регистрация прошла успешно, проверьте почту");
-		} else {
-			map = isUserDataCorrect(request, map);
-		}
-        return "registration";
+		
+		
+		
+        return "candidate_edit";
     }
 	
 	private  Map<String, Object> isUserDataCorrect (HttpServletRequest request, Map<String, Object> map){
@@ -141,60 +115,11 @@ public class RegistrationController{
        return authenticator;
     }
 	
-	@RequestMapping("/registration_{userid}")
-    public String registrationFromEmail(HttpSession session, @PathVariable("userid") Integer userID){
-		if (!validator.isUserCandidate(session)) 
-			;
-		User user = userService.getRecordById(userID, User.class);
-		Form newForm = new Form();
-			newForm.setUserId(user.getUserId());
-			newForm.setUser(user);
-			newForm.setUserId(user.getUserId());
-			newForm.setUser(user);
-			
-			newForm.setInterestTc("+-");
-			newForm.setInterestNc("+-");
-			
-			newForm.setInterestAreaPo("+-");
-			
-			newForm.setJobArDeepSpec("+-");
-			newForm.setJobArManage("+-");
-			newForm.setJobArSales("+-");
-			newForm.setJobArVaried("+-");
-			
-			newForm.setProgLangC(1);
-			newForm.setProgLangJava(1);
-			
-			newForm.setCsAlgorithms(0);
-			newForm.setCsDb(0);
-			newForm.setCsDesign(0);
-			newForm.setCsGui(0);
-			newForm.setCsNetworkProg(0);
-			newForm.setCsNetworkTech(0);
-			newForm.setCsOop(0);
-			newForm.setCsWeb(0);
-			
-			newForm.setEnglishRead(1);
-			newForm.setEnglishSpoken(1);
-			newForm.setEnglishWrite(1);
-			
-			newForm.setSourceId(4);
-			
-			newForm.setComment2(" ");
-			newForm.setMotivation_comment(" ");
-			
-			newForm.setStatus(0);
-			newForm.setVisitStatus(0);
-		formService.addRecord(newForm);
-		user.setForm(newForm);
-		userService.updateRecord(user);
-        return "candidate";
-    }
 	
-	
-	@RequestMapping("/registration")
+	@RequestMapping("/candidate_edit")
     public String registration(){
 
-        return "registration";
-    }
+        return "candidate_edit";
+    
+	}
 }

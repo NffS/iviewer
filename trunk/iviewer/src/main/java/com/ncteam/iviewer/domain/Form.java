@@ -172,9 +172,43 @@ public class Form implements Serializable, Comparable<Form>{
 	@ManyToOne
 	@JoinColumn(name="source_id", insertable=false, updatable=false)
 	private Source source;
-
-
-
+/*
+	public Form(){
+		setUserId(user.getUserId());
+		setUser(user);
+		
+		setInterestTc("+-");
+		setInterestNc("+-");
+		
+		setInterestAreaPo("+-");
+		
+		setJobArDeepSpec("+-");
+		setJobArManage("+-");
+		setJobArSales("+-");
+		setJobArVaried("+-");
+		
+		setProgLangC(1);
+		setProgLangJava(1);
+		
+		setCsAlgorithms(0);
+		setCsDb(0);
+		setCsDesign(0);
+		setCsGui(0);
+		setCsNetworkProg(0);
+		setCsNetworkTech(0);
+		setCsOop(0);
+		setCsWeb(0);
+		
+		setEnglishRead(1);
+		setEnglishSpoken(1);
+		setEnglishWrite(1);
+		
+		setSourceId(4);
+		
+		setStatus(0);
+		setVisitStatus(0);
+	}
+*/
 	@Override
 	public int compareTo(Form comparedForm) {
 		return this.user.getSurname().compareTo(comparedForm.getUser().getSurname());

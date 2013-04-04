@@ -65,11 +65,11 @@ public class UserEditController {
     	if((session.getAttribute("user_type_id"))!=null){
             	User userEdit = tablesService.getRecordById(Integer.parseInt(request.getParameter("user_id")), User.class);
             	userEdit.setEmail(request.getParameter("email"));
-            	if (validator.emailChangingFailCheck(request.getParameter("email"), session, tablesService, Integer.parseInt(request.getParameter("user_id")))) {
+            	/*if (validator.emailChangingFailCheck(request.getParameter("email"), session, tablesService, Integer.parseInt(request.getParameter("user_id")))) {
             		map.put("message","<font color='red'>Email "+ userEdit.getEmail() +" уже зарегистрирован</font>");
                     map.put("target","user_edit");
                     return "redirect";            	
-            	}
+            	}*/
             	userEdit.setSurname(request.getParameter("surname"));
             	userEdit.setFirstName(request.getParameter("first_name"));
             	userEdit.setLastName(request.getParameter("last_name"));

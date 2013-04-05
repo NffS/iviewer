@@ -46,6 +46,14 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 @Controller
 public class CandidateEditController{
 	
@@ -53,9 +61,6 @@ public class CandidateEditController{
 	private UserServiceImpl userService;
 	
 	Validator validator;
-	private static final String STORAGE_DIR = "server_image_storage";
-	private static final int MAX_TMP_MEMORY_SIZE = 2*1024*1024;
-	private static final long MAX_SIZE = 2*1024*1024;
 	
 	@RequestMapping(value = "/edit_this_candidate", method = RequestMethod.POST)
     public String createUser(HttpServletRequest request, HttpSession session, Map<String, Object> map) throws ServletException, IOException {
@@ -71,6 +76,7 @@ public class CandidateEditController{
 		
 		// устанавливаем временную директорию
 		File tempDir = (File)session.getServletContext().getAttribute("javax.servlet.context.tempdir");
+
 		factory.setRepository(tempDir);
  
 		//Создаём сам загрузчик
@@ -92,7 +98,8 @@ public class CandidateEditController{
 			        processFormField(item);
 			    } else {
 			    	//в противном случае рассматриваем как файл
-			        processUploadedFile(item, session);
+			        processUploadedFile(item, request);
+			        changeImageScale(request.getRealPath("") +"/resources/files/fotos/"+ item.getName());
 			    }
 			}			
 		} catch (Exception e) {
@@ -100,13 +107,15 @@ public class CandidateEditController{
 			
 			return "candidate_edit";
 		}
+		
+		
         return "candidate_edit";
     }
-	private void processUploadedFile(FileItem item, HttpSession session) throws Exception {
+	private void processUploadedFile(FileItem item, HttpServletRequest request) throws Exception {
 		File uploadetFile = null;
 		//выбираем файлу имя пока не найдём свободное
 		do{
-			String path = session.getServletContext().getRealPath("/resources/files/fotos/"+ item.getName());					
+			String path = request.getRealPath("") +"/resources/files/fotos/"+ item.getName();					
 			uploadetFile = new File(path);		
 		}while(uploadetFile.exists());
 		
@@ -123,6 +132,20 @@ public class CandidateEditController{
 	private void processFormField(FileItem item) {
 		System.out.println(item.getFieldName()+"="+item.getString());		
 	}
+	
+	private void changeImageScale(String filename) throws IOException{
+		BufferedImage originalImage = ImageIO.read(new File(filename));
+	        int width = 180;
+	        int height = 265;
+        java.awt.Image image = originalImage.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
+        BufferedImage changedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = changedImage.createGraphics();
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+        ImageIO.write(changedImage, "jpg", new File(filename));
+		
+	}
+	
 	private  Map<String, Object> isUserDataCorrect (HttpServletRequest request, Map<String, Object> map){
 		boolean isCorrect = true;
 		if (!validator.isNameCorrect(request.getParameter("firstname"))){

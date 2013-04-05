@@ -1,11 +1,29 @@
 package com.ncteam.iviewer.web;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.Message.RecipientType;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +58,7 @@ public class FormController{
 	 private FormServiceImpl formService;
 	
 	@RequestMapping(value = "/getform_{userid}", method = RequestMethod.POST)
-    public String getForm(HttpServletRequest request, @PathVariable("userid") Integer userID, HttpSession session, Map<String, Object> map){
+    public String getForm(HttpServletRequest request, @PathVariable("userid") Integer userID, HttpSession session, Map<String, Object> map) throws DocumentException, IOException, MessagingException{
 		//if (!getErrorMessage(request).equals("ok")) 
 			//return "form";
 		User user = userService.getRecordById(userID, User.class);
@@ -65,6 +83,9 @@ public class FormController{
 			formService.updateRecord(newForm);
 		}
 		
+		PDFservice pdf = new PDFservice(request.getRealPath("") + "/resources/files/forms/test.pdf", request);
+		pdf.createPDF(user, newForm);
+		sendFormToCandidate(user, request.getRealPath("") + "/resources/files/forms/test.pdf", request);
 		
 		map.put("user", user);
 		map.put("form", newForm);
@@ -81,7 +102,63 @@ public class FormController{
         return "form";
     }
 
-	Form createNewForm(HttpServletRequest request, Form newForm){
+	void sendFormToCandidate(User user, String filename, HttpServletRequest request) throws MessagingException, IOException{
+		
+		Properties properties = new Properties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.socketFactory.port", "465");
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.auth", "true");
+        
+        Session session = Session.getInstance(properties, authenticate("ncteam2013","qwertyshmerty"));
+                
+        Message mailMsg = new MimeMessage(session);
+        
+        InternetAddress senderAddress = new InternetAddress("ncteam2013@gmail.com");
+        InternetAddress targetAddress = new InternetAddress("Canopus-Team@yandex.ua");//заменить на user.mail
+        mailMsg.setFrom(senderAddress);
+        mailMsg.setRecipient(RecipientType.TO, targetAddress);
+        
+        mailMsg.setSubject("Учебный центр NetCracker");
+        
+        MimeBodyPart messageBodyPart = new MimeBodyPart();
+        messageBodyPart.setText("Ваша новая форма:");
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(messageBodyPart);
+        
+        messageBodyPart = new MimeBodyPart();
+        DataSource source = new FileDataSource(filename);
+        messageBodyPart.setDataHandler(new DataHandler(source));
+        messageBodyPart.setFileName("form.pdf");
+        multipart.addBodyPart(messageBodyPart);
+        mailMsg.setContent(multipart);
+        
+        Transport.send(mailMsg);
+	}
+	
+	public static byte[] getBytes(Object obj) throws java.io.IOException{
+	      ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
+	      ObjectOutputStream oos = new ObjectOutputStream(bos); 
+	      oos.writeObject(obj);
+	      oos.flush(); 
+	      oos.close(); 
+	      bos.close();
+	      byte [] data = bos.toByteArray();
+	      return data;
+	  }
+	
+	private Authenticator authenticate(final String userName, final String userPassword){
+        Authenticator authenticator = new javax.mail.Authenticator()
+       {
+           @Override
+           protected PasswordAuthentication getPasswordAuthentication() {
+                 return new PasswordAuthentication(userName, userPassword);
+           }
+       };
+       return authenticator;
+    }
+	Form createNewForm(HttpServletRequest request, Form newForm) throws DocumentException, IOException{
 		
 		if (newForm == null)
 			newForm = new Form();
@@ -139,6 +216,7 @@ public class FormController{
 			newForm.setExperience(request.getParameter("experience"));
 			newForm.setMotivation_comment(request.getParameter("promises"));
 			newForm.setComment2(request.getParameter("more_information"));
+			
 			
 		return newForm;
 	}

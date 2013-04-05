@@ -4,6 +4,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -28,11 +30,11 @@ public class PDFservice {
     private Document document;
     private PdfContentByte cb;
     
-    public PDFservice(String filename) throws DocumentException, IOException{
+    public PDFservice(String filename, HttpServletRequest request) throws DocumentException, IOException{
     	moveX(20);
         moveY(775);
         setTab(0);
-        baseFont = BaseFont.createFont(FONT_LOCATION, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+        baseFont = BaseFont.createFont(request.getRealPath("") + "/resources/times.ttf","cp1251",BaseFont.EMBEDDED);
         document = new Document(PageSize.A4,20,20,20,20);
         //filename = "d://test.pdf";
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filename));
@@ -46,7 +48,7 @@ public class PDFservice {
     
     public void createPDF(User user, Form form) throws DocumentException, MalformedURLException, IOException{
     	
-        addFoto(user.getFoto());
+        //addFoto(user.getFoto());
         addTitle("Персональная информация");
         setTab(30);
         addLine("Имя:", user.getFirstName(), 120);
@@ -106,8 +108,9 @@ public class PDFservice {
         addEnglish(form.getEnglishRead().toString(), form.getEnglishWrite().toString(), form.getEnglishSpoken().toString());
         setTab(30);
         for (int i=0;i<19;i++)
+        	document.add(new Paragraph(" "));
 			try {
-				document.add(new Paragraph(" "));
+				
 		        document.add(new Paragraph("Если у тебя уже есть опыт работы и/или выполненные учебные проекты, опиши их:", 
 		                new Font(baseFont, 14, Font.BOLD)));
 		        document.add(new Paragraph(form.getExperience(), 

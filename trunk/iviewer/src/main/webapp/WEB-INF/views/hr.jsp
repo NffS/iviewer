@@ -12,7 +12,7 @@
 <%@include file="/resources/design/hr_left_part.jsp" %>
 <%@ include file="/resources/design/center.jsp" %>
 
-Приветствуем, <%=session.getAttribute("first_name") %>.
+Приветствуем, ${sessionScope.first_name}.
 <br><br><br>
 <h1>Доступные собеседования</h1>
 <br>

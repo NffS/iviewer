@@ -12,25 +12,24 @@
 <%@include file="/resources/design/hr_left_part.jsp" %>
 <%@ include file="/resources/design/center.jsp" %>
 <%@include file="/resources/design/hr_reports_references.jsp" %>
-<% List<String[]> forms=(ArrayList<String[]>)request.getAttribute("attendances");
-int i=-1;
-int cameCount=0;
-int doesntCameCount=0;%>
+<c:set var="cameCount" scope="page" value="${0}"/>
+<c:set var="doesntCameCount" scope="page" value="${0}"/>
 <table border=2 align="center">
 	<tr align="center" bgcolor="64BFCD">
 		<th  width=300>ФИО</th> <th width=100>Посещение</th>
 	</tr>
 	<c:forEach var="form" items ="${attendances }">
-	<%i++; %>
 	<tr height=40 align="center">
 		<td>${form[0]}  ${form[1]} ${form[2]}</td>	
-		<td><%if(forms.get(i)[3].equals("1")){cameCount++; %>+<%}else{doesntCameCount++; %>-<%} %></td>
+		<td><c:if test="${form[3]==1}"><c:set var="cameCount" value="${cameCount+1 }"/>+</c:if>
+		<c:if test="${form[3]==0}"><c:set var="doesntCameCount" value="${doesntCameCount+1 }"/>-</c:if>
+		</td>
 	</tr>
 	</c:forEach>
 </table>
 <br><br>
-&nbsp;&nbsp;Всего пришло: <%=cameCount %>.
+&nbsp;&nbsp;Всего пришло: ${cameCount}.
 <br><br>
-&nbsp;&nbsp;Всего не пришло: <%=doesntCameCount %>.
+&nbsp;&nbsp;Всего не пришло: ${doesntCameCount}.
 <br><br><br><br>
 <%@ include file="/resources/design/footer.jsp" %>

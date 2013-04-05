@@ -1,10 +1,12 @@
 package validators;
 
+import java.util.Hashtable;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
+import com.ncteam.iviewer.domain.HRMark;
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.User;
 

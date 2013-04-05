@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +26,7 @@ public class HRMarkController {
 	@Autowired
 	private FormServiceImpl formService;
 	private Validator validator=new Validator();
+	private boolean isSecondRequest=false;
 	
 	@RequestMapping("/hr_mark_{form_id}")
 	public String hrMark(HttpServletResponse response, HttpSession session,
@@ -50,6 +52,7 @@ public class HRMarkController {
 	        map.put("target","index");
 	        return "redirect";
 		}
+		isSecondRequest=true;
 		int english;
 		int motivation;
 		try{

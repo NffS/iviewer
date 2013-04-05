@@ -13,31 +13,29 @@
 <%@include file="/resources/design/hr_left_part.jsp" %>
 <%@ include file="/resources/design/center.jsp" %>
 <%@include file="/resources/design/hr_reports_references.jsp" %>
-
-<%List<Faculty> faculties=(List<Faculty>)request.getAttribute("faculties");
-List<University> universities=(List<University>)request.getAttribute("universities");
-Hashtable<String, Long> studentsInUniversitiesTable=(Hashtable<String, Long>)request.getAttribute("studentsInUniversitiesTable");
-Hashtable<Integer, Long> studentsInFacultiesTable=(Hashtable<Integer, Long>)request.getAttribute("studentsInFacultiesTable");%>
-<font size="4">Студентов зрегистрировано</font><br><br>
+<c:set var="k" scope="page" value="${0}"/>
+<c:forEach var="university" items="${universities }">
+	<c:set var="k" value="${k+studentsInUniversitiesTable.get(university.universityName)}"/>
+</c:forEach>
+<font size="4">Студентов зрегистрировано: ${k }</font>
+<br><br>
 <table border=2 align="center">
 	<tr align="center" bgcolor="64BFCD">
 		<th colspan="2"  width=300 >Университет/факультет</th><th width=30>Количество</th>
 	</tr>
-<%for(University university :universities){%>
+<c:forEach var="university" items="${universities}">
 <tr align="center" height=40>
-	<td colspan=2 width=300><%=university.getUniversityName()%></td> <td><%=studentsInUniversitiesTable.get(university.getUniversityName())%></td>
+	<td colspan=2 width=300>${university.universityName }</td> <td>${studentsInUniversitiesTable.get(university.getUniversityName())}</td>
 </tr>
-	<%for(Faculty faculty :faculties){%>
-		<%
-			if(faculty.getUniversityId().equals(university.getUniversityId())){
-		%>
+	<c:forEach var="faculty" items="${faculties}">
+		<c:if test="${faculty.universityId.equals(university.universityId) }">
 		<tr align="center" height=40>
-		<td width=75/><td><%=faculty.getFacultyName() %></td> 
-		<td><%=studentsInFacultiesTable.get(faculty.getFacultyId())%></td>
+		<td width=75/><td>${faculty.facultyName}</td> 
+		<td>${studentsInFacultiesTable.get(faculty.facultyId)}</td>
 		</tr>
-		<%}
-	}%>
-<%} %> 
+		</c:if>
+	</c:forEach>
+</c:forEach>
 </table>
 <br><br><br><br>
 <%@ include file="/resources/design/footer.jsp" %>

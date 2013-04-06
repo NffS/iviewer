@@ -22,7 +22,8 @@ public class FormListController {
 
 	@Autowired
 	 private FormServiceImpl formService;
-	 private Validator validator=new Validator();
+	@Autowired
+	 private Validator validator;
 	
 	@RequestMapping("/form_list")
 	public String form_list(HttpSession session, Map<String, Object> map){

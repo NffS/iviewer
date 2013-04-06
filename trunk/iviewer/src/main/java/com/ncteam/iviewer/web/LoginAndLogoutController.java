@@ -20,7 +20,8 @@ public class LoginAndLogoutController {
 
 	@Autowired
 	private UserServiceImpl userService;
-	 private Validator validator=new Validator();
+	@Autowired
+	private Validator validator;
 	
 	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
 	public String checkUserLogin(@ModelAttribute("user") User user, Map<String, Object> map,

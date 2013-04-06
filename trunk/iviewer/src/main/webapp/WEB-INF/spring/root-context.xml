@@ -13,6 +13,7 @@ http://www.springframework.org/schema/jdbc http://www.springframework.org/schema
      <!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
      <context:component-scan base-package="com.ncteam.iviewer.DAO"/>
      <context:component-scan base-package="com.ncteam.iviewer.service"/>
+     <context:component-scan base-package="validators"/>
      <!-- Файл с настройками ресурсов для работы с данными (Data Access Resources) -->
      <import resource="data.xml"/>
      </beans>

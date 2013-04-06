@@ -25,7 +25,8 @@ public class TechController {
 	 
 	 @Autowired
 	 private FormServiceImpl formService;
-	 private Validator validator=new Validator();
+	 @Autowired
+	 private Validator validator;
 	
 	@RequestMapping(value="/interview")
 	public String it(HttpSession session, Map<String, Object> map){

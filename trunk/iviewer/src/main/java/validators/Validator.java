@@ -1,15 +1,16 @@
 package validators;
 
-import java.util.Hashtable;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
-import com.ncteam.iviewer.domain.HRMark;
+import org.springframework.stereotype.Service;
+
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.User;
 
+@Service
 public class Validator {
 	
 	private String checkLength(String str, int max, int min){

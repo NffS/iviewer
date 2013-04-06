@@ -23,7 +23,8 @@ public class TechMarkController {
 
 	@Autowired
 	private FormServiceImpl formService;
-	private Validator validator=new Validator();
+	@Autowired
+	private Validator validator;
 	
 	@RequestMapping("/tech_mark_{form_id}")
 	public String techMark(HttpServletResponse response, HttpSession session,

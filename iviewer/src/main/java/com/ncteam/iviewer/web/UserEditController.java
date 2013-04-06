@@ -28,7 +28,8 @@ public class UserEditController {
 
     @Autowired
     private UserServiceImpl tablesService;
-    private Validator validator=new Validator();
+    @Autowired
+    private Validator validator;
 
     @RequestMapping("/user_edit")
     public String userEdit(Map<String, Object> map, HttpSession session) {

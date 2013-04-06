@@ -22,7 +22,8 @@ public class HRController {
 	 
 	 @Autowired
 	 private InterviewServiceImpl interviewService;
-	 private Validator validator=new Validator();
+	 @Autowired
+	 private Validator validator;
 	
 	@RequestMapping(value="/hr")
 	public String hr(HttpSession session, Map<String, Object> map){

@@ -35,7 +35,8 @@ public class AdminController {
 
     @Autowired
     private UserServiceImpl tablesService;
-    private Validator validator=new Validator();
+    @Autowired
+    private Validator validator;
 
     @RequestMapping("/admin")
     public String showAdmin(Map<String, Object> map, HttpSession session) {

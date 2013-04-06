@@ -37,7 +37,8 @@ public class ReportsController {
 	
 	@Autowired
 	 private FormServiceImpl formService;
-	 private Validator validator=new Validator();
+	@Autowired
+	 private Validator validator;
 	
 	 
 	 

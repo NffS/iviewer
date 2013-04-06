@@ -25,8 +25,8 @@ public class HRMarkController {
 
 	@Autowired
 	private FormServiceImpl formService;
-	private Validator validator=new Validator();
-	private boolean isSecondRequest=false;
+	@Autowired
+	private Validator validator;
 	
 	@RequestMapping("/hr_mark_{form_id}")
 	public String hrMark(HttpServletResponse response, HttpSession session,
@@ -52,7 +52,6 @@ public class HRMarkController {
 	        map.put("target","index");
 	        return "redirect";
 		}
-		isSecondRequest=true;
 		int english;
 		int motivation;
 		try{

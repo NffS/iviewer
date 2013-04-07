@@ -5,49 +5,19 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.User;
+import com.ncteam.iviewer.service.impl.InterviewServiceImpl;
 
 @Service
 public class Validator {
 	
-	private String checkLength(String str, int max, int min){
-		if (str.length()>max)
-			return "too long";
-		if (str.length()<min)
-			return "too short";
-		return "ok";
-	}
+	@Autowired
+	private InterviewServiceImpl service;
 	
-	private String checkIsEmpty(String str){
-		if (str.equals("") || str==null)
-			return "is not entered";
-		return ("ok");
-	}
-	
-	public String checkEmail(String email){
-		if (!email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"))
-			return "invalid characters";
-		if (!checkLength(email, 30, 6).equals("ok"))
-			return checkLength(email, 30, 6)+" email";
-		if (!checkIsEmpty(email).equals("ok"))
-			return "email "+checkIsEmpty(email);
-		return "ok";
-	}
-	
-	
-	public String checkPassword(String password, String pattern){
-		if (!password.matches(pattern))
-			return "invalid characters";
-		if (!checkLength(password, 16, 4).equals("ok"))
-			return checkLength(password, 16, 4)+" email";
-		if (!checkIsEmpty(password).equals("ok"))
-			return "password "+checkIsEmpty(password);
-		return "ok";
-	}
-
 	public boolean isEmailCorrect(String email){
 		if(!Pattern.matches("^([a-zA-Z0-9_\\.\\-]{1,16})@([a-zA-Z0-9\\.\\-]{1,8})\\.([a-z]{2,4})$", email))
 			return false;
@@ -62,7 +32,7 @@ public class Validator {
 		return true;
 	}
 	
-	public String checkEmail2(String email){
+	public String checkEmail(String email){
 		if(email.isEmpty())
 			return "Заполните поле \"Email\".";
 		if(!Pattern.matches("^([a-zA-Z0-9_\\.\\-]{1,16})@([a-zA-Z0-9\\.\\-]{1,8})\\.([a-z]{2,4})$", email))
@@ -74,7 +44,7 @@ public class Validator {
 	public String checkPassword(String password){
 		if(password.isEmpty())
 			return "Заполните поле \"Пароль\".";
-		if(password.length()<0||!Pattern.matches("[a-zA-Z0-9]{4,16}$",password))
+		if(!Pattern.matches("[a-zA-Z0-9]{4,16}$",password))
 			return "Пароль введён некорректно.";
 		
 		return "";
@@ -128,21 +98,34 @@ public class Validator {
 		
 		return true;
 	}
-	public boolean isInterviewDateStringValid(String interviewDateStrig){
+	
+	public String checkInterview(Interview interview, boolean isCreating){
+		try{
+			checkInterviewDateStringValid(interview.getStringStartDate());
+			checkInterviewDateStringValid(interview.getStringEndDate());
+			checkInterviewStartEarlierThanEnd(interview.getStringStartDate(), interview.getStringEndDate());
+			checkInterviewsIntersection(interview,service.getAllRecords(Interview.class),isCreating);
+			
+		}
+		catch(Exception e){
+			return e.getMessage();
+		}
+		return "";		
+	}
+	
+	private void checkInterviewDateStringValid(String interviewDateStrig) throws Exception{
 		String pattern="201[3-9]-([0][1-9]|[1][0-2])-([0-2][0-9]|[3][0-1]) ([0-1][0-9]|2[0-4]):[0-5][0-9]";
-		return interviewDateStrig.matches(pattern);
+		if(!interviewDateStrig.matches(pattern))
+			throw new Exception("Введённые данные не соответствуют шаблону.");
 	}	
 
 	
-	public boolean isInterviewStartEarlierThanEnd(String start, String end){
-		if(Integer.parseInt(start.substring(0,2))>Integer.parseInt(end.substring(0,2)))
-			return false;
-		if(Integer.parseInt(start.substring(0,2))<Integer.parseInt(end.substring(0,2)))
-			return true;
-		if(Integer.parseInt(start.substring(3))<Integer.parseInt(end.substring(3)))
-			return true;
-		else
-			return false;
+	private void checkInterviewStartEarlierThanEnd(String start, String end) throws Exception{
+		if(Integer.parseInt(start.substring(11,13))>Integer.parseInt(end.substring(11,13)))
+			throw new Exception("Конец собеседования не может быть раньше его начала или совпадать с ним.");
+		if(Integer.parseInt(start.substring(11,13))==Integer.parseInt(end.substring(11,13)))
+		if(Integer.parseInt(start.substring(14))>=Integer.parseInt(end.substring(14)))
+			throw new Exception("Конец собеседования не может быть раньше его начала или совпадать с ним.");
 	}
 
 	public boolean isUserHR(HttpSession session){
@@ -185,8 +168,8 @@ public class Validator {
 	 *  if false - updating.
 	 * @return If interview doesn't intersect other interviews, returns null. Otherwise returns the error message.
 	 */
-	public String checkInterviewsIntersection(Interview checkedInterview, List<Interview> allInterviews,
-			boolean isCreating){
+	private void checkInterviewsIntersection(Interview checkedInterview, List<Interview> allInterviews,
+			boolean isCreating) throws Exception{
 				
 		long startTime=convertDateStringToItsLongValue(checkedInterview.getStringStartDate());
 		
@@ -201,11 +184,10 @@ public class Validator {
 				if(!isCreating&&checkedInterview.getInterviewId().equals(interview.getInterviewId()))
 					continue;
 				
-				return "Невозможно отредактировать или создать интервью:\n" +
-						"Такое интервью пересекается с другим по времени.";
+				throw new Exception("Невозможно отредактировать или создать интервью:\n" +
+						"Такое интервью пересекается с другим по времени.");
 			}
 		}
-		return null;
 	}
 	
 	/*

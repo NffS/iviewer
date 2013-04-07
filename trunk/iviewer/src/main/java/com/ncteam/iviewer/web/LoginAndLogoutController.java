@@ -27,23 +27,15 @@ public class LoginAndLogoutController {
 	public String checkUserLogin(@ModelAttribute("user") User user, Map<String, Object> map,
 			HttpSession session){
 		
-		String passwordMessage="";
-		String emailMessage="";
 		String email=user.getEmail();
 		String password=user.getPassword();
 		
-		if(!email.isEmpty()){
-				if(!password.isEmpty()){
+		String emailMessage=validator.checkEmail2(email);
+		String passwordMessage=validator.checkPassword(password);
+		
+		if(emailMessage.isEmpty()&&passwordMessage.isEmpty()){
 			
-					if(!validator.checkEmail(email).equals("ok")){
-						emailMessage="E-Mail не введён некорректно.";
-					}
-					else if(!validator.isPasswordCorrect(password)){
-						passwordMessage="Пароль введён некорректно.";
-					}
-					else{
-					
-					User resultUser=userService.getUserByEmail(user.getEmail());
+			User resultUser=userService.getUserByEmail(email);
 			
 					if(resultUser!=null){
 						if(resultUser.getPassword().equals(password)){
@@ -72,18 +64,8 @@ public class LoginAndLogoutController {
 					else{
 						emailMessage="Пользователя с таким email'ом не существует.";
 					}
-					}
-				}
-				else{
-					passwordMessage="Заполните поле \"Пароль\".";
-				}
-		}
-		else{
-			emailMessage="Заполните поле \"Email\".";
-			if(password.isEmpty()){
-				passwordMessage="Заполните поле \"Пароль\".";
 			}
-		}
+				
 		map.put("email", email);
 		map.put("password", password);
 		map.put("emailMessage", emailMessage);

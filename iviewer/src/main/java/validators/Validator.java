@@ -62,6 +62,23 @@ public class Validator {
 		return true;
 	}
 	
+	public String checkEmail2(String email){
+		if(email.isEmpty())
+			return "Заполните поле \"Email\".";
+		if(!Pattern.matches("^([a-zA-Z0-9_\\.\\-]{1,16})@([a-zA-Z0-9\\.\\-]{1,8})\\.([a-z]{2,4})$", email))
+			return "E-Mail не введён некорректно.";
+
+		return "";
+	}
+	
+	public String checkPassword(String password){
+		if(password.isEmpty())
+			return "Заполните поле \"Пароль\".";
+		if(password.length()<0||!Pattern.matches("[a-zA-Z0-9]{4,16}$",password))
+			return "Пароль введён некорректно.";
+		
+		return "";
+	}	
 		
 	public boolean isNameCorrect(String name){
 		if(!Pattern.matches("[A-ZА-ЯЁ][a-zа-яё]{1,20}$", name))

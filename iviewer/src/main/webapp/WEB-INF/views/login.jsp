@@ -15,7 +15,6 @@
 	<table>
 		<tr>
 			<td width=100><font size=5>E-mail:</font></td>
-			<!-- [\w_]+@\w+(.\w+)*.[a-z]{2,4} -->
    			 <td><input class="input-large" type="text" style="height:30px" name="email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" value="${email}"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${emailMessage }</font> </td>
    		</tr>
     	<tr>

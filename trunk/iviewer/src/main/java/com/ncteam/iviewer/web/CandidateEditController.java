@@ -63,43 +63,32 @@ public class CandidateEditController{
 	Validator validator;
 	
 	@RequestMapping(value = "/edit_this_candidate", method = RequestMethod.POST)
-    public String createUser(HttpServletRequest request, HttpSession session, Map<String, Object> map) throws ServletException, IOException {
+    public String updateUser(HttpServletRequest request, HttpSession session, Map<String, Object> map) throws ServletException, IOException {
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		 
-		// Создаём класс фабрику 
-		DiskFileItemFactory factory = new DiskFileItemFactory();
- 
-		// Максимальный буфера данных в байтах,
-		// при его привышении данные начнут записываться на диск во временную директорию
-		// устанавливаем один мегабайт
-		factory.setSizeThreshold(1024*1024);
+		User user = userService.getRecordById(Integer.parseInt(session.getAttribute("user_id").toString()), User.class);
 		
-		// устанавливаем временную директорию
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		
+		factory.setSizeThreshold(300*1024);
+		
 		File tempDir = (File)session.getServletContext().getAttribute("javax.servlet.context.tempdir");
 
 		factory.setRepository(tempDir);
  
-		//Создаём сам загрузчик
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		
-		//максимальный размер данных который разрешено загружать в байтах
-		//по умолчанию -1, без ограничений. Устанавливаем 10 мегабайт. 
-		upload.setSizeMax(1024 * 1024 * 10);
+		upload.setSizeMax(300 * 1024);
  
 		try {
 			List items = upload.parseRequest(request);
 			Iterator iter = items.iterator();
-			
+
 			while (iter.hasNext()) {
 			    FileItem item = (FileItem) iter.next();
- 
-			    if (item.isFormField()) {
-			    	//если принимаемая часть данных является полем формы			    	
-			        processFormField(item);
+			    if (item.isFormField()) {		    	
+			    	user = processFormField(item, user);
 			    } else {
-			    	//в противном случае рассматриваем как файл
-			        processUploadedFile(item, request);
-			        changeImageScale(request.getRealPath("") +"/resources/files/fotos/"+ item.getName());
+			        changeImageScale(processUploadedFile(item, request, user));
 			    }
 			}			
 		} catch (Exception e) {
@@ -108,29 +97,28 @@ public class CandidateEditController{
 			return "candidate_edit";
 		}
 		
-		
+		userService.updateRecord(user);
         return "candidate_edit";
     }
-	private void processUploadedFile(FileItem item, HttpServletRequest request) throws Exception {
+	
+	private String processUploadedFile(FileItem item, HttpServletRequest request, User user) throws Exception {
 		File uploadetFile = null;
-		//выбираем файлу имя пока не найдём свободное
-		do{
-			String path = request.getRealPath("") +"/resources/files/fotos/"+ item.getName();					
+			String path = request.getRealPath("") +"/resources/files/fotos/"+ user.getFirstName()+"_"+user.getSurname()+"_"+user.getUserId();					
 			uploadetFile = new File(path);		
-		}while(uploadetFile.exists());
-		
-		//создаём файл
 		uploadetFile.createNewFile();
-		//записываем в него данные
 		item.write(uploadetFile);
+		return path;
 	}
  
-	/**
-	 * Выводит на консоль имя параметра и значение
-	 * @param item
-	 */
-	private void processFormField(FileItem item) {
-		System.out.println(item.getFieldName()+"="+item.getString());		
+	private User processFormField(FileItem item, User user) {
+		switch(item.getFieldName()){
+			case "firstname": user.setFirstName(item.getString()); 
+			case "surname": user.setSurname(item.getString());
+			case "lastname": user.setLastName(item.getString());
+			case "email": user.setEmail(item.getString());
+			case "password": user.setPassword(item.getString());
+		}
+		return user;	
 	}
 	
 	private void changeImageScale(String filename) throws IOException{
@@ -175,42 +163,7 @@ public class CandidateEditController{
 			return null;
 		}
 	}
-	
-	protected void sendMail(User user, String host) throws MessagingException{
-		
-		Properties properties = new Properties();
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "465");
-        properties.put("mail.smtp.socketFactory.port", "465");
-        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        properties.put("mail.smtp.auth", "true");
-        
-        Session session = Session.getInstance(properties, authenticate("ncteam2013","qwertyshmerty"));
-                
-        Message mailMsg = new MimeMessage(session);
-        InternetAddress senderAddress = new InternetAddress("ncteam2013@gmail.com");
-        InternetAddress targetAddress = new InternetAddress(user.getEmail());
-        mailMsg.setFrom(senderAddress);
-        mailMsg.setRecipient(RecipientType.TO, targetAddress);
-        mailMsg.setSubject("Учебный центр NetCracker");
-        String link = host+"/registration_"+user.getUserId();
-        mailMsg.setText("Спасибо за регистрацию, "+user.getFirstName()+". Для регистрации пройдите по ссылке "+link);
-        
-        Transport.send(mailMsg);
-	}
 
-	private Authenticator authenticate(final String userName, final String userPassword){
-        Authenticator authenticator = new javax.mail.Authenticator()
-       {
-           @Override
-           protected PasswordAuthentication getPasswordAuthentication() {
-                 return new PasswordAuthentication(userName, userPassword);
-           }
-       };
-       return authenticator;
-    }
-	
-	
 	@RequestMapping("/candidate_edit")
     public String registration(){
 

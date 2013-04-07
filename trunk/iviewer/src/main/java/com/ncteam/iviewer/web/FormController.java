@@ -40,13 +40,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.ncteam.iviewer.DAO.impl.FormDAOImpl;
+import com.ncteam.iviewer.DAO.impl.TablesDAOImpl;
 import com.ncteam.iviewer.domain.Faculty;
 import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.University;
 import com.ncteam.iviewer.domain.User;
+import com.ncteam.iviewer.service.MailService;
+import com.ncteam.iviewer.service.PDFservice;
 import com.ncteam.iviewer.service.ValidationService;
 import com.ncteam.iviewer.service.impl.FormServiceImpl;
-import com.ncteam.iviewer.service.impl.PDFservice;
+import com.ncteam.iviewer.service.impl.TablesServiceImpl;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
 @Controller
@@ -56,122 +59,41 @@ public class FormController{
 	 private UserServiceImpl userService;
 	@Autowired
 	 private FormServiceImpl formService;
-	
+	 
 	@RequestMapping(value = "/getform_{userid}", method = RequestMethod.POST)
     public String getForm(HttpServletRequest request, @PathVariable("userid") Integer userID, HttpSession session, Map<String, Object> map) throws DocumentException, IOException, MessagingException{
-		//if (!getErrorMessage(request).equals("ok")) 
-			//return "form";
+
 		User user = userService.getRecordById(userID, User.class);
-		Form newForm;
+		Form newForm = formService.getFormByUserId(userID);
+		newForm = getFormByRequest(request, newForm);
+
+		formService.updateRecord(newForm);
 		
-		
-		if (formService.getFormByUserId(user.getUserId())==null){
-			newForm = createNewForm(request, formService.getFormByUserId(user.getUserId()));
-			newForm.setUserId(user.getUserId());
-			newForm.setUser(user);
-			newForm.setStatus(1);
-			newForm.setVisitStatus(1);
-			
-			formService.addRecord(newForm);
-			
-		} else {
-			newForm = createNewForm(request, formService.getFormByUserId(user.getUserId()));
-			newForm.setUserId(user.getUserId());
-			newForm.setUser(user);
-			newForm.setStatus(1);
-			
-			formService.updateRecord(newForm);
-		}
-		
-		PDFservice pdf = new PDFservice(request.getRealPath("") + "/resources/files/forms/test.pdf", request);
-		pdf.createPDF(user, newForm);
-		sendFormToCandidate(user, request.getRealPath("") + "/resources/files/forms/test.pdf", request);
+		String path = request.getRealPath("") + "/resources/files/forms/"+user.getFirstName()+"_"+user.getSurname()+"_"+user.getUserId()+".pdf";
+		PDFservice pdf = new PDFservice(path, request);
+			pdf.createPDF(user, newForm);
+		MailService mailService = new MailService();
+			mailService.sendFormToCandidate(user, path);
 		
 		map.put("user", user);
 		map.put("form", newForm);
-		
+		map.put("request", userID);
 		map.put("interesttc", convertFromDB(newForm.getInterestTc()));
 		map.put("interestnc", convertFromDB(newForm.getInterestNc()));
-		
 		map.put("interestpo", convertFromDB(newForm.getInterestAreaPo()));
-		
 		map.put("job_vj", convertFromDB(newForm.getJobArVaried()));
 		map.put("job_man", convertFromDB(newForm.getJobArManage()));
 		map.put("job_sales", convertFromDB(newForm.getJobArSales()));
+		map.put("job_deep", convertFromDB(newForm.getJobArDeepSpec()));
 		
         return "form";
     }
 
-	void sendFormToCandidate(User user, String filename, HttpServletRequest request) throws MessagingException, IOException{
-		
-		Properties properties = new Properties();
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "465");
-        properties.put("mail.smtp.socketFactory.port", "465");
-        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        properties.put("mail.smtp.auth", "true");
-        
-        Session session = Session.getInstance(properties, authenticate("ncteam2013","qwertyshmerty"));
-                
-        Message mailMsg = new MimeMessage(session);
-        
-        InternetAddress senderAddress = new InternetAddress("ncteam2013@gmail.com");
-        InternetAddress targetAddress = new InternetAddress("Canopus-Team@yandex.ua");//заменить на user.mail
-        mailMsg.setFrom(senderAddress);
-        mailMsg.setRecipient(RecipientType.TO, targetAddress);
-        
-        mailMsg.setSubject("Учебный центр NetCracker");
-        
-        MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setText("Ваша новая форма:");
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(messageBodyPart);
-        
-        messageBodyPart = new MimeBodyPart();
-        DataSource source = new FileDataSource(filename);
-        messageBodyPart.setDataHandler(new DataHandler(source));
-        messageBodyPart.setFileName("form.pdf");
-        multipart.addBodyPart(messageBodyPart);
-        mailMsg.setContent(multipart);
-        
-        Transport.send(mailMsg);
-	}
-	
-	public static byte[] getBytes(Object obj) throws java.io.IOException{
-	      ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
-	      ObjectOutputStream oos = new ObjectOutputStream(bos); 
-	      oos.writeObject(obj);
-	      oos.flush(); 
-	      oos.close(); 
-	      bos.close();
-	      byte [] data = bos.toByteArray();
-	      return data;
-	  }
-	
-	private Authenticator authenticate(final String userName, final String userPassword){
-        Authenticator authenticator = new javax.mail.Authenticator()
-       {
-           @Override
-           protected PasswordAuthentication getPasswordAuthentication() {
-                 return new PasswordAuthentication(userName, userPassword);
-           }
-       };
-       return authenticator;
-    }
-	Form createNewForm(HttpServletRequest request, Form newForm) throws DocumentException, IOException{
-		
-		if (newForm == null)
-			newForm = new Form();
-		
-		University university = new University();
-			university.setUniversityId(1);
-		Faculty faculty = new Faculty();
-			faculty.setFacultyId(1);
-	
-		newForm.getUniversity().setUniversityId(1);
-		newForm.setUniversity(university);
-		newForm.getFaculty().setFacultyId(1);
-		newForm.setFaculty(faculty);
+	Form getFormByRequest(HttpServletRequest request, Form newForm) throws DocumentException, IOException{
+		University university = formService.getRecordById(1, University.class);
+		Faculty faculty = formService.getRecordById(2, Faculty.class);
+			newForm.setUniversity(university);
+			newForm.setFaculty(faculty);
 		
 			newForm.setCourse(Integer.parseInt(request.getParameter("course")));
 			newForm.setEndYear(request.getParameter("year"));
@@ -216,7 +138,6 @@ public class FormController{
 			newForm.setExperience(request.getParameter("experience"));
 			newForm.setMotivation_comment(request.getParameter("promises"));
 			newForm.setComment2(request.getParameter("more_information"));
-			
 			
 		return newForm;
 	}
@@ -264,23 +185,19 @@ public class FormController{
 	
     @RequestMapping(value = "/form_{userid}")
     public String form(HttpSession session, @PathVariable("userid") Integer userID, Map<String, Object> map){
+    	
 		User user = userService.getRecordById(userID, User.class);
 		Form form = formService.getFormByUserId(userID);
-		
 		map.put("user", user);
 		map.put("form", form);
-		
-		 map.put("request", userID);
-		 
+		map.put("request", userID);
 		map.put("interesttc", convertFromDB(form.getInterestTc()));
 		map.put("interestnc", convertFromDB(form.getInterestNc()));
-		
 		map.put("interestpo", convertFromDB(form.getInterestAreaPo()));
-		
 		map.put("job_vj", convertFromDB(form.getJobArVaried()));
 		map.put("job_man", convertFromDB(form.getJobArManage()));
 		map.put("job_sales", convertFromDB(form.getJobArSales()));
-
+		map.put("job_deep", convertFromDB(form.getJobArDeepSpec()));
         return "form";
     }
     

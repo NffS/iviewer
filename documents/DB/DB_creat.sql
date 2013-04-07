@@ -46,7 +46,7 @@ CREATE TABLE Users
 		CHECK (surname = INITCAP(surname) AND REGEXP_LIKE(surname,'[a-zA-Zà-ÿÀ-ß]{1,40}$')),
 		last_name		VARCHAR2(100) NOT NULL CONSTRAINT last_name
 		CHECK (last_name = INITCAP(last_name) AND REGEXP_LIKE(last_name,'[a-zA-Zà-ÿÀ-ß]{1,40}$')),
-		foto			VARCHAR2(80),
+		foto			VARCHAR2(800),
 		user_type_id	NUMBER(6) REFERENCES Users_type (user_type_id) ON DELETE CASCADE,
 		reg_date		DATE
     );

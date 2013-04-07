@@ -29,10 +29,6 @@
 				</c:forEach>
 			</select>
 		</td>
-		<td colspan="2" width=300 align="right">
-			Только требующие подтверждения&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" onchange="filter('sf')" name="stateOnly" id="stateOnly"/>
-		</td>
 	</tr>
 </table>
 <br>
@@ -63,7 +59,6 @@ function filter(_id){
     var surname = document.getElementById("surname").value.toLowerCase().split(" ");
     var interview = document.getElementById("interview").value.toLowerCase().split(" ");
     var university = document.getElementById("university").value.toLowerCase().split(" ");
-    var state = document.getElementById("stateOnly");
     var table = document.getElementById(_id);
     var ele;
     for (var r = 1; r < table.rows.length; r++){
@@ -102,13 +97,7 @@ function filter(_id){
                 displayStyle = 'none';
                 break;
             }
-        }
-		
-        if(state.checked){
-        	if(table.rows[r].cells[3]!="Нет")
-        		displayStyle = 'none';
-        }
-        
+        }        
         table.rows[r].style.display = displayStyle;
     }
 }

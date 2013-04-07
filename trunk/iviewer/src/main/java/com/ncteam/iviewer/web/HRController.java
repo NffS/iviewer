@@ -53,16 +53,8 @@ public class HRController {
 		
 		String updateEndDateString=((String)request.getParameter("date"))
 				.concat(" "+(String)request.getParameter("endTime"));
-		
-		if(validator.isInterviewDateStringValid(updateStartDateString)
-				&&validator.isInterviewDateStringValid(updateEndDateString)){
-			
-			if(validator.isInterviewStartEarlierThanEnd((String)request.getParameter("startTime"),
-					(String)request.getParameter("endTime"))){
 				
 		Interview redactedInterview=interviewService.getRecordById(interview_id, Interview.class);
-		updateStartDateString=updateStartDateString+":00";
-		updateEndDateString=updateEndDateString+":00";
 		redactedInterview.setStringStartDate(updateStartDateString);
 		redactedInterview.setStringEndDate(updateEndDateString);
 		redactedInterview.setExtraTime(Integer.parseInt((String)request.getParameter("extraTime")));
@@ -73,25 +65,15 @@ public class HRController {
             redactedInterview.setSeats(Integer.parseInt((String)request.getParameter("seats")));
         }
 		
-		String errorMessage=validator.checkInterviewsIntersection(redactedInterview,
-				interviewService.getAllRecords(Interview.class), false);
+		String errorMessage=validator.checkInterview(redactedInterview, false);
 		
-		if(errorMessage!=null){
+		if(!errorMessage.isEmpty()){
 			map.put("erroMessage",errorMessage);
 			map.put("interviews",interviewService.getAllRecords(Interview.class));
 			return "hr";
 		}
 		
 		interviewService.updateRecord(redactedInterview);
-		}
-		else{
-			map.put("erroMessage", "Конец собеседования не может быть раньше его начала или совпадать с ним.");
-		}
-	}
-	else{
-		map.put("erroMessage","Введённые данные не соответствуют шаблону.");
-	}
-
 		map.put("interviews",interviewService.getAllRecords(Interview.class));
 		return "hr";
 	}
@@ -112,40 +94,21 @@ public class HRController {
 		
 		String newEndDateString=((String)request.getParameter("newDate"))
 				.concat(" "+(String)request.getParameter("newEndTime"));
-		
-		if(validator.isInterviewDateStringValid(newStartDateString)
-				&&validator.isInterviewDateStringValid(newEndDateString))
-		{
-			if(validator.isInterviewStartEarlierThanEnd((String)request.getParameter("newStartTime"),
-					(String)request.getParameter("newEndTime"))){
 				
 		Interview newInterview=new Interview();
-		newEndDateString=newEndDateString+":00";
-		newStartDateString=newStartDateString+":00";
 		newInterview.setStringEndDate(newEndDateString);
 		newInterview.setStringStartDate(newStartDateString);
 		newInterview.setExtraTime(Integer.parseInt((String)request.getParameter("newExtraTime")));
 		newInterview.setSeats(Integer.parseInt((String)request.getParameter("newSeats")));
 		
-		String errorMessage=validator.checkInterviewsIntersection(newInterview,
-				interviewService.getAllRecords(Interview.class), true);
+		String errorMessage=validator.checkInterview(newInterview, true);
 		
-		if(errorMessage!=null){
+		if(!errorMessage.isEmpty()){
 			map.put("erroMessage",errorMessage);
 			map.put("interviews",interviewService.getAllRecords(Interview.class));
 			return "hr";
-		}
-		
-		interviewService.addRecord(newInterview);
-		}
-			else{
-				map.put("erroMessage", "Конец собеседования не может быть раньше его начала или совпадать с ним.");
-			}
-		}
-		else{
-			map.put("erroMessage","Введённые данные не соответствуют шаблону.");
-		}
-		
+		}		
+		interviewService.addRecord(newInterview);		
 		map.put("interviews",interviewService.getAllRecords(Interview.class));
 		return "hr";
 	}

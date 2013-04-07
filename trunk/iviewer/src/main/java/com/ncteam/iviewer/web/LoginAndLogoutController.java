@@ -30,7 +30,7 @@ public class LoginAndLogoutController {
 		String email=user.getEmail();
 		String password=user.getPassword();
 		
-		String emailMessage=validator.checkEmail2(email);
+		String emailMessage=validator.checkEmail(email);
 		String passwordMessage=validator.checkPassword(password);
 		
 		if(emailMessage.isEmpty()&&passwordMessage.isEmpty()){

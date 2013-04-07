@@ -26,8 +26,6 @@ public class CandidateController{
 	@RequestMapping("/candidate")
     public String registration(HttpSession session, Map<String, Object> map){
 		
-		
-		
         return "candidate";
     }
 	

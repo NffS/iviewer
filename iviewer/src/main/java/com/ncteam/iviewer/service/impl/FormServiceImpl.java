@@ -14,6 +14,7 @@ import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.FormInformation;
 import com.ncteam.iviewer.domain.HRMark;
 import com.ncteam.iviewer.domain.TechMark;
+import com.ncteam.iviewer.domain.User;
 
 @Service
 public class FormServiceImpl extends TablesServiceImpl<FormDAOImpl> {
@@ -76,5 +77,42 @@ public class FormServiceImpl extends TablesServiceImpl<FormDAOImpl> {
 	}
 	public Form getFormByUserId(int userID){
 		return formDAO.getFormByUserId(userID);
+	}
+	public Form getFirstForm(){
+		Form newForm = new Form();		
+			newForm.setInterestTc("+-");
+			newForm.setInterestNc("+-");
+			
+			newForm.setInterestAreaPo("+-");
+			
+			newForm.setJobArDeepSpec("+-");
+			newForm.setJobArManage("+-");
+			newForm.setJobArSales("+-");
+			newForm.setJobArVaried("+-");
+			
+			newForm.setProgLangC(1);
+			newForm.setProgLangJava(1);
+			
+			newForm.setCsAlgorithms(0);
+			newForm.setCsDb(0);
+			newForm.setCsDesign(0);
+			newForm.setCsGui(0);
+			newForm.setCsNetworkProg(0);
+			newForm.setCsNetworkTech(0);
+			newForm.setCsOop(0);
+			newForm.setCsWeb(0);
+			
+			newForm.setEnglishRead(1);
+			newForm.setEnglishSpoken(1);
+			newForm.setEnglishWrite(1);
+			
+			newForm.setSourceId(4);
+			
+			newForm.setComment2(" ");
+			newForm.setMotivation_comment(" ");
+			
+			newForm.setStatus(0);
+			newForm.setVisitStatus(0);
+		return newForm;
 	}
 }

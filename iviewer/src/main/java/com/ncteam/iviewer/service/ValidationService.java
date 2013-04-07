@@ -5,8 +5,28 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.ncteam.iviewer.domain.Interview;
+import com.ncteam.iviewer.domain.User;
 
-public class ValidationService {
+public abstract class ValidationService {
+	abstract boolean check(Object obj);
+	
+	class UserValidator extends ValidationService{
+
+		@Override
+		boolean check(Object obj) {
+			User user = (User) obj;
+			return false;
+		}
+	}
+
+	class FormValidator extends ValidationService{
+
+		@Override
+		boolean check(Object obj) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+	}
 	
 	public String checkLength(String str, int max, int min){
 		if (str.length()>max)

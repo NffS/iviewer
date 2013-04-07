@@ -32,8 +32,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import validators.Validator;
 
+import com.ncteam.iviewer.DAO.impl.TablesDAOImpl;
 import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.User;
+import com.ncteam.iviewer.service.MailService;
 import com.ncteam.iviewer.service.impl.FormServiceImpl;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
 
@@ -44,39 +46,42 @@ public class RegistrationController{
 	private UserServiceImpl userService;
 	@Autowired
 	private FormServiceImpl formService;
-	Validator validator;
-	
+	private MailService mailService;
+		
 	@RequestMapping(value = "/registration_user", method = RequestMethod.POST)
     public String createUser(HttpServletRequest request, HttpSession session, Map<String, Object> map) {
-		validator = new Validator();
-		//kovalenko.alexandr.ua@gmail.com
-		User newUser = new User();
 
-		if (isUserDataCorrect(request, map)==null){
-			newUser.setFirstName(request.getParameter("firstname"));
-			newUser.setSurname(request.getParameter("surname"));
-			newUser.setLastName(request.getParameter("lastname"));
-			newUser.setEmail(request.getParameter("email"));
-			newUser.setPassword(request.getParameter("password"));
-			newUser.setFoto("");
-			newUser.setStringRegDate(new SimpleDateFormat("yyyy-MM-dd kk:mm").format(new Date()).toString());
-			newUser.setUserTypeId(4);
-			
-			userService.addRecord(newUser);
-			
+		User newUser = getUserByRequest(request);
+
+		if(true){
+		userService.addRecord(newUser);
 			try {
-				sendMail(newUser, "http://localhost:8086/iviewer");
+				mailService = new MailService();
+				mailService.sendMailForRegistration(newUser, request.getRequestURL().toString());
 			} catch (MessagingException e) {
 				map.put("message", "Неккоректный email, невозможно отправить письмо");
 			}
-			
 			map.put("message", "Регистрация прошла успешно, проверьте почту");
 		} else {
-			map = isUserDataCorrect(request, map);
+			//map = isUserDataCorrect(request, map);
 		}
         return "registration";
     }
 	
+	User getUserByRequest(HttpServletRequest request){
+		User newUser = new User();
+		newUser.setFirstName(request.getParameter("firstname"));
+		newUser.setSurname(request.getParameter("surname"));
+		newUser.setLastName(request.getParameter("lastname"));
+		newUser.setEmail(request.getParameter("email"));
+		newUser.setPassword(request.getParameter("password"));
+		newUser.setFoto(request.getRealPath("") + "/resources/files/fotos/defaut.jpg");
+		newUser.setStringRegDate(new SimpleDateFormat("yyyy-MM-dd kk:mm").format(new Date()).toString());
+		newUser.setUserTypeId(4);
+		
+		return newUser;
+	}
+	/*
 	private  Map<String, Object> isUserDataCorrect (HttpServletRequest request, Map<String, Object> map){
 		boolean isCorrect = true;
 		if (!validator.isNameCorrect(request.getParameter("firstname"))){
@@ -106,95 +111,24 @@ public class RegistrationController{
 			return null;
 		}
 	}
-	
-	protected void sendMail(User user, String host) throws MessagingException{
-		
-		Properties properties = new Properties();
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "465");
-        properties.put("mail.smtp.socketFactory.port", "465");
-        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        properties.put("mail.smtp.auth", "true");
-        
-        Session session = Session.getInstance(properties, authenticate("ncteam2013","qwertyshmerty"));
-                
-        Message mailMsg = new MimeMessage(session);
-        InternetAddress senderAddress = new InternetAddress("ncteam2013@gmail.com");
-        InternetAddress targetAddress = new InternetAddress(user.getEmail());
-        mailMsg.setFrom(senderAddress);
-        mailMsg.setRecipient(RecipientType.TO, targetAddress);
-        mailMsg.setSubject("Учебный центр NetCracker");
-        String link = host+"/registration_"+user.getUserId();
-        mailMsg.setText("Спасибо за регистрацию, "+user.getFirstName()+". Для регистрации пройдите по ссылке "+link);
-        
-        Transport.send(mailMsg);
-	}
+	*/
 
-	private Authenticator authenticate(final String userName, final String userPassword){
-        Authenticator authenticator = new javax.mail.Authenticator()
-       {
-           @Override
-           protected PasswordAuthentication getPasswordAuthentication() {
-                 return new PasswordAuthentication(userName, userPassword);
-           }
-       };
-       return authenticator;
-    }
-	
-	@RequestMapping("/registration_{userid}")
+	@RequestMapping("/registration_user_{userid}")
     public String registrationFromEmail(HttpSession session, @PathVariable("userid") Integer userID){
-		if (!validator.isUserCandidate(session)) 
+		if (true) 
 			;
 		User user = userService.getRecordById(userID, User.class);
-		Form newForm = new Form();
+		Form newForm = formService.getFirstForm();
 			newForm.setUserId(user.getUserId());
 			newForm.setUser(user);
-			newForm.setUserId(user.getUserId());
-			newForm.setUser(user);
-			
-			newForm.setInterestTc("+-");
-			newForm.setInterestNc("+-");
-			
-			newForm.setInterestAreaPo("+-");
-			
-			newForm.setJobArDeepSpec("+-");
-			newForm.setJobArManage("+-");
-			newForm.setJobArSales("+-");
-			newForm.setJobArVaried("+-");
-			
-			newForm.setProgLangC(1);
-			newForm.setProgLangJava(1);
-			
-			newForm.setCsAlgorithms(0);
-			newForm.setCsDb(0);
-			newForm.setCsDesign(0);
-			newForm.setCsGui(0);
-			newForm.setCsNetworkProg(0);
-			newForm.setCsNetworkTech(0);
-			newForm.setCsOop(0);
-			newForm.setCsWeb(0);
-			
-			newForm.setEnglishRead(1);
-			newForm.setEnglishSpoken(1);
-			newForm.setEnglishWrite(1);
-			
-			newForm.setSourceId(4);
-			
-			newForm.setComment2(" ");
-			newForm.setMotivation_comment(" ");
-			
-			newForm.setStatus(0);
-			newForm.setVisitStatus(0);
 		formService.addRecord(newForm);
 		user.setForm(newForm);
 		userService.updateRecord(user);
-        return "candidate";
+        return "index";
     }
 	
-	
 	@RequestMapping("/registration")
-    public String registration(){
-
+    public String registration(HttpServletRequest request){
         return "registration";
     }
 }

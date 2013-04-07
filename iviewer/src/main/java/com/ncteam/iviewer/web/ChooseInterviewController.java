@@ -1,6 +1,7 @@
 package com.ncteam.iviewer.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,9 +35,15 @@ public class ChooseInterviewController{
 	 
 	@RequestMapping(value = "/choose")
     public String chooseInterview(HttpSession session, Map<String, Object> map) {
+		Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
 		List<Interview> allInterviews = interviewService.getAllRecords(Interview.class);
-		List<Interview> interviews = interviewService.getAllRecords(Interview.class);
-		interviews.clear();
+		List<Interview> interviews = new ArrayList<Interview>();
+		
+		Interview myInterview = form.getInterview();
+		if (myInterview!=null)
+			map.put("my_interview", myInterview);
+			
+	
 		for (int i=0;i<allInterviews.size();i++)
 			if(allInterviews.get(i).getSeats()>allInterviews.get(i).getForms().size())
 				interviews.add(allInterviews.get(i));
@@ -54,8 +61,7 @@ public class ChooseInterviewController{
 		formService.updateRecord(form);
 		
 		List<Interview> allInterviews = interviewService.getAllRecords(Interview.class);
-		List<Interview> interviews = interviewService.getAllRecords(Interview.class);
-		interviews.clear();
+		List<Interview> interviews = new ArrayList<Interview>();
 		for (int i=0;i<allInterviews.size();i++)
 			if(allInterviews.get(i).getSeats()>allInterviews.get(i).getForms().size())
 				interviews.add(allInterviews.get(i));
@@ -63,5 +69,25 @@ public class ChooseInterviewController{
 		map.put("interviews",interviews);
 		
 		return "choose_interview";
+	}
+	
+	private List<Interview> getFreeInterviews(){
+		List<Interview> allInterviews = interviewService.getAllRecords(Interview.class);
+		List<Interview> interviews = new ArrayList<Interview>();
+		for (int i=0;i<allInterviews.size();i++)
+			if(allInterviews.get(i).getSeats()>allInterviews.get(i).getForms().size())
+				interviews.add(allInterviews.get(i));
+		return interviews;
+	}
+	
+	private Interview getMyInterview(HttpSession session){
+		Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
+		return form.getInterview();
+	}
+	
+	private void setMyInterview(HttpSession session, int interviewID){
+		Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
+		form.setInterviewId(interviewID);
+		formService.updateRecord(form);
 	}
 }

@@ -1,22 +1,46 @@
 package validators;
 
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+<<<<<<< .mine
+import org.springframework.beans.factory.annotation.Autowired;
+
+=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+>>>>>>> .r179
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.User;
+<<<<<<< .mine
+import com.ncteam.iviewer.service.impl.FormServiceImpl;
+=======
 import com.ncteam.iviewer.service.impl.InterviewServiceImpl;
+>>>>>>> .r179
 
 @Service
 public class Validator {
 	
+<<<<<<< .mine
+	@Autowired
+	 private FormServiceImpl formService;
+	
+	private String checkLength(String str, int max, int min){
+		if (str.length()>max)
+			return "too long";
+		if (str.length()<min)
+			return "too short";
+		return "ok";
+	}
+=======
 	@Autowired
 	private InterviewServiceImpl service;
+>>>>>>> .r179
 	
 	public boolean isEmailCorrect(String email){
 		if(!Pattern.matches("^([a-zA-Z0-9_\\.\\-]{1,16})@([a-zA-Z0-9\\.\\-]{1,8})\\.([a-z]{2,4})$", email))
@@ -65,16 +89,17 @@ public class Validator {
 	}
 	
 	public boolean isYearCorrect(String year){
-		if(!Pattern.matches("[1970-2020]$", year))
+		if(!Pattern.matches("[0-9]{1,4}$", year))
 			return false;
 		
 		return true;
 	}
 	
 	public boolean isFieldCorrect(String field){
-		if(!Pattern.matches("[A-ZА-ЯЁ][a-zа-яё]{1,14}$", field))
+		if(!checkLength(field,16,1).equals("ok"))
 			return false;
-		
+		if(!checkIsEmpty(field).equals("ok"))
+			return false;
 		return true;
 	}
 
@@ -148,6 +173,15 @@ public class Validator {
 		}
 	}
 	
+	public boolean isUserCandidateWithoutForm(HttpSession session){
+		if(formService.getFormByUserId((Integer) session.getAttribute("user_id"))==null){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
 	public boolean isUserTech(HttpSession session){
 		if((Integer)session.getAttribute("user_type_id")==null
 				||(Integer)session.getAttribute("user_type_id")!=3){
@@ -158,6 +192,106 @@ public class Validator {
 		}
 	}
 	
+	public Map<String, Object> checkUser(Map<String, Object> map, HttpServletRequest request){
+		boolean isCorrect = true;
+		if (!isNameCorrect(request.getParameter("firstname"))){
+			 map.put("firstnameMessage", "Ошибка в имени");
+			 isCorrect = false;
+		}
+		if (!isNameCorrect(request.getParameter("surname"))){
+			 map.put("surnameMessage", "Ошибка в фамилии");
+			 isCorrect = false;
+		}
+		if (!isNameCorrect(request.getParameter("lastname"))){
+			 map.put("lastnameMessage", "Ошибка в отчестве");
+			 isCorrect = false;
+		}
+		if (!isEmailCorrect(request.getParameter("email"))){
+			 map.put("emailMessage", "Ошибка в email");
+			 isCorrect = false;
+		}
+		if (!isPasswordCorrect(request.getParameter("password"))){
+			 map.put("passwordMessage", "Ошибка в пароле");
+			 isCorrect = false;
+		}
+		if(!isCorrect){
+			return map;
+		} else {
+			return null;
+		}
+	}
+	
+	public Map<String, Object> checkForm(Map<String, Object> map, HttpServletRequest request){
+		boolean isCorrect = true;
+		if (!isNameCorrect(request.getParameter("firstname"))){
+			 map.put("firstnameMessage", "Ошибка в имени");
+			 isCorrect = false;
+		}
+		if (!isNameCorrect(request.getParameter("surname"))){
+			 map.put("surnameMessage", "Ошибка в фамилии");
+			 isCorrect = false;
+		}
+		if (!isNameCorrect(request.getParameter("lastname"))){
+			 map.put("lastnameMessage", "Ошибка в отчестве");
+			 isCorrect = false;
+		}
+		if (!isYearCorrect(request.getParameter("year"))){
+			 map.put("yearMessage", "Ошибка");
+			 isCorrect = false;
+		}
+		if (!isEmailCorrect(request.getParameter("email1"))){
+			 map.put("email1Message", "Ошибка в email1");
+			 isCorrect = false;
+		}
+		if (!isEmailCorrect(request.getParameter("email2"))){
+			 map.put("email2Message", "Ошибка в email2");
+			 isCorrect = false;
+		}
+		if (!isPhoneCorrect(request.getParameter("phone"))){
+			 map.put("phoneMessage", "Ошибка в phone");
+			 isCorrect = false;
+		}
+		
+		if (!isFieldCorrect(request.getParameter("another_contact"))){
+			 map.put("another_contactMessage", "Ошибка");
+			 isCorrect = false;
+		}
+		if (!isFieldCorrect(request.getParameter("interest_another"))){
+			 map.put("interest_anotherMessage", "Ошибка");
+			 isCorrect = false;
+		}
+		if (!isFieldCorrect(request.getParameter("jobtype_another"))){
+			 map.put("jobtype_anotherMessage", "Ошибка");
+			 isCorrect = false;
+		}
+		if (!isFieldCorrect(request.getParameter("lan_other"))){
+			 map.put("lan_otherMessage", "Ошибка");
+			 isCorrect = false;
+		}
+		if (!isFieldCorrect(request.getParameter("cs_another"))){
+			 map.put("cs_anotherMessage", "Ошибка");
+			 isCorrect = false;
+		}
+		
+		
+		if (!checkLength(request.getParameter("more_information"), 420, 1).equals("ok")){
+			 map.put("message", "Ошибка дополнительном комментарии");
+			 isCorrect = false;
+		}
+		if (!checkLength(request.getParameter("promises"), 420, 1).equals("ok")){
+			 map.put("message", "слишком много (или мало) обещаний");
+			 isCorrect = false;
+		}
+		if (!checkLength(request.getParameter("experience"), 420, 1).equals("ok")){
+			 map.put("message", "Ошибка в опыте");
+			 isCorrect = false;
+		}
+		if(!isCorrect){
+			return map;
+		} else {
+			return null;
+		}
+	}
 	/*
 	 * Checks, if the interview and its extra time intersects with any other interview. Uses long values
 	 * of dates to compare them.

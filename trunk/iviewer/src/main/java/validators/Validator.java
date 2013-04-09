@@ -7,26 +7,26 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-<<<<<<< .mine
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-=======
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
->>>>>>> .r179
+
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.User;
-<<<<<<< .mine
+
 import com.ncteam.iviewer.service.impl.FormServiceImpl;
-=======
+
 import com.ncteam.iviewer.service.impl.InterviewServiceImpl;
->>>>>>> .r179
+
 
 @Service
 public class Validator {
 	
-<<<<<<< .mine
+
 	@Autowired
 	 private FormServiceImpl formService;
 	
@@ -37,10 +37,10 @@ public class Validator {
 			return "too short";
 		return "ok";
 	}
-=======
+
 	@Autowired
 	private InterviewServiceImpl service;
->>>>>>> .r179
+
 	
 	public boolean isEmailCorrect(String email){
 		if(!Pattern.matches("^([a-zA-Z0-9_\\.\\-]{1,16})@([a-zA-Z0-9\\.\\-]{1,8})\\.([a-z]{2,4})$", email))
@@ -98,8 +98,7 @@ public class Validator {
 	public boolean isFieldCorrect(String field){
 		if(!checkLength(field,16,1).equals("ok"))
 			return false;
-		if(!checkIsEmpty(field).equals("ok"))
-			return false;
+		
 		return true;
 	}
 

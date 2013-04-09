@@ -5,7 +5,7 @@
 
 <a href="index"><font size="3" color="000000">На главную</font></a>
 <%@ include file="/resources/design/center.jsp" %>
-Приветствуем, <%=session.getAttribute("first_name") %>.
+Приветствуем, <%=session.getAttribute("first_name") %>. ${ThisIsMyInterview}
 <br><br>
 <h3>Выбери собеседования</h3>
 <br>

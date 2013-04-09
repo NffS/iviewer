@@ -59,6 +59,29 @@ public class MailService {
         Transport.send(mailMsg);
 	}
 	
+	public void sendMailWhenYouGetInterview(String userMail, String text) throws MessagingException{
+		
+		Properties properties = new Properties();
+        properties.put("mail.smtp.host", SMTP_HOST);
+        properties.put("mail.smtp.port", SMTP_PORT);
+        properties.put("mail.smtp.socketFactory.port", SOCKET_FACTORY_PORT);
+        properties.put("mail.smtp.socketFactory.class", SOCKET_FACTORY_CLASS);
+        properties.put("mail.smtp.auth", SMTP_AUTHENTICATION);
+        
+		Session session = Session.getInstance(properties, authenticate(login, password));
+                
+        Message mailMsg = new MimeMessage(session);
+        InternetAddress senderAddress = new InternetAddress(mail);
+        InternetAddress targetAddress = new InternetAddress(userMail);
+        mailMsg.setFrom(senderAddress);
+        mailMsg.setRecipient(RecipientType.TO, targetAddress);
+        mailMsg.setSubject("Учебный центр NetCracker");
+
+        mailMsg.setText(text);
+        
+        Transport.send(mailMsg);
+	}
+	
 	public void sendFormToCandidate(User user, String filename) throws MessagingException, IOException{
         
 		Properties properties = new Properties();

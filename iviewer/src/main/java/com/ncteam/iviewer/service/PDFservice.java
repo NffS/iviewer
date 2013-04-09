@@ -43,9 +43,9 @@ public class PDFservice {
        document.add(paragraph);
     }
     
-    public void createPDF(User user, Form form) throws DocumentException, MalformedURLException, IOException{
+    public void createPDF(User user, Form form, HttpServletRequest request) throws DocumentException, MalformedURLException, IOException{
     	
-        addFoto(user.getFoto());
+        addFoto(user.getFoto(), request);
         addTitle("Персональная информация");
         setTab(30);
         addLine("Имя:", user.getFirstName(), 120);
@@ -70,6 +70,11 @@ public class PDFservice {
         addLine("учебный центр/стажировка:", form.getInterestTc(), 210);
         addLine("работа в компании NetCracker:", form.getInterestNc(), 210);
         setTab(30);
+        addLine("Интересующая область деятельности", "", 120);
+        setTab(90);
+        addLine("разработка ПО:", form.getInterestAreaPo(), 210);
+        addLine("другое:", form.getInterestAreaOther(), 210);
+        setTab(30);
         addLine("Тип работы", "", 120);
         setTab(90);
         addLine("глубокая специализация", form.getJobArDeepSpec(), 210);
@@ -83,7 +88,7 @@ public class PDFservice {
         addLine("Владение языками программирования (по шкале от 1 до 5): 1 – писал простые ", "", 0);
         setTab(25);
         addLine("программы сo справкой; 3 – хорошо помню синтаксис; 5 – написал крупный проект", "", 0);
-        addTable(form.getProgLangJava().toString(), form.getProgLangC().toString(), form.getProgLangOther());
+        addTable(form.getProgLangJava().toString(), form.getProgLangC().toString(), form.getProgLangOther(), form.getProgLangOtherMark().toString());
         document.newPage();
         moveX(20);
         moveY(775);
@@ -98,7 +103,7 @@ public class PDFservice {
         addLine("Web", form.getCsWeb().toString(), 260);
         addLine("сетевое программирование", form.getCsNetworkProg().toString(), 260);
         addLine("проектирование программ", form.getCsDesign().toString(), 260);
-        addLine("другой раздел ", form.getCsOther().toString(), 260);
+        addLine(form.getCsOther().toString(), form.getCsOtherMark().toString(), 260);
         setTab(30);
         addLine("Уровень английского языка (от 1 = elementary до 5 = advanced):", "", 0);
         setTab(90);
@@ -165,18 +170,18 @@ public class PDFservice {
         document.close();
     }
     
-    void addFoto(String filename) throws BadElementException, MalformedURLException, IOException, DocumentException{
-        Image image = Image.getInstance(filename);
+    void addFoto(String filename, HttpServletRequest request) throws BadElementException, MalformedURLException, IOException, DocumentException{
+        Image image = Image.getInstance(request.getRealPath("") +"/resources/files/fotos/"+filename+".jpg");
         image.setAbsolutePosition(400, 580);
         cb.addImage(image);
     }
     
-    void addTable(String a, String b, String c) throws DocumentException{
+    void addTable(String a, String b, String lang, String c) throws DocumentException{
             cb.beginText();
             cb.setFontAndSize(baseFont, 14);
-                cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Java - "+a, 170, 95, 0);
-                cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "C++ - "+b, 270, 95, 0);
-                cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Другой язык - "+c, 350, 95, 0);
+                cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "C++ - "+a, 170, 42, 0);
+                cb.showTextAligned(PdfContentByte.ALIGN_LEFT, "Java - "+b, 270, 42, 0);
+                cb.showTextAligned(PdfContentByte.ALIGN_LEFT, lang+" - "+c, 350, 42, 0);
             cb.endText();
     }
     

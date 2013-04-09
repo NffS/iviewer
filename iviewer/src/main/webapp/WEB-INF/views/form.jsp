@@ -23,17 +23,19 @@
 						  		<tr>
 						  			<td align="left" width=130>
 	            			<label for="inputValue"><font size=4>имя: </font></label>
+	            			<font color="#FF0000" >&nbsp;&nbsp;${firstnameMessage }</font>
 	            			</td>
 	            					
 	            					<td align="right" width=80>
 	            			<input type="text" class="input-medium" id="inputValue" name="firstname" value="${user.getFirstName()}">
+	            			
 	            			</td>
 								</tr>
 							</table>
         					</div>
         	</td>
         	<td ROWSPAN=7>
-        	<img src="${user.getFoto()}" width="120" height="180">
+        	<img src="${path}" width="120" height="180">
         	</td>
         	</tr>
         	<tr><td width=15%></td><td>
@@ -42,10 +44,12 @@
 						  		<tr>
 						  			<td align="left" width=130>
 	            				<label for="inputValue"><font size=4>фамилия: </font></label>
+	            				<font color="#FF0000" >&nbsp;&nbsp;${surnameMessage }</font>
 	            				</td>
 	            					
 	            					<td align="right" width=80>
 	            				<input type="text" class="input-medium" id="inputValue" name="surname" value="${user.getSurname()}">
+        						
         					</td>
 								</tr>
 							</table>
@@ -56,11 +60,13 @@
         					<table>
 						  		<tr>
 						  			<td align="left" width=130>
-	            				<label for="inputValue"><font size=4>отчество: </font></label>
+	            				<label for="inputValue"><font size=4>отчество: </font></label> 
+	            				<font color="#FF0000" >&nbsp;&nbsp;${lastnameMessage }</font>
 	            				</td>
 	            					
 	            					<td align="right" width=80>
 	            				<input type="text" class="input-medium" id="inputValue" name="lastname" value="${user.getLastName()}">
+        						
         					</td>
 								</tr>
 							</table>
@@ -74,7 +80,7 @@
 								<label for="f1"><font size=4>вуз: </font></label>
 								</td>
 	            					
-	            					<td align="right" width=80>
+	            					<td align="right" width=140>
 								<select style="height:27px" class="input-medium" id="f1" onchange="filter()" name="univerid">
 				  					<option value="1">ОНПУ</option>
 				  					<option value="2">ОНУ им. Мечникова</option>
@@ -138,10 +144,12 @@
 						  		<tr>
 						  			<td align="left" width=130>
 	            				<label for="inputValue"><font size=4>год окончания: </font></label>
+	            				<font color="#FF0000" >&nbsp;&nbsp;${yearMessage }</font>
 	            				</td>
 	            					
 	            					<td align="right" width=80>
 	            				<input type="text" class="input-small" id="inputValue" name="year" value="${form.getEndYear()}">
+	            				
 	            				</td>
 								</tr>
 							</table>
@@ -161,10 +169,12 @@
 						  		<tr>
 						  			<td align="left" width=150>
 	            				<label for="inputValue"><font size=4>e-mail 1: </font></label>
+	            				<font color="#FF0000" >&nbsp;&nbsp;${email1Message }</font>
 	            				</td>
 	            					
 	            					<td align="right" width=80>
 	            				<input type="text" class="input-big" id="inputValue" name="email1" value="${user.getEmail()}">
+	            				
 	            				</td>
 								</tr>
 							</table>
@@ -181,10 +191,12 @@
 						  		<tr>
 						  			<td align="left" width=150>
 	            				<label for="inputValue"><font size=4>e-mail 2: </font></label>
+	            				<font color="#FF0000" >&nbsp;&nbsp;${email2Message }</font>
 	            				</td>
 	            					
 	            					<td align="right" width=80>
 	            				<input type="text" class="input-big" id="inputValue" name="email2" value="${form.getEmail2()}">
+	            				
 	            				</td>
 								</tr>
 							</table>
@@ -200,11 +212,13 @@
 						  <table>
 						  		<tr>
 						  			<td align="left" width=150>
-	            				<label for="inputValue"><font size=4>телефон: </font></label>
+	            				<label for="inputValue"><font size=4>телефон: </font></label>    
+	            				<font color="#FF0000" >&nbsp;&nbsp;${phoneMessage }</font>       				
 	            				</td>
 	            					
 	            					<td align="right" width=80>
 	            				<input type="text" class="input-big" id="inputValue" name="phone" value="${form.getPhone()}">
+	            				
 	            				</td>
 								</tr>
 							</table>
@@ -221,10 +235,12 @@
 						  		<tr>
 						  			<td align="left" width=150>
 	            				<label for="inputValue"><font size=4>другие контакты: </font></label>
+	            				<font color="#FF0000" >&nbsp;&nbsp;${another_contactMessage }</font>
 	            				</td>
 	            					
 	            					<td align="right" width=80>
 	            				<input type="text" class="input-big" id="inputValue" name="another_contact" value="${form.getAnotherContact()}">
+	            				
 	            				</td>
 								</tr>
 							</table>
@@ -316,10 +332,10 @@
 	            					
 	            					<td align="right" width=150>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="interest_po">
-				  					<option value="да">да</option>
-				  					<option value="возможно">возможно</option>
-				  					<option value="нет">нет</option>
-				  					<option value="хочу узнать больше">хочу узнать больше</option>
+				  					<option value="+">да</option>
+				  					<option value="+-">возможно</option>
+				  					<option value="-">нет</option>
+				  					<option value="?">хочу узнать больше</option>
 				  					<option selected value="${form.getInterestTc()}">${interestpo}</option>
 								</select>
 								</td>
@@ -338,10 +354,12 @@
 						  		<tr>
 						  			<td align="left" width=300>
 	            				<label for="inputValue"><font size=4>другое: </font></label>
+	            				<font color="#FF0000" >&nbsp;&nbsp;${interest_anotherMessage }</font>
 	            				</td>
 	            					
 	            					<td align="right" width=150>
-	            				<input type="text" class="input-medium" id="inputValue" name="interest_another">
+	            				<input type="text" class="input-medium" id="inputValue" name="interest_another" value="${form.getInterestAreaOther()}">
+	            				
 	            				</td>
 								</tr>
 							</table>
@@ -397,10 +415,10 @@
 	            					
 	            					<td align="right" width=150>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_vj">
-				  					<option value="да">да</option>
-				  					<option value="возможно">возможно</option>
-				  					<option value="нет">нет</option>
-				  					<option value="хочу узнать больше">хочу узнать больше</option>
+				  					<option value="+">да</option>
+				  					<option value="+-">возможно</option>
+				  					<option value="-">нет</option>
+				  					<option value="?">хочу узнать больше</option>
 				  					<option selected value="${form.getJobArVaried()}">${job_vj}</option>
 								</select>
 								</td>
@@ -423,10 +441,10 @@
 	            					
 	            					<td align="right" width=150>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_manage">
-				  					<option value="да">да</option>
-				  					<option value=">возможно">возможно</option>
-				  					<option value="нет">нет</option>
-				  					<option value="хочу узнать больше">хочу узнать больше</option>
+				  					<option value="+">да</option>
+				  					<option value="+-">возможно</option>
+				  					<option value="-">нет</option>
+				  					<option value="?">хочу узнать больше</option>
 				  					<option selected value="${form.getJobArManage()}">${job_man}</option>
 								</select>
 								</td>
@@ -449,10 +467,10 @@
 	            					
 	            					<td align="right" width=150>
 	            				<select  style="height:27px" class="input-medium" id="inputValue" name="jobtype_sales">
-				  					<option value="да">да</option>
-				  					<option value=">возможно">возможно</option>
-				  					<option value="нет">нет</option>
-				  					<option value="хочу узнать больше">хочу узнать больше</option>
+				  					<option value="+">да</option>
+				  					<option value="+-">возможно</option>
+				  					<option value="-">нет</option>
+				  					<option value="?">хочу узнать больше</option>
 				  					<option selected value="${form.getJobArSales()}">${job_sales}</option>
 								</select>
 								</td>
@@ -471,10 +489,12 @@
 						  		<tr>
 						  			<td align="left" width=300>
 	            				<label for="inputValue"><font size=4>другое: </font></label>
+	            				<font color="#FF0000" >&nbsp;&nbsp;${jobtype_anotherMessage }</font>
 	            				</td>
 	            					
 	            					<td align="right" width=150>
-	            				<input type="text" class="input-medium" id="inputValue" name="jobtype_another">
+	            				<input type="text" class="input-medium" id="inputValue" name="jobtype_another" value="${form.getJobArOther()}">
+	            				
 	            				</td>
 								</tr>
 							</table>
@@ -530,6 +550,7 @@
 						
 							<div class="controls form-inline">
 								<input type="text" class="input-small" id="inputValue" name="lan_other" value="${form.getProgLangOther()}">
+								<font color="#FF0000" >&nbsp;&nbsp;${lan_otherMessage }</font>
 								<select  style="height:27px" class="input-small" id="inputValue" name="lan_other_mark">
 				  					<option value="1">1</option>
 				  					<option value="2">2</option>
@@ -783,6 +804,7 @@
 						  		<tr>
 						  			<td align="left" width=300>
 	            				<input type="text" class="input-big" id="inputValue" value="${form.getCsOther()}" name="cs_another">
+	            				<font color="#FF0000" >&nbsp;&nbsp;${cs_anotherMessage }</font>
 	            				</td>
 	            					
 	            					<td align="right" width=150>
@@ -983,6 +1005,6 @@
     }
 </script>
 
-<font color="#FF0000" id="error" size="15px">${message }</font>
+<font color="#FF0000" id="error">${message }</font>
 
 <%@ include file="/resources/design/footer.jsp" %>

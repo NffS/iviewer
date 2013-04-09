@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,12 +38,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import validators.Validator;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.ncteam.iviewer.DAO.impl.FormDAOImpl;
 import com.ncteam.iviewer.DAO.impl.TablesDAOImpl;
 import com.ncteam.iviewer.domain.Faculty;
 import com.ncteam.iviewer.domain.Form;
+import com.ncteam.iviewer.domain.Source;
 import com.ncteam.iviewer.domain.University;
 import com.ncteam.iviewer.domain.User;
 import com.ncteam.iviewer.service.MailService;
@@ -59,25 +63,37 @@ public class FormController{
 	 private UserServiceImpl userService;
 	@Autowired
 	 private FormServiceImpl formService;
-	 
+	
+	private Validator validator=new Validator();
+	
 	@RequestMapping(value = "/getform_{userid}", method = RequestMethod.POST)
     public String getForm(HttpServletRequest request, @PathVariable("userid") Integer userID, HttpSession session, Map<String, Object> map) throws DocumentException, IOException, MessagingException{
 
+		if(!(validator.isUserHR(session) || validator.isUserCandidate(session))){
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
+		}
+		
 		User user = userService.getRecordById(userID, User.class);
 		Form newForm = formService.getFormByUserId(userID);
-		newForm = getFormByRequest(request, newForm);
-
-		formService.updateRecord(newForm);
 		
-		String path = request.getRealPath("") + "/resources/files/forms/"+user.getFirstName()+"_"+user.getSurname()+"_"+user.getUserId()+".pdf";
-		PDFservice pdf = new PDFservice(path, request);
-			pdf.createPDF(user, newForm);
-		MailService mailService = new MailService();
-			mailService.sendFormToCandidate(user, path);
+		if(validator.checkForm(map, request)!=null){
+			map=validator.checkForm(map, request);
+		} else {
+			newForm = getFormByRequest(request, newForm);
+			formService.updateRecord(newForm);
+			String path = request.getRealPath("") + "/resources/files/forms/"+user.getFirstName()+"_"+user.getSurname()+"_"+user.getUserId()+".pdf";
+			PDFservice pdf = new PDFservice(path, request);
+				pdf.createPDF(user, newForm, request);
+			MailService mailService = new MailService();
+				mailService.sendFormToCandidate(user, path);
+		}
 		
 		map.put("user", user);
 		map.put("form", newForm);
 		map.put("request", userID);
+		map.put("path", request.getRealPath("") +"/resources/files/fotos/"+ user.getFoto());
 		map.put("interesttc", convertFromDB(newForm.getInterestTc()));
 		map.put("interestnc", convertFromDB(newForm.getInterestNc()));
 		map.put("interestpo", convertFromDB(newForm.getInterestAreaPo()));
@@ -90,10 +106,12 @@ public class FormController{
     }
 
 	Form getFormByRequest(HttpServletRequest request, Form newForm) throws DocumentException, IOException{
-		University university = formService.getRecordById(1, University.class);
-		Faculty faculty = formService.getRecordById(2, Faculty.class);
+		University university = formService.getRecordById(Integer.parseInt(request.getParameter("univerid")), University.class);
+		Faculty faculty = formService.getRecordById(getFaculty(request.getParameter("faculty")), Faculty.class);
 			newForm.setUniversity(university);
+			newForm.setUniversityId(Integer.parseInt(request.getParameter("univerid")));
 			newForm.setFaculty(faculty);
+			newForm.setFacultyId(getFaculty(request.getParameter("faculty")));
 		
 			newForm.setCourse(Integer.parseInt(request.getParameter("course")));
 			newForm.setEndYear(request.getParameter("year"));
@@ -133,6 +151,8 @@ public class FormController{
 			newForm.setEnglishWrite(Integer.parseInt(request.getParameter("eng_writting")));
 			newForm.setEnglishSpoken(Integer.parseInt(request.getParameter("eng_speaking")));
 			
+			Source source = formService.getRecordById(Integer.parseInt(request.getParameter("source")), Source.class);
+			newForm.setSource(source);
 			newForm.setSourceId(Integer.parseInt(request.getParameter("source")));
 			
 			newForm.setExperience(request.getParameter("experience"));
@@ -142,55 +162,32 @@ public class FormController{
 		return newForm;
 	}
 
-	/*String getErrorMessage(HttpServletRequest request){
-		String errorMessage="ok";
-		ValidationService validationService = new ValidationService();
-		if (!validationService.checkName(request.getParameter("firstname")).equals("ok"))
-			return errorMessage=validationService.checkName(request.getParameter("firstname"));
-		if (!validationService.checkName(request.getParameter("surname")).equals("ok"))
-			return errorMessage=validationService.checkName(request.getParameter("surname"));
-		if (!validationService.checkName(request.getParameter("lastname")).equals("ok"))
-			return errorMessage=validationService.checkName(request.getParameter("lastname"));
-		if (!validationService.checkYear(request.getParameter("year")).equals("ok"))
-			return errorMessage=validationService.checkYear(request.getParameter("year"));
-		
-		
-		if (!validationService.checkEmail(request.getParameter("email1")).equals("ok"))
-			return errorMessage=validationService.checkEmail(request.getParameter("email1"));
-		if (!validationService.checkEmail(request.getParameter("email2")).equals("ok"))
-			return errorMessage=validationService.checkEmail(request.getParameter("email2"));
-		if (!validationService.checkPhone(request.getParameter("phone")).equals("ok"))
-			return errorMessage=validationService.checkPhone(request.getParameter("phone"));
-		if (!validationService.checkLength(request.getParameter("another_contact"), 40, 1).equals("ok"))
-			return errorMessage=validationService.checkPhone(request.getParameter("another_contact"));
-		
-		if (!validationService.checkLength(request.getParameter("interest_another"), 20, 1).equals("ok"))
-			return errorMessage=validationService.checkPhone(request.getParameter("interest_another")); 
-		if (!validationService.checkLength(request.getParameter("jobtype_another"), 20, 1).equals("ok"))
-			return errorMessage=validationService.checkPhone(request.getParameter("jobtype_another"));
-		if (!validationService.checkLength(request.getParameter("lan_other"), 12, 1).equals("ok"))
-			return errorMessage=validationService.checkPhone(request.getParameter("lan_other"));
-		if (!validationService.checkLength(request.getParameter("cs_another"), 20, 1).equals("ok"))
-			return errorMessage=validationService.checkPhone(request.getParameter("cs_another"));
-		
-		if (!validationService.checkLength(request.getParameter("form.getExperience()"), 420, 1).equals("ok"))
-			return errorMessage=validationService.checkPhone(request.getParameter("form.getExperience()"));
-		if (!validationService.checkLength(request.getParameter("promises"), 420, 1).equals("ok"))
-			return errorMessage=validationService.checkPhone(request.getParameter("promises"));
-		if (!validationService.checkLength(request.getParameter("more_information"), 420, 1).equals("ok"))
-			return errorMessage=validationService.checkPhone(request.getParameter("more_information"));
-		
-		return errorMessage;
-	}*/
+	int getFaculty(String faculty){
+		switch(faculty){
+		case "11": return 1;
+		case "21": return 2;
+		case "31": return 3;
+		case "12": return 4;
+		case "22": return 5;
+		}
+		return 3;
+	}
 	
     @RequestMapping(value = "/form_{userid}")
-    public String form(HttpSession session, @PathVariable("userid") Integer userID, Map<String, Object> map){
+    public String form(HttpSession session, @PathVariable("userid") Integer userID, Map<String, Object> map, HttpServletRequest request){
+    	
+    	if(!(validator.isUserHR(session) || validator.isUserCandidate(session))){
+	        map.put("message","<font color='red'>Ошибка доступа</font>");
+	        map.put("target","index");
+	        return "redirect";
+		}
     	
 		User user = userService.getRecordById(userID, User.class);
 		Form form = formService.getFormByUserId(userID);
 		map.put("user", user);
 		map.put("form", form);
 		map.put("request", userID);
+		map.put("path", request.getRealPath("") +"/resources/files/fotos/"+ user.getFoto());
 		map.put("interesttc", convertFromDB(form.getInterestTc()));
 		map.put("interestnc", convertFromDB(form.getInterestNc()));
 		map.put("interestpo", convertFromDB(form.getInterestAreaPo()));

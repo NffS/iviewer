@@ -47,13 +47,13 @@ public class RegistrationController{
 	@Autowired
 	private FormServiceImpl formService;
 	private MailService mailService;
-		
+	private Validator validator=new Validator();
 	@RequestMapping(value = "/registration_user", method = RequestMethod.POST)
     public String createUser(HttpServletRequest request, HttpSession session, Map<String, Object> map) {
 
 		User newUser = getUserByRequest(request);
 
-		if(true){
+		if(validator.checkUser(map, request)==null){
 		userService.addRecord(newUser);
 			try {
 				mailService = new MailService();
@@ -63,7 +63,7 @@ public class RegistrationController{
 			}
 			map.put("message", "Регистрация прошла успешно, проверьте почту");
 		} else {
-			//map = isUserDataCorrect(request, map);
+			map = validator.checkUser(map, request);
 		}
         return "registration";
     }
@@ -81,42 +81,10 @@ public class RegistrationController{
 		
 		return newUser;
 	}
-	/*
-	private  Map<String, Object> isUserDataCorrect (HttpServletRequest request, Map<String, Object> map){
-		boolean isCorrect = true;
-		if (!validator.isNameCorrect(request.getParameter("firstname"))){
-			 map.put("firstnameMessage", "Ошибка в имени");
-			 isCorrect = false;
-		}
-		if (!validator.isNameCorrect(request.getParameter("surname"))){
-			 map.put("surnameMessage", "Ошибка в фамилии");
-			 isCorrect = false;
-		}
-		if (!validator.isNameCorrect(request.getParameter("lastname"))){
-			 map.put("lastnameMessage", "Ошибка в отчестве");
-			 isCorrect = false;
-		}
-		if (!validator.isEmailCorrect(request.getParameter("email"))){
-			 map.put("emailMessage", "Ошибка в email");
-			 isCorrect = false;
-		}
-		if (!validator.isPasswordCorrect(request.getParameter("password"))){
-			 map.put("passwordMessage", "Ошибка в пароле");
-			 isCorrect = false;
-		}
-		
-		if(!isCorrect){
-			return map;
-		} else {
-			return null;
-		}
-	}
-	*/
-
+	
 	@RequestMapping("/registration_user_{userid}")
-    public String registrationFromEmail(HttpSession session, @PathVariable("userid") Integer userID){
-		if (true) 
-			;
+    public String registrationFromEmail(HttpSession session, @PathVariable("userid") Integer userID, Map<String, Object> map){
+
 		User user = userService.getRecordById(userID, User.class);
 		Form newForm = formService.getFirstForm();
 			newForm.setUserId(user.getUserId());
@@ -124,7 +92,8 @@ public class RegistrationController{
 		formService.addRecord(newForm);
 		user.setForm(newForm);
 		userService.updateRecord(user);
-        return "index";
+		map.put("message", "Регистрация подтверждена, пройдите авторизацию");
+        return "registration";
     }
 	
 	@RequestMapping("/registration")

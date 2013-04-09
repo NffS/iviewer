@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import validators.Validator;
+
 import com.ncteam.iviewer.domain.Form;
 import com.ncteam.iviewer.domain.Interview;
 import com.ncteam.iviewer.domain.User;
+import com.ncteam.iviewer.service.MailService;
 import com.ncteam.iviewer.service.impl.FormServiceImpl;
 import com.ncteam.iviewer.service.impl.InterviewServiceImpl;
 import com.ncteam.iviewer.service.impl.UserServiceImpl;
@@ -32,9 +36,14 @@ public class ChooseInterviewController{
 	 private InterviewServiceImpl interviewService;
 	 @Autowired
 	 private FormServiceImpl formService;
+	 @Autowired
+	 private UserServiceImpl userService;
+	 private MailService mailService = new MailService();
+	 private Validator validator=new Validator();
 	 
 	@RequestMapping(value = "/choose")
     public String chooseInterview(HttpSession session, Map<String, Object> map) {
+				
 		Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
 		List<Interview> allInterviews = interviewService.getAllRecords(Interview.class);
 		List<Interview> interviews = new ArrayList<Interview>();
@@ -54,18 +63,22 @@ public class ChooseInterviewController{
 	
 	@RequestMapping(value="/choose_{interview_id}")
 	public String chooseInterviewByID(HttpSession session,
-			@PathVariable("interview_id") Integer interview_id,	Map<String, Object> map){
+			@PathVariable("interview_id") Integer interview_id,	Map<String, Object> map) throws MessagingException{
+		
+		
 		
 		Form form = formService.getFormByUserId(Integer.parseInt(session.getAttribute("user_id").toString()));
 		form.setInterviewId(interview_id);
 		formService.updateRecord(form);
-		
+
 		List<Interview> allInterviews = interviewService.getAllRecords(Interview.class);
 		List<Interview> interviews = new ArrayList<Interview>();
 		for (int i=0;i<allInterviews.size();i++)
 			if(allInterviews.get(i).getSeats()>allInterviews.get(i).getForms().size())
 				interviews.add(allInterviews.get(i));
-					
+
+		String text = "Вы записаны на "+interviewService.getRecordById(interview_id, Interview.class).getStringStartDate();
+		mailService.sendMailWhenYouGetInterview(session.getAttribute("email").toString(), text);
 		map.put("interviews",interviews);
 		
 		return "choose_interview";

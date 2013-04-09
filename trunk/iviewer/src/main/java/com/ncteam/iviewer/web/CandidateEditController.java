@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -57,19 +58,25 @@ import javax.imageio.ImageIO;
 @Controller
 public class CandidateEditController{
 	
+	private final int MAX_IMAGE_SIZE = 300 * 1024;
+	
 	@Autowired
 	private UserServiceImpl userService;
 	
-	Validator validator;
+	Validator validator = new Validator();
 	
 	@RequestMapping(value = "/edit_this_candidate", method = RequestMethod.POST)
     public String updateUser(HttpServletRequest request, HttpSession session, Map<String, Object> map) throws ServletException, IOException {
+		
+	
+		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		User user = userService.getRecordById(Integer.parseInt(session.getAttribute("user_id").toString()), User.class);
+		
+		User user = userService.getUserByEmail(session.getAttribute("email").toString());
 		
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		
-		factory.setSizeThreshold(300*1024);
+		factory.setSizeThreshold(MAX_IMAGE_SIZE);
 		
 		File tempDir = (File)session.getServletContext().getAttribute("javax.servlet.context.tempdir");
 
@@ -77,7 +84,7 @@ public class CandidateEditController{
  
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		
-		upload.setSizeMax(300 * 1024);
+		upload.setSizeMax(MAX_IMAGE_SIZE);
  
 		try {
 			List items = upload.parseRequest(request);
@@ -86,24 +93,29 @@ public class CandidateEditController{
 			while (iter.hasNext()) {
 			    FileItem item = (FileItem) iter.next();
 			    if (item.isFormField()) {		    	
-			    	user = processFormField(item, user);
+			    	//user = processFormField(item, user);
 			    } else {
 			        changeImageScale(processUploadedFile(item, request, user));
+			        user.setFoto(user.getFirstName()+"_"+user.getSurname()+"_"+user.getUserId());
 			    }
 			}			
-		} catch (Exception e) {
+		} catch (SizeLimitExceededException e) {
 			e.printStackTrace();
-			
+			map.put("message", "размер файла превышает 300 килобайт");
+			return "candidate_edit";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return "candidate_edit";
 		}
 		
-		userService.updateRecord(user);
+			userService.updateRecord(user);
         return "candidate_edit";
     }
 	
 	private String processUploadedFile(FileItem item, HttpServletRequest request, User user) throws Exception {
 		File uploadetFile = null;
-			String path = request.getRealPath("") +"/resources/files/fotos/"+ user.getFirstName()+"_"+user.getSurname()+"_"+user.getUserId();					
+			String path = request.getRealPath("") +"/resources/files/fotos/"+ user.getFirstName()+"_"+user.getSurname()+"_"+user.getUserId()+".jpg";					
 			uploadetFile = new File(path);		
 		uploadetFile.createNewFile();
 		item.write(uploadetFile);
@@ -123,8 +135,8 @@ public class CandidateEditController{
 	
 	private void changeImageScale(String filename) throws IOException{
 		BufferedImage originalImage = ImageIO.read(new File(filename));
-	        int width = 180;
-	        int height = 265;
+	        int width = 120;
+	        int height = 180;
         java.awt.Image image = originalImage.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
         BufferedImage changedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = changedImage.createGraphics();
@@ -133,40 +145,12 @@ public class CandidateEditController{
         ImageIO.write(changedImage, "jpg", new File(filename));
 		
 	}
-	
-	private  Map<String, Object> isUserDataCorrect (HttpServletRequest request, Map<String, Object> map){
-		boolean isCorrect = true;
-		if (!validator.isNameCorrect(request.getParameter("firstname"))){
-			 map.put("firstnameMessage", "Ошибка в имени");
-			 isCorrect = false;
-		}
-		if (!validator.isNameCorrect(request.getParameter("surname"))){
-			 map.put("surnameMessage", "Ошибка в фамилии");
-			 isCorrect = false;
-		}
-		if (!validator.isNameCorrect(request.getParameter("lastname"))){
-			 map.put("lastnameMessage", "Ошибка в отчестве");
-			 isCorrect = false;
-		}
-		if (!validator.isEmailCorrect(request.getParameter("email"))){
-			 map.put("emailMessage", "Ошибка в email");
-			 isCorrect = false;
-		}
-		if (!validator.isPasswordCorrect(request.getParameter("password"))){
-			 map.put("passwordMessage", "Ошибка в пароле");
-			 isCorrect = false;
-		}
-		
-		if(!isCorrect){
-			return map;
-		} else {
-			return null;
-		}
-	}
 
 	@RequestMapping("/candidate_edit")
-    public String registration(){
+    public String candidateEdit(HttpSession session, Map<String, Object> map){
 
+	
+		
         return "candidate_edit";
     
 	}

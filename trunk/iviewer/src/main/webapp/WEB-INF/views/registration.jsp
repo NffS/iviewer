@@ -23,13 +23,13 @@
    		</tr>
     	<tr>
     		<td width=110><font size=5>Пароль:</font></td>
-    		<td><input class="input-large" type="password" style="height:30px" name="password" "/></td><td><font color="#FF0000" >&nbsp;&nbsp;${passwordMessage }</font></td>
+    		<td><input class="input-large" type="password" style="height:30px" name="password" value="${password}"/></td><td><font color="#FF0000" >&nbsp;&nbsp;${passwordMessage }</font></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center"><input type="submit" style="height:30px; width:100px; font-size: 15px" value="Регистрация"></td>
 </table>
 </form>
 <br><br><br><br>
-<font color="#FF0000" id="error" size="12px">${message}</font>
+<font color="#FF0000">${message}</font>
 
 <%@ include file="/resources/design/footer.jsp" %>
